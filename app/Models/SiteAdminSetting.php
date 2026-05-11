@@ -10,6 +10,7 @@ class SiteAdminSetting extends Model
 
     protected $fillable = [
         'general',
+        'hero',
         'global_seo',
     ];
 
@@ -17,6 +18,7 @@ class SiteAdminSetting extends Model
     {
         return [
             'general' => 'array',
+            'hero' => 'array',
             'global_seo' => 'array',
         ];
     }
@@ -30,6 +32,7 @@ class SiteAdminSetting extends Model
 
         return static::query()->create([
             'general' => [],
+            'hero' => [],
             'global_seo' => [],
         ]);
     }

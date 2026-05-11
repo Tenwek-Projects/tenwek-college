@@ -14,8 +14,33 @@
     <textarea name="body" id="body" rows="12" class="admin-textarea">{{ old('body', $post->body ?? '') }}</textarea>
 </x-admin.ui.group>
 
-<x-admin.ui.group label="Featured image path" for="featured_image_path" name="featured_image_path" hint="Path under public/ or storage URL.">
-    <input type="text" name="featured_image_path" id="featured_image_path" value="{{ old('featured_image_path', $post->featured_image_path ?? '') }}" class="admin-input" placeholder="path under public/ or storage URL">
+<x-admin.ui.group label="Featured image" for="featured_image" name="featured_image" hint="Upload an image file (JPEG, PNG, WebP, or GIF, max 8MB). A preview will appear below.">
+    <input type="file" name="featured_image" id="featured_image" accept="image/jpeg,image/png,image/webp,image/gif" class="admin-file-input">
+    @error('featured_image')<p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>@enderror
+
+    @php
+        $existingUrl = ($post->exists ?? false) ? $post->featuredImagePublicUrl() : null;
+    @endphp
+
+    <div class="mt-3 flex flex-wrap items-end gap-4">
+        <img
+            id="cohs-featured-image-preview"
+            src="{{ $existingUrl ?? '' }}"
+            alt=""
+            class="h-28 max-w-[12rem] rounded-lg border border-thc-navy/10 object-cover shadow-sm {{ $existingUrl ? '' : 'hidden' }}"
+            loading="lazy"
+            decoding="async"
+            width="192"
+            height="112"
+        >
+        <p class="admin-hint">
+            @if($existingUrl)
+                Current image — choose a new file to replace it.
+            @else
+                Choose a file to see a preview.
+            @endif
+        </p>
+    </div>
 </x-admin.ui.group>
 
 <div class="admin-grid-2">
@@ -30,3 +55,28 @@
 <x-admin.ui.group label="SEO description" for="seo_description" name="seo_description">
     <textarea name="seo_description" id="seo_description" rows="2" class="admin-textarea">{{ old('seo_description', $post->seo_description ?? '') }}</textarea>
 </x-admin.ui.group>
+
+@once
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const input = document.getElementById('featured_image');
+                const preview = document.getElementById('cohs-featured-image-preview');
+                if (!input || !preview) return;
+
+                input.addEventListener('change', function () {
+                    const file = input.files && input.files[0] ? input.files[0] : null;
+                    if (!file) {
+                        return;
+                    }
+                    if (!file.type || !file.type.startsWith('image/')) {
+                        return;
+                    }
+                    const url = URL.createObjectURL(file);
+                    preview.src = url;
+                    preview.classList.remove('hidden');
+                });
+            });
+        </script>
+    @endpush
+@endonce
