@@ -130,6 +130,7 @@ class PageController extends Controller
 
         if ($school->slug === 'soc') {
             return match (true) {
+                $pageSlug === 'about-us' => view('schools.soc.about-us', compact('seo', 'page', 'school')),
                 $pageSlug === 'our-history' => view('schools.soc.our-history', compact('seo', 'page', 'school')),
                 $pageSlug === 'message-from-the-principal' => view('schools.soc.message-from-principal', compact('seo', 'page', 'school')),
                 $pageSlug === 'board-and-management-team' => view('schools.soc.board-and-management-team', compact('seo', 'page', 'school')),
@@ -166,10 +167,13 @@ class PageController extends Controller
         $summary = (string) ($item['summary'] ?? '');
         $admissions = route('schools.pages.show', [$school, 'admissions']);
         $fees = route('schools.pages.show', [$school, 'fee']);
+        $applyOnlineUrl = $pageSlug === 'certificate-in-chaplaincy'
+            ? route('soc.register', [], false)
+            : $admissions;
 
         $defaultBody = '<p>'.e($summary).'</p>'
             .'<p class="mt-6 flex flex-wrap gap-x-4 gap-y-2">'
-            .'<a class="font-semibold text-thc-royal hover:underline" href="'.e($admissions).'">'.e(__('Apply online')).'</a>'
+            .'<a class="font-semibold text-thc-royal hover:underline" href="'.e($applyOnlineUrl).'">'.e(__('Apply online')).'</a>'
             .'<span class="text-thc-text/35" aria-hidden="true">·</span>'
             .'<a class="font-semibold text-thc-royal hover:underline" href="'.e($fees).'">'.e(__('View fees')).'</a>'
             .'</p>';

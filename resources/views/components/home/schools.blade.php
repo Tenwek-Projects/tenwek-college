@@ -4,23 +4,23 @@
     $cream = config('tenwek.landing.cream_bg', '#FFFFFF');
     $socBg = config('tenwek.landing.soc_card_image', 'banner-a.jpg');
     $cohsBg = config('tenwek.landing.cohs_card_image', 'banner-nursing.jpg');
-    $ctaClasses = 'mt-8 inline-flex items-center justify-center rounded-full border-2 border-white/85 bg-white/15 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-white shadow-md transition duration-300 group-hover:border-white group-hover:bg-white group-hover:text-thc-navy sm:px-10 sm:py-4 sm:text-base';
+    $ctaClasses = 'mt-8 inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/85 bg-white/15 px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-white shadow-md transition duration-300 group-hover:border-white group-hover:bg-white group-hover:text-thc-navy sm:px-10 sm:py-4 sm:text-base';
 @endphp
 
 <section
     id="schools"
-    class="flex min-h-svh scroll-mt-20 flex-col justify-center"
+    class="scroll-mt-20 pb-12 pt-4 sm:pb-16 sm:pt-6 lg:pb-20"
     style="background-color: {{ $cream }};"
     aria-label="School selection"
 >
-    <div class="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-10 lg:py-14">
+    <div class="relative z-20 mx-auto w-full max-w-[86rem] -mt-10 px-4 sm:-mt-14 sm:px-6 md:-mt-16 lg:-mt-20 lg:px-10">
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:gap-10">
         @forelse($schools as $school)
             @php $isSoc = $school->slug === 'soc'; @endphp
             @if($isSoc)
                 <a
                     href="{{ route('schools.show', $school) }}"
-                    class="group relative flex aspect-video w-full overflow-hidden rounded-2xl text-center text-white shadow-xl transition duration-300 hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-thc-maroon"
+                    class="group relative flex aspect-[16/10] w-full overflow-hidden rounded-2xl text-center text-white shadow-xl transition duration-300 hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-thc-maroon"
                     data-reveal
                 >
                     <span class="absolute left-0 right-0 top-0 z-20 h-1.5 bg-thc-maroon" aria-hidden="true"></span>
@@ -40,13 +40,18 @@
                                 {{ $school->tagline }}
                             </p>
                         @endif
-                        <span class="{{ $ctaClasses }}">Explore school</span>
+                        <span class="{{ $ctaClasses }}">
+                            Explore school
+                            <svg class="h-4 w-4 shrink-0 transition duration-300 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0-7 7m7-7H3"/>
+                            </svg>
+                        </span>
                     </div>
                 </a>
             @else
                 <a
                     href="{{ route('schools.show', $school) }}"
-                    class="group relative flex aspect-video w-full overflow-hidden rounded-2xl shadow-xl transition duration-300 hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-thc-royal"
+                    class="group relative flex aspect-[16/10] w-full overflow-hidden rounded-2xl shadow-xl transition duration-300 hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-thc-royal"
                     data-reveal
                 >
                     <span class="absolute left-0 right-0 top-0 z-20 h-1.5 bg-thc-royal" aria-hidden="true"></span>
@@ -64,7 +69,12 @@
                                 {{ $school->tagline }}
                             </p>
                         @endif
-                        <span class="{{ $ctaClasses }} w-fit">Explore school</span>
+                        <span class="{{ $ctaClasses }} w-fit">
+                            Explore school
+                            <svg class="h-4 w-4 shrink-0 transition duration-300 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0-7 7m7-7H3"/>
+                            </svg>
+                        </span>
                     </div>
                 </a>
             @endif

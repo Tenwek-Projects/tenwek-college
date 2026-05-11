@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
     {
         RateLimiter::for('login', fn (Request $request) => Limit::perMinute(5)->by($request->ip()));
         RateLimiter::for('forms', fn (Request $request) => Limit::perMinute(10)->by($request->ip()));
+        RateLimiter::for('mpesa-stk', fn (Request $request) => Limit::perMinute(8)->by($request->ip()));
 
         Gate::before(function ($user, string $ability) {
             if ($user === null) {

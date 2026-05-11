@@ -49,7 +49,8 @@ return [
     /** Defaults match the legacy WordPress college site; override with env or set to empty string to hide. */
     'social' => array_filter([
         'facebook' => env('TENWEK_SOCIAL_FACEBOOK', 'https://www.facebook.com/TenwekHospital/'),
-        'linkedin' => env('TENWEK_SOCIAL_LINKEDIN'),
+        'instagram' => env('TENWEK_SOCIAL_INSTAGRAM', 'https://www.instagram.com/tenwekhospital/'),
+        'linkedin' => env('TENWEK_SOCIAL_LINKEDIN', 'https://www.linkedin.com/company/tenwek-hospital/'),
         'youtube' => env('TENWEK_SOCIAL_YOUTUBE'),
         'x' => env('TENWEK_SOCIAL_X', 'https://twitter.com/tenwekhosp'),
     ]),
@@ -159,6 +160,27 @@ return [
             'paragraphs' => [
                 'The Tenwek Hospital College – School of Chaplaincy was established in 1991 as the L. Nelson Bell Chaplaincy Training School. Dr. Ernie Steury, who was the first doctor to serve at Tenwek Hospital, realized that the institution needed full-time chaplains to serve alongside the dedicated medical team.',
                 'There was no college or university offering training in chaplaincy at the time. That gap gave birth to the vision of opening a chaplaincy school at Tenwek Hospital: a vision we continue to live out today.',
+            ],
+        ],
+        /**
+         * Public About us page (/soc/about-us): hero band and featured image under public/.
+         */
+        'about_page' => [
+            'kicker' => 'Tenwek Hospital College',
+            /** Brand purple — matches legacy #8265ae / --color-thc-royal */
+            'accent' => '#8265ae',
+            'hero_image' => env('TENWEK_SOC_ABOUT_IMAGE', 'about.jpg'),
+            'hero_image_alt' => env('TENWEK_SOC_ABOUT_IMAGE_ALT', 'Tenwek Hospital College — School of Chaplaincy'),
+            'core_values_heading' => 'Our core values',
+            'programmes_cta_label' => 'Our programmes',
+            'core_values' => [
+                ['title' => 'Holiness', 'text' => 'Promoting Christ-like life as demonstrated by His love and empathy.'],
+                ['title' => 'Servanthood', 'text' => 'Dedicated to serve God and humanity.'],
+                ['title' => 'Professionalism', 'text' => 'Promoting knowledge and excellence in the ministry of chaplaincy.'],
+                ['title' => 'Integrity', 'text' => 'Promoting accountability and good stewardship of resources, and adherence to moral and ethical values.'],
+                ['title' => 'Resilience', 'text' => 'Ability to withstand and cope with stress and challenges of all kinds.'],
+                ['title' => 'Timeliness', 'text' => 'We are committed to deliver what is required of us in a timely and appropriate manner.'],
+                ['title' => 'Teamwork', 'text' => 'Diverse individuals committed to a shared vision.'],
             ],
         ],
         'vision' => [
@@ -979,6 +1001,7 @@ return [
         ]),
         'social_labels' => [
             'facebook' => 'Facebook',
+            'instagram' => 'Instagram',
             'linkedin' => 'LinkedIn',
             'youtube' => 'YouTube',
             'x' => 'X',

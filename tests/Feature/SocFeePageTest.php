@@ -25,5 +25,7 @@ class SocFeePageTest extends TestCase
         $response->assertSee('Kenya Commercial Bank', false);
         $response->assertSee('522522', false);
         $response->assertSee('0716178653', false);
+        $response->assertSee('Pay with M-Pesa (STK)', false);
     }
 }
+

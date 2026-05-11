@@ -7,6 +7,17 @@
     $totals = $S['totals'] ?? [];
     $fmt = fn (?int $n) => $n === null ? '-' : 'Ksh '.number_format($n);
     $admissionsUrl = route('schools.pages.show', [$school, 'admissions']);
+    $certTotal = (int) ($totals['certificate'] ?? 17_500);
+    $dipTotal = (int) ($totals['diploma'] ?? 29_000);
+    $stkPresets = [
+        ['label' => ($cols['certificate'] ?? 'Certificate').' — total per trimester', 'amount' => $certTotal],
+        ['label' => ($cols['diploma'] ?? 'Diploma').' — total per trimester', 'amount' => $dipTotal],
+    ];
+    $stkConfigured = filled(config('mpesa.consumer_key'))
+        && filled(config('mpesa.consumer_secret'))
+        && filled(config('mpesa.shortcode'))
+        && filled(config('mpesa.passkey'))
+        && filled(config('mpesa.callback_url'));
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
@@ -117,13 +128,141 @@
             </div>
 
             {{-- Payment --}}
-            <section class="space-y-6" data-reveal aria-labelledby="payment-heading">
+            <section
+                class="space-y-6"
+                data-reveal
+                aria-labelledby="payment-heading"
+                x-data="socFeeStk({
+                    initiateUrl: @js(route('soc.fee.mpesa.stk')),
+                    presets: @js($stkPresets),
+                    configured: @js($stkConfigured),
+                })"
+                @keydown.escape.window="closeModal()"
+            >
                 <h2 id="payment-heading" class="font-serif text-2xl font-semibold text-thc-navy sm:text-3xl">
                     How to pay
                 </h2>
                 @if(filled($F['payment_notice'] ?? null))
                     <p class="max-w-3xl text-base leading-relaxed text-thc-text/90">{{ $F['payment_notice'] }}</p>
                 @endif
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <button
+                        type="button"
+                        class="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+                        @click="openModal()"
+                    >
+                        <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 4.5c-1.32 0-2.55.38-3.6 1.04L12 6.93l-1.9-1.39A6.49 6.49 0 006.5 4.5C3.46 4.5 1 6.96 1 10c0 4.5 5.5 9.5 11 12 5.5-2.5 11-7.5 11-12 0-3.04-2.46-5.5-5.5-5.5z"/></svg>
+                        Pay with M-Pesa (STK)
+                    </button>
+                    <span class="text-sm text-thc-text/70">Pop-up: enter your number, confirm amount, then complete payment on your phone.</span>
+                </div>
+
+                {{-- STK modal --}}
+                <div
+                    x-show="open"
+                    x-cloak
+                    class="fixed inset-0 z-[200] flex items-end justify-center sm:items-center"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="stk-modal-title"
+                >
+                    <div class="absolute inset-0 bg-thc-navy/60 backdrop-blur-[2px]" @click="closeModal()" aria-hidden="true"></div>
+                    <div class="relative z-10 m-0 w-full max-w-md rounded-t-2xl border border-thc-navy/10 bg-white p-6 shadow-2xl sm:m-4 sm:rounded-2xl sm:p-8" @click.stop>
+                        <div class="flex items-start justify-between gap-4">
+                            <h3 id="stk-modal-title" class="font-serif text-xl font-semibold text-thc-navy">
+                                M-Pesa STK Push
+                            </h3>
+                            <button
+                                type="button"
+                                class="rounded-lg p-1 text-thc-text/50 transition hover:bg-thc-navy/5 hover:text-thc-navy"
+                                @click="closeModal()"
+                                aria-label="Close"
+                            >
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                            </button>
+                        </div>
+
+                        <template x-if="step === 'form'">
+                            <div class="mt-6 space-y-5">
+                                <ol class="list-decimal space-y-2 pl-5 text-sm text-thc-text/85">
+                                    <li>Enter the <strong class="text-thc-navy">M-Pesa phone number</strong> that will receive the prompt.</li>
+                                    <li>Choose the <strong class="text-thc-navy">fee amount</strong> (trimester totals match the table above).</li>
+                                    <li>Tap <strong class="text-thc-navy">Send prompt</strong> — complete payment with your M-Pesa PIN on your phone.</li>
+                                </ol>
+
+                                <div x-show="!configured" x-cloak class="rounded-xl border border-amber-200 bg-amber-50/90 px-4 py-3 text-sm text-amber-950">
+                                    STK is not configured on this server. Add <code class="rounded bg-white/80 px-1">MPESA_*</code> keys in <code class="rounded bg-white/80 px-1">.env</code> (Daraja consumer key/secret, shortcode, passkey, and a public <code class="rounded bg-white/80 px-1">MPESA_CALLBACK_URL</code>). Until then, use Pay Bill below.
+                                </div>
+
+                                <div>
+                                    <label for="stk-phone" class="block text-sm font-semibold text-thc-navy">M-Pesa phone</label>
+                                    <input
+                                        id="stk-phone"
+                                        type="tel"
+                                        x-model="phone"
+                                        class="mt-1.5 w-full rounded-xl border border-thc-navy/15 px-4 py-3 text-sm transition focus:border-thc-royal focus:outline-none focus:ring-2 focus:ring-thc-royal/25"
+                                        placeholder="e.g. 0712 345 678"
+                                        autocomplete="tel"
+                                    >
+                                </div>
+
+                                <fieldset class="space-y-3">
+                                    <legend class="text-sm font-semibold text-thc-navy">Amount (Ksh)</legend>
+                                    <template x-for="(p, idx) in presets" :key="idx">
+                                        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-thc-navy/10 px-4 py-3 transition has-[:checked]:border-emerald-600/50 has-[:checked]:bg-emerald-50/40">
+                                            <input type="radio" name="stk_amount" class="mt-1" :value="String(idx)" x-model="presetKey">
+                                            <span>
+                                                <span class="block text-sm font-medium text-thc-navy" x-text="p.label"></span>
+                                                <span class="text-sm tabular-nums text-thc-text/80" x-text="'Ksh ' + (p.amount || 0).toLocaleString()"></span>
+                                            </span>
+                                        </label>
+                                    </template>
+                                    <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-thc-navy/10 px-4 py-3 transition has-[:checked]:border-emerald-600/50 has-[:checked]:bg-emerald-50/40">
+                                        <input type="radio" name="stk_amount" class="mt-1" value="custom" x-model="presetKey">
+                                        <span class="min-w-0 flex-1">
+                                            <span class="block text-sm font-medium text-thc-navy">Other amount</span>
+                                            <input
+                                                type="number"
+                                                x-model="customAmount"
+                                                min="1"
+                                                max="250000"
+                                                class="mt-2 w-full rounded-lg border border-thc-navy/15 px-3 py-2 text-sm"
+                                                placeholder="Enter amount"
+                                                :disabled="presetKey !== 'custom'"
+                                            >
+                                        </span>
+                                    </label>
+                                </fieldset>
+
+                                <p x-show="error" x-cloak class="text-sm font-medium text-red-700" x-text="error"></p>
+
+                                <button
+                                    type="button"
+                                    class="flex w-full items-center justify-center rounded-xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-emerald-700 disabled:opacity-60"
+                                    :disabled="loading || !configured"
+                                    @click="submitStk()"
+                                >
+                                    <span x-show="!loading">Send M-Pesa prompt</span>
+                                    <span x-show="loading" x-cloak>Sending…</span>
+                                </button>
+                            </div>
+                        </template>
+
+                        <template x-if="step === 'success'">
+                            <div class="mt-6 space-y-4">
+                                <div class="rounded-xl border border-emerald-200 bg-emerald-50/90 px-4 py-4 text-sm text-emerald-950">
+                                    <p class="font-semibold text-emerald-900">Prompt sent</p>
+                                    <p class="mt-2 leading-relaxed" x-text="successMessage"></p>
+                                    <p class="mt-3 text-thc-text/80">If you don’t see a pop-up, unlock your phone and check for an M-Pesa notification. Enter your PIN only on the official Safaricom prompt.</p>
+                                </div>
+                                <button type="button" class="w-full rounded-xl border border-thc-navy/15 py-3 text-sm font-semibold text-thc-navy hover:bg-thc-navy/[0.04]" @click="closeModal()">
+                                    Close
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
 
                 <div class="grid gap-6 lg:grid-cols-2">
                     @php $bank = $F['bank'] ?? []; @endphp

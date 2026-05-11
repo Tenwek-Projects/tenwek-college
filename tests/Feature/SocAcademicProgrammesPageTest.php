@@ -36,6 +36,7 @@ class SocAcademicProgrammesPageTest extends TestCase
         $response->assertSee('Certificate in Chaplaincy', false);
         $response->assertSee('KCSE D', false);
         $response->assertSee('Back to academic programmes', false);
+        $response->assertSee(route('soc.register', [], false), false);
     }
 
     public function test_individual_programme_page_works_when_database_row_missing(): void
@@ -50,5 +51,6 @@ class SocAcademicProgrammesPageTest extends TestCase
         $response->assertOk();
         $response->assertSee('Certificate in Chaplaincy', false);
         $response->assertSee('Apply online', false);
+        $response->assertSee(route('soc.register', [], false), false);
     }
 }

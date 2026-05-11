@@ -158,8 +158,20 @@ class TenwekFoundationSeeder extends Seeder
 
         $legacyNote = '<p>Content structure matches the former <a href="https://tenwekhospitalcollege.ac.ke/" rel="noopener noreferrer">Tenwek Hospital College</a> WordPress site. Replace this placeholder with the published article.</p>';
 
+        $socAboutUsBody = <<<'HTML'
+<p><strong>Tenwek Hospital College</strong></p>
+<p>The institution is registered as Tenwek Hospital College with the Technical and Vocational Education and Training Authority (TVETA). The School of Chaplaincy is one of the departments in this college.</p>
+<p>Due to changing chaplaincy training needs, the School has redesigned and upgraded its curriculum. This ensures consistency with the ongoing development of competency-based curriculum in institutions of learning across Kenya.</p>
+<p>The School works closely with Technical and Vocational Education and Training (TVET) and its arm, the Curriculum Development, Assessment and Certification Council (CDACC), in the development of both Certificate and Diploma in Chaplaincy curricula that are nearing completion. The Certificate and Diploma in Chaplaincy will be examined by CDACC.</p>
+HTML;
+
         $socPages = [
-            ['slug' => 'about-us', 'title' => 'About us', 'excerpt' => 'Learn about the School of Chaplaincy at Tenwek Hospital College.'],
+            [
+                'slug' => 'about-us',
+                'title' => 'About us',
+                'excerpt' => 'TVETA-registered Tenwek Hospital College: the School of Chaplaincy, upgraded competency-based curricula, and CDACC-examined Certificate and Diploma programmes.',
+                'body' => $socAboutUsBody,
+            ],
             ['slug' => 'register', 'title' => 'Register', 'excerpt' => 'Registration information for School of Chaplaincy programmes.'],
             ['slug' => 'academic-programmes', 'title' => 'Academic programmes', 'excerpt' => 'Programmes offered by the School of Chaplaincy.'],
             ['slug' => 'admissions', 'title' => 'Admissions', 'excerpt' => 'Admissions requirements and process for the School of Chaplaincy.'],
@@ -178,7 +190,7 @@ class TenwekFoundationSeeder extends Seeder
                 [
                     'title' => $p['title'],
                     'excerpt' => $p['excerpt'],
-                    'body' => $legacyNote,
+                    'body' => $p['body'] ?? $legacyNote,
                     'published_at' => now(),
                     'seo_title' => $p['title'].' | '.$soc->name.' | '.config('tenwek.name'),
                     'seo_description' => $p['excerpt'],
@@ -187,6 +199,8 @@ class TenwekFoundationSeeder extends Seeder
         }
 
         $socAdmissionsUrl = route('schools.pages.show', [$soc, 'admissions']);
+        /** Relative path so links work on any host/port (e.g. localhost:8000). */
+        $socRegisterPath = route('soc.register', [], false);
 
         $socProgrammePages = [
             [
@@ -194,7 +208,7 @@ class TenwekFoundationSeeder extends Seeder
                 'title' => 'Certificate in Chaplaincy',
                 'excerpt' => 'Level 5 introductory chaplaincy qualification examined by CDACC.',
                 'body' => '<p>Certificate in Chaplaincy (Level 5) is an introductory level to chaplaincy studies that targets students with the qualification of KCSE D (Plain) and above. It shall be a build up to the Diploma programme.</p>'
-                    .'<p>This qualification is offered as part of the School of Chaplaincy’s competency-based pathway examined by CDACC. <a href="'.$socAdmissionsUrl.'">Apply online</a>.</p>',
+                    .'<p>This qualification is offered as part of the School of Chaplaincy’s competency-based pathway examined by CDACC. <a href="'.$socRegisterPath.'">Apply online</a>.</p>',
             ],
             [
                 'slug' => 'diploma-in-chaplaincy',

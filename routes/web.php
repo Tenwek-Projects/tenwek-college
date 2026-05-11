@@ -42,6 +42,7 @@ use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SchoolEventController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\SocMpesaStkController;
 use App\Http\Controllers\SocRegistrationController;
 use App\Models\School;
 use App\Support\Cohs\CohsLandingRepository;
@@ -230,6 +231,12 @@ Route::middleware(['auth', 'active_user', 'role:super_admin|cohs_admin', 'manage
         Route::get('/submissions/{submission}', [CohsFormSubmissionController::class, 'show'])->name('submissions.show');
         Route::patch('/submissions/{submission}', [CohsFormSubmissionController::class, 'update'])->name('submissions.update');
     });
+
+Route::post('/soc/fee/mpesa/stk', [SocMpesaStkController::class, 'initiate'])
+    ->middleware('throttle:mpesa-stk')
+    ->name('soc.fee.mpesa.stk');
+Route::post('/payments/mpesa/stk-callback', [SocMpesaStkController::class, 'callback'])
+    ->name('payments.mpesa.stk-callback');
 
 Route::get('/soc/register', [SocRegistrationController::class, 'show'])->name('soc.register');
 Route::post('/soc/register', [SocRegistrationController::class, 'store'])

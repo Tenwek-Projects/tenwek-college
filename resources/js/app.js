@@ -229,6 +229,93 @@ document.addEventListener('alpine:init', () => {
         },
     }));
 
+    /** SOC /fee: M-Pesa STK Push payment modal */
+    Alpine.data('socFeeStk', (config) => ({
+        initiateUrl: config.initiateUrl,
+        presets: Array.isArray(config.presets) ? config.presets : [],
+        configured: Boolean(config.configured),
+        open: false,
+        step: 'form',
+        phone: '',
+        presetKey: '0',
+        customAmount: '',
+        loading: false,
+        error: '',
+        successMessage: '',
+
+        effectiveAmount() {
+            if (this.presetKey === 'custom') {
+                const n = parseInt(String(this.customAmount).replace(/\D/g, ''), 10);
+
+                return Number.isFinite(n) ? n : 0;
+            }
+            const idx = parseInt(this.presetKey, 10);
+            const p = this.presets[idx];
+
+            return p && typeof p.amount === 'number' ? p.amount : 0;
+        },
+
+        openModal() {
+            this.open = true;
+            this.step = 'form';
+            this.error = '';
+            this.successMessage = '';
+            this.loading = false;
+            document.documentElement.classList.add('overflow-hidden');
+        },
+
+        closeModal() {
+            this.open = false;
+            document.documentElement.classList.remove('overflow-hidden');
+        },
+
+        async submitStk() {
+            this.error = '';
+            const amount = this.effectiveAmount();
+            if (!this.phone.trim()) {
+                this.error = 'Enter your M-Pesa phone number.';
+
+                return;
+            }
+            if (amount < 1) {
+                this.error = 'Choose a fee option or enter a valid custom amount.';
+
+                return;
+            }
+            const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+            if (!token) {
+                this.error = 'Security token missing. Refresh the page.';
+
+                return;
+            }
+            this.loading = true;
+            try {
+                const res = await fetch(this.initiateUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                        'X-CSRF-TOKEN': token,
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                    body: JSON.stringify({ phone: this.phone.trim(), amount }),
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) {
+                    this.error = data.message || 'Request failed.';
+
+                    return;
+                }
+                this.successMessage = data.message || 'Check your phone for the M-Pesa prompt.';
+                this.step = 'success';
+            } catch {
+                this.error = 'Network error. Try again.';
+            } finally {
+                this.loading = false;
+            }
+        },
+    }));
+
     /** SOC /gallery: in-page lightbox for grid images */
     Alpine.data('socGallery', (config) => ({
         items: Array.isArray(config?.items) ? config.items : [],

@@ -52,7 +52,7 @@
                     <p class="mt-4 text-lg leading-relaxed text-thc-text/90">{{ $page->excerpt }}</p>
                 @endif
             </header>
-            <div class="mt-10 space-y-4 text-base leading-relaxed text-thc-text [&_a]:font-medium [&_a]:text-thc-royal [&_h2]:mt-8 [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:text-thc-navy [&_ul]:list-disc [&_ul]:pl-6">
+            <div class="mt-10 space-y-4 text-base leading-relaxed text-thc-text [&_a]:font-medium [&_a]:text-thc-royal [&_h2]:mt-10 [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:text-thc-navy [&_h3]:mt-8 [&_h3]:font-serif [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-thc-navy [&_ul]:list-disc [&_ul]:pl-6">
                 {!! $page->body !!}
             </div>
         @endif
