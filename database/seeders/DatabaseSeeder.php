@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(TenwekFoundationSeeder::class);
         $this->call(SocCmsInitialContentSeeder::class);
+        $this->call(SocFaqsLiveSiteSeeder::class);
     }
 }

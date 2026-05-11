@@ -551,11 +551,12 @@ return [
             ],
         ],
         /**
-         * /soc/faqs: mirrors https://tenwekhospitalcollege.ac.ke/soc/faqs/
+         * /soc/faqs: default copy aligned with https://tenwekhospitalcollege.ac.ke/soc/faqs/
+         * (superseded by soc_faq_items when seeded or created in admin).
          */
         'faqs' => [
             'kicker' => 'FAQs',
-            'intro' => 'Quick answers about chaplaincy formation, entry requirements, and career pathways at the School of Chaplaincy.',
+            'intro' => 'Answers about chaplaincy formation, entry requirements, and where trained chaplains can serve.',
             'items' => [
                 [
                     'question' => 'Is there a difference between a pastor and a chaplain?',
@@ -566,23 +567,23 @@ return [
                         'rows' => [
                             [
                                 'left' => 'Ministry is church-based',
-                                'right' => 'Ministry is beyond the church: it is community- and institution-based. Chaplains are the bridge between secular and sacred.',
+                                'right' => 'Ministry is beyond the church it is community/ institution-based. Chaplains are the bridge between secular and sacred',
                             ],
                             [
                                 'left' => 'Serve members of same faith',
                                 'right' => 'Serve people of all faiths',
                             ],
                             [
-                                'left' => 'Members go to church where the pastor is',
-                                'right' => 'Chaplains go where people are working, studying, healing, serving, or imprisoned',
+                                'left' => 'Members go to church where pastor is',
+                                'right' => 'Chaplains go to where people are working, studying, healing, serving or imprisoned',
                             ],
                             [
-                                'left' => 'Trained to teach and lead in specific denominational doctrines and beliefs',
-                                'right' => 'Trained to talk with and counsel people from a variety of faith backgrounds. Chaplains often function as supportive listeners more than verbal advisors',
+                                'left' => 'Trained to teach and lead in specific denominational doctrines, beliefs',
+                                'right' => 'Trained to be able to talk to and counsel people with variety of faith backgrounds. Chaplains function as supportive listeners more than verbal advisors',
                             ],
                             [
-                                'left' => 'Shares his or her faith with members',
-                                'right' => 'Meets the needs of the client, and does not share his or her own beliefs unless asked',
+                                'left' => 'Shares his/her faith with members',
+                                'right' => 'Meets the needs of client- does not share his/her own beliefs unless asked',
                             ],
                         ],
                     ],
@@ -590,38 +591,38 @@ return [
                 [
                     'question' => 'Why should I register for Certificate or Diploma in Chaplaincy?',
                     'paragraphs' => [
-                        'Registering for Certificate or Diploma in Chaplaincy exposes you to theory and practical work. The theory equips every chaplain with the right concepts to approach everyday challenges, while the practical work exposes students to real-life scenarios so they can practice what they have learnt in class. This all-rounded training helps ensure that graduates are qualified to serve in different settings.',
+                        'Registering to take Certificate or Diploma in Chaplaincy studies exposes you to theory and practical work. The theory equips every chaplain with the right concepts to approach everyday life challenges while the practical work exposes our students to real-life scenarios enabling them to practice what they have learnt in class. This all-rounded training approach ensures that our students are qualified to serve in different settings.',
                     ],
                 ],
                 [
                     'question' => 'What is the minimum qualification required to join the programme?',
                     'certificate' => [
-                        'title' => 'Certificate in Chaplaincy',
+                        'title' => 'Certificate in chaplaincy',
                         'body' => 'KCSE D (Plain) and above.',
                     ],
                     'diploma' => [
                         'title' => 'Diploma in Chaplaincy admission requirements',
                         'items' => [
-                            'Must have attained a pass in their previous qualification or Certificate in Chaplaincy (Level 5), or',
-                            'KCSE mean grade of C- and above or its equivalent, or high school certificate (A-level) with a minimum of two principal passes and one subsidiary or its equivalent, or a distinction or credit from an accredited institution.',
+                            'Must have attained a pass in their previous qualification or Certificate in chaplaincy (Level 5) or',
+                            'KCSE mean grade of C- and above or its equivalent, or high school certificate (A-level) with a minimum of two principal passes and one subsidiary or its equivalent or a distinction/credit from an accredited institution.',
                         ],
                     ],
                 ],
                 [
                     'question' => 'How long is the course?',
                     'lines' => [
-                        'Certificate in Chaplaincy: 1 year, offered in 3 trimesters.',
-                        'Diploma in Chaplaincy: 2 years, over 6 trimesters.',
+                        'Certificate in Chaplaincy: 1 Year offered 3 trimesters.',
+                        'Diploma in Chaplaincy: 2 Years of 6 trimesters.',
                     ],
                 ],
                 [
                     'question' => 'Where can I serve after completing my studies?',
                     'paragraphs' => [
-                        'Chaplains are trained to serve in a variety of settings including schools, universities, hospitals, correctional ministry, sports, the military or police, and many other institutions. We believe that need versus the supply of trained chaplains remains significant for reasons such as:',
+                        'Chaplains have been trained to serve in a variety of settings including schools, universities, hospitals, in the correctional ministry, sports, in the military or police forces and in various institutions. We strongly believe that need versus the supply of trained chaplains is unmatched for the following reasons:',
                     ],
                     'bullets' => [
-                        'In 2016, the Cabinet Secretary for Education announced that public high schools would be required to have a trained chaplain serving the student population, creating strong demand in the education sector.',
-                        'Institutions across Kenya continue to recognise the role of chaplains. Between January and July 2019, over ten institutions advertised chaplaincy vacancies, including AIC Githumu Mission Hospital, PAC University, Nova Pioneer Schools, and Brookhurst International School.',
+                        'In 2016, the Cabinet Secretary of Education announced that they are making it a requirement for all public high schools to have a trained chaplain serving the student population. This means that there is a huge demand for chaplains within the education sector',
+                        'Institutions have recognized the important role played by Chaplains in Kenya. Between January and July 2019, over ten institutions advertised for vacancies in the chaplaincy field. Some of the notable institutions include; AIC Githumu Mission Hospital, PAC University, Nova Pioneer Schools and Brookhurst International.',
                     ],
                 ],
             ],
