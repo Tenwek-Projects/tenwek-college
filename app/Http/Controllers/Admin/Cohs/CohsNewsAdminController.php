@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin\Cohs;
 
 use App\Models\NewsPost;
+use App\Models\School;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -41,11 +43,14 @@ class CohsNewsAdminController extends BaseCohsAdminController
             'seo_title' => ['nullable', 'string', 'max:192'],
             'seo_description' => ['nullable', 'string', 'max:512'],
             'published_at' => ['nullable', 'date'],
-            'featured_image_path' => ['nullable', 'string', 'max:512'],
+            'featured_image' => ['nullable', 'image', 'max:8192'],
         ]);
         $slug = $validated['slug'] ?? Str::slug($validated['title']);
         $slug = $this->uniqueSlug($cohs->id, $slug);
-        $data = Arr::except($validated, ['slug']);
+        $data = Arr::except($validated, ['slug', 'featured_image']);
+        if ($request->hasFile('featured_image')) {
+            $data['featured_image_path'] = $request->file('featured_image')->store($cohs->slug.'/'.$cohs->id.'/news', 'public');
+        }
         NewsPost::query()->create([
             ...$data,
             'slug' => $slug,
@@ -76,11 +81,16 @@ class CohsNewsAdminController extends BaseCohsAdminController
             'seo_title' => ['nullable', 'string', 'max:192'],
             'seo_description' => ['nullable', 'string', 'max:512'],
             'published_at' => ['nullable', 'date'],
-            'featured_image_path' => ['nullable', 'string', 'max:512'],
+            'featured_image' => ['nullable', 'image', 'max:8192'],
         ]);
         $slug = $validated['slug'] ?? $news->slug;
         $slug = $this->uniqueSlug($cohs->id, $slug, $news->id);
-        $news->update([...Arr::except($validated, ['slug']), 'slug' => $slug]);
+        $data = Arr::except($validated, ['slug', 'featured_image']);
+        if ($request->hasFile('featured_image')) {
+            $this->deleteStoredFeaturedImage($cohs, $news->featured_image_path);
+            $data['featured_image_path'] = $request->file('featured_image')->store($cohs->slug.'/'.$cohs->id.'/news', 'public');
+        }
+        $news->update([...$data, 'slug' => $slug]);
 
         return redirect()->route('admin.cohs.news.index')->with('status', 'News post updated.');
     }
@@ -89,6 +99,7 @@ class CohsNewsAdminController extends BaseCohsAdminController
     {
         $cohs = $this->cohsSchool($request);
         abort_unless((int) $news->school_id === (int) $cohs->id, 404);
+        $this->deleteStoredFeaturedImage($cohs, $news->featured_image_path);
         $news->delete();
 
         return redirect()->route('admin.cohs.news.index')->with('status', 'News post deleted.');
@@ -108,5 +119,16 @@ class CohsNewsAdminController extends BaseCohsAdminController
         }
 
         return $slug;
+    }
+
+    private function deleteStoredFeaturedImage(School $school, ?string $path): void
+    {
+        if ($path === null || $path === '') {
+            return;
+        }
+        $prefix = $school->slug.'/'.$school->id.'/news/';
+        if (str_starts_with($path, $prefix)) {
+            Storage::disk('public')->delete($path);
+        }
     }
 }

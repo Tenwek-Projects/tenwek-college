@@ -2,8 +2,9 @@
 
 @php
     $hero = config('tenwek.hero', []);
-    $img = $hero['image'] ?? 'ctc.jpg';
+    $img = $hero['image'] ?? 'https://tenwekhospitalcollege.ac.ke/wp-content/uploads/2020/10/tenwekoverhead.jpg';
     $imgAlt = $hero['image_alt'] ?? 'Tenwek Hospital College campus';
+    $imgUrl = \Illuminate\Support\Str::startsWith($img, ['http://', 'https://']) ? $img : asset($img);
     $logoSrc = config('tenwek.brand_logo', 'images/tenwek-hospital-logo.png');
     $logoUrl = \Illuminate\Support\Str::startsWith($logoSrc, ['http://', 'https://']) ? $logoSrc : asset($logoSrc);
 @endphp
@@ -14,7 +15,7 @@
 >
     <div
         class="absolute inset-0 bg-cover bg-center motion-safe:thc-hero-ken-bg"
-        style="background-image: url('{{ e(asset($img)) }}');"
+        style="background-image: url('{{ e($imgUrl) }}');"
         role="img"
         aria-label="{{ e($imgAlt) }}"
     ></div>

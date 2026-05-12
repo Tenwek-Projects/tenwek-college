@@ -15,6 +15,8 @@
     --color-thc-maroon: #8265ae;
     /* School of Chaplaincy — aligns with brand purple under .thc-soc-skin */
     --color-thc-soc-purple: #8265ae;
+    /* SOC accent: very subtle magenta (use at low opacity only) */
+    --color-thc-soc-magenta: #d946ef;
     /**
      * Secondary accent — shared with School of Chaplaincy skin via --color-thc-soc-teal.
      */
@@ -54,6 +56,8 @@
     /* SOC public site: use brand purple instead of global maroon for all thc-maroon-* utilities */
     .thc-soc-skin {
         --color-thc-maroon: var(--color-thc-soc-purple);
+        /* SOC: make hairlines/borders gently magenta (subtle but noticeable) */
+        --color-thc-line: #e879f9;
     }
 }
 
@@ -77,6 +81,20 @@
     /** Shared hero strip for SOC inner pages (light teal wash into white). */
     .soc-page-hero {
         @apply border-b border-thc-line/25 bg-gradient-to-b from-thc-soc-teal/[0.09] via-white to-white;
+    }
+
+    /**
+     * SOC landing: many cards use border-thc-navy/10 for hairlines.
+     * Nudge those borders toward a light magenta so the accent is visible without shouting.
+     */
+    .thc-soc-skin :where(.border-thc-navy\/10) {
+        border-color: rgb(217 70 239 / 0.18);
+    }
+    .thc-soc-skin :where(.border-thc-navy\/8) {
+        border-color: rgb(217 70 239 / 0.14);
+    }
+    .thc-soc-skin :where(.border-thc-navy\/12) {
+        border-color: rgb(217 70 239 / 0.20);
     }
 
     /** COHS inner pages — subtle royal wash (matches /cohs landing accent). */

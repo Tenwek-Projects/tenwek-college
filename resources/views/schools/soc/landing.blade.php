@@ -19,8 +19,8 @@
         aria-label="School of Chaplaincy hero"
     >
         <div class="pointer-events-none absolute inset-0 thc-hero-ken-bg bg-cover bg-center" style="background-image: url('{{ e($heroImageUrl) }}');" aria-hidden="true"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-thc-navy via-thc-soc-teal/38 to-thc-maroon/48" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute inset-0 opacity-[0.14] mix-blend-overlay" style="background-image: radial-gradient(circle at 20% 25%, rgba(255,255,255,0.45), transparent 45%), radial-gradient(circle at 85% 70%, rgba(21,104,116,0.4), transparent 42%);" aria-hidden="true"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-thc-navy via-thc-soc-teal/36 to-thc-soc-magenta/22" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-0 opacity-[0.14] mix-blend-overlay" style="background-image: radial-gradient(circle at 20% 25%, rgba(255,255,255,0.45), transparent 45%), radial-gradient(circle at 85% 70%, rgba(21,104,116,0.35), transparent 42%), radial-gradient(circle at 70% 20%, rgba(217,70,239,0.18), transparent 46%);" aria-hidden="true"></div>
 
         <div class="relative z-10 mx-auto w-full max-w-7xl px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:px-8 lg:pb-24">
             <x-schools.soc.breadcrumbs :school="$school" variant="hero" class="mb-8" />
@@ -88,7 +88,6 @@
                     data-reveal
                     class="group relative overflow-hidden rounded-2xl border border-thc-navy/10 bg-white p-8 shadow-[var(--shadow-thc-card)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-thc-card-hover)] sm:p-10"
                 >
-                    <div class="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-gradient-to-br from-thc-maroon/15 to-transparent opacity-80 transition group-hover:scale-110" aria-hidden="true"></div>
                     <h3 class="relative font-serif text-xl font-semibold text-thc-maroon sm:text-2xl">{{ $L['vision']['title'] }}</h3>
                     <p class="relative mt-6 text-lg leading-relaxed text-thc-text/90">{{ $L['vision']['text'] }}</p>
                 </article>
@@ -96,7 +95,6 @@
                     data-reveal
                     class="group relative overflow-hidden rounded-2xl border border-thc-navy/10 bg-white p-8 shadow-[var(--shadow-thc-card)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-thc-card-hover)] sm:p-10"
                 >
-                    <div class="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-gradient-to-br from-thc-soc-teal/18 to-transparent opacity-80 transition group-hover:scale-110" aria-hidden="true"></div>
                     <h3 class="relative font-serif text-xl font-semibold text-thc-soc-teal sm:text-2xl">{{ $L['mission']['title'] }}</h3>
                     <p class="relative mt-6 text-lg leading-relaxed text-thc-text/90">{{ $L['mission']['text'] }}</p>
                 </article>
@@ -106,7 +104,7 @@
 
     {{-- Motto --}}
     <section id="motto" class="scroll-mt-24 relative overflow-hidden border-y border-thc-navy/10 bg-thc-navy text-white">
-        <div class="pointer-events-none absolute inset-0 opacity-30" style="background-image: radial-gradient(circle at 50% 0%, rgba(21,104,116,0.4), transparent 55%), radial-gradient(circle at 10% 90%, rgba(0,86,179,0.35), transparent 50%);" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-0 opacity-30" style="background-image: radial-gradient(circle at 50% 0%, rgba(21,104,116,0.4), transparent 55%), radial-gradient(circle at 10% 90%, rgba(0,86,179,0.35), transparent 50%), radial-gradient(circle at 90% 10%, rgba(217,70,239,0.18), transparent 52%);" aria-hidden="true"></div>
         <div class="relative mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 lg:py-28">
             <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-white/70" data-reveal>{{ $L['motto']['kicker'] }}</p>
             <p class="mt-8 font-serif text-3xl font-medium leading-snug text-white sm:text-4xl lg:text-[2.75rem]" data-reveal>
@@ -212,8 +210,9 @@
                 <p class="mt-4 text-lg text-thc-text/85">Admissions, programme questions, or prayer: reach the School of Chaplaincy office directly.</p>
             </div>
 
-            <div class="mt-12 grid items-start gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-14">
+            <div class="mt-12 grid items-stretch gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-14">
                 <div class="lg:col-span-5" data-reveal>
+                    <div class="flex h-full flex-col gap-8">
                     <div class="rounded-2xl border border-thc-navy/10 bg-white p-6 shadow-sm sm:p-8">
                         <div class="grid gap-8 sm:grid-cols-2 sm:gap-8 lg:grid-cols-1 lg:gap-10">
                             <div>
@@ -256,6 +255,20 @@
                             </div>
                         </div>
                     </div>
+
+                    @if($mapUrl)
+                        <div class="flex-1 overflow-hidden rounded-2xl border border-thc-navy/10 bg-thc-navy/[0.03] shadow-[var(--shadow-thc-card)] ring-1 ring-thc-navy/5">
+                            <iframe
+                                title="Map: Tenwek Hospital College area"
+                                src="{{ $mapUrl }}"
+                                class="block h-full min-h-[16rem] w-full border-0"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                allowfullscreen
+                            ></iframe>
+                        </div>
+                    @endif
+                    </div>
                 </div>
 
                 <div class="lg:col-span-7" data-reveal>
@@ -263,7 +276,7 @@
                         <div class="mb-6 rounded-xl border border-thc-royal/25 bg-thc-royal/8 px-4 py-3 text-sm text-thc-navy">{{ session('status') }}</div>
                     @endif
 
-                    <div class="rounded-2xl border border-thc-navy/10 bg-white p-6 shadow-[var(--shadow-thc-card)] sm:p-8">
+                    <div class="h-full rounded-2xl border border-thc-navy/10 bg-white p-6 shadow-[var(--shadow-thc-card)] sm:p-8">
                         <h3 class="font-serif text-xl font-semibold text-thc-navy">Send a message</h3>
                         <p class="mt-2 text-sm text-thc-text/80">All fields marked required must be completed. Your message is protected the same way as our main contact form.</p>
 
@@ -309,21 +322,6 @@
                 </div>
             </div>
         </div>
-
-        @if($mapUrl)
-            <div class="mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8" data-reveal>
-                <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-thc-navy/[0.03] shadow-[var(--shadow-thc-card)] ring-1 ring-thc-navy/5">
-                    <iframe
-                        title="Map: Tenwek Hospital College area"
-                        src="{{ $mapUrl }}"
-                        class="block aspect-video min-h-[16rem] w-full border-0 sm:min-h-[18rem] lg:min-h-[22rem]"
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        allowfullscreen
-                    ></iframe>
-                </div>
-            </div>
-        @endif
 
         <div class="h-12 sm:h-16 lg:h-20" aria-hidden="true"></div>
     </section>

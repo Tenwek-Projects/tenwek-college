@@ -94,6 +94,10 @@
                     href="{{ route('home') }}"
                     class="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/[0.07] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:border-white/35 hover:bg-white/15 sm:text-[11px]"
                 >
+                    <svg class="h-3.5 w-3.5 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10.5L12 3l9 7.5V21a1.5 1.5 0 01-1.5 1.5H4.5A1.5 1.5 0 013 21V10.5z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 22.5V15a1.5 1.5 0 011.5-1.5h3A1.5 1.5 0 0115 15v7.5"/>
+                    </svg>
                     {{ __('College Home') }}
                 </a>
                 <a
