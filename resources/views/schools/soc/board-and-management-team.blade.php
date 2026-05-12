@@ -1,11 +1,6 @@
 @php
     $soc = $socLanding ?? config('tenwek.soc_landing');
     $B = $soc['board_and_management'] ?? [];
-    $management = $B['management'] ?? [];
-    /** Row 1: chair (first). Row 2: next two. Row 3+: remaining (each full width). */
-    $managementHead = $management[0] ?? null;
-    $managementMid = array_values(array_slice($management, 1, 2));
-    $managementTail = array_values(array_slice($management, 3));
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
@@ -57,25 +52,9 @@
                         <p class="mt-1 text-sm text-thc-text/65">School and hospital leadership</p>
                     </div>
                 </div>
-                <ul class="mt-10 list-none space-y-8 p-0 xl:space-y-10" role="list">
-                    @if($managementHead)
-                        <li class="mx-auto w-full max-w-md xl:max-w-lg">
-                            <x-schools.soc.leadership-card :person="$managementHead" accent="royal" />
-                        </li>
-                    @endif
-                    @if(count($managementMid) > 0)
-                        <li class="list-none p-0">
-                            <ul class="m-0 grid list-none gap-6 p-0 sm:grid-cols-2 sm:gap-8 xl:mx-auto xl:max-w-5xl" role="list">
-                                @foreach($managementMid as $person)
-                                    <li>
-                                        <x-schools.soc.leadership-card :person="$person" accent="royal" />
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
-                    @endif
-                    @foreach($managementTail as $person)
-                        <li class="mx-auto w-full max-w-md xl:max-w-lg">
+                <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" role="list">
+                    @foreach($B['management'] ?? [] as $person)
+                        <li>
                             <x-schools.soc.leadership-card :person="$person" accent="royal" />
                         </li>
                     @endforeach

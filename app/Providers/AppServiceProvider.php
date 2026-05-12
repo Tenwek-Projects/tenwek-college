@@ -99,7 +99,6 @@ class AppServiceProvider extends ServiceProvider
 
         $row = SiteAdminSetting::query()->first();
         $general = is_array($row?->general) ? $row->general : [];
-        $hero = is_array($row?->hero) ? $row->hero : [];
         $globalSeo = is_array($row?->global_seo) ? $row->global_seo : [];
 
         $updates = [];
@@ -117,16 +116,6 @@ class AppServiceProvider extends ServiceProvider
         }
         if (! empty($general['phone'])) {
             $updates['tenwek.phone'] = $general['phone'];
-        }
-
-        if (array_key_exists('credibility', $hero) && is_string($hero['credibility']) && $hero['credibility'] !== '') {
-            $updates['tenwek.hero.credibility'] = $hero['credibility'];
-        }
-        if (! empty($hero['image']) && is_string($hero['image'])) {
-            $updates['tenwek.hero.image'] = $hero['image'];
-        }
-        if (array_key_exists('image_alt', $hero) && is_string($hero['image_alt']) && $hero['image_alt'] !== '') {
-            $updates['tenwek.hero.image_alt'] = $hero['image_alt'];
         }
 
         foreach ($updates as $key => $value) {
