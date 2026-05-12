@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\Soc\SocPageAdminController;
 use App\Http\Controllers\Admin\Soc\SocProgrammeGroupController;
 use App\Http\Controllers\Admin\Soc\SocProgrammeItemController;
 use App\Http\Controllers\Admin\Soc\SocSchoolEventController;
+use App\Http\Controllers\Admin\Soc\SocStrategicPartnersImagesController;
 use App\Http\Controllers\Admin\Soc\SocTeamMemberController;
 use App\Http\Controllers\Admin\Soc\SocTestimonialController;
 use App\Http\Controllers\Admin\UserAdminController;
@@ -137,6 +138,8 @@ Route::middleware(['auth', 'active_user', 'role:super_admin|soc_admin', 'manages
         Route::put('/about', [SocLandingFormsController::class, 'updateAbout'])->name('about.update');
         Route::get('/mission-vision', [SocLandingFormsController::class, 'editMissionVision'])->name('mission-vision.edit');
         Route::put('/mission-vision', [SocLandingFormsController::class, 'updateMissionVision'])->name('mission-vision.update');
+        Route::get('/strategic-partners/images', [SocStrategicPartnersImagesController::class, 'edit'])->name('strategic-partners.images.edit');
+        Route::put('/strategic-partners/images', [SocStrategicPartnersImagesController::class, 'update'])->name('strategic-partners.images.update');
         Route::get('/motto', [SocLandingFormsController::class, 'editMotto'])->name('motto.edit');
         Route::put('/motto', [SocLandingFormsController::class, 'updateMotto'])->name('motto.update');
         Route::get('/contact', [SocLandingFormsController::class, 'editContact'])->name('contact.edit');

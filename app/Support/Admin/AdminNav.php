@@ -65,6 +65,7 @@ final class AdminNav
                 self::link('Contact block', 'admin.soc.contact.edit', [], 'map-pin', ['admin.soc.contact.*']),
                 self::link('About', 'admin.soc.about.edit', [], 'book-open', ['admin.soc.about.*']),
                 self::link('Mission & vision', 'admin.soc.mission-vision.edit', [], 'flag', ['admin.soc.mission-vision.*']),
+                self::link('Strategic partners (images)', 'admin.soc.strategic-partners.images.edit', [], 'photo', ['admin.soc.strategic-partners.images.*']),
                 self::link('FAQs', 'admin.soc.faqs.index', [], 'chat-bubble-left-right', ['admin.soc.faqs.*']),
                 self::link('Motto', 'admin.soc.motto.edit', [], 'sparkles', ['admin.soc.motto.*']),
                 self::link('Top bar', 'admin.soc.top-bar.edit', [], 'signal', ['admin.soc.top-bar.*']),

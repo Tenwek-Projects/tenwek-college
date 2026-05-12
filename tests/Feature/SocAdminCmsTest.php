@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\FormSubmission;
 use App\Models\MediaAsset;
+use App\Models\SocLandingSection;
 use App\Models\School;
 use App\Models\SocProgrammeGroup;
 use App\Models\SocProgrammeItem;
@@ -123,5 +124,34 @@ class SocAdminCmsTest extends TestCase
 
         $this->assertSame(2, MediaAsset::query()->where('school_id', $soc->id)->count());
         $this->assertSame('Batch alt', MediaAsset::query()->where('school_id', $soc->id)->first()->alt_text);
+    }
+
+    public function test_soc_admin_can_open_and_save_strategic_partner_images(): void
+    {
+        $this->seed(TenwekFoundationSeeder::class);
+        $user = User::query()->where('email', 'soc.admin@tenwekhospitalcollege.ac.ke')->firstOrFail();
+        $soc = School::query()->where('slug', 'soc')->firstOrFail();
+
+        $this->actingAs($user)
+            ->get(route('admin.soc.strategic-partners.images.edit'))
+            ->assertOk()
+            ->assertSee('Africa Gospel Church', false);
+
+        $file = UploadedFile::fake()->image('partner0.png', 120, 80);
+
+        $this->actingAs($user)
+            ->from(route('admin.soc.strategic-partners.images.edit'))
+            ->put(route('admin.soc.strategic-partners.images.update'), [
+                'partner_image' => [0 => $file],
+            ])
+            ->assertRedirect(route('admin.soc.strategic-partners.images.edit'));
+
+        $row = SocLandingSection::query()
+            ->where('school_id', $soc->id)
+            ->where('section_key', 'strategic_partners')
+            ->firstOrFail();
+        $path = $row->payload['partners'][0]['image'] ?? null;
+        $this->assertIsString($path);
+        $this->assertStringStartsWith('soc/'.$soc->id.'/strategic-partners/', $path);
     }
 }
