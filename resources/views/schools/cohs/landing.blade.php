@@ -277,22 +277,22 @@
                         </form>
                     </div>
                 </div>
-
-                @if($mapUrl)
-                    <div class="mt-10 lg:col-span-12 lg:mt-12" data-reveal>
-                        <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-thc-navy/[0.03] shadow-[var(--shadow-thc-card)] ring-1 ring-thc-navy/5">
-                            <iframe
-                                title="Map: Tenwek Hospital College area"
-                                src="{{ $mapUrl }}"
-                                class="block aspect-video min-h-[16rem] w-full border-0 sm:min-h-[18rem] lg:min-h-[22rem]"
-                                loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"
-                                allowfullscreen
-                            ></iframe>
-                        </div>
-                    </div>
-                @endif
             </div>
+
+            @if($mapUrl)
+                <div class="mt-10 w-full sm:mt-12 lg:mt-14" data-reveal>
+                    <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-thc-navy/[0.03] shadow-[var(--shadow-thc-card)] ring-1 ring-thc-navy/5">
+                        <iframe
+                            title="Map: Tenwek Hospital College area"
+                            src="{{ $mapUrl }}"
+                            class="block aspect-video min-h-[16rem] w-full max-w-full border-0 sm:min-h-[18rem] lg:min-h-[22rem]"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+            @endif
         </div>
 
         <div class="h-12 sm:h-16 lg:h-20" aria-hidden="true"></div>
