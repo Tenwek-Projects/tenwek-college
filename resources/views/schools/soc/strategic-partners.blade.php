@@ -6,12 +6,12 @@
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
-    <div class="soc-page-hero">
+    <div class="soc-page-hero soc-strategic-partners-hero">
         <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
             <x-schools.soc.breadcrumbs :school="$school" :current="$page->title" class="mb-8" data-reveal />
 
             <header class="max-w-3xl" data-reveal>
-                <p class="thc-kicker">Strategic partnerships</p>
+                <p class="thc-kicker strategic-partners-kicker">Strategic partnerships</p>
                 <h1 class="mt-4 font-serif text-4xl font-semibold tracking-tight text-thc-navy sm:text-5xl">
                     {{ $page->title }}
                 </h1>
@@ -24,16 +24,16 @@
         </div>
     </div>
 
-    <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:flex lg:gap-12 lg:px-8 lg:py-16">
+    <div class="soc-strategic-partners-main mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:flex lg:gap-12 lg:px-8 lg:py-16">
         <div class="min-w-0 flex-1 space-y-12 lg:space-y-14">
             @foreach($partners as $index => $partner)
                 <article
                     id="partner-{{ \Illuminate\Support\Str::slug($partner['name']) }}"
-                    class="scroll-mt-28 overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-sm"
+                    class="scroll-mt-28 overflow-hidden rounded-2xl border border-thc-navy/10 border-l-[3px] border-l-thc-soc-magenta/25 bg-white shadow-sm"
                     data-reveal
                     aria-labelledby="partner-heading-{{ $index }}"
                 >
-                    <div class="flex flex-col gap-8 p-6 sm:p-8 lg:flex-row lg:gap-10 lg:p-10">
+                    <div class="flex flex-col gap-8 p-6 sm:p-8 lg:flex-row lg:items-center lg:gap-10 lg:p-10">
                         <figure class="mx-auto w-full max-w-[20rem] shrink-0 lg:mx-0 lg:w-[min(100%,18rem)] xl:w-[20rem]">
                             @php $pImage = $partner['image'] ?? null; @endphp
                             @if(filled($pImage))
@@ -41,7 +41,7 @@
                                     <img
                                         src="{{ \App\Support\Soc\SocLandingRepository::publicMediaUrl($pImage) ?? asset($pImage) }}"
                                         alt="{{ $partner['name'] }}"
-                                        class="aspect-[4/3] w-full object-cover"
+                                        class="aspect-[4/3] w-full object-cover object-center"
                                         loading="lazy"
                                         decoding="async"
                                         width="640"
@@ -80,7 +80,7 @@
                                     @foreach($partner['bullets'] as $item)
                                         <li class="flex gap-3">
                                             <span
-                                                class="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-thc-maroon shadow-[0_0_0_3px_rgb(122_0_223_/_0.12)]"
+                                                class="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-gradient-to-br from-thc-maroon to-thc-soc-magenta shadow-[0_0_0_3px_rgb(217_70_239_/_0.14)]"
                                                 aria-hidden="true"
                                             ></span>
                                             <span class="min-w-0 flex-1 text-base leading-relaxed">{{ $item }}</span>

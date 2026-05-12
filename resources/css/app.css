@@ -83,6 +83,25 @@
         @apply border-b border-thc-line/25 bg-gradient-to-b from-thc-soc-teal/[0.09] via-white to-white;
     }
 
+    /** /soc/strategic-partners — whisper of magenta in the hero + list band (SOC skin only). */
+    .thc-soc-skin .soc-strategic-partners-hero {
+        border-bottom-color: rgb(217 70 239 / 0.22);
+        background: linear-gradient(
+            to bottom,
+            rgb(217 70 239 / 0.07) 0%,
+            rgb(98 163 161 / 0.08) 38%,
+            white 100%
+        );
+    }
+
+    .thc-soc-skin .soc-strategic-partners-main {
+        background: linear-gradient(to bottom, rgb(217 70 239 / 0.035), transparent 10rem);
+    }
+
+    .thc-soc-skin .strategic-partners-kicker {
+        @apply border-l-2 border-thc-soc-magenta/40 pl-3;
+    }
+
     /**
      * SOC landing: many cards use border-thc-navy/10 for hairlines.
      * Nudge those borders toward a light magenta so the accent is visible without shouting.
