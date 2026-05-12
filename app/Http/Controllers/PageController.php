@@ -81,6 +81,11 @@ class PageController extends Controller
             abort(404);
         }
 
+        $programmeMeta = null;
+        if ($school->slug === 'soc' && in_array($pageSlug, $socCourseSlugs, true)) {
+            $programmeMeta = $this->socAcademicProgrammeMeta($school, $pageSlug);
+        }
+
         $seoOverrides = [
             'title' => $page->seo_title ?? $page->title,
             'description' => $page->seo_description ?? $page->excerpt ?? strip_tags((string) $page->body),
@@ -92,6 +97,31 @@ class PageController extends Controller
                 ['label' => $page->title, 'href' => route('schools.pages.show', [$school, $page->slug])],
             ],
         ];
+        if ($school->slug === 'soc' && in_array($pageSlug, $socCourseSlugs, true)) {
+            $programmesIndexUrl = route('schools.pages.show', [$school, 'academic-programmes']);
+            $pageUrl = route('schools.pages.show', [$school, $page->slug]);
+            $seoOverrides['breadcrumbs'] = [
+                ['label' => 'Home', 'href' => route('home')],
+                ['label' => $school->name, 'href' => route('schools.show', $school)],
+                ['label' => 'Academic programmes', 'href' => $programmesIndexUrl],
+                ['label' => $page->title, 'href' => $pageUrl],
+            ];
+            $plainDesc = preg_replace('/\s+/', ' ', strip_tags((string) ($page->seo_description ?? $page->excerpt ?? ''))) ?? '';
+            $seoOverrides['schema'] = [
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'Course',
+                    'name' => $page->title,
+                    'description' => Str::limit(trim($plainDesc), 500, ''),
+                    'url' => $pageUrl,
+                    'provider' => [
+                        '@type' => 'EducationalOrganization',
+                        'name' => $school->name,
+                        'url' => route('schools.show', $school),
+                    ],
+                ],
+            ];
+        }
         if (filled($page->seo_keywords)) {
             $seoOverrides['keywords'] = $page->seo_keywords;
         }
@@ -140,7 +170,7 @@ class PageController extends Controller
                 $pageSlug === 'admissions' => view('schools.soc.admissions', compact('seo', 'page', 'school')),
                 $pageSlug === 'gallery' => view('schools.soc.gallery', compact('seo', 'page', 'school')),
                 $pageSlug === 'faqs' => view('schools.soc.faqs', compact('seo', 'page', 'school')),
-                in_array($pageSlug, $socCourseSlugs, true) => view('schools.soc.programme-show', compact('seo', 'page', 'school')),
+                in_array($pageSlug, $socCourseSlugs, true) => view('schools.soc.programme-show', compact('seo', 'page', 'school', 'programmeMeta')),
                 default => view('pages.show', compact('seo', 'page', 'school')),
             };
         }
@@ -181,6 +211,9 @@ class PageController extends Controller
 
         $defaultSeoTitle = $title.' | '.$school->name.' | '.config('tenwek.name');
 
+        $stripBody = preg_replace('/\s+/', ' ', strip_tags($body)) ?? '';
+        $fallbackDescription = Str::limit(trim($stripBody), 160, '');
+
         return new Page([
             'school_id' => $school->id,
             'slug' => $pageSlug,
@@ -189,11 +222,39 @@ class PageController extends Controller
             'body' => $body,
             'published_at' => now(),
             'seo_title' => filled($item['seo_title'] ?? null) ? (string) $item['seo_title'] : $defaultSeoTitle,
-            'seo_description' => filled($item['seo_description'] ?? null) ? (string) $item['seo_description'] : Str::limit($summary, 160),
+            'seo_description' => filled($item['seo_description'] ?? null) ? (string) $item['seo_description'] : ($fallbackDescription !== '' ? $fallbackDescription : Str::limit($summary, 160)),
             'seo_keywords' => filled($item['seo_keywords'] ?? null) ? (string) $item['seo_keywords'] : null,
             'og_title' => filled($item['og_title'] ?? null) ? (string) $item['og_title'] : null,
             'og_image_path' => filled($item['og_image_path'] ?? null) ? (string) $item['og_image_path'] : null,
         ]);
+    }
+
+    /**
+     * @return array{badge: ?string, group_heading: ?string}|null
+     */
+    private function socAcademicProgrammeMeta(School $school, string $pageSlug): ?array
+    {
+        $landing = app(SocLandingRepository::class)->forSchool($school);
+        foreach ($landing['academic_programmes']['groups'] ?? [] as $group) {
+            if (! is_array($group)) {
+                continue;
+            }
+            foreach ($group['items'] ?? [] as $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+                if (($item['slug'] ?? '') === $pageSlug) {
+                    $badge = $item['badge'] ?? null;
+
+                    return [
+                        'badge' => is_string($badge) && $badge !== '' ? $badge : null,
+                        'group_heading' => is_string($group['heading'] ?? null) ? $group['heading'] : null,
+                    ];
+                }
+            }
+        }
+
+        return null;
     }
 
     /**

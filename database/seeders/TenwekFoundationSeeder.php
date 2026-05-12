@@ -9,6 +9,7 @@ use App\Models\Page;
 use App\Models\School;
 use App\Models\User;
 use App\Support\CohsApplicationFormDownloads;
+use Database\Seeders\Data\SocProgrammePageDefinitions;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -198,64 +199,7 @@ HTML;
             );
         }
 
-        $socAdmissionsUrl = route('schools.pages.show', [$soc, 'admissions']);
-        /** Relative path so links work on any host/port (e.g. localhost:8000). */
-        $socRegisterPath = route('soc.register', [], false);
-
-        $socProgrammePages = [
-            [
-                'slug' => 'certificate-in-chaplaincy',
-                'title' => 'Certificate in Chaplaincy',
-                'excerpt' => 'Level 5 introductory chaplaincy qualification examined by CDACC.',
-                'body' => '<p>Certificate in Chaplaincy (Level 5) is an introductory level to chaplaincy studies that targets students with the qualification of KCSE D (Plain) and above. It shall be a build up to the Diploma programme.</p>'
-                    .'<p>This qualification is offered as part of the School of Chaplaincy’s competency-based pathway examined by CDACC. <a href="'.$socRegisterPath.'">Apply online</a>.</p>',
-            ],
-            [
-                'slug' => 'diploma-in-chaplaincy',
-                'title' => 'Diploma in Chaplaincy',
-                'excerpt' => 'Level 6 advanced chaplaincy programme: two years over six trimesters, examined by CDACC.',
-                'body' => '<p>Diploma in Chaplaincy (Level 6) is an advanced level envisioned to prepare chaplains at a higher level of discharging their roles appropriately. The programme has been designed to take 2 years offered in six (6) trimesters.</p>'
-                    .'<p>Like the Certificate, the Diploma is examined by CDACC. <a href="'.$socAdmissionsUrl.'">Learn about admissions</a>.</p>',
-            ],
-            [
-                'slug' => 'healthcare-chaplaincy',
-                'title' => 'Healthcare Chaplaincy',
-                'excerpt' => 'Spiritual care in hospitals, hospices, and other healing environments.',
-                'body' => '<p>Healthcare chaplains serve in environments of sickness, pain, birth, and death, including hospital and hospice chaplaincy. They walk alongside patients, families, and staff with compassion and cultural and religious sensitivity.</p>',
-            ],
-            [
-                'slug' => 'military-chaplaincy',
-                'title' => 'Military Chaplaincy',
-                'excerpt' => 'Counseling and spiritual support for service members and families.',
-                'body' => '<p>Military chaplaincy provides counseling and spiritual support for military personnel and families, often across deployments, trauma, loss, and transition.</p>',
-            ],
-            [
-                'slug' => 'educational-chaplaincy',
-                'title' => 'Educational Chaplaincy',
-                'excerpt' => 'Serving schools, colleges, and universities.',
-                'body' => '<p>Educational chaplains serve the spiritual needs of students, teachers, administrators, and support staff at all levels of education, from primary school to higher education.</p>',
-            ],
-            [
-                'slug' => 'police-chaplaincy',
-                'title' => 'Police Chaplaincy',
-                'excerpt' => 'Support for officers, staff, and families.',
-                'body' => '<p>Police chaplaincy provides counseling and spiritual support for police officers, employees, and families, often in the aftermath of critical incidents and sustained operational stress.</p>',
-            ],
-            [
-                'slug' => 'prison-chaplaincy',
-                'title' => 'Prison (correctional ministry) chaplaincy',
-                'excerpt' => 'Pastoral care in correctional and rehabilitation settings.',
-                'body' => '<p>Prison (or correctional ministry) chaplaincy supports inmates, officers, and their families with counseling and spiritual care in men’s and women’s prisons, borstal institutions (youth offenders), rehabilitation schools, and probation departments.</p>',
-            ],
-            [
-                'slug' => 'future-chaplaincy-programmes',
-                'title' => 'Future programmes',
-                'excerpt' => 'Planned specialties and further levels in chaplaincy formation.',
-                'body' => '<p>The school envisions developing other areas of specialty training in chaplaincy alongside other study levels to propel chaplaincy as an area of professional growth.</p>',
-            ],
-        ];
-
-        foreach ($socProgrammePages as $p) {
+        foreach (SocProgrammePageDefinitions::all($soc) as $p) {
             Page::query()->updateOrCreate(
                 ['school_id' => $soc->id, 'slug' => $p['slug']],
                 [
@@ -263,8 +207,10 @@ HTML;
                     'excerpt' => $p['excerpt'],
                     'body' => $p['body'],
                     'published_at' => now(),
-                    'seo_title' => $p['title'].' | '.$soc->name.' | '.config('tenwek.name'),
-                    'seo_description' => $p['excerpt'],
+                    'seo_title' => $p['seo_title'],
+                    'seo_description' => $p['seo_description'],
+                    'seo_keywords' => $p['seo_keywords'],
+                    'og_title' => $p['og_title'],
                 ]
             );
         }

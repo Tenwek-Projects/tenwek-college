@@ -314,6 +314,8 @@ class SocCmsInitialContentSeeder extends Seeder
                     'body' => $page?->body,
                     'seo_title' => $page?->seo_title,
                     'seo_description' => $page?->seo_description,
+                    'seo_keywords' => $page?->seo_keywords,
+                    'og_title' => $page?->og_title,
                     'sort_order' => $iOrder++,
                     'is_published' => true,
                 ]);

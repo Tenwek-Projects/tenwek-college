@@ -34,7 +34,9 @@ class SocAcademicProgrammesPageTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Certificate in Chaplaincy', false);
-        $response->assertSee('KCSE D', false);
+        $response->assertSee('Who this programme is for', false);
+        $response->assertSee('CDACC', false);
+        $response->assertSee('Next steps', false);
         $response->assertSee('Back to academic programmes', false);
         $response->assertSee(route('soc.register', [], false), false);
     }
@@ -50,7 +52,6 @@ class SocAcademicProgrammesPageTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Certificate in Chaplaincy', false);
-        $response->assertSee('Apply online', false);
         $response->assertSee(route('soc.register', [], false), false);
     }
 }
