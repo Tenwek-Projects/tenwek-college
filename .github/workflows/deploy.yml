@@ -26,7 +26,7 @@ jobs:
           cache: npm
 
       - run: composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
-      - run: npm install NPM_CMD_PLACEHOLDERNPM_CMD_PLACEHOLDER npm run build
+      - run: npm install && npm run build
 
       - name: pack
         run: |
