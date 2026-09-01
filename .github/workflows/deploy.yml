@@ -1,0 +1,58 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  TENWEK_APP_DIR: college
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: mbstring, xml, curl, zip, bcmath, intl, mysql
+          coverage: none
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+      - run: npm ci && npm run build
+
+      - name: pack
+        run: |
+          tar czf "$RUNNER_TEMP/tenwek-code.tar.gz" \
+            --exclude=node_modules --exclude=.git --exclude=public/build \
+            --exclude=storage/logs --exclude=storage/framework/cache \
+            --exclude=storage/framework/sessions --exclude=storage/framework/views \
+            --exclude=.env .
+          tar czf "$RUNNER_TEMP/tenwek-build.tar.gz" -C public build
+          cp "$RUNNER_TEMP/tenwek-code.tar.gz" "$RUNNER_TEMP/tenwek-build.tar.gz" deploy/run-full-deploy.sh .
+
+      - uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ vars.DEPLOY_HOST }}
+          username: ${{ vars.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          source: tenwek-code.tar.gz,tenwek-build.tar.gz,run-full-deploy.sh
+          target: /home/tenwek-deploy/incoming/
+          overwrite: true
+
+      - uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ vars.DEPLOY_HOST }}
+          username: ${{ vars.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          envs: TENWEK_APP_DIR
+          script: |
+            export TENWEK_APP_DIR=${{ env.TENWEK_APP_DIR }}
+            bash /home/tenwek-deploy/incoming/run-full-deploy.sh
