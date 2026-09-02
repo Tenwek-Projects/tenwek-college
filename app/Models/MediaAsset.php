@@ -24,7 +24,7 @@ class MediaAsset extends Model
 
     public function publicUrl(): string
     {
-        return asset('storage/'.$this->path);
+        return \App\Support\PublicAssetUrl::toUrl($this->path) ?? asset('storage/'.$this->path);
     }
 
     /** True when the asset can be shown in an <img> (raster or SVG). */

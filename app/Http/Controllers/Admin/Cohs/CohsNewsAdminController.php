@@ -49,7 +49,7 @@ class CohsNewsAdminController extends BaseCohsAdminController
         $slug = $this->uniqueSlug($cohs->id, $slug);
         $data = Arr::except($validated, ['slug', 'featured_image']);
         if ($request->hasFile('featured_image')) {
-            $data['featured_image_path'] = $request->file('featured_image')->store($cohs->slug.'/'.$cohs->id.'/news', 'public');
+            $data['featured_image_path'] = $request->file('featured_image')->store($cohs->slug.'/'.$cohs->id.'/news', \App\Support\UploadsDisk::name());
         }
         NewsPost::query()->create([
             ...$data,
@@ -88,7 +88,7 @@ class CohsNewsAdminController extends BaseCohsAdminController
         $data = Arr::except($validated, ['slug', 'featured_image']);
         if ($request->hasFile('featured_image')) {
             $this->deleteStoredFeaturedImage($cohs, $news->featured_image_path);
-            $data['featured_image_path'] = $request->file('featured_image')->store($cohs->slug.'/'.$cohs->id.'/news', 'public');
+            $data['featured_image_path'] = $request->file('featured_image')->store($cohs->slug.'/'.$cohs->id.'/news', \App\Support\UploadsDisk::name());
         }
         $news->update([...$data, 'slug' => $slug]);
 
@@ -128,7 +128,7 @@ class CohsNewsAdminController extends BaseCohsAdminController
         }
         $prefix = $school->slug.'/'.$school->id.'/news/';
         if (str_starts_with($path, $prefix)) {
-            Storage::disk('public')->delete($path);
+            Storage::disk(\App\Support\UploadsDisk::name())->delete($path);
         }
     }
 }

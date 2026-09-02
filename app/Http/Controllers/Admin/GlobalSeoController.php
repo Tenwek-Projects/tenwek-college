@@ -53,7 +53,7 @@ class GlobalSeoController extends Controller
 
         if ($request->hasFile('og_image_upload')) {
             self::deleteStoredGlobalOgIfManaged($priorOg);
-            $path = $request->file('og_image_upload')->store('global-seo', 'public');
+            $path = $request->file('og_image_upload')->store('global-seo', \App\Support\UploadsDisk::name());
             $merged['default_og_image'] = 'storage/'.$path;
         } elseif ($request->boolean('clear_og_image')) {
             self::deleteStoredGlobalOgIfManaged($priorOg);
@@ -77,6 +77,6 @@ class GlobalSeoController extends Controller
             return;
         }
         $relative = Str::after($stored, 'storage/');
-        Storage::disk('public')->delete($relative);
+        Storage::disk(\App\Support\UploadsDisk::name())->delete($relative);
     }
 }

@@ -68,7 +68,7 @@ class CohsLandingFormsController extends BaseCohsAdminController
         $hadUpload = false;
         foreach (['hero_image' => 'hero_image', 'welcome_image' => 'welcome_image', 'logo' => 'logo'] as $fileKey => $assetKey) {
             if ($request->hasFile($fileKey)) {
-                $stored = $request->file($fileKey)->store($prefix, 'public');
+                $stored = $request->file($fileKey)->store($prefix, \App\Support\UploadsDisk::name());
                 $assets[$assetKey] = $stored;
                 $hadUpload = true;
             }
@@ -219,7 +219,7 @@ class CohsLandingFormsController extends BaseCohsAdminController
             }
         }
         if ($request->hasFile('og_image_upload')) {
-            $payload['og_image'] = $request->file('og_image_upload')->store('cohs/'.$cohs->id, 'public');
+            $payload['og_image'] = $request->file('og_image_upload')->store('cohs/'.$cohs->id, \App\Support\UploadsDisk::name());
         }
         $this->persistSection($cohs, 'landing_seo', $payload);
 
@@ -334,7 +334,7 @@ class CohsLandingFormsController extends BaseCohsAdminController
             $assets = [];
         }
         if ($request->hasFile('hero_image')) {
-            $assets['cohs_social_hero'] = $request->file('hero_image')->store('cohs/'.$cohs->id, 'public');
+            $assets['cohs_social_hero'] = $request->file('hero_image')->store('cohs/'.$cohs->id, \App\Support\UploadsDisk::name());
             $payload['hero_image'] = $assets['cohs_social_hero'];
         } elseif (! empty($prev['hero_image']) && is_string($prev['hero_image'])) {
             $payload['hero_image'] = $prev['hero_image'];
@@ -389,7 +389,7 @@ class CohsLandingFormsController extends BaseCohsAdminController
             $assets = [];
         }
         if ($request->hasFile('hero_image')) {
-            $assets['cohs_facilities_hero'] = $request->file('hero_image')->store('cohs/'.$cohs->id, 'public');
+            $assets['cohs_facilities_hero'] = $request->file('hero_image')->store('cohs/'.$cohs->id, \App\Support\UploadsDisk::name());
             $payload['hero_image'] = $assets['cohs_facilities_hero'];
         } elseif (! empty($prev['hero_image']) && is_string($prev['hero_image'])) {
             $payload['hero_image'] = $prev['hero_image'];
@@ -480,7 +480,7 @@ class CohsLandingFormsController extends BaseCohsAdminController
         ];
 
         if ($request->hasFile('history_image_upload')) {
-            $path = $request->file('history_image_upload')->store('cohs/'.$cohs->id.'/about', 'public');
+            $path = $request->file('history_image_upload')->store('cohs/'.$cohs->id.'/about', \App\Support\UploadsDisk::name());
             $payload['history_image'] = $path;
         }
 

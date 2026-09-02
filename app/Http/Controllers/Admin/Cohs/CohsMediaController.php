@@ -30,20 +30,24 @@ class CohsMediaController extends BaseCohsAdminController
             'alt_text' => ['nullable', 'string', 'max:500'],
         ]);
         $file = $request->file('file');
-        $path = $file->store('cohs/'.$cohs->id.'/library', 'public');
+        $disk = \App\Support\UploadsDisk::name();
+        GdImageDownscaler::downscaleMaxWidth($file->getRealPath());
+        $path = $file->store('cohs/'.$cohs->id.'/library', $disk);
         $medium = MediaAsset::query()->create([
             'user_id' => $request->user()->id,
             'school_id' => $cohs->id,
-            'disk' => 'public',
+            'disk' => $disk,
             'path' => $path,
             'original_filename' => $file->getClientOriginalName(),
             'mime_type' => $file->getMimeType(),
             'size_bytes' => $file->getSize(),
             'alt_text' => $request->input('alt_text'),
         ]);
-        $fullPath = Storage::disk('public')->path($path);
-        if (GdImageDownscaler::downscaleMaxWidth($fullPath)) {
-            $medium->update(['size_bytes' => Storage::disk('public')->size($path)]);
+        if ($disk === 'public') {
+            $fullPath = Storage::disk('public')->path($path);
+            if (GdImageDownscaler::downscaleMaxWidth($fullPath)) {
+                $medium->update(['size_bytes' => Storage::disk('public')->size($path)]);
+            }
         }
 
         return redirect()->route('admin.cohs.media.index')->with('status', 'File uploaded. Path: '.$path);

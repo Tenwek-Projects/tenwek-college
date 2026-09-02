@@ -50,9 +50,9 @@ class SchoolEvent extends Model
             return $path;
         }
         if (str_starts_with($path, 'soc/') || str_starts_with($path, 'cohs/')) {
-            return asset('storage/'.$path);
+            return \App\Support\PublicAssetUrl::toUrl($path);
         }
 
-        return asset($path);
+        return \App\Support\PublicAssetUrl::toUrl($path) ?? asset($path);
     }
 }

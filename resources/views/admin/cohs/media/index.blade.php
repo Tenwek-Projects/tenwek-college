@@ -19,7 +19,7 @@
             <div class="admin-card p-4 text-sm">
                 <p class="truncate font-mono text-xs text-thc-text/80" title="{{ $asset->path }}">{{ $asset->path }}</p>
                 <p class="mt-1 text-xs text-thc-text/65">{{ $asset->original_filename }} · {{ number_format(($asset->size_bytes ?? 0) / 1024, 1) }} KB</p>
-                <p class="mt-2 break-all text-xs text-thc-royal">{{ asset('storage/'.$asset->path) }}</p>
+                <p class="mt-2 break-all text-xs text-thc-royal">{{ $asset->publicUrl() }}</p>
                 <form method="post" action="{{ route('admin.cohs.media.destroy', $asset) }}" class="mt-3" onsubmit="return confirm('Delete file?');">
                     @csrf
                     @method('DELETE')

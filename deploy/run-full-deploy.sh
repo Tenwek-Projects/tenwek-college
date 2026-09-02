@@ -32,6 +32,7 @@ fi
 
 composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 php artisan migrate --force
+php artisan cache:clear
 php artisan config:cache
 php artisan route:cache 2>/dev/null || true
 php artisan view:cache

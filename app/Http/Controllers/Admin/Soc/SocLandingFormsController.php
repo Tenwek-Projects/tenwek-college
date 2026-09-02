@@ -68,7 +68,7 @@ class SocLandingFormsController extends BaseSocAdminController
         $hadUpload = false;
         foreach (['hero_image' => 'hero_image', 'about_image' => 'about_image', 'logo' => 'logo'] as $fileKey => $assetKey) {
             if ($request->hasFile($fileKey)) {
-                $assets[$assetKey] = $request->file($fileKey)->store($prefix, 'public');
+                $assets[$assetKey] = $request->file($fileKey)->store($prefix, \App\Support\UploadsDisk::name());
                 $hadUpload = true;
             }
         }
@@ -259,7 +259,7 @@ class SocLandingFormsController extends BaseSocAdminController
             }
         }
         if ($request->hasFile('og_image_upload')) {
-            $payload['og_image'] = $request->file('og_image_upload')->store('soc/'.$soc->id, 'public');
+            $payload['og_image'] = $request->file('og_image_upload')->store('soc/'.$soc->id, \App\Support\UploadsDisk::name());
         }
         $this->persistSection($soc, 'landing_seo', $payload);
 

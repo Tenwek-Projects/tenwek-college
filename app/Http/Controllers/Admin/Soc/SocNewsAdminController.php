@@ -49,7 +49,7 @@ class SocNewsAdminController extends BaseSocAdminController
         $slug = $this->uniqueSlug($soc->id, $slug);
         $data = Arr::except($validated, ['slug', 'featured_image']);
         if ($request->hasFile('featured_image')) {
-            $data['featured_image_path'] = $request->file('featured_image')->store($soc->slug.'/'.$soc->id.'/news', 'public');
+            $data['featured_image_path'] = $request->file('featured_image')->store($soc->slug.'/'.$soc->id.'/news', \App\Support\UploadsDisk::name());
         }
         NewsPost::query()->create([
             ...$data,
@@ -91,7 +91,7 @@ class SocNewsAdminController extends BaseSocAdminController
         $data = Arr::except($validated, ['featured_image']);
         if ($request->hasFile('featured_image')) {
             $this->deleteStoredFeaturedImage($soc, $news->featured_image_path);
-            $data['featured_image_path'] = $request->file('featured_image')->store($soc->slug.'/'.$soc->id.'/news', 'public');
+            $data['featured_image_path'] = $request->file('featured_image')->store($soc->slug.'/'.$soc->id.'/news', \App\Support\UploadsDisk::name());
         }
         $news->update($data);
 
@@ -131,7 +131,7 @@ class SocNewsAdminController extends BaseSocAdminController
         }
         $prefix = $school->slug.'/'.$school->id.'/news/';
         if (str_starts_with($path, $prefix)) {
-            Storage::disk('public')->delete($path);
+            Storage::disk(\App\Support\UploadsDisk::name())->delete($path);
         }
     }
 }

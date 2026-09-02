@@ -61,7 +61,7 @@ class SocSchoolEventController extends BaseSocAdminController
         $data['school_id'] = $soc->id;
         $data['author_id'] = $request->user()->id;
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store($soc->slug.'/'.$soc->id.'/events', 'public');
+            $data['image_path'] = $request->file('image')->store($soc->slug.'/'.$soc->id.'/events', \App\Support\UploadsDisk::name());
         }
         SchoolEvent::query()->create($data);
 
@@ -107,7 +107,7 @@ class SocSchoolEventController extends BaseSocAdminController
         $data = Arr::except($validated, ['image']);
         if ($request->hasFile('image')) {
             $this->deleteStoredImage($soc, $event->image_path);
-            $data['image_path'] = $request->file('image')->store($soc->slug.'/'.$soc->id.'/events', 'public');
+            $data['image_path'] = $request->file('image')->store($soc->slug.'/'.$soc->id.'/events', \App\Support\UploadsDisk::name());
         }
         $event->update($data);
 
@@ -147,7 +147,7 @@ class SocSchoolEventController extends BaseSocAdminController
         }
         $prefix = $school->slug.'/'.$school->id.'/events/';
         if (str_starts_with($path, $prefix)) {
-            Storage::disk('public')->delete($path);
+            Storage::disk(\App\Support\UploadsDisk::name())->delete($path);
         }
     }
 }

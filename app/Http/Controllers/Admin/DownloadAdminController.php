@@ -85,7 +85,7 @@ class DownloadAdminController extends Controller
 
         $previewPath = null;
         if ($request->hasFile('preview')) {
-            $previewPath = $request->file('preview')->store("{$school->slug}/previews", 'public');
+            $previewPath = $request->file('preview')->store("{$school->slug}/previews", \App\Support\UploadsDisk::name());
         }
 
         $download = Download::query()->create([
@@ -193,9 +193,9 @@ class DownloadAdminController extends Controller
 
         if ($request->hasFile('preview')) {
             if ($download->preview_image_path && Str::startsWith($download->preview_image_path, 'storage/')) {
-                Storage::disk('public')->delete(Str::after($download->preview_image_path, 'storage/'));
+                Storage::disk(\App\Support\UploadsDisk::name())->delete(Str::after($download->preview_image_path, 'storage/'));
             }
-            $previewPath = $request->file('preview')->store("{$school->slug}/previews", 'public');
+            $previewPath = $request->file('preview')->store("{$school->slug}/previews", \App\Support\UploadsDisk::name());
             $download->preview_image_path = 'storage/'.$previewPath;
         }
 
@@ -223,7 +223,7 @@ class DownloadAdminController extends Controller
             Storage::disk('downloads')->delete($download->file_path);
         }
         if ($download->preview_image_path && Str::startsWith($download->preview_image_path, 'storage/')) {
-            Storage::disk('public')->delete(Str::after($download->preview_image_path, 'storage/'));
+            Storage::disk(\App\Support\UploadsDisk::name())->delete(Str::after($download->preview_image_path, 'storage/'));
         }
         $download->delete();
 
