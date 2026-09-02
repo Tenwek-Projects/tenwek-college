@@ -20,6 +20,8 @@ rsync -r --delete --no-group --no-owner --no-perms --omit-dir-times \
   --exclude=.env --exclude=vendor --exclude=storage/app \
   --exclude=storage/logs --exclude=storage/framework \
   --exclude=public/build \
+  --exclude=public/storage \
+  --exclude='public/storage.bak-*' \
   "$STAGING"/ "$ROOT"/
 rm -rf "$STAGING"
 
