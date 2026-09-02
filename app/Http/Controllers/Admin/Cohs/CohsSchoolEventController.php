@@ -61,7 +61,7 @@ class CohsSchoolEventController extends BaseCohsAdminController
         $data['school_id'] = $cohs->id;
         $data['author_id'] = $request->user()->id;
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store($cohs->slug.'/'.$cohs->id.'/events', \App\Support\UploadsDisk::name());
+            $data['image_path'] = \App\Support\UploadsDisk::store($request->file('image'), $cohs->slug.'/'.$cohs->id.'/events');
         }
         SchoolEvent::query()->create($data);
 
@@ -107,7 +107,7 @@ class CohsSchoolEventController extends BaseCohsAdminController
         $data = Arr::except($validated, ['image']);
         if ($request->hasFile('image')) {
             $this->deleteStoredImage($cohs, $event->image_path);
-            $data['image_path'] = $request->file('image')->store($cohs->slug.'/'.$cohs->id.'/events', \App\Support\UploadsDisk::name());
+            $data['image_path'] = \App\Support\UploadsDisk::store($request->file('image'), $cohs->slug.'/'.$cohs->id.'/events');
         }
         $event->update($data);
 

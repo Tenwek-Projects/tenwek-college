@@ -68,7 +68,7 @@ class SiteSettingsController extends Controller
 
         if ($request->hasFile('hero_image_upload')) {
             self::deleteStoredHeroIfManaged($priorImg);
-            $path = $request->file('hero_image_upload')->store('hero', \App\Support\UploadsDisk::name());
+            $path = \App\Support\UploadsDisk::store($request->file('hero_image_upload'), 'hero');
             $hero['image'] = 'storage/'.$path;
         } elseif ($request->boolean('clear_hero_image')) {
             self::deleteStoredHeroIfManaged($priorImg);

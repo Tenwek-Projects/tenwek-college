@@ -50,7 +50,7 @@ class SocTeamMemberController extends BaseSocAdminController
         $data['highlight'] = $request->boolean('highlight', false);
         $data['is_published'] = $request->boolean('is_published', true);
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('soc/'.$soc->id.'/team', \App\Support\UploadsDisk::name());
+            $data['image_path'] = \App\Support\UploadsDisk::store($request->file('image'), 'soc/'.$soc->id.'/team');
         }
         SocTeamMember::query()->create($data);
         SocLandingRepository::flushCache();
@@ -85,7 +85,7 @@ class SocTeamMemberController extends BaseSocAdminController
         $data['is_published'] = $request->boolean('is_published', true);
         if ($request->hasFile('image')) {
             $this->deleteStoredTeamPortrait((int) $soc->id, $team->image_path);
-            $data['image_path'] = $request->file('image')->store('soc/'.$soc->id.'/team', \App\Support\UploadsDisk::name());
+            $data['image_path'] = \App\Support\UploadsDisk::store($request->file('image'), 'soc/'.$soc->id.'/team');
         }
         $team->update($data);
         SocLandingRepository::flushCache();

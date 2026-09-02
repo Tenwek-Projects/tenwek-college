@@ -55,7 +55,7 @@ class SocStrategicPartnersImagesController extends BaseSocAdminController
                 unset($frag['image']);
             }
             if ($request->hasFile('partner_image.'.$i)) {
-                $frag['image'] = $request->file('partner_image.'.$i)->store($prefix, \App\Support\UploadsDisk::name());
+                $frag['image'] = \App\Support\UploadsDisk::store($request->file('partner_image.'.$i), $prefix);
             }
             $fragments[$i] = $frag;
         }

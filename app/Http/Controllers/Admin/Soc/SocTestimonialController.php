@@ -45,7 +45,7 @@ class SocTestimonialController extends BaseSocAdminController
         $data['school_id'] = $soc->id;
         $data['is_published'] = $request->boolean('is_published', true);
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('soc/'.$soc->id.'/testimonials', \App\Support\UploadsDisk::name());
+            $data['image_path'] = \App\Support\UploadsDisk::store($request->file('image'), 'soc/'.$soc->id.'/testimonials');
         }
         SocTestimonial::query()->create($data);
         SocLandingRepository::flushCache();
@@ -77,7 +77,7 @@ class SocTestimonialController extends BaseSocAdminController
         $data = collect($validated)->except('image')->all();
         $data['is_published'] = $request->boolean('is_published', true);
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('soc/'.$soc->id.'/testimonials', \App\Support\UploadsDisk::name());
+            $data['image_path'] = \App\Support\UploadsDisk::store($request->file('image'), 'soc/'.$soc->id.'/testimonials');
         }
         $testimonial->update($data);
         SocLandingRepository::flushCache();

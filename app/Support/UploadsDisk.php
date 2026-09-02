@@ -4,6 +4,7 @@ namespace App\Support;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 final class UploadsDisk
 {
@@ -14,7 +15,17 @@ final class UploadsDisk
 
     public static function store(UploadedFile $file, string $directory): string
     {
-        return $file->store(trim($directory, '/'), static::name());
+        $directory = trim($directory, '/');
+        $disk = static::name();
+
+        if ($webp = ImageWebpConverter::convert($file)) {
+            $path = $directory.'/'.Str::uuid().'.webp';
+            Storage::disk($disk)->put($path, $webp, ['ContentType' => 'image/webp']);
+
+            return $path;
+        }
+
+        return $file->store($directory, $disk);
     }
 
     public static function delete(?string $path): void

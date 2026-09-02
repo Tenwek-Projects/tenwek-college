@@ -45,7 +45,7 @@ class CohsTestimonialController extends BaseCohsAdminController
         $data['school_id'] = $cohs->id;
         $data['is_published'] = $request->boolean('is_published', true);
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('cohs/'.$cohs->id.'/testimonials', \App\Support\UploadsDisk::name());
+            $data['image_path'] = \App\Support\UploadsDisk::store($request->file('image'), 'cohs/'.$cohs->id.'/testimonials');
         }
         CohsTestimonial::query()->create($data);
         CohsLandingRepository::flushCache();
@@ -77,7 +77,7 @@ class CohsTestimonialController extends BaseCohsAdminController
         $data = collect($validated)->except('image')->all();
         $data['is_published'] = $request->boolean('is_published', true);
         if ($request->hasFile('image')) {
-            $data['image_path'] = $request->file('image')->store('cohs/'.$cohs->id.'/testimonials', \App\Support\UploadsDisk::name());
+            $data['image_path'] = \App\Support\UploadsDisk::store($request->file('image'), 'cohs/'.$cohs->id.'/testimonials');
         }
         $testimonial->update($data);
         CohsLandingRepository::flushCache();

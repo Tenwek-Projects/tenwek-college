@@ -30,17 +30,17 @@ class CohsMediaController extends BaseCohsAdminController
             'alt_text' => ['nullable', 'string', 'max:500'],
         ]);
         $file = $request->file('file');
-        $disk = \App\Support\UploadsDisk::name();
         GdImageDownscaler::downscaleMaxWidth($file->getRealPath());
-        $path = $file->store('cohs/'.$cohs->id.'/library', $disk);
+        $disk = \App\Support\UploadsDisk::name();
+        $path = \App\Support\UploadsDisk::store($file, 'cohs/'.$cohs->id.'/library');
         $medium = MediaAsset::query()->create([
             'user_id' => $request->user()->id,
             'school_id' => $cohs->id,
             'disk' => $disk,
             'path' => $path,
             'original_filename' => $file->getClientOriginalName(),
-            'mime_type' => $file->getMimeType(),
-            'size_bytes' => $file->getSize(),
+            'mime_type' => str_ends_with($path, '.webp') ? 'image/webp' : $file->getMimeType(),
+            'size_bytes' => Storage::disk($disk)->size($path),
             'alt_text' => $request->input('alt_text'),
         ]);
         if ($disk === 'public') {

@@ -49,7 +49,7 @@ class CohsNewsAdminController extends BaseCohsAdminController
         $slug = $this->uniqueSlug($cohs->id, $slug);
         $data = Arr::except($validated, ['slug', 'featured_image']);
         if ($request->hasFile('featured_image')) {
-            $data['featured_image_path'] = $request->file('featured_image')->store($cohs->slug.'/'.$cohs->id.'/news', \App\Support\UploadsDisk::name());
+            $data['featured_image_path'] = \App\Support\UploadsDisk::store($request->file('featured_image'), $cohs->slug.'/'.$cohs->id.'/news');
         }
         NewsPost::query()->create([
             ...$data,
@@ -88,7 +88,7 @@ class CohsNewsAdminController extends BaseCohsAdminController
         $data = Arr::except($validated, ['slug', 'featured_image']);
         if ($request->hasFile('featured_image')) {
             $this->deleteStoredFeaturedImage($cohs, $news->featured_image_path);
-            $data['featured_image_path'] = $request->file('featured_image')->store($cohs->slug.'/'.$cohs->id.'/news', \App\Support\UploadsDisk::name());
+            $data['featured_image_path'] = \App\Support\UploadsDisk::store($request->file('featured_image'), $cohs->slug.'/'.$cohs->id.'/news');
         }
         $news->update([...$data, 'slug' => $slug]);
 

@@ -85,7 +85,7 @@ class DownloadAdminController extends Controller
 
         $previewPath = null;
         if ($request->hasFile('preview')) {
-            $previewPath = $request->file('preview')->store("{$school->slug}/previews", \App\Support\UploadsDisk::name());
+            $previewPath = \App\Support\UploadsDisk::store($request->file('preview'), "{$school->slug}/previews");
         }
 
         $download = Download::query()->create([
@@ -195,7 +195,7 @@ class DownloadAdminController extends Controller
             if ($download->preview_image_path && Str::startsWith($download->preview_image_path, 'storage/')) {
                 Storage::disk(\App\Support\UploadsDisk::name())->delete(Str::after($download->preview_image_path, 'storage/'));
             }
-            $previewPath = $request->file('preview')->store("{$school->slug}/previews", \App\Support\UploadsDisk::name());
+            $previewPath = \App\Support\UploadsDisk::store($request->file('preview'), "{$school->slug}/previews");
             $download->preview_image_path = 'storage/'.$previewPath;
         }
 
