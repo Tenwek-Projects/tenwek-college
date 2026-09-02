@@ -19,6 +19,7 @@ echo "== Sync code =="
 rsync -r --delete --no-group --no-owner --no-perms --omit-dir-times \
   --exclude=.env --exclude=vendor --exclude=storage/app \
   --exclude=storage/logs --exclude=storage/framework \
+  --exclude=public/build \
   "$STAGING"/ "$ROOT"/
 rm -rf "$STAGING"
 
