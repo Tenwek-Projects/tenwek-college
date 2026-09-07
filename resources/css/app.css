@@ -192,7 +192,7 @@
 
     /**
      * Site footer — visual rhythm inspired by the Cardiothoracic Centre footer
-     * (http://ctc.tenwek.designekta.com/): layered dark band, column titles,
+     * (https://ctc.designekta.com/): layered dark band, column titles,
      * contact emphasis, CTA strip, sub-bar.
      */
     .thc-site-footer {
@@ -215,7 +215,7 @@
     }
 
     .thc-footer-col-title {
-        @apply text-[11px] font-bold uppercase tracking-[0.2em] text-white/50;
+        @apply text-[11px] font-bold uppercase tracking-[0.2em] text-white/50 underline decoration-white/35 underline-offset-4;
     }
 
     .thc-footer-link {

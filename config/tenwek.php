@@ -25,7 +25,7 @@ return [
     ],
     'ctc' => [
         'name' => 'Tenwek Cardiothoracic Centre',
-        'url' => 'https://ctc.tenwek.designekta.com/',
+        'url' => 'https://ctc.designekta.com/',
     ],
 
     /**
