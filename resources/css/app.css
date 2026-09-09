@@ -138,14 +138,6 @@
         background: linear-gradient(135deg, #e64a2c 0%, #1b20b8 100%);
     }
 
-    .thc-cohs-skin .thc-site-footer {
-        background: linear-gradient(180deg, #1a1ab8 0%, #2228d8 42%, #13007c 100%);
-    }
-
-    .thc-cohs-skin .thc-footer-sub {
-        background-color: #13007c;
-    }
-
     /** COHS landing — section washes from live site */
     .thc-cohs-skin .cohs-landing-programmes {
         background: linear-gradient(to bottom, #eaf1fd 0%, white 100%);
