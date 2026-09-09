@@ -42,6 +42,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsPostController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PublicDownloadController;
+use App\Http\Controllers\PublicMediaController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\SchoolEventController;
 use App\Http\Controllers\SearchController;
@@ -53,6 +54,10 @@ use App\Support\Cohs\CohsLandingRepository;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
+
+Route::get('/media/{path}', [PublicMediaController::class, 'show'])
+    ->where('path', '.*')
+    ->name('media.public');
 
 Route::get('/robots.txt', function () {
     $content = implode("\n", [

@@ -50,7 +50,7 @@ class SocGalleryPageTest extends TestCase
 
         $this->get('/soc/gallery')
             ->assertOk()
-            ->assertSee('storage/'.$path, false)
+            ->assertSee('media/'.$path, false)
             ->assertSee('From media library', false);
     }
 }

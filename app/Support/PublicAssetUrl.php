@@ -30,9 +30,8 @@ class PublicAssetUrl
             return Storage::disk($disk)->url($relative);
         }
 
-        // Local public disk: use request-aware url() (same idea as {{ url('/') }}),
-        // not filesystems.disks.public.url which bakes APP_URL (often http://localhost).
-        return url('storage/'.$relative);
+        // Serve via app route so hosts without a working public/storage symlink still work.
+        return url('media/'.$relative);
     }
 
     public static function storageRelativePath(?string $path): ?string
@@ -47,6 +46,10 @@ class PublicAssetUrl
 
         if (str_starts_with($relative, 'storage/')) {
             $relative = substr($relative, strlen('storage/'));
+        }
+
+        if (str_starts_with($relative, 'media/')) {
+            $relative = substr($relative, strlen('media/'));
         }
 
         if (str_starts_with($relative, 'build/')) {
