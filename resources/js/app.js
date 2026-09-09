@@ -1,6 +1,129 @@
 import Alpine from 'alpinejs';
 
 document.addEventListener('alpine:init', () => {
+    Alpine.store('mathGuard', {
+        open: false,
+        loading: false,
+        prompt: '',
+        token: '',
+        answer: '',
+        error: '',
+        pendingForm: null,
+        pendingResolve: null,
+        challengeUrl: () => window.__mathChallengeUrl || '/forms/math-challenge',
+        csrf() {
+            return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+        },
+        async challengeForForm(form) {
+            this.pendingForm = form;
+            this.pendingResolve = null;
+            await this.openChallenge();
+        },
+        async challengeAsync() {
+            return new Promise((resolve) => {
+                this.pendingForm = null;
+                this.pendingResolve = resolve;
+                this.openChallenge().then((ok) => {
+                    if (!ok && this.pendingResolve) {
+                        this.pendingResolve(null);
+                        this.pendingResolve = null;
+                    }
+                });
+            });
+        },
+        async openChallenge() {
+            this.loading = true;
+            this.error = '';
+            this.answer = '';
+            this.prompt = '';
+            this.token = '';
+            try {
+                const res = await fetch(this.challengeUrl(), {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'X-CSRF-TOKEN': this.csrf(),
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                });
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok || !data.token || !data.prompt) {
+                    this.error = data.message || 'Could not start the spam check. Refresh and try again.';
+                    this.loading = false;
+
+                    return false;
+                }
+                this.token = data.token;
+                this.prompt = data.prompt;
+                this.open = true;
+                this.loading = false;
+                document.documentElement.classList.add('overflow-hidden');
+                queueMicrotask(() => {
+                    document.getElementById('math-guard-answer')?.focus();
+                });
+
+                return true;
+            } catch {
+                this.error = 'Network error starting the spam check.';
+                this.loading = false;
+
+                return false;
+            }
+        },
+        cancel() {
+            this.open = false;
+            this.loading = false;
+            this.error = '';
+            this.pendingForm = null;
+            if (this.pendingResolve) {
+                this.pendingResolve(null);
+                this.pendingResolve = null;
+            }
+            document.documentElement.classList.remove('overflow-hidden');
+        },
+        confirm() {
+            const answer = String(this.answer ?? '').trim();
+            if (answer === '' || Number.isNaN(Number(answer))) {
+                this.error = 'Enter the answer as a number.';
+
+                return;
+            }
+            const token = this.token;
+            const form = this.pendingForm;
+            const resolve = this.pendingResolve;
+            this.open = false;
+            this.pendingForm = null;
+            this.pendingResolve = null;
+            document.documentElement.classList.remove('overflow-hidden');
+
+            if (resolve) {
+                resolve({ token, answer: Number(answer) });
+
+                return;
+            }
+            if (!form) {
+                return;
+            }
+            form.querySelectorAll('input[name="math_challenge_token"], input[name="math_challenge_answer"]').forEach((el) => el.remove());
+            const tokenInput = document.createElement('input');
+            tokenInput.type = 'hidden';
+            tokenInput.name = 'math_challenge_token';
+            tokenInput.value = token;
+            form.appendChild(tokenInput);
+            const answerInput = document.createElement('input');
+            answerInput.type = 'hidden';
+            answerInput.name = 'math_challenge_answer';
+            answerInput.value = String(answer);
+            form.appendChild(answerInput);
+            form.dataset.mathOk = '1';
+            if (typeof form.requestSubmit === 'function') {
+                form.requestSubmit();
+            } else {
+                form.submit();
+            }
+        },
+    });
+
     Alpine.data('adminShell', () => ({
         sidebarOpen: false,
         sidebarCollapsed: false,
@@ -342,6 +465,10 @@ document.addEventListener('alpine:init', () => {
 
                 return;
             }
+            const math = await Alpine.store('mathGuard').challengeAsync();
+            if (!math) {
+                return;
+            }
             this.loading = true;
             try {
                 const res = await fetch(this.initiateUrl, {
@@ -352,7 +479,12 @@ document.addEventListener('alpine:init', () => {
                         'X-CSRF-TOKEN': token,
                         'X-Requested-With': 'XMLHttpRequest',
                     },
-                    body: JSON.stringify({ phone: this.phone.trim(), amount }),
+                    body: JSON.stringify({
+                        phone: this.phone.trim(),
+                        amount,
+                        math_challenge_token: math.token,
+                        math_challenge_answer: math.answer,
+                    }),
                 });
                 const data = await res.json().catch(() => ({}));
                 if (!res.ok) {
@@ -446,6 +578,28 @@ document.addEventListener('alpine:init', () => {
 
 window.Alpine = Alpine;
 Alpine.start();
+
+document.addEventListener(
+    'submit',
+    (event) => {
+        const form = event.target;
+        if (!(form instanceof HTMLFormElement)) {
+            return;
+        }
+        if (!form.hasAttribute('data-arithmetic-guard')) {
+            return;
+        }
+        if (form.dataset.mathOk === '1') {
+            form.dataset.mathOk = '0';
+
+            return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        Alpine.store('mathGuard').challengeForForm(form);
+    },
+    true,
+);
 
 function initRevealAnimations() {
     const nodes = document.querySelectorAll('[data-reveal]');

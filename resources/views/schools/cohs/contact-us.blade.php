@@ -119,7 +119,7 @@
                         </div>
                     @endif
 
-                    <form method="post" action="{{ route('contact.store') }}" class="relative space-y-6">
+                    <form method="post" action="{{ route('contact.store') }}" class="relative space-y-6" data-arithmetic-guard>
                         @csrf
                         <input type="hidden" name="school_id" value="{{ $school->id }}">
                         <input type="text" name="fax" tabindex="-1" autocomplete="off" class="absolute -left-[9999px] h-0 w-0 opacity-0" aria-hidden="true">

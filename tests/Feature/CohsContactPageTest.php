@@ -29,13 +29,13 @@ class CohsContactPageTest extends TestCase
         $this->seed(TenwekFoundationSeeder::class);
         $cohs = School::query()->where('slug', 'cohs')->firstOrFail();
 
-        $response = $this->post(route('contact.store'), [
+        $response = $this->post(route('contact.store'), $this->withMathChallenge([
             'name' => 'Test Applicant',
             'email' => 'test@example.com',
             'topic' => 'Admissions',
             'message' => '',
             'school_id' => $cohs->id,
-        ]);
+        ]));
 
         $response->assertRedirect();
         $response->assertSessionHas('status');

@@ -4,6 +4,7 @@ use App\Http\Middleware\EnsureUserCanManageCohs;
 use App\Http\Middleware\EnsureUserCanManageSoc;
 use App\Http\Middleware\EnsureUserIsActive;
 use App\Http\Middleware\LogAdminActivity;
+use App\Http\Middleware\VerifyArithmeticChallenge;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -31,6 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'active_user' => EnsureUserIsActive::class,
             'manages_soc' => EnsureUserCanManageSoc::class,
             'manages_cohs' => EnsureUserCanManageCohs::class,
+            'arithmetic' => VerifyArithmeticChallenge::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

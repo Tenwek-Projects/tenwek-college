@@ -135,7 +135,7 @@ class CohsProgrammeApplicationWizardTest extends TestCase
             'post_kcse_courses' => 'no',
         ]);
 
-        $response = $this->post(route('cohs.programme-application.store', 'krchn'), $payload);
+        $response = $this->post(route('cohs.programme-application.store', 'krchn'), $this->withMathChallenge($payload));
 
         $response->assertRedirect(route('cohs.programme-application', 'krchn'));
         $response->assertSessionHas('status');
@@ -174,7 +174,7 @@ class CohsProgrammeApplicationWizardTest extends TestCase
             'diploma_or_degree' => UploadedFile::fake()->create('diploma.pdf', 100, 'application/pdf'),
         ]);
 
-        $response = $this->post(route('cohs.programme-application.store', 'critical-care-nursing'), $payload);
+        $response = $this->post(route('cohs.programme-application.store', 'critical-care-nursing'), $this->withMathChallenge($payload));
 
         $response->assertRedirect(route('cohs.programme-application', 'critical-care-nursing'));
         $response->assertSessionHas('status');
@@ -206,7 +206,7 @@ class CohsProgrammeApplicationWizardTest extends TestCase
         ]);
 
         $response = $this->from(route('cohs.programme-application', 'krchn'))
-            ->post(route('cohs.programme-application.store', 'krchn'), $payload);
+            ->post(route('cohs.programme-application.store', 'krchn'), $this->withMathChallenge($payload));
 
         $response->assertSessionHasErrors('fax');
         $this->assertDatabaseMissing('form_submissions', ['form_key' => 'cohs_apply_krchn']);

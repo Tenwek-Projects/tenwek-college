@@ -81,7 +81,7 @@ class SocRegistrationWizardTest extends TestCase
             'certificates' => UploadedFile::fake()->create('certs.pdf', 200, 'application/pdf'),
         ];
 
-        $response = $this->post('/soc/register', $base);
+        $response = $this->post('/soc/register', $this->withMathChallenge($base));
 
         $response->assertRedirect(route('soc.register'));
         $response->assertSessionHas('status');

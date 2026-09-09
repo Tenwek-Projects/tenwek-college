@@ -200,7 +200,7 @@
                         <div class="mb-6 mt-6 rounded-xl border border-thc-royal/25 bg-thc-royal/8 px-4 py-3 text-sm text-thc-navy">{{ session('status') }}</div>
                     @endif
 
-                    <form method="post" action="{{ route('contact.store') }}" class="mt-6 space-y-4">
+                    <form method="post" action="{{ route('contact.store') }}" class="mt-6 space-y-4" data-arithmetic-guard>
                         @csrf
                         <input type="text" name="fax" tabindex="-1" autocomplete="off" class="absolute -left-[9999px] h-0 w-0 opacity-0" aria-hidden="true">
 

@@ -75,7 +75,7 @@
                 @endif
 
                 <div class="px-5 py-8 sm:px-8 sm:py-10">
-                    <form method="post" action="{{ route('cohs.on-campus-application.store') }}" enctype="multipart/form-data" class="space-y-8" x-ref="appForm">
+                    <form method="post" action="{{ route('cohs.on-campus-application.store') }}" enctype="multipart/form-data" class="space-y-8" x-ref="appForm" data-arithmetic-guard>
                         @csrf
 
                         <div class="absolute -left-[9999px] h-px w-px overflow-hidden opacity-0" aria-hidden="true">

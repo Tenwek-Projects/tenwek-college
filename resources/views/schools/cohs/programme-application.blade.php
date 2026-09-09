@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <form method="post" action="{{ route('cohs.programme-application.store', $form['slug']) }}" enctype="multipart/form-data" class="space-y-8" x-ref="appForm">
+        <form method="post" action="{{ route('cohs.programme-application.store', $form['slug']) }}" enctype="multipart/form-data" class="space-y-8" x-ref="appForm" data-arithmetic-guard>
             @csrf
 
             <div class="absolute -left-[9999px] h-px w-px overflow-hidden opacity-0" aria-hidden="true">

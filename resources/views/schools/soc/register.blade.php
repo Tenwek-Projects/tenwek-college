@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <form method="post" action="{{ route('soc.register.store') }}" enctype="multipart/form-data" class="space-y-8">
+        <form method="post" action="{{ route('soc.register.store') }}" enctype="multipart/form-data" class="space-y-8" data-arithmetic-guard>
             @csrf
 
             <div class="absolute -left-[9999px] h-px w-px overflow-hidden opacity-0" aria-hidden="true">

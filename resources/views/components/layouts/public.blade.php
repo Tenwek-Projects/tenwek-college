@@ -527,5 +527,9 @@
         </div>
     </footer>
     @endif
+    <x-forms.arithmetic-guard-modal />
+    <script>
+        window.__mathChallengeUrl = @js(route('forms.math-challenge'));
+    </script>
 </body>
 </html>

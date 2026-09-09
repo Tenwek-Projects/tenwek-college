@@ -16,10 +16,10 @@ class SocFeeMpesaStkTest extends TestCase
         $this->seed(TenwekFoundationSeeder::class);
         config(['mpesa.consumer_key' => null]);
 
-        $response = $this->postJson(route('soc.fee.mpesa.stk'), [
+        $response = $this->postJson(route('soc.fee.mpesa.stk'), $this->withMathChallenge([
             'phone' => '0712345678',
             'amount' => 17_500,
-        ]);
+        ]));
 
         $response->assertStatus(503);
     }
@@ -47,10 +47,10 @@ class SocFeeMpesaStkTest extends TestCase
             ]),
         ]);
 
-        $response = $this->postJson(route('soc.fee.mpesa.stk'), [
+        $response = $this->postJson(route('soc.fee.mpesa.stk'), $this->withMathChallenge([
             'phone' => '0712345678',
             'amount' => 17_500,
-        ]);
+        ]));
 
         $response->assertOk()
             ->assertJsonFragment(['checkout_request_id' => 'ws_CO_1']);

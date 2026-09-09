@@ -280,7 +280,7 @@
                         <h3 class="font-serif text-xl font-semibold text-thc-navy">Send a message</h3>
                         <p class="mt-2 text-sm text-thc-text/80">All fields marked required must be completed. Your message is protected the same way as our main contact form.</p>
 
-                        <form method="post" action="{{ route('contact.store') }}" class="mt-8 space-y-5">
+                        <form method="post" action="{{ route('contact.store') }}" class="mt-8 space-y-5" data-arithmetic-guard>
                             @csrf
                             <input type="hidden" name="school_id" value="{{ $school->id }}">
                             <input type="text" name="fax" tabindex="-1" autocomplete="off" class="absolute -left-[9999px] h-0 w-0 opacity-0" aria-hidden="true">
