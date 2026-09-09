@@ -19,13 +19,20 @@ class PublicAssetUrl
         $relative = static::storageRelativePath($path);
 
         if ($relative === null) {
-            return static::absoluteUrl(asset(ltrim($path, '/')));
+            return asset(ltrim($path, '/'));
         }
 
         $disk = UploadsDisk::name();
-        $generated = Storage::disk($disk)->url($relative);
+        $driver = (string) config("filesystems.disks.{$disk}.driver", 'local');
 
-        return static::absoluteUrl($generated);
+        // Cloud / remote disks keep their own absolute URLs.
+        if (in_array($driver, ['s3', 'ftp', 'sftp'], true)) {
+            return Storage::disk($disk)->url($relative);
+        }
+
+        // Local public disk: use request-aware url() (same idea as {{ url('/') }}),
+        // not filesystems.disks.public.url which bakes APP_URL (often http://localhost).
+        return url('storage/'.$relative);
     }
 
     public static function storageRelativePath(?string $path): ?string
@@ -55,27 +62,5 @@ class PublicAssetUrl
         }
 
         return null;
-    }
-
-    /**
-     * Force a full absolute URL using APP_URL when Storage/asset return a root-relative path.
-     */
-    private static function absoluteUrl(string $url): string
-    {
-        $url = trim($url);
-        if ($url === '') {
-            return $url;
-        }
-
-        if (str_starts_with($url, 'http://') || str_starts_with($url, 'https://') || str_starts_with($url, '//')) {
-            return $url;
-        }
-
-        $base = rtrim((string) config('app.url'), '/');
-        if ($base === '') {
-            return url($url);
-        }
-
-        return $base.'/'.ltrim($url, '/');
     }
 }
