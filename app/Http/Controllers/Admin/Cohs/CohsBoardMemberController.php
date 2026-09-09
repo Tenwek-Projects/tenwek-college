@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Cohs;
 
 use App\Models\CohsBoardMember;
+use App\Support\Cohs\CohsBoardMemberImporter;
 use App\Support\Cohs\CohsLandingRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,16 +12,51 @@ use Illuminate\View\View;
 
 class CohsBoardMemberController extends BaseCohsAdminController
 {
-    public function index(Request $request): View
+    public function index(Request $request): View|RedirectResponse
     {
         $cohs = $this->cohsSchool($request);
+
+        // First visit after deploy: pull the public About us defaults into the CMS table.
+        if (! CohsBoardMember::query()->where('school_id', $cohs->id)->exists()) {
+            $imported = CohsBoardMemberImporter::importDefaults($cohs);
+            if ($imported > 0) {
+                return redirect()
+                    ->route('admin.cohs.board.index')
+                    ->with('status', "Imported {$imported} hospital board member(s) from the About us page defaults. You can edit them and upload photos.");
+            }
+        }
+
         $members = CohsBoardMember::query()
             ->where('school_id', $cohs->id)
             ->orderBy('sort_order')
             ->orderByDesc('id')
             ->paginate(30);
 
-        return view('admin.cohs.board.index', compact('cohs', 'members'));
+        $defaultCount = CohsBoardMemberImporter::defaultCount($cohs);
+
+        return view('admin.cohs.board.index', compact('cohs', 'members', 'defaultCount'));
+    }
+
+    public function importDefaults(Request $request): RedirectResponse
+    {
+        $cohs = $this->cohsSchool($request);
+
+        if (CohsBoardMember::query()->where('school_id', $cohs->id)->exists()) {
+            return redirect()
+                ->route('admin.cohs.board.index')
+                ->with('status', 'Board members already exist. Delete them first if you want to re-import defaults.');
+        }
+
+        $imported = CohsBoardMemberImporter::importDefaults($cohs);
+        if ($imported === 0) {
+            return redirect()
+                ->route('admin.cohs.board.index')
+                ->withErrors(['import' => 'No default board members were found to import.']);
+        }
+
+        return redirect()
+            ->route('admin.cohs.board.index')
+            ->with('status', "Imported {$imported} hospital board member(s).");
     }
 
     public function create(Request $request): View

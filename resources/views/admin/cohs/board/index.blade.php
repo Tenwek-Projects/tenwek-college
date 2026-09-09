@@ -9,6 +9,14 @@
     <div class="admin-toolbar">
         <div class="admin-toolbar-actions">
             <a href="{{ route('admin.cohs.board.create') }}" class="admin-btn-primary admin-btn-sm">Add board member</a>
+            @if ($members->total() === 0 && ($defaultCount ?? 0) > 0)
+                <form method="post" action="{{ route('admin.cohs.board.import-defaults') }}" class="inline">
+                    @csrf
+                    <button type="submit" class="admin-btn-secondary admin-btn-sm">
+                        Import {{ $defaultCount }} from About us defaults
+                    </button>
+                </form>
+            @endif
         </div>
         <a href="{{ route('admin.cohs.dashboard') }}" class="admin-btn-ghost admin-btn-sm">← COHS CMS</a>
     </div>
@@ -64,7 +72,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="admin-table-empty">No board members yet — site will use config defaults until you add people here.</td>
+                            <td colspan="6" class="admin-table-empty">
+                                <p>No editable board members in the CMS yet.</p>
+                                <p class="mt-2 text-thc-text/70">
+                                    The public About us page is still showing {{ $defaultCount ?? 0 }} default member(s).
+                                    Use <strong>Import from About us defaults</strong> above, or add people manually.
+                                </p>
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>

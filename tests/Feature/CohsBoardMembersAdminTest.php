@@ -25,6 +25,11 @@ class CohsBoardMembersAdminTest extends TestCase
 
         $this->actingAs($user)
             ->get(route('admin.cohs.board.index'))
+            ->assertRedirect(route('admin.cohs.board.index'));
+
+        $this->actingAs($user)
+            ->followingRedirects()
+            ->get(route('admin.cohs.board.index'))
             ->assertOk()
             ->assertSee('Hospital board members', false);
 
@@ -62,5 +67,25 @@ class CohsBoardMembersAdminTest extends TestCase
             'school_id' => $cohs->id,
             'name' => 'Rev. Dr. Robert Langat',
         ]);
+    }
+
+    public function test_board_index_auto_imports_defaults_when_empty(): void
+    {
+        $this->seed(TenwekFoundationSeeder::class);
+        $user = User::query()->where('email', 'cohs.admin@tenwekhospitalcollege.ac.ke')->firstOrFail();
+        $cohs = School::query()->where('slug', 'cohs')->firstOrFail();
+
+        $this->assertSame(0, CohsBoardMember::query()->where('school_id', $cohs->id)->count());
+
+        $this->actingAs($user)
+            ->get(route('admin.cohs.board.index'))
+            ->assertRedirect(route('admin.cohs.board.index'));
+
+        $this->assertGreaterThanOrEqual(5, CohsBoardMember::query()->where('school_id', $cohs->id)->count());
+
+        $this->actingAs($user)
+            ->get(route('admin.cohs.board.index'))
+            ->assertOk()
+            ->assertSee('Rev. Dr. Robert Langat', false);
     }
 }

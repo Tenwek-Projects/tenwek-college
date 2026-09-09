@@ -223,6 +223,7 @@ Route::middleware(['auth', 'active_user', 'role:super_admin|cohs_admin', 'manage
         Route::get('/sections/{section}/json', [CohsJsonSectionController::class, 'edit'])->name('json.edit');
         Route::put('/sections/{section}/json', [CohsJsonSectionController::class, 'update'])->name('json.update');
 
+        Route::post('/board/import-defaults', [CohsBoardMemberController::class, 'importDefaults'])->name('board.import-defaults');
         Route::resource('board', CohsBoardMemberController::class)->except(['show']);
         Route::resource('testimonials', CohsTestimonialController::class)->except(['show']);
         Route::resource('navigation', CohsNavItemController::class)->except(['show']);
