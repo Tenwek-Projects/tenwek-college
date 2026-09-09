@@ -62,7 +62,7 @@
 
     <div class="rounded-2xl border border-dashed border-thc-navy/20 bg-thc-royal/[0.04] p-5">
         <p class="text-sm font-semibold text-thc-navy">Referred by a current student? (optional)</p>
-        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @include('schools.soc.register._text', ['name' => 'referral_student_name', 'label' => "Student's name", 'autocomplete' => null, 'required' => false])
             @include('schools.soc.register._text', ['name' => 'referral_admission_number', 'label' => 'Admission number', 'autocomplete' => null, 'required' => false])
             @include('schools.soc.register._text', ['name' => 'referral_contact', 'label' => 'Contact details', 'autocomplete' => null, 'required' => false])

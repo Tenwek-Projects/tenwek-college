@@ -1,7 +1,7 @@
 <section class="space-y-6" aria-labelledby="step3-title">
     <h2 id="step3-title" class="font-serif text-xl font-semibold text-thc-navy sm:text-2xl">Address & contact</h2>
 
-    <div class="grid gap-5 sm:grid-cols-2">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         @include('schools.soc.register._textarea', ['name' => 'postal_address', 'label' => 'Postal address', 'rows' => 3])
         @include('schools.soc.register._text', ['name' => 'postal_code', 'label' => 'Postal code', 'autocomplete' => 'postal-code'])
         @include('schools.soc.register._text', ['name' => 'city_town', 'label' => 'City / town', 'autocomplete' => 'address-level2'])

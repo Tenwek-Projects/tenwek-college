@@ -52,7 +52,7 @@
         <div class="rounded-2xl border border-thc-navy/10 bg-thc-navy/[0.02] p-5 shadow-sm">
             <h3 class="font-semibold text-thc-navy">Prior education, institution {{ $n }} @if($n === 1)<span class="text-thc-maroon">*</span>@else<span class="text-sm font-normal text-thc-text/65">(optional)</span>@endif</h3>
             <p class="mt-1 text-xs text-thc-text/70">Do not list primary school. Institution 1 is required; add more if applicable.</p>
-            <div class="mt-4 grid gap-4 sm:grid-cols-2">
+            <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @include('schools.soc.register._text', ['name' => "institution_{$n}_name", 'label' => 'Name of institution', 'autocomplete' => null, 'required' => $n === 1])
                 @include('schools.soc.register._text', ['name' => "institution_{$n}_area", 'label' => 'Area of study', 'autocomplete' => null, 'required' => $n === 1])
                 @include('schools.soc.register._text', ['name' => "institution_{$n}_from", 'label' => 'Duration from', 'type' => 'date', 'autocomplete' => null, 'required' => $n === 1])

@@ -19,7 +19,7 @@
         @enderror
     </fieldset>
 
-    <div class="grid gap-5 sm:grid-cols-2">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         @include('schools.soc.register._text', ['name' => 'last_name', 'label' => 'Last (family) name', 'autocomplete' => 'family-name'])
         @include('schools.soc.register._text', ['name' => 'middle_name', 'label' => 'Middle name', 'autocomplete' => 'additional-name'])
         @include('schools.soc.register._text', ['name' => 'first_name', 'label' => 'First name', 'autocomplete' => 'given-name'])

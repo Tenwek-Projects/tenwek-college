@@ -3,7 +3,7 @@
 
     <div class="rounded-2xl border border-thc-navy/10 bg-white p-5 shadow-sm">
         <p class="text-sm font-semibold text-thc-navy">Years of formal education</p>
-        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @include('schools.soc.register._text', ['name' => 'years_english', 'label' => 'English (years)', 'type' => 'number', 'autocomplete' => null])
             @include('schools.soc.register._text', ['name' => 'years_primary', 'label' => 'Primary (years)', 'type' => 'number', 'autocomplete' => null])
             @include('schools.soc.register._text', ['name' => 'years_secondary', 'label' => 'Secondary (years)', 'type' => 'number', 'autocomplete' => null])
