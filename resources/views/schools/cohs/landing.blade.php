@@ -20,8 +20,8 @@
         aria-label="College of Health Sciences hero"
     >
         <div class="pointer-events-none absolute inset-0 thc-hero-ken-bg bg-cover bg-center" style="background-image: url('{{ e($heroImageUrl) }}');" aria-hidden="true"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-thc-navy via-thc-navy/55 to-thc-royal/45" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-overlay" style="background-image: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.4), transparent 42%), radial-gradient(circle at 80% 75%, rgba(0,86,179,0.35), transparent 40%);" aria-hidden="true"></div>
+        <div class="cohs-landing-hero-overlay absolute inset-0" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-0 opacity-[0.14] mix-blend-overlay" style="background-image: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.45), transparent 42%), radial-gradient(circle at 80% 75%, rgba(90,200,250,0.45), transparent 40%);" aria-hidden="true"></div>
 
         <div class="relative z-10 mx-auto w-full max-w-7xl px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:px-8 lg:pb-24">
             <nav class="mb-8 text-sm text-white/75" aria-label="Breadcrumb">
@@ -60,7 +60,7 @@
             <div class="lg:col-span-5" data-reveal>
                 <div class="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-[var(--shadow-thc-card)] ring-1 ring-thc-navy/10 sm:aspect-[3/4] lg:sticky lg:top-28 lg:max-h-[min(85vh,36rem)] lg:min-h-[20rem]">
                     <div class="absolute inset-0 bg-cover bg-center transition duration-700 hover:scale-[1.02]" style="background-image: url('{{ e($welcomeImageUrl) }}');"></div>
-                    <div class="absolute inset-0 bg-gradient-to-tr from-thc-navy/40 via-transparent to-thc-royal/20" aria-hidden="true"></div>
+                    <div class="absolute inset-0 bg-gradient-to-tr from-thc-navy/40 via-transparent to-thc-cohs-sky/25" aria-hidden="true"></div>
                 </div>
             </div>
             <div class="mt-12 lg:col-span-7 lg:mt-0" data-reveal>
@@ -83,7 +83,7 @@
     </section>
 
     {{-- Programmes band (legacy “About us” + two cards) --}}
-    <section id="programmes" class="scroll-mt-24 bg-gradient-to-b from-thc-navy/[0.04] to-white" aria-labelledby="cohs-programmes-heading">
+    <section id="programmes" class="cohs-landing-programmes scroll-mt-24" aria-labelledby="cohs-programmes-heading">
         <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
             <div class="mx-auto max-w-2xl text-center" data-reveal>
                 <p class="thc-kicker">{{ $programmesBand['kicker'] }}</p>
@@ -98,7 +98,7 @@
                         data-reveal
                         class="group flex flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-thc-card-hover)]"
                     >
-                        <div class="h-1.5 bg-gradient-to-r from-thc-navy via-thc-royal to-thc-navy/80" aria-hidden="true"></div>
+                        <div class="h-1.5 bg-gradient-to-r from-thc-cohs-indigo via-thc-cohs-blue to-thc-cohs-coral" aria-hidden="true"></div>
                         <div class="flex flex-1 flex-col p-8 sm:p-10">
                             <h3 class="font-serif text-xl font-semibold text-thc-navy sm:text-2xl">{{ $prog['title'] }}</h3>
                             <p class="mt-4 flex-1 text-base leading-relaxed text-thc-text/90">{{ $prog['summary'] }}</p>
@@ -117,7 +117,7 @@
     </section>
 
     {{-- Testimonials --}}
-    <section id="testimonials" class="scroll-mt-24 bg-white" aria-labelledby="cohs-testimonials-heading">
+    <section id="testimonials" class="cohs-landing-testimonials scroll-mt-24" aria-labelledby="cohs-testimonials-heading">
         <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
             <div class="max-w-2xl" data-reveal>
                 <p class="thc-kicker">{{ $testimonials['kicker'] }}</p>
@@ -130,7 +130,7 @@
                 x-data="{ active: 0, count: {{ $tCount }} }"
                 data-reveal
             >
-                <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-gradient-to-br from-thc-royal/[0.06] via-white to-white shadow-[var(--shadow-thc-card)]">
+                <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-gradient-to-br from-thc-cohs-wash via-white to-white shadow-[var(--shadow-thc-card)]">
                     @foreach($testimonials['items'] as $ti => $t)
                         <div
                             x-show="active === {{ $ti }}"
@@ -149,7 +149,7 @@
                                 “{{ $t['quote'] }}”
                             </blockquote>
                             <footer class="mt-8 flex items-center gap-4">
-                                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-thc-royal to-thc-navy text-sm font-bold text-white" aria-hidden="true">{{ \Illuminate\Support\Str::substr($t['name'], 0, 1) }}</span>
+                                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-thc-cohs-coral to-thc-cohs-indigo text-sm font-bold text-white" aria-hidden="true">{{ \Illuminate\Support\Str::substr($t['name'], 0, 1) }}</span>
                                 <div>
                                     <cite class="not-italic text-base font-semibold text-thc-navy">{{ $t['name'] }}</cite>
                                 </div>
@@ -192,7 +192,7 @@
     </section>
 
     {{-- Contact --}}
-    <section id="contact" class="scroll-mt-24 border-t border-thc-navy/10 bg-gradient-to-b from-white to-thc-navy/[0.04] pb-0">
+    <section id="contact" class="cohs-landing-contact scroll-mt-24 border-t border-thc-navy/10 pb-0">
         <div class="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8 lg:pt-24">
             <div class="max-w-3xl lg:max-w-2xl" data-reveal>
                 <p class="thc-kicker">{{ $contactBlock['kicker'] }}</p>

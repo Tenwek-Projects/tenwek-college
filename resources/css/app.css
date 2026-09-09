@@ -18,6 +18,18 @@
     /* SOC accent: very subtle magenta (use at low opacity only) */
     --color-thc-soc-magenta: #d946ef;
     /**
+     * College of Health Sciences — Salient palette from
+     * https://tenwekhospitalcollege.ac.ke/cohs/
+     */
+    --color-thc-cohs-indigo: #13007c;
+    --color-thc-cohs-blue: #5694ff;
+    --color-thc-cohs-footer: #2228d8;
+    --color-thc-cohs-coral: #ff5433;
+    --color-thc-cohs-sky: #5ac8fa;
+    --color-thc-cohs-sky-soft: #70c5ff;
+    --color-thc-cohs-wash: #eaf1fd;
+    --color-thc-cohs-cream: #f7f4eb;
+    /**
      * Secondary accent — shared with School of Chaplaincy skin via --color-thc-soc-teal.
      */
     --color-thc-teal: #62a3a1;
@@ -59,6 +71,20 @@
         /* SOC: make hairlines/borders gently magenta (subtle but noticeable) */
         --color-thc-line: #e879f9;
     }
+
+    /**
+     * COHS public site — remap shared tokens to the live College of Health Sciences
+     * Salient colors (deep indigo, bright blue, coral accent, sky washes).
+     */
+    .thc-cohs-skin {
+        --color-thc-navy: var(--color-thc-cohs-indigo);
+        --color-thc-royal: var(--color-thc-cohs-blue);
+        --color-thc-maroon: var(--color-thc-cohs-coral);
+        --color-thc-line: var(--color-thc-cohs-coral);
+        --color-thc-teal: var(--color-thc-cohs-sky);
+        --shadow-thc-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 12px 40px rgb(19 0 124 / 0.08);
+        --shadow-thc-card-hover: 0 4px 6px rgb(0 0 0 / 0.05), 0 22px 50px rgb(19 0 124 / 0.14);
+    }
 }
 
 @layer components {
@@ -75,7 +101,71 @@
     }
 
     .thc-cohs-skin .thc-kicker {
-        @apply text-thc-royal;
+        @apply text-thc-cohs-coral;
+    }
+
+    /** COHS inner pages — light sky wash matching live site section gradients. */
+    .cohs-page-hero {
+        border-bottom-color: rgb(86 148 255 / 0.22);
+        background: linear-gradient(
+            to bottom,
+            rgb(234 241 253) 0%,
+            rgb(255 255 255) 72%,
+            white 100%
+        );
+    }
+
+    .thc-cohs-skin .thc-btn-primary {
+        background: linear-gradient(135deg, #13007c 0%, #2228d8 48%, #5694ff 100%);
+    }
+
+    .thc-cohs-skin .thc-btn-primary:hover {
+        filter: brightness(1.05);
+    }
+
+    .thc-cohs-skin .thc-btn-ghost:hover {
+        border-color: rgb(86 148 255 / 0.45);
+        background: linear-gradient(to bottom right, rgb(86 148 255 / 0.08), rgb(90 200 250 / 0.1));
+    }
+
+    .thc-cohs-skin .cohs-contact-submit,
+    .thc-cohs-skin .cohs-app-form-download {
+        background: linear-gradient(135deg, #ff5433 0%, #2228d8 100%);
+    }
+
+    .thc-cohs-skin .cohs-app-form-download:hover {
+        filter: brightness(1.05);
+        background: linear-gradient(135deg, #e64a2c 0%, #1b20b8 100%);
+    }
+
+    .thc-cohs-skin .thc-site-footer {
+        background: linear-gradient(180deg, #1a1ab8 0%, #2228d8 42%, #13007c 100%);
+    }
+
+    .thc-cohs-skin .thc-footer-sub {
+        background-color: #13007c;
+    }
+
+    /** COHS landing — section washes from live site */
+    .thc-cohs-skin .cohs-landing-programmes {
+        background: linear-gradient(to bottom, #eaf1fd 0%, white 100%);
+    }
+
+    .thc-cohs-skin .cohs-landing-testimonials {
+        background-color: #f7f4eb;
+    }
+
+    .thc-cohs-skin .cohs-landing-contact {
+        background: linear-gradient(to bottom, white 0%, #eaf1fd 100%);
+    }
+
+    .thc-cohs-skin .cohs-landing-hero-overlay {
+        background: linear-gradient(
+            to top,
+            rgb(19 0 124 / 0.92) 0%,
+            rgb(34 40 216 / 0.55) 42%,
+            rgb(90 200 250 / 0.45) 100%
+        );
     }
 
     /** Shared hero strip for SOC inner pages (light teal wash into white). */
@@ -116,11 +206,6 @@
         border-color: rgb(217 70 239 / 0.20);
     }
 
-    /** COHS inner pages — subtle royal wash (matches /cohs landing accent). */
-    .cohs-page-hero {
-        @apply border-b border-thc-line/25 bg-gradient-to-b from-thc-royal/[0.09] via-white to-white;
-    }
-
     /** COHS online application form controls */
     .cohs-app-input {
         @apply mt-1.5 w-full rounded-lg border border-thc-navy/15 bg-white px-3 py-2.5 text-sm text-thc-text shadow-sm transition focus:border-thc-royal focus:outline-none focus:ring-2 focus:ring-thc-royal/20;
@@ -148,7 +233,7 @@
     }
 
     .cohs-contact-submit {
-        background: linear-gradient(135deg, #1a1a68 0%, #8265ae 100%);
+        background: linear-gradient(135deg, #13007c 0%, #2228d8 50%, #5694ff 100%);
     }
 
     .cohs-contact-prose a {
