@@ -19,10 +19,13 @@ class PublicAssetUrl
         $relative = static::storageRelativePath($path);
 
         if ($relative === null) {
-            return asset(ltrim($path, '/'));
+            return static::absoluteUrl(asset(ltrim($path, '/')));
         }
 
-        return Storage::disk(UploadsDisk::name())->url($relative);
+        $disk = UploadsDisk::name();
+        $generated = Storage::disk($disk)->url($relative);
+
+        return static::absoluteUrl($generated);
     }
 
     public static function storageRelativePath(?string $path): ?string
@@ -52,5 +55,27 @@ class PublicAssetUrl
         }
 
         return null;
+    }
+
+    /**
+     * Force a full absolute URL using APP_URL when Storage/asset return a root-relative path.
+     */
+    private static function absoluteUrl(string $url): string
+    {
+        $url = trim($url);
+        if ($url === '') {
+            return $url;
+        }
+
+        if (str_starts_with($url, 'http://') || str_starts_with($url, 'https://') || str_starts_with($url, '//')) {
+            return $url;
+        }
+
+        $base = rtrim((string) config('app.url'), '/');
+        if ($base === '') {
+            return url($url);
+        }
+
+        return $base.'/'.ltrim($url, '/');
     }
 }
