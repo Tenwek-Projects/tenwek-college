@@ -21,4 +21,7 @@ return [
 
     /** Shown on customer statement / reconciliation (max ~12 chars). */
     'account_reference' => env('MPESA_ACCOUNT_REFERENCE', 'SOCFEES'),
+
+    /** Public SOC fees page STK button/modal (Pay Bill details remain visible either way). */
+    'stk_public_ui' => (bool) env('MPESA_STK_PUBLIC_UI', false),
 ];
