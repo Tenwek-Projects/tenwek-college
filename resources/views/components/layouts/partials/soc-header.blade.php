@@ -121,20 +121,19 @@
     <div class="relative mx-auto flex max-w-7xl items-center justify-between gap-2 overflow-visible px-4 py-3 sm:px-6 lg:min-h-[4rem] lg:px-8">
         <a
             href="{{ route('schools.show', $school) }}"
-            class="group flex min-w-0 shrink-0 items-center gap-2 sm:gap-3"
+            class="group flex min-w-0 shrink-0 items-center gap-3 sm:gap-3.5"
             @if($isSchoolLanding) aria-current="page" @endif
             @click="openMega = null"
         >
-            <span class="flex h-10 shrink-0 items-center justify-center rounded-lg bg-thc-navy/[0.06] px-1 py-0.5 ring-1 ring-thc-navy/15 transition group-hover:bg-thc-navy/[0.09] group-hover:ring-thc-navy/25">
-                <img
-                    src="{{ \App\Support\Soc\SocLandingRepository::publicMediaUrl($socLogo) }}"
-                    alt="{{ $school->name }} logo"
-                    width="144"
-                    height="48"
-                    class="h-9 w-auto max-w-[9rem] object-contain object-center sm:max-w-[9.5rem]"
-                    decoding="async"
-                >
-            </span>
+            <img
+                src="{{ \App\Support\Soc\SocLandingRepository::publicMediaUrl($socLogo) }}"
+                alt="{{ $school->name }} logo"
+                width="176"
+                height="56"
+                class="h-11 w-auto max-w-[11rem] object-contain object-center sm:h-12 sm:max-w-[12rem]"
+                decoding="async"
+            >
+            <span class="hidden h-10 w-px shrink-0 bg-thc-navy/20 sm:block" aria-hidden="true"></span>
             <span class="min-w-0 leading-tight">
                 <span class="block truncate text-sm font-semibold tracking-tight text-thc-navy group-hover:text-thc-royal">{{ $school->name }}</span>
                 <span class="hidden truncate text-xs text-thc-text/65 sm:block">{{ config('tenwek.name') }}</span>
