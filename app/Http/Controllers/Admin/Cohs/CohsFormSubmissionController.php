@@ -10,7 +10,16 @@ use Illuminate\View\View;
 class CohsFormSubmissionController extends BaseCohsAdminController
 {
     /** @var list<string> */
-    public const FORM_KEYS = ['contact', 'cohs_on_campus_application'];
+    public const FORM_KEYS = [
+        'contact',
+        'cohs_on_campus_application',
+        'cohs_apply_clinical_medicine',
+        'cohs_apply_krchn',
+        'cohs_apply_critical_care_nursing',
+        'cohs_apply_hnd_trauma_emergency',
+        'cohs_apply_hnd_cardiac_perfusion',
+        'cohs_apply_hd_cardiovascular_perfusion',
+    ];
 
     public function index(Request $request): View
     {

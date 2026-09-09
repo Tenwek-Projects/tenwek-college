@@ -120,6 +120,60 @@ document.addEventListener('alpine:init', () => {
         },
     }));
 
+    Alpine.data('cohsProgrammeApplyWizard', (opts = {}) => ({
+        step: 1,
+        totalSteps: 7,
+        maritalStatus: opts.maritalStatus || '',
+        gender: opts.gender || '',
+        next() {
+            if (!this.validateStep(this.step)) {
+                return;
+            }
+            if (this.step < this.totalSteps) {
+                this.step += 1;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        },
+        prev() {
+            if (this.step > 1) {
+                this.step -= 1;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        },
+        progress() {
+            return Math.min(100, Math.round((this.step / this.totalSteps) * 100));
+        },
+        validateStep(s) {
+            const form = this.$refs.appForm;
+            if (!form) {
+                return true;
+            }
+            const stepEl = form.querySelector(`[data-step="${s}"]`);
+            if (!stepEl) {
+                return true;
+            }
+            const fields = stepEl.querySelectorAll('[required]');
+            for (const el of fields) {
+                if (el.offsetParent === null && el.type !== 'hidden') {
+                    continue;
+                }
+                if (el.type === 'file') {
+                    if (!el.files || el.files.length === 0) {
+                        el.reportValidity();
+
+                        return false;
+                    }
+                } else if (!el.checkValidity()) {
+                    el.reportValidity();
+
+                    return false;
+                }
+            }
+
+            return true;
+        },
+    }));
+
     /** SOC admin /media: drag-and-drop multi-file queue before POST */
     Alpine.data('socMediaDropzone', () => ({
         dragging: false,

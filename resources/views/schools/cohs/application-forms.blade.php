@@ -93,11 +93,22 @@
                                 </div>
 
                                 <div class="mt-8 flex flex-wrap items-center gap-3 border-t border-thc-navy/8 pt-6">
+                                    @php
+                                        $applySlug = \App\Support\CohsProgrammeApplicationCatalog::applySlugForDownload($form->slug);
+                                    @endphp
+                                    @if($applySlug)
+                                        <a
+                                            href="{{ route('cohs.programme-application', $applySlug) }}"
+                                            class="thc-btn-primary"
+                                        >
+                                            Apply online
+                                        </a>
+                                    @endif
                                     @if($url)
                                         <a
                                             href="{{ $url }}"
                                             @if($form->primaryDownloadOpensNewTab()) target="_blank" rel="noopener noreferrer" @endif
-                                            class="thc-btn-primary"
+                                            class="{{ $applySlug ? 'thc-btn-ghost' : 'thc-btn-primary' }}"
                                         >
                                             <svg class="h-4 w-4 shrink-0 opacity-95" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>

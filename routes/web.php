@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\Soc\SocTestimonialController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CohsOnCampusApplicationController;
+use App\Http\Controllers\CohsProgrammeApplicationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsPostController;
@@ -250,6 +251,14 @@ Route::get('/cohs/on-campus-application', [CohsOnCampusApplicationController::cl
 Route::post('/cohs/on-campus-application', [CohsOnCampusApplicationController::class, 'store'])
     ->middleware('throttle:forms')
     ->name('cohs.on-campus-application.store');
+
+Route::get('/cohs/apply/{form}', [CohsProgrammeApplicationController::class, 'show'])
+    ->where('form', 'clinical-medicine|critical-care-nursing|hnd-cardiac-perfusion|hnd-trauma-emergency|hd-cardiovascular-perfusion|krchn')
+    ->name('cohs.programme-application');
+Route::post('/cohs/apply/{form}', [CohsProgrammeApplicationController::class, 'store'])
+    ->where('form', 'clinical-medicine|critical-care-nursing|hnd-cardiac-perfusion|hnd-trauma-emergency|hd-cardiovascular-perfusion|krchn')
+    ->middleware('throttle:forms')
+    ->name('cohs.programme-application.store');
 
 Route::get('/cohs/off-campus-application', function () {
     $school = School::query()->where('slug', 'cohs')->first();
