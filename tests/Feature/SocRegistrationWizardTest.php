@@ -6,7 +6,9 @@ use App\Models\FormSubmission;
 use Database\Seeders\TenwekFoundationSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\SocChaplaincyApplicationMail;
 use Tests\TestCase;
 
 class SocRegistrationWizardTest extends TestCase
@@ -29,6 +31,7 @@ class SocRegistrationWizardTest extends TestCase
     {
         $this->seed(TenwekFoundationSeeder::class);
         Storage::fake('local');
+        Mail::fake();
 
         $base = [
             'application_type' => 'certificate',
@@ -71,6 +74,8 @@ class SocRegistrationWizardTest extends TestCase
             'heard_how' => 'website',
             'why_tenwek' => 'I am called to healthcare chaplaincy.',
             'agree_declaration' => '1',
+            'checklist_complete' => '1',
+            'applicant_signature' => 'Mary A Otieno',
             'bank_slip' => UploadedFile::fake()->create('slip.pdf', 120, 'application/pdf'),
             'photograph' => UploadedFile::fake()->image('photo.jpg', 320, 400),
             'certificates' => UploadedFile::fake()->create('certs.pdf', 200, 'application/pdf'),
@@ -90,5 +95,8 @@ class SocRegistrationWizardTest extends TestCase
         $this->assertSame('Mary', $submission->payload['first_name'] ?? null);
         $this->assertNotEmpty($submission->payload['bank_slip_path'] ?? null);
         Storage::disk('local')->assertExists($submission->payload['bank_slip_path']);
+        Mail::assertSent(SocChaplaincyApplicationMail::class, function (SocChaplaincyApplicationMail $mail) {
+            return $mail->hasTo('soc@tenwekhosp.org');
+        });
     }
 }

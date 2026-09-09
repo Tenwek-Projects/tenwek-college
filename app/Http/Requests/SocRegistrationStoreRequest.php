@@ -59,9 +59,9 @@ class SocRegistrationStoreRequest extends FormRequest
             'parent_email' => ['required', 'email:rfc', 'max:255'],
             'parent_mobile' => ['required', 'string', 'max:40'],
 
-            'denomination' => ['required', Rule::in(['protestant', 'roman_catholic', 'hindu', 'muslim', 'other'])],
+            'denomination' => ['required', Rule::in(['protestant', 'roman_catholic', 'hindu', 'muslim', 'other', 'none'])],
             'denomination_other' => ['nullable', 'required_if:denomination,other', 'string', 'max:200'],
-            'pastors_status' => ['required', Rule::in(['ordained', 'to_be_ordained'])],
+            'pastors_status' => ['required', Rule::in(['ordained', 'to_be_ordained', 'none'])],
 
             'institution_1_name' => ['required', 'string', 'max:200'],
             'institution_1_area' => ['required', 'string', 'max:200'],
@@ -86,12 +86,18 @@ class SocRegistrationStoreRequest extends FormRequest
             'referral_admission_number' => ['nullable', 'string', 'max:80'],
             'referral_contact' => ['nullable', 'string', 'max:200'],
             'why_tenwek' => ['required', 'string', 'max:8000'],
+            'english_competence' => ['nullable', 'string', 'max:500'],
 
+            'applicant_signature' => ['required', 'string', 'max:200'],
             'agree_declaration' => ['accepted'],
+            'checklist_complete' => ['accepted'],
 
             'bank_slip' => ['required', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp'],
             'photograph' => ['required', 'file', 'max:5120', 'mimes:jpg,jpeg,png,webp'],
+            'photograph_2' => ['nullable', 'file', 'max:5120', 'mimes:jpg,jpeg,png,webp'],
+            'photograph_3' => ['nullable', 'file', 'max:5120', 'mimes:jpg,jpeg,png,webp'],
             'certificates' => ['required', 'file', 'max:15360', 'mimes:pdf,jpg,jpeg,png,webp'],
+            'english_proof' => ['nullable', 'file', 'max:10240', 'mimes:pdf,jpg,jpeg,png,webp'],
         ];
     }
 
@@ -108,7 +114,11 @@ class SocRegistrationStoreRequest extends FormRequest
             'institution_1_award' => 'certificate, diploma, or degree (institution 1)',
             'bank_slip' => 'bank slip for application fee',
             'photograph' => 'passport photograph',
+            'photograph_2' => 'second passport photograph',
+            'photograph_3' => 'third passport photograph',
             'certificates' => 'academic certificates',
+            'english_proof' => 'English competence document',
+            'applicant_signature' => 'signature (typed full name)',
         ];
     }
 }

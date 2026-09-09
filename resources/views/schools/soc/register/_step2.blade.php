@@ -12,6 +12,12 @@
     </div>
 
     @include('schools.soc.register._textarea', ['name' => 'languages_other', 'label' => 'Other languages spoken or written', 'rows' => 3])
+    @include('schools.soc.register._textarea', [
+        'name' => 'english_competence',
+        'label' => 'English competence (required if your prior certificates are not in English — describe IELTS, school medium, or attach proof on the last step)',
+        'rows' => 3,
+        'required' => false,
+    ])
 
     <fieldset class="space-y-3 rounded-2xl border border-thc-navy/10 bg-white p-5 shadow-sm">
         <legend class="px-1 text-sm font-bold uppercase tracking-[0.12em] text-thc-maroon">Do you have any disability?</legend>

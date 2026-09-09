@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SocRegistrationStoreRequest;
+use App\Mail\SocChaplaincyApplicationMail;
 use App\Models\FormSubmission;
 use App\Models\Page;
 use App\Models\School;
@@ -51,7 +52,7 @@ class SocRegistrationController extends Controller
         $school = School::query()->where('slug', 'soc')->where('is_active', true)->firstOrFail();
 
         $payload = collect($request->validated())
-            ->except(['bank_slip', 'photograph', 'certificates'])
+            ->except(['bank_slip', 'photograph', 'photograph_2', 'photograph_3', 'certificates', 'english_proof'])
             ->all();
 
         $submission = FormSubmission::query()->create([
@@ -68,26 +69,26 @@ class SocRegistrationController extends Controller
             'photograph_path' => $request->file('photograph')->store($base, 'local'),
             'certificates_path' => $request->file('certificates')->store($base, 'local'),
         ];
+        if ($request->hasFile('photograph_2')) {
+            $files['photograph_2_path'] = $request->file('photograph_2')->store($base, 'local');
+        }
+        if ($request->hasFile('photograph_3')) {
+            $files['photograph_3_path'] = $request->file('photograph_3')->store($base, 'local');
+        }
+        if ($request->hasFile('english_proof')) {
+            $files['english_proof_path'] = $request->file('english_proof')->store($base, 'local');
+        }
 
         $submission->update([
             'payload' => array_merge($submission->payload, $files),
         ]);
 
-        $to = config('mail.from.address');
-        if ($to && filter_var($to, FILTER_VALIDATE_EMAIL)) {
+        $to = config('tenwek.soc_landing.contact.email', 'soc@tenwekhosp.org');
+        if (is_string($to) && filter_var($to, FILTER_VALIDATE_EMAIL)) {
             try {
-                $lines = [
-                    'New School of Chaplaincy online registration',
-                    'Submission ID: '.$submission->id,
-                    'Applicant: '.($payload['first_name'] ?? '').' '.($payload['last_name'] ?? ''),
-                    'Email: '.($payload['email'] ?? ''),
-                    'Programme: '.($payload['application_type'] ?? ''),
-                ];
-                Mail::raw(implode("\n", $lines), function ($message) use ($to, $payload): void {
-                    $message->to($to)->subject('SOC registration: '.($payload['last_name'] ?? 'Applicant'));
-                });
+                Mail::to($to)->send(new SocChaplaincyApplicationMail($submission->fresh()));
             } catch (\Throwable) {
-                // Stored; mail optional
+                // Stored in CMS; mail can be retried from the server logs.
             }
         }
 

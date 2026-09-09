@@ -24,6 +24,10 @@
                 <input type="radio" name="denomination" value="other" class="text-thc-maroon focus:ring-thc-royal" @checked(old('denomination') === 'other')>
                 Other
             </label>
+            <label class="inline-flex items-center gap-2 text-sm font-medium text-thc-navy">
+                <input type="radio" name="denomination" value="none" class="text-thc-maroon focus:ring-thc-royal" @checked(old('denomination') === 'none')>
+                None
+            </label>
         </div>
         @error('denomination')
             <p class="text-sm text-thc-maroon">{{ $message }}</p>
@@ -41,6 +45,10 @@
             <label class="inline-flex items-center gap-2 text-sm font-medium text-thc-navy">
                 <input type="radio" name="pastors_status" value="to_be_ordained" class="text-thc-maroon focus:ring-thc-royal" @checked(old('pastors_status') === 'to_be_ordained')>
                 To be ordained
+            </label>
+            <label class="inline-flex items-center gap-2 text-sm font-medium text-thc-navy">
+                <input type="radio" name="pastors_status" value="none" class="text-thc-maroon focus:ring-thc-royal" @checked(old('pastors_status') === 'none')>
+                None (not a practising pastor)
             </label>
         </div>
         @error('pastors_status')
