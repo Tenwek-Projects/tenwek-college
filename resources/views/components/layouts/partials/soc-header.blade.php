@@ -65,7 +65,7 @@
 @endphp
 
 {{-- Utility strip: hidden on small screens to save vertical space; primary nav stays visible. --}}
-<div class="hidden border-b border-white/15 bg-thc-navy text-white sm:block" aria-label="School contact and portal">
+<div class="hidden border-b border-white/15 bg-thc-soc-purple text-white sm:block" aria-label="School contact and portal">
         <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-2.5 text-xs sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-6 sm:gap-y-1 sm:px-6 sm:text-sm lg:px-8">
             <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-1">
                 <a
@@ -73,7 +73,7 @@
                     class="inline-flex items-center gap-2 font-medium text-white/95 transition hover:text-white hover:underline"
                     aria-label="{{ __('Email :address', ['address' => $topEmail]) }}"
                 >
-                    <span class="inline-flex shrink-0 text-thc-royal/90" aria-hidden="true">
+                    <span class="inline-flex shrink-0 text-thc-soc-sky-soft" aria-hidden="true">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     </span>
                     <span>{{ $topEmail }}</span>
@@ -83,7 +83,7 @@
                     class="inline-flex items-center gap-2 font-medium text-white/95 transition hover:text-white hover:underline"
                     aria-label="{{ __('Call :number', ['number' => $topCallDisplay]) }}"
                 >
-                    <span class="inline-flex shrink-0 text-thc-royal/90" aria-hidden="true">
+                    <span class="inline-flex shrink-0 text-thc-soc-sky-soft" aria-hidden="true">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                     </span>
                     <span>{{ $topCallDisplay }}</span>

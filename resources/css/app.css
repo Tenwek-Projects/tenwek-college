@@ -13,9 +13,16 @@
     --color-thc-navy: #1a1a68;
     --color-thc-royal: #8265ae;
     --color-thc-maroon: #8265ae;
-    /* School of Chaplaincy — aligns with brand purple under .thc-soc-skin */
+    /**
+     * School of Chaplaincy — Salient palette from
+     * https://tenwekhospitalcollege.ac.ke/soc/
+     */
     --color-thc-soc-purple: #8265ae;
-    /* SOC accent: very subtle magenta (use at low opacity only) */
+    --color-thc-soc-sky: #5ac8fa;
+    --color-thc-soc-sky-soft: #b2deea;
+    --color-thc-soc-cream: #f5f4f0;
+    --color-thc-soc-wash: #eef8fc;
+    /* Legacy alias — remapped to sky under .thc-soc-skin; keep for older class names */
     --color-thc-soc-magenta: #d946ef;
     /**
      * College of Health Sciences — Salient palette from
@@ -30,7 +37,7 @@
     --color-thc-cohs-wash: #eaf1fd;
     --color-thc-cohs-cream: #f7f4eb;
     /**
-     * Secondary accent — shared with School of Chaplaincy skin via --color-thc-soc-teal.
+     * Secondary accent — remapped to SOC sky under .thc-soc-skin.
      */
     --color-thc-teal: #62a3a1;
     --color-thc-soc-teal: var(--color-thc-teal);
@@ -65,11 +72,18 @@
         background-color: rgb(98 163 161 / 0.28);
     }
 
-    /* SOC public site: use brand purple instead of global maroon for all thc-maroon-* utilities */
+    /**
+     * SOC public site — remap shared tokens to the live School of Chaplaincy
+     * Salient colors (purple, sky blue, cream washes).
+     */
     .thc-soc-skin {
         --color-thc-maroon: var(--color-thc-soc-purple);
-        /* SOC: make hairlines/borders gently magenta (subtle but noticeable) */
-        --color-thc-line: #e879f9;
+        --color-thc-royal: var(--color-thc-soc-purple);
+        --color-thc-teal: var(--color-thc-soc-sky);
+        --color-thc-soc-teal: var(--color-thc-soc-sky);
+        --color-thc-line: var(--color-thc-soc-sky-soft);
+        --shadow-thc-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 12px 40px rgb(130 101 174 / 0.1);
+        --shadow-thc-card-hover: 0 4px 6px rgb(0 0 0 / 0.05), 0 22px 50px rgb(130 101 174 / 0.16);
     }
 
     /**
@@ -97,7 +111,7 @@
     }
 
     .thc-soc-skin .thc-kicker {
-        @apply text-thc-soc-teal;
+        @apply text-thc-soc-sky;
     }
 
     .thc-cohs-skin .thc-kicker {
@@ -113,6 +127,22 @@
             rgb(255 255 255) 72%,
             white 100%
         );
+    }
+
+    .thc-soc-skin .thc-btn-primary {
+        color: #1a1a68;
+        background: linear-gradient(135deg, #5ac8fa 0%, #70c5ff 55%, #b2deea 100%);
+        box-shadow: 0 10px 28px rgb(90 200 250 / 0.35);
+    }
+
+    .thc-soc-skin .thc-btn-primary:hover {
+        filter: brightness(1.04);
+        color: #1a1a68;
+    }
+
+    .thc-soc-skin .thc-btn-ghost:hover {
+        border-color: rgb(130 101 174 / 0.4);
+        background: linear-gradient(to bottom right, rgb(130 101 174 / 0.08), rgb(90 200 250 / 0.12));
     }
 
     .thc-cohs-skin .thc-btn-primary {
@@ -160,42 +190,65 @@
         );
     }
 
-    /** Shared hero strip for SOC inner pages (light teal wash into white). */
+    /** Shared hero strip for SOC inner pages (cream / sky wash into white). */
     .soc-page-hero {
-        @apply border-b border-thc-line/25 bg-gradient-to-b from-thc-soc-teal/[0.09] via-white to-white;
-    }
-
-    /** /soc/strategic-partners — whisper of magenta in the hero + list band (SOC skin only). */
-    .thc-soc-skin .soc-strategic-partners-hero {
-        border-bottom-color: rgb(217 70 239 / 0.22);
+        border-bottom-color: rgb(178 222 234 / 0.55);
         background: linear-gradient(
             to bottom,
-            rgb(217 70 239 / 0.07) 0%,
-            rgb(98 163 161 / 0.08) 38%,
+            #f5f4f0 0%,
+            rgb(238 248 252 / 0.65) 42%,
+            white 100%
+        );
+    }
+
+    /** SOC landing — section washes from live site */
+    .thc-soc-skin .soc-landing-about {
+        background-color: #f5f4f0;
+    }
+
+    .thc-soc-skin .soc-landing-mission {
+        background: linear-gradient(to bottom, #eef8fc 0%, white 100%);
+    }
+
+    .thc-soc-skin .soc-landing-testimonials {
+        background-color: #f5f4f0;
+    }
+
+    .thc-soc-skin .soc-landing-contact {
+        background: linear-gradient(to bottom, white 0%, #eef8fc 100%);
+    }
+
+    /** /soc/strategic-partners — purple / sky washes (SOC skin only). */
+    .thc-soc-skin .soc-strategic-partners-hero {
+        border-bottom-color: rgb(130 101 174 / 0.22);
+        background: linear-gradient(
+            to bottom,
+            rgb(130 101 174 / 0.08) 0%,
+            rgb(90 200 250 / 0.1) 38%,
             white 100%
         );
     }
 
     .thc-soc-skin .soc-strategic-partners-main {
-        background: linear-gradient(to bottom, rgb(217 70 239 / 0.035), transparent 10rem);
+        background: linear-gradient(to bottom, rgb(238 248 252 / 0.55), transparent 10rem);
     }
 
     .thc-soc-skin .strategic-partners-kicker {
-        @apply border-l-2 border-thc-soc-magenta/40 pl-3;
+        @apply border-l-2 border-thc-soc-sky/50 pl-3;
     }
 
     /**
      * SOC landing: many cards use border-thc-navy/10 for hairlines.
-     * Nudge those borders toward a light magenta so the accent is visible without shouting.
+     * Nudge those borders toward soft sky / purple so the live accent reads.
      */
     .thc-soc-skin :where(.border-thc-navy\/10) {
-        border-color: rgb(217 70 239 / 0.18);
+        border-color: rgb(130 101 174 / 0.16);
     }
     .thc-soc-skin :where(.border-thc-navy\/8) {
-        border-color: rgb(217 70 239 / 0.14);
+        border-color: rgb(90 200 250 / 0.2);
     }
     .thc-soc-skin :where(.border-thc-navy\/12) {
-        border-color: rgb(217 70 239 / 0.20);
+        border-color: rgb(130 101 174 / 0.2);
     }
 
     /** COHS online application form controls */

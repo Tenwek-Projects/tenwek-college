@@ -10,13 +10,13 @@
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
     {{-- Hero band --}}
-    <div class="relative overflow-hidden bg-gradient-to-br from-thc-navy via-thc-soc-teal/50 to-thc-maroon/88 text-white">
-        <div class="pointer-events-none absolute inset-0 opacity-[0.12]" style="background-image: radial-gradient(circle at 15% 20%, rgba(255,255,255,0.35), transparent 42%), radial-gradient(circle at 90% 80%, rgba(21,104,116,0.45), transparent 45%);" aria-hidden="true"></div>
+    <div class="relative overflow-hidden bg-gradient-to-br from-thc-navy via-thc-soc-purple/70 to-thc-soc-sky/80 text-white">
+        <div class="pointer-events-none absolute inset-0 opacity-[0.14]" style="background-image: radial-gradient(circle at 15% 20%, rgba(255,255,255,0.35), transparent 42%), radial-gradient(circle at 90% 80%, rgba(90,200,250,0.45), transparent 45%);" aria-hidden="true"></div>
         <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
             <x-schools.soc.breadcrumbs :school="$school" :current="$page->title" variant="hero" class="mb-8" data-reveal />
             <div class="mt-8 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
                 <div class="min-w-0 flex-1">
-                    <p class="max-w-2xl text-[11px] font-bold uppercase tracking-[0.22em] text-thc-soc-teal/95 sm:text-xs" data-reveal>
+                    <p class="max-w-2xl text-[11px] font-bold uppercase tracking-[0.22em] text-thc-soc-sky-soft sm:text-xs" data-reveal>
                         {{ $P['kicker'] ?? '' }}
                     </p>
                     <h1 class="mt-4 max-w-3xl font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-[3.25rem]" data-reveal>
@@ -83,13 +83,13 @@
                     <p class="max-w-3xl text-base font-medium text-thc-navy sm:text-lg">
                         {{ $P['belief'] ?? '' }}
                     </p>
-                    <figure class="relative mt-8 overflow-hidden rounded-2xl border border-thc-soc-teal/25 bg-gradient-to-br from-thc-soc-teal/[0.07] via-white to-thc-royal/[0.05] p-8 shadow-[var(--shadow-thc-card)] sm:p-10">
-                        <div class="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-thc-soc-teal via-thc-soc-teal/75 to-thc-royal" aria-hidden="true"></div>
+                    <figure class="relative mt-8 overflow-hidden rounded-2xl border border-thc-soc-sky/30 bg-gradient-to-br from-thc-soc-wash via-white to-thc-soc-purple/[0.05] p-8 shadow-[var(--shadow-thc-card)] sm:p-10">
+                        <div class="absolute left-0 top-0 h-full w-1.5 bg-gradient-to-b from-thc-soc-sky via-thc-soc-sky-soft to-thc-soc-purple" aria-hidden="true"></div>
                         <blockquote class="relative pl-4 sm:pl-6">
                             <p class="font-serif text-xl leading-relaxed text-thc-navy sm:text-2xl lg:text-[1.65rem]">
                                 “{{ $scripture['text'] ?? '' }}”
                             </p>
-                            <figcaption class="mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-thc-soc-teal">
+                            <figcaption class="mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-thc-soc-sky">
                                 {{ $scripture['reference'] ?? '' }}
                             </figcaption>
                         </blockquote>

@@ -17,8 +17,8 @@
         $initials = '?';
     }
     $roleClass = $accent === 'royal'
-        ? 'text-thc-royal'
-        : 'text-thc-soc-teal';
+        ? 'text-thc-soc-purple'
+        : 'text-thc-soc-sky';
 @endphp
 
 <article

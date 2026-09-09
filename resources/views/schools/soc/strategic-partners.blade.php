@@ -29,7 +29,7 @@
             @foreach($partners as $index => $partner)
                 <article
                     id="partner-{{ \Illuminate\Support\Str::slug($partner['name']) }}"
-                    class="scroll-mt-28 overflow-hidden rounded-2xl border border-thc-navy/10 border-l-[3px] border-l-thc-soc-magenta/25 bg-white shadow-sm"
+                    class="scroll-mt-28 overflow-hidden rounded-2xl border border-thc-navy/10 border-l-[3px] border-l-thc-soc-sky/40 bg-white shadow-sm"
                     data-reveal
                     aria-labelledby="partner-heading-{{ $index }}"
                 >
@@ -80,7 +80,7 @@
                                     @foreach($partner['bullets'] as $item)
                                         <li class="flex gap-3">
                                             <span
-                                                class="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-gradient-to-br from-thc-maroon to-thc-soc-magenta shadow-[0_0_0_3px_rgb(217_70_239_/_0.14)]"
+                                                class="mt-[0.55rem] h-2 w-2 shrink-0 rounded-full bg-gradient-to-br from-thc-soc-purple to-thc-soc-sky shadow-[0_0_0_3px_rgb(90_200_250_/_0.18)]"
                                                 aria-hidden="true"
                                             ></span>
                                             <span class="min-w-0 flex-1 text-base leading-relaxed">{{ $item }}</span>
