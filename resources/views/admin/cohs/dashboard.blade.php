@@ -28,7 +28,12 @@
             <a href="{{ route('admin.cohs.about-us.edit') }}" class="admin-dash-tile">
                 <p class="admin-dash-tile-kicker">Inner</p>
                 <p class="admin-dash-tile-title">About us page</p>
-                <p class="admin-dash-tile-desc">History, vision, mission, board</p>
+                <p class="admin-dash-tile-desc">History, vision, mission, board headings</p>
+            </a>
+            <a href="{{ route('admin.cohs.board.index') }}" class="admin-dash-tile">
+                <p class="admin-dash-tile-kicker">CRUD</p>
+                <p class="admin-dash-tile-title">Hospital board</p>
+                <p class="admin-dash-tile-desc">{{ number_format($stats['board_members']) }} members · photos</p>
             </a>
             <a href="{{ route('admin.cohs.social-life.edit') }}" class="admin-dash-tile">
                 <p class="admin-dash-tile-kicker">Inner</p>

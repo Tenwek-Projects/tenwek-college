@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Cohs;
 
+use App\Models\CohsBoardMember;
 use App\Models\CohsNavItem;
 use App\Models\CohsTestimonial;
 use App\Models\FormSubmission;
@@ -21,6 +22,7 @@ class CohsDashboardController extends BaseCohsAdminController
             'pages' => Page::query()->where('school_id', $cohs->id)->count(),
             'news' => NewsPost::query()->where('school_id', $cohs->id)->count(),
             'testimonials' => CohsTestimonial::query()->where('school_id', $cohs->id)->count(),
+            'board_members' => CohsBoardMember::query()->where('school_id', $cohs->id)->count(),
             'nav_items' => CohsNavItem::query()->where('school_id', $cohs->id)->count(),
             'media' => MediaAsset::query()->where('school_id', $cohs->id)->count(),
             'submissions_7d' => FormSubmission::query()

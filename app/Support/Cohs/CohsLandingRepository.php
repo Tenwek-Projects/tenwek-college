@@ -2,6 +2,7 @@
 
 namespace App\Support\Cohs;
 
+use App\Models\CohsBoardMember;
 use App\Models\CohsLandingSection;
 use App\Models\CohsNavItem;
 use App\Models\CohsTestimonial;
@@ -64,6 +65,7 @@ final class CohsLandingRepository
         }
 
         $base['testimonials'] = $this->mergeTestimonials($school, $base['testimonials'] ?? []);
+        $base['about_us'] = $this->mergeBoardMembers($school, is_array($base['about_us'] ?? null) ? $base['about_us'] : []);
         $base['main_nav'] = $this->mainNavFor($school, $base['main_nav'] ?? []);
 
         self::$cache[$key] = $base;
@@ -154,6 +156,42 @@ final class CohsLandingRepository
         })->all();
 
         return $testimonialBlock;
+    }
+
+    /**
+     * @param  array<string, mixed>  $aboutUs
+     * @return array<string, mixed>
+     */
+    private function mergeBoardMembers(School $school, array $aboutUs): array
+    {
+        $rows = CohsBoardMember::query()
+            ->where('school_id', $school->id)
+            ->published()
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        if ($rows->isEmpty()) {
+            return $aboutUs;
+        }
+
+        $aboutUs['board'] = $rows->map(static function (CohsBoardMember $m) {
+            $item = [
+                'name' => $m->name,
+                'role' => $m->role_title,
+                'highlight' => $m->highlight,
+            ];
+            if (filled($m->bio)) {
+                $item['bio'] = $m->bio;
+            }
+            if (filled($m->image_path)) {
+                $item['image'] = $m->image_path;
+            }
+
+            return $item;
+        })->all();
+
+        return $aboutUs;
     }
 
     /**

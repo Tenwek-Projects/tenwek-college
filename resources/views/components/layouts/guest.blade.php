@@ -9,8 +9,11 @@
     <title>{{ $title ?? 'Sign in | '.config('tenwek.name') }}</title>
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>[x-cloak]{display:none!important}</style>
 </head>
-<body class="flex min-h-full items-center justify-center bg-thc-navy/[0.04] px-4 py-12 text-thc-text">
-    {{ $slot }}
+<body class="min-h-screen bg-slate-100 font-sans text-thc-text antialiased">
+    <div class="flex min-h-screen items-center justify-center p-4 sm:p-8">
+        {{ $slot }}
+    </div>
 </body>
 </html>

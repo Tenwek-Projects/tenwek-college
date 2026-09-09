@@ -17,7 +17,7 @@ final class CohsAdminPageHints
             'admin.cohs.welcome.edit' => __('The welcome band directly under the hero: intro copy and layout for the COHS landing page.'),
             'admin.cohs.programmes-band.edit' => __('The programmes strip on the landing page: kicker, title, and intro above programme cards.'),
             'admin.cohs.testimonials-band.edit' => __('Heading and intro for the testimonials area on the landing page. Individual quotes are managed under Testimonials.'),
-            'admin.cohs.about-us.edit' => __('The public About us page at /cohs/about-us: story, governance, and related blocks.'),
+            'admin.cohs.about-us.edit' => __('The public About us page at /cohs/about-us: story, governance headings, and related blocks. Board people and photos are under Hospital board members.'),
             'admin.cohs.social-life.edit' => __('The Social life inner page: copy and sections for student life content.'),
             'admin.cohs.facilities.edit' => __('The Facilities inner page: descriptions of campuses and learning spaces.'),
             'admin.cohs.contact.edit' => __('COHS contact page content and office details shown on /cohs/contact-us.'),
@@ -25,6 +25,10 @@ final class CohsAdminPageHints
             'admin.cohs.top-bar.edit' => __('The thin top announcement or utility bar above the COHS header on public pages.'),
 
             'admin.cohs.json.edit' => __('Structured JSON for one configurable section (for example programme listings). Changes affect the matching block on the live site.'),
+
+            'admin.cohs.board.index' => __('Hospital board members shown on the COHS About us page. Add portraits, roles, bios, and publish order here.'),
+            'admin.cohs.board.create' => __('Add a hospital board member with name, role, optional bio, and photo.'),
+            'admin.cohs.board.edit' => __('Update this board member’s details, highlight, or portrait.'),
 
             'admin.cohs.testimonials.index' => __('List of testimonial quotes that can appear in COHS landing or inner pages.'),
             'admin.cohs.testimonials.create' => __('Add a new testimonial quote, attribution, and optional photo.'),

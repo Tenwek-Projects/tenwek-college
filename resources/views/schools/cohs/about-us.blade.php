@@ -203,6 +203,11 @@
                                     <p class="mt-3 text-[11px] font-bold uppercase leading-snug tracking-[0.14em] text-thc-cohs-coral sm:text-xs">
                                         {{ $person['role'] ?? '' }}
                                     </p>
+                                    @if(filled($person['bio'] ?? null))
+                                        <p class="mt-3 text-sm leading-relaxed text-thc-text/80">
+                                            {{ $person['bio'] }}
+                                        </p>
+                                    @endif
                                 </div>
                             </article>
                         </li>

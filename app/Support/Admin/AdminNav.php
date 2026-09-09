@@ -91,6 +91,7 @@ final class AdminNav
                 self::link('Welcome & programmes band', 'admin.cohs.welcome.edit', [], 'document-text', ['admin.cohs.welcome.*', 'admin.cohs.programmes-band.*']),
                 self::link('Testimonials band', 'admin.cohs.testimonials-band.edit', [], 'chat-bubble-left-right', ['admin.cohs.testimonials-band.*']),
                 self::link('About us (landing)', 'admin.cohs.about-us.edit', [], 'book-open', ['admin.cohs.about-us.*']),
+                self::link('Hospital board members', 'admin.cohs.board.index', [], 'users', ['admin.cohs.board.*']),
                 self::link('Social life', 'admin.cohs.social-life.edit', [], 'sparkles', ['admin.cohs.social-life.*']),
                 self::link('Facilities', 'admin.cohs.facilities.edit', [], 'rectangle-group', ['admin.cohs.facilities.*']),
                 self::link('Contact page', 'admin.cohs.contact.edit', [], 'map-pin', ['admin.cohs.contact.*']),

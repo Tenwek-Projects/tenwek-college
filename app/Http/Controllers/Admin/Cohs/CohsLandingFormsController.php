@@ -450,17 +450,8 @@ class CohsLandingFormsController extends BaseCohsAdminController
             'board_section_heading' => ['required', 'string', 'max:255'],
             'board_intro' => ['required', 'string', 'max:5000'],
             'board_heading' => ['required', 'string', 'max:255'],
-            'board_json' => ['required', 'string', 'max:50000'],
             'history_image_upload' => ['nullable', 'image', 'max:8192'],
         ]);
-        try {
-            $board = json_decode($validated['board_json'], true, 512, JSON_THROW_ON_ERROR);
-        } catch (\JsonException $e) {
-            return back()->withErrors(['board_json' => 'Invalid JSON: '.$e->getMessage()])->withInput();
-        }
-        if (! is_array($board)) {
-            return back()->withErrors(['board_json' => 'Board must be a JSON array.'])->withInput();
-        }
         $historyParagraphs = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $validated['history_paragraphs']) ?: [])));
 
         $payload = [
@@ -476,7 +467,6 @@ class CohsLandingFormsController extends BaseCohsAdminController
             'board_section_heading' => $validated['board_section_heading'],
             'board_intro' => $validated['board_intro'],
             'board_heading' => $validated['board_heading'],
-            'board' => $board,
         ];
 
         if ($request->hasFile('history_image_upload')) {

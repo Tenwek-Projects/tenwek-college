@@ -1,6 +1,3 @@
-@php
-    $boardJson = old('board_json', json_encode($about['board'] ?? [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
-@endphp
 <x-layouts.admin header="COHS — About us page">
     <form method="post" action="{{ route('admin.cohs.about-us.update') }}" enctype="multipart/form-data" class="admin-page-wide">
         @csrf
@@ -61,9 +58,14 @@
                 <x-admin.ui.group label="Board list heading" for="board_heading" name="board_heading">
                     <input type="text" name="board_heading" id="board_heading" value="{{ old('board_heading', $about['board_heading'] ?? '') }}" required class="admin-input">
                 </x-admin.ui.group>
-                <x-admin.ui.group label="Board members (JSON)" for="board_json" name="board_json" hint='[ { "name": "", "role": "", "highlight": true }, ... ]'>
-                    <textarea name="board_json" id="board_json" rows="18" required class="admin-textarea font-mono text-xs">{{ $boardJson }}</textarea>
-                </x-admin.ui.group>
+                <div class="rounded-xl border border-thc-navy/10 bg-thc-navy/[0.02] px-4 py-3 text-sm text-thc-text/85">
+                    <p class="font-semibold text-thc-navy">Hospital board members</p>
+                    <p class="mt-1">
+                        Add, edit, and upload portraits under
+                        <a href="{{ route('admin.cohs.board.index') }}" class="admin-link">Hospital board members</a>.
+                        Published people replace the default config list on the public About us page.
+                    </p>
+                </div>
             </div>
             <div class="admin-actions admin-actions-sticky mt-8">
                 <div class="admin-actions-primary">
