@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — JSON: {{ str_replace('_', ' ', $section) }}">
+<x-layouts.admin header="COHS - JSON: {{ str_replace('_', ' ', $section) }}">
     <form method="post" action="{{ route('admin.cohs.json.update', $section) }}" class="admin-page-wide">
         @csrf
         @method('PUT')

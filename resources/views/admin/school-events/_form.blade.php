@@ -24,7 +24,7 @@
     @if ($e->exists && $e->image_path)
         <div class="mt-3 flex flex-wrap items-end gap-4">
             <img src="{{ $e->imagePublicUrl() }}" alt="" class="h-28 max-w-[12rem] rounded-lg border border-thc-navy/10 object-cover shadow-sm" loading="lazy" decoding="async" width="192" height="112">
-            <p class="admin-hint">Current: <span class="admin-code">{{ $e->image_path }}</span> — upload a new file to replace.</p>
+            <p class="admin-hint">Current: <span class="admin-code">{{ $e->image_path }}</span> - upload a new file to replace.</p>
         </div>
     @endif
 </x-admin.ui.group>

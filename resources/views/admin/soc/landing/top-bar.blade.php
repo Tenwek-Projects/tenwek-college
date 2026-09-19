@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — Utility top bar">
+<x-layouts.admin header="SOC - Utility top bar">
     <form method="post" action="{{ route('admin.soc.top-bar.update') }}" class="admin-page-narrow">
         @csrf
         @method('PUT')

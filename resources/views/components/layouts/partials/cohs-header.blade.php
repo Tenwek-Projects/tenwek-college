@@ -26,7 +26,7 @@
 
     $cohsChildHref = function (array $child) use ($page, $L): string {
         if (! empty($child['route'])) {
-            return route($child['route']);
+            return route($child['route'], $child['route_params'] ?? []);
         }
         if (! empty($child['external_url'])) {
             return $child['external_url'];
@@ -54,6 +54,9 @@
 
     $isMegaActive = function (string $megaId) use ($pageSlug, $megaChildSlugs, $onCampusApplication): bool {
         if ($megaId === 'cohs-application' && $onCampusApplication) {
+            return true;
+        }
+        if ($megaId === 'cohs-courses' && request()->routeIs('cohs.programme-application')) {
             return true;
         }
 
@@ -227,6 +230,9 @@
                                         $childNavActive = isset($child['slug']) && $pageSlug === $child['slug'];
                                     } elseif (! empty($child['route'])) {
                                         $childNavActive = request()->routeIs($child['route']);
+                                        if ($childNavActive && ! empty($child['route_params']['form'])) {
+                                            $childNavActive = request()->route('form') === $child['route_params']['form'];
+                                        }
                                     } else {
                                         $childNavActive = isset($child['slug']) && $pageSlug === $child['slug'];
                                     }

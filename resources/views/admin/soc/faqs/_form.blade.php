@@ -47,11 +47,11 @@
             @endphp
             <li class="grid gap-3 rounded-lg border border-thc-navy/8 bg-white p-3 sm:grid-cols-2">
                 <div>
-                    <label class="admin-label text-xs font-medium normal-case">Left — row {{ $idx + 1 }}</label>
+                    <label class="admin-label text-xs font-medium normal-case">Left - row {{ $idx + 1 }}</label>
                     <textarea name="comparison_rows[{{ $idx }}][left]" rows="2" class="admin-textarea mt-1 text-sm">{{ old("comparison_rows.$idx.left", $crow['left']) }}</textarea>
                 </div>
                 <div>
-                    <label class="admin-label text-xs font-medium normal-case">Right — row {{ $idx + 1 }}</label>
+                    <label class="admin-label text-xs font-medium normal-case">Right - row {{ $idx + 1 }}</label>
                     <textarea name="comparison_rows[{{ $idx }}][right]" rows="2" class="admin-textarea mt-1 text-sm">{{ old("comparison_rows.$idx.right", $crow['right']) }}</textarea>
                 </div>
             </li>

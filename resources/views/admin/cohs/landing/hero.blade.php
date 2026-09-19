@@ -3,7 +3,7 @@
     $cta = $h['primary_cta'] ?? [];
     $sec = $h['secondary_cta'] ?? [];
 @endphp
-<x-layouts.admin header="COHS — Hero &amp; branding images">
+<x-layouts.admin header="COHS - Hero &amp; branding images">
     <form method="post" action="{{ route('admin.cohs.hero.update') }}" enctype="multipart/form-data" class="admin-page-narrow">
         @csrf
         @method('PUT')

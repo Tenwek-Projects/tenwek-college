@@ -39,7 +39,7 @@
                 <h1 class="mt-3 font-serif text-4xl font-semibold tracking-tight text-thc-navy sm:text-5xl lg:text-[3.25rem]">
                     @if($filterSchool)
                         <span class="text-thc-navy">{{ $filterSchool->name }}</span>
-                        <span class="text-thc-text/80"> — </span>
+                        <span class="text-thc-text/80"> - </span>
                     @endif
                     Downloads <span class="italic text-thc-royal">&amp; forms</span>
                 </h1>

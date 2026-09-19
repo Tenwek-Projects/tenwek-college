@@ -59,7 +59,7 @@ class PublicDownloadController extends Controller
         $description = 'Admission forms, clinical placement documents, policies, and student resources from Tenwek Hospital College.';
 
         if ($filterSchool) {
-            $title = $filterSchool->name.' — Downloads & forms | '.config('tenwek.name');
+            $title = $filterSchool->name.' - Downloads & forms | '.config('tenwek.name');
             $description = 'Forms, policies, and resources for '.$filterSchool->name.' at '.config('tenwek.name').'.';
             $breadcrumbs[] = [
                 'label' => $filterSchool->name,

@@ -16,7 +16,7 @@
 
                 <x-admin.ui.group label="Category" for="category_id" name="category_id" hint="Optional.">
                     <select name="category_id" id="category_id" class="admin-select">
-                        <option value="">—</option>
+                        <option value="">-</option>
                         @foreach ($categories as $c)
                             <option value="{{ $c->id }}" @selected(old('category_id') == $c->id)>{{ $c->name }}</option>
                         @endforeach

@@ -70,7 +70,7 @@ final class SocProgrammePageDefinitions
         return [
             'slug' => 'certificate-in-chaplaincy',
             'title' => 'Certificate in Chaplaincy',
-            'excerpt' => 'Level 5 introductory chaplaincy qualification examined by CDACC — competency-based formation at Tenwek Hospital College for hospital, education, and institutional ministry.',
+            'excerpt' => 'Level 5 introductory chaplaincy qualification examined by CDACC - competency-based formation at Tenwek Hospital College for hospital, education, and institutional ministry.',
             'body' => <<<'HTML'
 <p><strong>Certificate in Chaplaincy (Level 5)</strong> at Tenwek Hospital College is an introductory, competency-based pathway for men and women preparing to serve as chaplains in hospitals, schools, colleges, uniformed services, and other institutions. The qualification is examined by the <strong>Curriculum Development, Assessment and Certification Council (CDACC)</strong> and sits within Kenya’s Technical and Vocational Education and Training (TVET) framework, alongside the School of Chaplaincy’s wider mission to integrate spiritual care with real-world clinical and community contexts.</p>
 
@@ -83,7 +83,7 @@ final class SocProgrammePageDefinitions
 </ul>
 
 <h2>What you will learn</h2>
-<p>Competency-based chaplaincy training focuses on what you can <em>do</em> in context—not only what you know. While exact unit titles follow the approved curriculum, learners typically grow in areas such as:</p>
+<p>Competency-based chaplaincy training focuses on what you can <em>do</em> in context-not only what you know. While exact unit titles follow the approved curriculum, learners typically grow in areas such as:</p>
 <ul>
 <li>Pastoral presence, listening, and crisis response in fast-paced environments</li>
 <li>Ethical and respectful engagement across diverse faith backgrounds and worldviews</li>
@@ -93,16 +93,16 @@ final class SocProgrammePageDefinitions
 <p>The Certificate is designed as a <strong>build-up to the Diploma in Chaplaincy (Level 6)</strong>, so you can deepen formation and responsibility over time.</p>
 
 <h2>Why study at Tenwek</h2>
-<p>The School of Chaplaincy is embedded in the Tenwek Hospital College ecosystem—minutes from bedside realities, multidisciplinary rounds, and the spiritual needs of patients, families, and staff. That proximity shapes case-based learning, supervised reflection, and a community where theology meets the stress, grief, and hope found in African healthcare and education settings.</p>
+<p>The School of Chaplaincy is embedded in the Tenwek Hospital College ecosystem-minutes from bedside realities, multidisciplinary rounds, and the spiritual needs of patients, families, and staff. That proximity shapes case-based learning, supervised reflection, and a community where theology meets the stress, grief, and hope found in African healthcare and education settings.</p>
 
 <h2>Entry requirements and intakes</h2>
 <p>Standard entry for the Certificate is <strong>KCSE D (Plain) and above</strong>. Admissions typically follow <strong>January, May, and September</strong> intakes; confirm current dates and any document checklist on our <a class="font-semibold text-thc-royal hover:underline" href="__ADMISSIONS__">admissions page</a>.</p>
 
 <h2>Fees and finance</h2>
-<p>Tuition and trimester-related charges are published on the <a class="font-semibold text-thc-royal hover:underline" href="__FEES__">fees page</a>. The school uses designated bank and M-Pesa channels—plan ahead so you can secure your place before each intake closes.</p>
+<p>Tuition and trimester-related charges are published on the <a class="font-semibold text-thc-royal hover:underline" href="__FEES__">fees page</a>. The school uses designated bank and M-Pesa channels-plan ahead so you can secure your place before each intake closes.</p>
 
 <h2>How to apply</h2>
-<p>If you are ready to begin, complete the <a class="font-semibold text-thc-royal hover:underline" href="__REGISTER__">online registration</a> for the Certificate stream. For broader questions—documents, prerequisites, or campus life—browse <a class="font-semibold text-thc-royal hover:underline" href="__FAQS__">FAQs</a> or contact the School of Chaplaincy office using the details in the site header.</p>
+<p>If you are ready to begin, complete the <a class="font-semibold text-thc-royal hover:underline" href="__REGISTER__">online registration</a> for the Certificate stream. For broader questions-documents, prerequisites, or campus life-browse <a class="font-semibold text-thc-royal hover:underline" href="__FAQS__">FAQs</a> or contact the School of Chaplaincy office using the details in the site header.</p>
 HTML,
             'seo_title' => 'Certificate in Chaplaincy (Level 5) | School of Chaplaincy | Tenwek Hospital College',
             'seo_description' => 'CDACC Level 5 Certificate in Chaplaincy at Tenwek Hospital College: competency-based training for hospital, school & institutional chaplaincy. Entry KCSE D+. Apply online.',
@@ -141,7 +141,7 @@ HTML,
 <p>Studying at Tenwek means learning beside a busy referral hospital, vibrant college community, and partners who value whole-person care. Case discussions draw from real (appropriately anonymised) scenarios, and faculty challenge learners to connect Scripture, culture, and professional standards.</p>
 
 <h2>Fees, intakes, and admissions</h2>
-<p>Review current trimester fees on the <a class="font-semibold text-thc-royal hover:underline" href="__FEES__">fees page</a> and intake calendars on <a class="font-semibold text-thc-royal hover:underline" href="__ADMISSIONS__">admissions</a>. January, May, and September remain common entry points—confirm the active cycle before you apply.</p>
+<p>Review current trimester fees on the <a class="font-semibold text-thc-royal hover:underline" href="__FEES__">fees page</a> and intake calendars on <a class="font-semibold text-thc-royal hover:underline" href="__ADMISSIONS__">admissions</a>. January, May, and September remain common entry points-confirm the active cycle before you apply.</p>
 
 <h2>Next steps</h2>
 <p>Start with the admissions checklist, then submit the required forms and supporting documents. If you are exploring whether chaplaincy is your calling, read the <a class="font-semibold text-thc-royal hover:underline" href="__PROGRAMMES__">academic programmes overview</a> and reach out to the registrar with specific questions.</p>
@@ -161,9 +161,9 @@ HTML,
         return [
             'slug' => 'healthcare-chaplaincy',
             'title' => 'Healthcare Chaplaincy',
-            'excerpt' => 'Spiritual care in hospitals, hospices, and healing environments — how Tenwek forms chaplains for bedside ministry, ethics rounds, and family support.',
+            'excerpt' => 'Spiritual care in hospitals, hospices, and healing environments - how Tenwek forms chaplains for bedside ministry, ethics rounds, and family support.',
             'body' => <<<'HTML'
-<p><strong>Healthcare chaplaincy</strong> brings compassionate spiritual care to patients, families, and staff in hospitals, hospices, clinics, and community health programmes. At Tenwek Hospital College, healthcare chaplaincy is not an abstract specialty—it is learned in the shadow of active wards, busy outpatient corridors, and the pastoral needs that arise when people face birth, illness, trauma, and death.</p>
+<p><strong>Healthcare chaplaincy</strong> brings compassionate spiritual care to patients, families, and staff in hospitals, hospices, clinics, and community health programmes. At Tenwek Hospital College, healthcare chaplaincy is not an abstract specialty-it is learned in the shadow of active wards, busy outpatient corridors, and the pastoral needs that arise when people face birth, illness, trauma, and death.</p>
 
 <h2>What healthcare chaplains do</h2>
 <ul>
@@ -197,7 +197,7 @@ HTML,
         return [
             'slug' => 'military-chaplaincy',
             'title' => 'Military Chaplaincy',
-            'excerpt' => 'Counseling and spiritual support for service members and families — competencies developed through Tenwek’s CDACC chaplaincy programmes.',
+            'excerpt' => 'Counseling and spiritual support for service members and families - competencies developed through Tenwek’s CDACC chaplaincy programmes.',
             'body' => <<<'HTML'
 <p><strong>Military chaplaincy</strong> provides spiritual readiness, moral counsel, and pastoral care for personnel and families navigating deployment, transition, trauma, and loss. While national structures differ, the core skills mirror those of institutional chaplaincy elsewhere: trustworthy presence, ethical guidance, crisis intervention, and liaison with command teams.</p>
 
@@ -231,7 +231,7 @@ HTML,
         return [
             'slug' => 'educational-chaplaincy',
             'title' => 'Educational Chaplaincy',
-            'excerpt' => 'Chaplaincy in schools, colleges, and universities — spiritual care for students, educators, and staff across the education lifecycle.',
+            'excerpt' => 'Chaplaincy in schools, colleges, and universities - spiritual care for students, educators, and staff across the education lifecycle.',
             'body' => <<<'HTML'
 <p><strong>Educational chaplaincy</strong> serves learners and educators from primary school through higher education. Chaplains nurture spiritual formation, mediate conflict, support student wellbeing initiatives, and help institutions honour both missional identity and pluralism in the classroom.</p>
 
@@ -264,7 +264,7 @@ HTML,
         return [
             'slug' => 'police-chaplaincy',
             'title' => 'Police Chaplaincy',
-            'excerpt' => 'Spiritual care and counseling for police officers, staff, and families — grounded in Tenwek’s competency-based chaplaincy curriculum.',
+            'excerpt' => 'Spiritual care and counseling for police officers, staff, and families - grounded in Tenwek’s competency-based chaplaincy curriculum.',
             'body' => <<<'HTML'
 <p><strong>Police chaplaincy</strong> offers spiritual support, crisis ministry, and confidential pastoral care for law-enforcement personnel, civilian staff, and their households. Chaplains often respond after critical incidents, line-of-duty trauma, and cumulative stress that affects entire families.</p>
 
@@ -277,7 +277,7 @@ HTML,
 </ul>
 
 <h2>How Tenwek prepares police chaplains</h2>
-<p>Learners pursue the <a class="font-semibold text-thc-royal hover:underline" href="__CERTIFICATE__">Certificate</a> or <a class="font-semibold text-thc-royal hover:underline" href="__DIPLOMA__">Diploma in Chaplaincy</a>, using the <a class="font-semibold text-thc-royal hover:underline" href="__PROGRAMMES__">specialised areas</a> catalogue—including police chaplaincy—to contextualise assignments. Faculty emphasise confidentiality, cultural competence, and sustainable boundaries for high-demand roles.</p>
+<p>Learners pursue the <a class="font-semibold text-thc-royal hover:underline" href="__CERTIFICATE__">Certificate</a> or <a class="font-semibold text-thc-royal hover:underline" href="__DIPLOMA__">Diploma in Chaplaincy</a>, using the <a class="font-semibold text-thc-royal hover:underline" href="__PROGRAMMES__">specialised areas</a> catalogue-including police chaplaincy-to contextualise assignments. Faculty emphasise confidentiality, cultural competence, and sustainable boundaries for high-demand roles.</p>
 
 <h2>Admissions and fees</h2>
 <p>Review <a class="font-semibold text-thc-royal hover:underline" href="__ADMISSIONS__">admissions</a> for intake cycles and documentation, and the <a class="font-semibold text-thc-royal hover:underline" href="__FEES__">fees page</a> for the latest trimester schedule. Certificate students may launch the process through <a class="font-semibold text-thc-royal hover:underline" href="__REGISTER__">online registration</a>.</p>
@@ -297,7 +297,7 @@ HTML,
         return [
             'slug' => 'prison-chaplaincy',
             'title' => 'Prison (correctional ministry) chaplaincy',
-            'excerpt' => 'Pastoral care in prisons, borstals, rehabilitation schools, and probation — restorative chaplaincy through Tenwek’s CDACC pathways.',
+            'excerpt' => 'Pastoral care in prisons, borstals, rehabilitation schools, and probation - restorative chaplaincy through Tenwek’s CDACC pathways.',
             'body' => <<<'HTML'
 <p><strong>Prison and correctional ministry chaplaincy</strong> serves inmates, correctional officers, and families affected by incarceration. Chaplains facilitate worship, discipleship, restorative encounters, and re-entry planning while navigating security protocols and diverse religious rights.</p>
 
@@ -309,7 +309,7 @@ HTML,
 </ul>
 
 <h2>Formation focus</h2>
-<p>Tenwek’s programmes cultivate resilience, ethical clarity, and trauma-aware communication—skills essential when ministering in high-control environments. Learners connect classroom theory with supervised practice and case studies drawn from African correctional realities.</p>
+<p>Tenwek’s programmes cultivate resilience, ethical clarity, and trauma-aware communication-skills essential when ministering in high-control environments. Learners connect classroom theory with supervised practice and case studies drawn from African correctional realities.</p>
 
 <h2>Programme links</h2>
 <p>Start with the <a class="font-semibold text-thc-royal hover:underline" href="__PROGRAMMES__">academic programmes</a> overview, then choose the <a class="font-semibold text-thc-royal hover:underline" href="__CERTIFICATE__">Certificate</a> or <a class="font-semibold text-thc-royal hover:underline" href="__DIPLOMA__">Diploma</a>. Confirm entry criteria on <a class="font-semibold text-thc-royal hover:underline" href="__ADMISSIONS__">admissions</a>, tuition on <a class="font-semibold text-thc-royal hover:underline" href="__FEES__">fees</a>, and common questions on <a class="font-semibold text-thc-royal hover:underline" href="__FAQS__">FAQs</a>. Certificate applicants may <a class="font-semibold text-thc-royal hover:underline" href="__REGISTER__">register online</a>.</p>
@@ -334,7 +334,7 @@ HTML,
 <p>The School of Chaplaincy continually discerns how to expand <strong>specialty training</strong> and advanced credentials that keep pace with Kenya’s TVET reforms and the global growth of professional chaplaincy. Future programming may include deeper clinical pastoral education, digital chaplaincy competencies, and new collaborations with regional seminaries and healthcare systems.</p>
 
 <h2>Why this matters</h2>
-<p>Chaplains today serve in aerospace, corporate, humanitarian, and cyber-enabled ministries—not only traditional hospitals and schools. Tenwek’s leadership monitors CDACC guidance, employer expectations, and student feedback to prioritise the next wave of courses.</p>
+<p>Chaplains today serve in aerospace, corporate, humanitarian, and cyber-enabled ministries-not only traditional hospitals and schools. Tenwek’s leadership monitors CDACC guidance, employer expectations, and student feedback to prioritise the next wave of courses.</p>
 
 <h2>Stay connected</h2>
 <p>While future offerings are under development, you can still pursue the <a class="font-semibold text-thc-royal hover:underline" href="__CERTIFICATE__">Certificate</a>, <a class="font-semibold text-thc-royal hover:underline" href="__DIPLOMA__">Diploma</a>, and every <a class="font-semibold text-thc-royal hover:underline" href="__PROGRAMMES__">specialised area</a> currently advertised. Subscribe to college news, monitor the admissions desk for announcements, and direct specific ideas to the School of Chaplaincy registrar.</p>

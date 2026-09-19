@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — Board &amp; management">
+<x-layouts.admin header="SOC - Board &amp; management">
     <p class="mb-4 max-w-3xl text-sm leading-relaxed text-thc-text/85">
         People listed here (when published) drive the
         <a href="{{ url('/soc/board-and-management-team') }}" class="admin-link" target="_blank" rel="noopener">board &amp; management</a>
@@ -30,7 +30,7 @@
                                     @php($thumb = \App\Support\Soc\SocLandingRepository::publicMediaUrl($m->image_path) ?? asset($m->image_path))
                                     <img src="{{ $thumb }}" alt="" class="h-10 w-8 rounded object-cover ring-1 ring-thc-navy/10" width="32" height="40" loading="lazy" decoding="async">
                                 @else
-                                    <span class="text-thc-text/40">—</span>
+                                    <span class="text-thc-text/40">-</span>
                                 @endif
                             </td>
                             <td class="font-medium text-thc-navy">{{ $m->name }}</td>

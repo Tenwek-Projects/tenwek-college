@@ -5,27 +5,27 @@
     <dl class="grid gap-4 rounded-xl border border-thc-navy/10 bg-thc-navy/[0.02] p-5 text-sm sm:grid-cols-2 sm:p-6">
         <div class="sm:col-span-2">
             <dt class="text-xs font-bold uppercase tracking-wider text-thc-text/55">Full name</dt>
-            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.name || '–'"></dd>
+            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.name || '-'"></dd>
         </div>
         <div>
             <dt class="text-xs font-bold uppercase tracking-wider text-thc-text/55">Email</dt>
-            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.email || '–'"></dd>
+            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.email || '-'"></dd>
         </div>
         <div>
             <dt class="text-xs font-bold uppercase tracking-wider text-thc-text/55">Mobile</dt>
-            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.mobile || '–'"></dd>
+            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.mobile || '-'"></dd>
         </div>
         <div class="sm:col-span-2">
             <dt class="text-xs font-bold uppercase tracking-wider text-thc-text/55">Programme</dt>
-            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.programme || '–'"></dd>
+            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.programme || '-'"></dd>
         </div>
         <div>
             <dt class="text-xs font-bold uppercase tracking-wider text-thc-text/55">Mode of study</dt>
-            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.study_mode || '–'"></dd>
+            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.study_mode || '-'"></dd>
         </div>
         <div>
             <dt class="text-xs font-bold uppercase tracking-wider text-thc-text/55">Campus</dt>
-            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.campus || '–'"></dd>
+            <dd class="mt-1 font-medium text-thc-navy" x-text="summary.campus || '-'"></dd>
         </div>
     </dl>
 </div>

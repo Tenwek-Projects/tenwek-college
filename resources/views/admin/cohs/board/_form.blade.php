@@ -34,7 +34,7 @@
         <div class="mt-3 flex flex-wrap items-end gap-4">
             <img src="{{ $imgUrl }}" alt="" class="h-32 w-24 rounded-lg border border-thc-navy/10 object-cover shadow-sm" width="96" height="128" loading="lazy" decoding="async">
             <div class="space-y-2">
-                <p class="admin-hint">Current file: <span class="admin-code">{{ $board->image_path }}</span> — choose a new file above to replace it.</p>
+                <p class="admin-hint">Current file: <span class="admin-code">{{ $board->image_path }}</span> - choose a new file above to replace it.</p>
                 <label class="admin-check-row">
                     <input type="checkbox" name="remove_image" value="1" class="admin-checkbox">
                     <span>Remove photo</span>

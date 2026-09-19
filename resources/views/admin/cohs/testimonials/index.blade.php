@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — Testimonials">
+<x-layouts.admin header="COHS - Testimonials">
     <div class="admin-toolbar">
         <div class="admin-toolbar-actions">
             <a href="{{ route('admin.cohs.testimonials.create') }}" class="admin-btn-primary admin-btn-sm">Add testimonial</a>
@@ -43,7 +43,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="admin-table-empty">No testimonials — site will use config defaults.</td>
+                            <td colspan="5" class="admin-table-empty">No testimonials - site will use config defaults.</td>
                         </tr>
                     @endforelse
                 </tbody>

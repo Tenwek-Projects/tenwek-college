@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — Edit event">
+<x-layouts.admin header="SOC - Edit event">
     <form method="post" action="{{ route('admin.soc.events.update', $event) }}" enctype="multipart/form-data" class="admin-page-narrow">
         <div class="admin-card p-6 sm:p-8">
             @csrf

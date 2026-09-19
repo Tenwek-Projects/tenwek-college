@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — Pages">
+<x-layouts.admin header="SOC - Pages">
     <div class="admin-toolbar">
         <a href="{{ route('admin.soc.dashboard') }}" class="admin-btn-ghost admin-btn-sm">← SOC CMS</a>
     </div>

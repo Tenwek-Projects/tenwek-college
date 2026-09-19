@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — FAQ page intro" title="FAQ intro | SOC CMS | {{ config('tenwek.name') }}">
+<x-layouts.admin header="SOC - FAQ page intro" title="FAQ intro | SOC CMS | {{ config('tenwek.name') }}">
     <form method="post" action="{{ route('admin.soc.faqs.intro.update') }}" class="admin-page-wide">
         @csrf
         @method('PUT')

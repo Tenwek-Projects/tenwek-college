@@ -60,7 +60,7 @@
 
     <div class="grid gap-5 lg:grid-cols-3">
         <div>
-            <label for="ref_pastor_name" class="mb-1.5 block text-sm font-medium text-thc-navy">Pastor of your church — name <span class="text-red-600">*</span></label>
+            <label for="ref_pastor_name" class="mb-1.5 block text-sm font-medium text-thc-navy">Pastor of your church - name <span class="text-red-600">*</span></label>
             <input id="ref_pastor_name" type="text" name="ref_pastor_name" value="{{ old('ref_pastor_name') }}" required maxlength="200" class="cohs-app-input">
         </div>
         <div>

@@ -14,7 +14,7 @@
     @include('schools.soc.register._textarea', ['name' => 'languages_other', 'label' => 'Other languages spoken or written', 'rows' => 3])
     @include('schools.soc.register._textarea', [
         'name' => 'english_competence',
-        'label' => 'English competence (required if your prior certificates are not in English — describe IELTS, school medium, or attach proof on the last step)',
+        'label' => 'English competence (required if your prior certificates are not in English - describe IELTS, school medium, or attach proof on the last step)',
         'rows' => 3,
         'required' => false,
     ])

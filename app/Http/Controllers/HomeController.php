@@ -21,7 +21,7 @@ class HomeController extends Controller
                 ],
                 [
                     'question' => 'Where is Tenwek Hospital College located?',
-                    'answer' => 'The college is located in Bomet County, Kenya, alongside Tenwek Hospital — a Level 5 teaching and referral mission hospital.',
+                    'answer' => 'The college is located in Bomet County, Kenya, alongside Tenwek Hospital - a Level 5 teaching and referral mission hospital.',
                 ],
             ],
         ]);

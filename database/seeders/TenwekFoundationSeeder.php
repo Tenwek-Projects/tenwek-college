@@ -132,7 +132,7 @@ class TenwekFoundationSeeder extends Seeder
             ['slug' => 'academics', 'title' => 'Academics', 'excerpt' => 'Rigorous curricula blending classroom excellence with bedside learning at a Level 5 teaching hospital.'],
             ['slug' => 'programs', 'title' => 'Programmes', 'excerpt' => 'Explore nursing, perfusion, critical care, community health nursing, chaplaincy, and continuing professional development pathways.'],
             ['slug' => 'student-life', 'title' => 'Student life', 'excerpt' => 'Spiritual formation, student support, campus culture, and community living in Bomet County.'],
-            ['slug' => 'clinical-training', 'title' => 'Clinical training', 'excerpt' => 'Clinical immersion at Tenwek Hospital — from general wards to specialised centres of excellence.'],
+            ['slug' => 'clinical-training', 'title' => 'Clinical training', 'excerpt' => 'Clinical immersion at Tenwek Hospital - from general wards to specialised centres of excellence.'],
             ['slug' => 'governance', 'title' => 'Governance', 'excerpt' => 'Institutional accountability, academic policies, and alignment with regulatory partners in Kenya.'],
             ['slug' => 'parents', 'title' => 'Parents & guardians', 'excerpt' => 'Resources for families supporting students through healthcare education.'],
             ['slug' => 'faculty-resources', 'title' => 'Faculty & staff', 'excerpt' => 'Internal pathways for educators and administrators serving Tenwek Hospital College.'],
@@ -181,7 +181,7 @@ HTML;
             ['slug' => 'fee', 'title' => 'Fees', 'excerpt' => 'Fee information for School of Chaplaincy students.'],
             ['slug' => 'gallery', 'title' => 'Gallery', 'excerpt' => 'Photo gallery from the School of Chaplaincy.'],
             ['slug' => 'message-from-the-principal', 'title' => 'Message from the principal', 'excerpt' => 'A welcome from the principal: our calling, context, and invitation to study chaplaincy at Tenwek.'],
-            ['slug' => 'our-history', 'title' => 'Our history', 'excerpt' => 'From the L. Nelson Bell Chaplaincy Training School (1991) to today’s competency-based programmes and TVET – CDACC partnership.'],
+            ['slug' => 'our-history', 'title' => 'Our history', 'excerpt' => 'From the L. Nelson Bell Chaplaincy Training School (1991) to today’s competency-based programmes and TVET - CDACC partnership.'],
             ['slug' => 'strategic-partners', 'title' => 'Strategic Partners', 'excerpt' => 'Africa Gospel Church, Samaritan’s Purse, World Gospel Mission, Friends of Tenwek: partners who walk with us in quality, affordable healthcare and formation.'],
         ];
 

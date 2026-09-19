@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — Mission &amp; vision">
+<x-layouts.admin header="SOC - Mission &amp; vision">
     <form method="post" action="{{ route('admin.soc.mission-vision.update') }}" class="admin-page-narrow">
         @csrf
         @method('PUT')

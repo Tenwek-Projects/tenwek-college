@@ -20,7 +20,7 @@
         ? $topBar['portal_url']
         : route('downloads.index', ['school' => $school->slug]);
     $topEmail = $topBar['email'] ?? 'soc@tenwekhosp.org';
-    $topCallDisplay = $topBar['call_display'] ?? '+254 728 091 900 – Ext 1315/1334';
+    $topCallDisplay = $topBar['call_display'] ?? '+254 728 091 900 - Ext 1315/1334';
     $topCallTel = preg_replace('/[^\d+]/', '', $topBar['call_tel'] ?? '+254728091900');
     $aboutMega = collect($mainNav)->first(fn ($i) => ! empty($i['children']));
     $socMegaId = 'soc-about';

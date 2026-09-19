@@ -1,10 +1,10 @@
-<x-layouts.admin header="SOC — Media library">
+<x-layouts.admin header="SOC - Media library">
     <div class="admin-card mb-10 max-w-3xl p-6" x-data="socMediaDropzone()">
         <form method="post" action="{{ route('admin.soc.media.store') }}" enctype="multipart/form-data" class="admin-form-stack-tight">
             @csrf
             <p class="text-sm font-semibold text-thc-navy">Upload</p>
             <p class="admin-hint -mt-2">
-                Drop many files at once or click to browse. JPEG, PNG, GIF, WebP, SVG, and PDF — up to 12MB each, 40 files per batch.
+                Drop many files at once or click to browse. JPEG, PNG, GIF, WebP, SVG, and PDF - up to 12MB each, 40 files per batch.
                 Large JPEG/PNG/WebP may be downscaled (max width 2400px) when PHP GD is available.
                 Image files (not PDF) are listed first on the public <a href="{{ url('/soc/gallery') }}" class="admin-link" target="_blank" rel="noopener">/soc/gallery</a> page automatically.
             </p>

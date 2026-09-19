@@ -19,7 +19,7 @@
     @if ($post->exists && $post->featured_image_path)
         <div class="mt-3 flex flex-wrap items-end gap-4">
             <img src="{{ $post->featuredImagePublicUrl() }}" alt="" class="h-28 max-w-[12rem] rounded-lg border border-thc-navy/10 object-cover shadow-sm" loading="lazy" decoding="async" width="192" height="112">
-            <p class="admin-hint">Current image — choose a new file to replace it.</p>
+            <p class="admin-hint">Current image - choose a new file to replace it.</p>
         </div>
     @endif
 </x-admin.ui.group>

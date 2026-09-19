@@ -1,7 +1,7 @@
 @php
     use App\Support\Soc\SocLandingRepository;
 @endphp
-<x-layouts.admin header="SOC — Strategic partners (images)">
+<x-layouts.admin header="SOC - Strategic partners (images)">
     <form method="post" action="{{ route('admin.soc.strategic-partners.images.update') }}" enctype="multipart/form-data" class="admin-page-narrow">
         @csrf
         @method('PUT')
@@ -43,7 +43,7 @@
                                 <img src="{{ $preview }}" alt="" class="max-h-24 w-auto rounded border border-thc-border/40 bg-white object-contain">
                             </div>
                         @else
-                            <p class="admin-hint">No image set — default layout may hide this block or use a placeholder.</p>
+                            <p class="admin-hint">No image set - default layout may hide this block or use a placeholder.</p>
                         @endif
                         <x-admin.ui.group label="Upload image" for="partner_image_{{ $i }}" name="partner_image.{{ $i }}">
                             <input type="file" name="partner_image[{{ $i }}]" id="partner_image_{{ $i }}" accept="image/*" class="admin-file-input">

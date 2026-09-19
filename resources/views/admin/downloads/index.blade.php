@@ -31,8 +31,8 @@
                     @foreach($downloads as $dl)
                         <tr>
                             <td class="font-medium text-thc-navy">{{ $dl->title }}</td>
-                            <td class="hidden text-thc-text/90 sm:table-cell">{{ $dl->school?->name ?? '—' }}</td>
-                            <td class="hidden text-thc-text/90 md:table-cell">{{ $dl->category?->name ?? '—' }}</td>
+                            <td class="hidden text-thc-text/90 sm:table-cell">{{ $dl->school?->name ?? '-' }}</td>
+                            <td class="hidden text-thc-text/90 md:table-cell">{{ $dl->category?->name ?? '-' }}</td>
                             <td>
                                 @if($dl->is_active && $dl->published_at && $dl->published_at->isPast())
                                     <span class="rounded-full bg-thc-royal/12 px-2 py-0.5 text-xs font-medium text-thc-navy">Live</span>

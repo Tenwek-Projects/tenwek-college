@@ -33,9 +33,9 @@ return [
      * College and school details are pulled from soc_landing.contact, cohs_landing.contact_page, and email_public.
      */
     'contact_directory' => [
-        'intro' => 'Tenwek Hospital College sits alongside Tenwek Hospital in Bomet. Use the directory below to reach the School of Chaplaincy, the College of Health Sciences, the main hospital, or the Cardiothoracic Centre—or send us a message and we will route it appropriately.',
+        'intro' => 'Tenwek Hospital College sits alongside Tenwek Hospital in Bomet. Use the directory below to reach the School of Chaplaincy, the College of Health Sciences, the main hospital, or the Cardiothoracic Centre-or send us a message and we will route it appropriately.',
         'hospital' => [
-            'tagline' => 'Level 5 teaching and referral hospital—clinical home for our health sciences students and the wider community.',
+            'tagline' => 'Level 5 teaching and referral hospital-clinical home for our health sciences students and the wider community.',
             'phone' => env('TENWEK_HOSPITAL_PHONE', '+254 728 091 900'),
             'email' => env('TENWEK_HOSPITAL_EMAIL'),
         ],
@@ -62,7 +62,7 @@ return [
     'hero' => [
         'credibility' => env('TENWEK_HERO_CREDIBILITY', 'Est. 1937 · Level 5 Teaching & Referral · Bomet, Kenya'),
         'image' => env('TENWEK_HERO_IMAGE', 'ctc.jpg'),
-        'image_alt' => env('TENWEK_HERO_IMAGE_ALT', 'Tenwek Hospital College — clinical and academic excellence in Bomet, Kenya'),
+        'image_alt' => env('TENWEK_HERO_IMAGE_ALT', 'Tenwek Hospital College - clinical and academic excellence in Bomet, Kenya'),
     ],
 
     'landing' => [
@@ -75,7 +75,7 @@ return [
         'pillars' => [
             [
                 'title' => 'Clinical training',
-                'description' => 'Hands-on education anchored at Tenwek Hospital — a Level 5 teaching and referral mission hospital serving Kenya and the wider region.',
+                'description' => 'Hands-on education anchored at Tenwek Hospital - a Level 5 teaching and referral mission hospital serving Kenya and the wider region.',
                 'route' => 'pages.show',
                 'params' => ['slug' => 'clinical-training'],
                 'cta' => 'Learn more',
@@ -89,7 +89,7 @@ return [
             ],
             [
                 'title' => 'Downloads hub',
-                'description' => 'Admission packs, clinical placement forms, and student resources — searchable and kept current.',
+                'description' => 'Admission packs, clinical placement forms, and student resources - searchable and kept current.',
                 'route' => 'downloads.index',
                 'params' => [],
                 'cta' => 'Browse downloads',
@@ -158,7 +158,7 @@ return [
             'title' => 'The Tenwek Hospital College School of Chaplaincy',
             'lead' => 'Excellence in healthcare chaplaincy, forming leaders who serve the whole person.',
             'paragraphs' => [
-                'The Tenwek Hospital College – School of Chaplaincy was established in 1991 as the L. Nelson Bell Chaplaincy Training School. Dr. Ernie Steury, who was the first doctor to serve at Tenwek Hospital, realized that the institution needed full-time chaplains to serve alongside the dedicated medical team.',
+                'The Tenwek Hospital College - School of Chaplaincy was established in 1991 as the L. Nelson Bell Chaplaincy Training School. Dr. Ernie Steury, who was the first doctor to serve at Tenwek Hospital, realized that the institution needed full-time chaplains to serve alongside the dedicated medical team.',
                 'There was no college or university offering training in chaplaincy at the time. That gap gave birth to the vision of opening a chaplaincy school at Tenwek Hospital: a vision we continue to live out today.',
             ],
         ],
@@ -167,10 +167,10 @@ return [
          */
         'about_page' => [
             'kicker' => 'Tenwek Hospital College',
-            /** Brand purple — matches legacy #8265ae / --color-thc-royal */
+            /** Brand purple - matches legacy #8265ae / --color-thc-royal */
             'accent' => '#8265ae',
             'hero_image' => env('TENWEK_SOC_ABOUT_IMAGE', 'about.jpg'),
-            'hero_image_alt' => env('TENWEK_SOC_ABOUT_IMAGE_ALT', 'Tenwek Hospital College — School of Chaplaincy'),
+            'hero_image_alt' => env('TENWEK_SOC_ABOUT_IMAGE_ALT', 'Tenwek Hospital College - School of Chaplaincy'),
             'core_values_heading' => 'Our core values',
             'programmes_cta_label' => 'Our programmes',
             'core_values' => [
@@ -218,9 +218,9 @@ return [
         'our_history' => [
             'kicker' => 'About School of Chaplaincy',
             'intro_paragraphs' => [
-                'The Tenwek Hospital College – School of Chaplaincy was established in 1991 as the L. Nelson Bell Chaplaincy Training School. Dr. Ernie Steury, who was the first doctor to serve at Tenwek Hospital, realised that the institution needed full-time chaplains to serve alongside the dedicated medical team. There was no college or university offering training in chaplaincy at the time, and that gave birth to the vision of opening one at Tenwek Hospital.',
+                'The Tenwek Hospital College - School of Chaplaincy was established in 1991 as the L. Nelson Bell Chaplaincy Training School. Dr. Ernie Steury, who was the first doctor to serve at Tenwek Hospital, realised that the institution needed full-time chaplains to serve alongside the dedicated medical team. There was no college or university offering training in chaplaincy at the time, and that gave birth to the vision of opening one at Tenwek Hospital.',
                 'Over 29 years later, the school had trained more than 200 students from various African nations including Rwanda, Zambia, Zimbabwe, Malawi, Uganda, Tanzania, Ghana, Nigeria, Madagascar and the Democratic Republic of Congo (DRC).',
-                'Due to changing chaplaincy needs, the school has redesigned and upgraded its curriculum. This ensures consistency with the ongoing development of competency-based curriculum in all institutions of learning in Kenya. The school is working closely with Technical and Vocational Education and Training – Curriculum Development, Assessment and Certification Council (TVET – CDACC) in the development of Certificate and Diploma in Chaplaincy curricula that is nearing completion. The school envisions developing other areas of specialisation in chaplaincy alongside further study levels to advance chaplaincy as a field of professional growth.',
+                'Due to changing chaplaincy needs, the school has redesigned and upgraded its curriculum. This ensures consistency with the ongoing development of competency-based curriculum in all institutions of learning in Kenya. The school is working closely with Technical and Vocational Education and Training - Curriculum Development, Assessment and Certification Council (TVET - CDACC) in the development of Certificate and Diploma in Chaplaincy curricula that is nearing completion. The school envisions developing other areas of specialisation in chaplaincy alongside further study levels to advance chaplaincy as a field of professional growth.',
             ],
             'milestones' => [
                 [
@@ -229,14 +229,14 @@ return [
                     'body' => 'The School of Chaplaincy opens at Tenwek Hospital: the first dedicated response to the need for full-time, professionally formed chaplains alongside the medical team.',
                 ],
                 [
-                    'year' => '1991–2020',
+                    'year' => '1991-2020',
                     'title' => 'Formation across Africa',
                     'body' => 'In the decades following its founding, the school trained more than 200 students from Rwanda, Zambia, Zimbabwe, Malawi, Uganda, Tanzania, Ghana, Nigeria, Madagascar and the Democratic Republic of Congo (DRC), among others.',
                 ],
                 [
                     'year' => 'Today',
-                    'title' => 'Competency-based curriculum & TVET – CDACC',
-                    'body' => 'The curriculum has been redesigned and upgraded to align with competency-based education in Kenya. The school partners with TVET – CDACC on Certificate and Diploma in Chaplaincy programmes nearing completion, with a vision for further specialisations and study levels.',
+                    'title' => 'Competency-based curriculum & TVET - CDACC',
+                    'body' => 'The curriculum has been redesigned and upgraded to align with competency-based education in Kenya. The school partners with TVET - CDACC on Certificate and Diploma in Chaplaincy programmes nearing completion, with a vision for further specialisations and study levels.',
                 ],
             ],
             'about_sidebar' => [
@@ -265,7 +265,7 @@ return [
             'belief' => 'We strongly believe that God has called some to be chaplains, and they are burning with great passion, as expressed by the great apostle:',
             'scripture' => [
                 'text' => 'To the Jew I became like a Jew, to win the Jews … To the weak I became weak, to win the weak. I have become all things to all people so that by all possible means some might be saved.',
-                'reference' => '1 Corinthians 9:19–22',
+                'reference' => '1 Corinthians 9:19-22',
             ],
             'invitation' => 'If these words resonate with you, or you know someone with such longings, the School of Chaplaincy is the place for you and for them. Come, and we will support your God-given calling to fruitfulness.',
         ],
@@ -665,7 +665,7 @@ return [
             'kicker' => 'Contact us',
             'location_lines' => [
                 'Silibwet Township, Bomet Central, Kenya',
-                'P.O. Box 39–20400, Bomet, Kenya',
+                'P.O. Box 39-20400, Bomet, Kenya',
                 'Tenwek Hospital College · School of Chaplaincy',
             ],
             'phones' => [
@@ -689,7 +689,7 @@ return [
         'welcome_image' => env('TENWEK_COHS_LANDING_WELCOME_IMAGE', 'images/image-2.jpg'),
         'map_embed_url' => env('TENWEK_COHS_MAP_EMBED_URL', 'https://maps.google.com/maps?q=-0.7792,35.3369&z=14&output=embed'),
         /**
-         * /cohs/contact-us — brochure contact + apply facts
+         * /cohs/contact-us - brochure contact + apply facts
          */
         'contact_page' => [
             'hero_kicker' => 'College of Health Sciences',
@@ -741,8 +741,24 @@ return [
                 'label' => 'Courses',
                 'mega_id' => 'cohs-courses',
                 'children' => [
-                    ['label' => 'Diploma in Nursing', 'slug' => 'diploma-in-nursing'],
-                    ['label' => 'Diploma in Clinical Medicine', 'slug' => 'diploma-in-clinical-medicine'],
+                    ['label' => 'Diploma in Nursing (KRCHN)', 'slug' => 'diploma-in-nursing'],
+                    ['label' => 'Diploma in Clinical Medicine & Surgery', 'slug' => 'diploma-in-clinical-medicine'],
+                    [
+                        'label' => 'Higher Diploma in Cardiovascular Perfusion',
+                        'route' => 'cohs.programme-application',
+                        'route_params' => ['form' => 'hd-cardiovascular-perfusion'],
+                    ],
+                    [
+                        'label' => 'HND Critical Care Nursing',
+                        'route' => 'cohs.programme-application',
+                        'route_params' => ['form' => 'critical-care-nursing'],
+                    ],
+                    [
+                        'label' => 'HND Trauma & Emergency Nursing',
+                        'route' => 'cohs.programme-application',
+                        'route_params' => ['form' => 'hnd-trauma-emergency'],
+                    ],
+                    ['label' => 'BLS & ACLS short courses', 'slug' => 'application-forms'],
                 ],
             ],
             ['label' => 'Social Life', 'slug' => 'social-life'],
@@ -784,7 +800,7 @@ return [
         'programmes_band' => [
             'kicker' => 'Programmes',
             'title' => 'Training for Christ\'s Service',
-            'intro' => 'Three-year diploma pathways, higher diplomas for practising clinicians and nurses, and life-saving short courses — all combining classroom learning, clinical practice, and Christian service.',
+            'intro' => 'Three-year diploma pathways, higher diplomas for practising clinicians and nurses, and life-saving short courses - all combining classroom learning, clinical practice, and Christian service.',
             'items' => [
                 [
                     'title' => 'Diploma in Nursing (KRCHN)',
@@ -855,7 +871,7 @@ return [
             'history_image_alt' => 'Nursing and clinical training at Tenwek Hospital College of Health Sciences',
             'history_heading' => 'Our history',
             'history_paragraphs' => [
-                'Tenwek Hospital College — School of Health Sciences has qualified nurses since 1987. The school offers the best training in healthcare, mentorship, and matters of spirituality. In 1999 it graduated its first class of registered Community Health Nurses, and in 2022 its first class of registered Clinical Medicine and Surgery.',
+                'Tenwek Hospital College - School of Health Sciences has qualified nurses since 1987. The school offers the best training in healthcare, mentorship, and matters of spirituality. In 1999 it graduated its first class of registered Community Health Nurses, and in 2022 its first class of registered Clinical Medicine and Surgery.',
                 'We offer a 3-year diploma in Kenya Registered Community Health Nursing (KRCHN) and a 3-year diploma in Clinical Medicine and Surgery, plus Higher National Diploma in Trauma and Emergency Nursing (KRT&EN), Higher Diploma in Cardiovascular Perfusion, and Higher National Diploma in Critical Care Nursing. Training combines classroom learning, clinical practice, and Christian service. The school is an affiliate of Africa Gospel Church.',
             ],
             'vision' => [
@@ -917,8 +933,8 @@ return [
                     'subject_rules' => [
                         'C in English or Kiswahili',
                         'C in Biology or Biological Sciences',
-                        'C– (minus) in Chemistry',
-                        'C– (minus) in either Mathematics, Physics, or Physical Sciences',
+                        'C- (minus) in Chemistry',
+                        'C- (minus) in either Mathematics, Physics, or Physical Sciences',
                     ],
                 ],
             ],
@@ -929,7 +945,7 @@ return [
                     ['label' => 'Clinical rounds', 'description' => 'Bedside training at Tenwek Hospital and partner sites.'],
                     ['label' => 'Community health', 'description' => 'Practical experience in communities around the college.'],
                 ],
-                'overview' => 'A 3-year diploma training programme for Basic Kenya Registered Community Health Nurse (KRCHN). Nursing graduates earn a diploma in nursing, having qualified as midwives, general nurses, and community health nurses — incorporating classroom learning, clinical practice, and Christian service.',
+                'overview' => 'A 3-year diploma training programme for Basic Kenya Registered Community Health Nurse (KRCHN). Nursing graduates earn a diploma in nursing, having qualified as midwives, general nurses, and community health nurses - incorporating classroom learning, clinical practice, and Christian service.',
                 'admissions' => [
                     'heading' => 'Admission requirements',
                     'lead' => 'Those interested in pursuing a Diploma in Nursing (KRCHN) must meet the requirements below.',
@@ -937,14 +953,14 @@ return [
                     'subject_rules' => [
                         'C in English or Kiswahili',
                         'C in Biology or Biological Sciences',
-                        'C– (minus) in Chemistry',
-                        'C– (minus) in either Mathematics, Physics, or Physical Sciences',
+                        'C- (minus) in Chemistry',
+                        'C- (minus) in either Mathematics, Physics, or Physical Sciences',
                     ],
                 ],
             ],
         ],
         /**
-         * /cohs/social-life — brochure student life
+         * /cohs/social-life - brochure student life
          */
         'social_life' => [
             'kicker' => 'Student life',
@@ -976,7 +992,7 @@ return [
             'hero_image' => env('TENWEK_COHS_SOCIAL_HERO', 'banner-nursing.jpg'),
         ],
         /**
-         * /cohs/facilities — brochure campus facts
+         * /cohs/facilities - brochure campus facts
          */
         'facilities' => [
             'kicker' => 'Campus',
@@ -1011,7 +1027,7 @@ return [
             'kicker' => 'Contact us',
             'location_lines' => [
                 'Silibwet Township, Bomet Central, Kenya',
-                'P.O. Box 39–20400, Bomet, Kenya',
+                'P.O. Box 39-20400, Bomet, Kenya',
                 'About 5 km from Bomet Town',
                 'Tenwek Hospital College · College of Health Sciences',
             ],

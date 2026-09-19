@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — About us page">
+<x-layouts.admin header="COHS - About us page">
     <form method="post" action="{{ route('admin.cohs.about-us.update') }}" enctype="multipart/form-data" class="admin-page-wide">
         @csrf
         @method('PUT')

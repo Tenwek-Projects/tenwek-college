@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — Academic programme groups">
+<x-layouts.admin header="SOC - Academic programme groups">
     @if (session('status'))
         <div class="admin-alert-success mb-4" role="status">{{ session('status') }}</div>
     @endif

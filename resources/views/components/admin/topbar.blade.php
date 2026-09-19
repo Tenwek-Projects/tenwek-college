@@ -87,7 +87,7 @@
         <button
             type="button"
             class="rounded-lg p-2 text-thc-navy/70 transition hover:bg-thc-navy/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-thc-royal"
-            title="Notifications — coming soon"
+            title="Notifications - coming soon"
             disabled
             aria-disabled="true"
         >

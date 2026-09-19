@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — Programmes band">
+<x-layouts.admin header="COHS - Programmes band">
     <form method="post" action="{{ route('admin.cohs.programmes-band.update') }}" class="admin-page-narrow">
         @csrf
         @method('PUT')

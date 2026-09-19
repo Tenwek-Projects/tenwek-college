@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — Hospital board members">
+<x-layouts.admin header="COHS - Hospital board members">
     <p class="mb-4 max-w-3xl text-sm leading-relaxed text-thc-text/85">
         Published members appear on the
         <a href="{{ route('schools.pages.show', [$cohs, 'about-us']) }}" class="admin-link" target="_blank" rel="noopener">About us</a>
@@ -41,7 +41,7 @@
                                     @php($thumb = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl($m->image_path) ?? asset($m->image_path))
                                     <img src="{{ $thumb }}" alt="" class="h-10 w-8 rounded object-cover ring-1 ring-thc-navy/10" width="32" height="40" loading="lazy" decoding="async">
                                 @else
-                                    <span class="text-thc-text/40">—</span>
+                                    <span class="text-thc-text/40">-</span>
                                 @endif
                             </td>
                             <td class="font-medium text-thc-navy">

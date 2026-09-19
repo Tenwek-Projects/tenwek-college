@@ -1,7 +1,7 @@
 @php
     $phoneJson = old('phone_rows_json', json_encode($contactPage['phone_rows'] ?? [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 @endphp
-<x-layouts.admin header="COHS — Contact page">
+<x-layouts.admin header="COHS - Contact page">
     <form method="post" action="{{ route('admin.cohs.contact.update') }}" class="admin-page-narrow">
         @csrf
         @method('PUT')

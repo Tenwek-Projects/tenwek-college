@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — FAQs" title="FAQs | SOC CMS | {{ config('tenwek.name') }}">
+<x-layouts.admin header="SOC - FAQs" title="FAQs | SOC CMS | {{ config('tenwek.name') }}">
     <div class="admin-page-wide">
         <div class="admin-toolbar">
             <div>
@@ -68,7 +68,7 @@
         </div>
 
         <p class="mt-6 text-xs text-thc-text/60">
-            Raw <span class="admin-code">faqs</span> JSON (kicker/intro merge) —
+            Raw <span class="admin-code">faqs</span> JSON (kicker/intro merge) -
             <a href="{{ route('admin.soc.json.edit', 'faqs') }}" class="admin-link">Advanced editor</a>
         </p>
     </div>

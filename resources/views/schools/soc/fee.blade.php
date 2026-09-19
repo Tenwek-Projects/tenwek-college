@@ -10,8 +10,8 @@
     $certTotal = (int) ($totals['certificate'] ?? 17_500);
     $dipTotal = (int) ($totals['diploma'] ?? 29_000);
     $stkPresets = [
-        ['label' => ($cols['certificate'] ?? 'Certificate').' — total per trimester', 'amount' => $certTotal],
-        ['label' => ($cols['diploma'] ?? 'Diploma').' — total per trimester', 'amount' => $dipTotal],
+        ['label' => ($cols['certificate'] ?? 'Certificate').' - total per trimester', 'amount' => $certTotal],
+        ['label' => ($cols['diploma'] ?? 'Diploma').' - total per trimester', 'amount' => $dipTotal],
     ];
     $stkConfigured = filled(config('mpesa.consumer_key'))
         && filled(config('mpesa.consumer_secret'))
@@ -191,7 +191,7 @@
                                     <ol class="list-decimal space-y-2 pl-5 text-sm text-thc-text/85">
                                         <li>Enter the <strong class="text-thc-navy">M-Pesa phone number</strong> that will receive the prompt.</li>
                                         <li>Choose the <strong class="text-thc-navy">fee amount</strong> (trimester totals match the table above).</li>
-                                        <li>Tap <strong class="text-thc-navy">Send prompt</strong> — complete payment with your M-Pesa PIN on your phone.</li>
+                                        <li>Tap <strong class="text-thc-navy">Send prompt</strong> - complete payment with your M-Pesa PIN on your phone.</li>
                                     </ol>
 
                                     <div x-show="!configured" x-cloak class="rounded-xl border border-amber-200 bg-amber-50/90 px-4 py-3 text-sm text-amber-950">

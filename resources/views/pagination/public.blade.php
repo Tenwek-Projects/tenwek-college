@@ -2,7 +2,7 @@
     <nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
         <p class="order-2 text-sm text-thc-text/65 sm:order-1">
             @if ($paginator->firstItem())
-                Showing <span class="font-semibold text-thc-navy">{{ $paginator->firstItem() }}</span>–<span class="font-semibold text-thc-navy">{{ $paginator->lastItem() }}</span>
+                Showing <span class="font-semibold text-thc-navy">{{ $paginator->firstItem() }}</span>-<span class="font-semibold text-thc-navy">{{ $paginator->lastItem() }}</span>
                 of <span class="font-semibold text-thc-navy">{{ $paginator->total() }}</span>
             @else
                 {{ $paginator->count() }} {{ \Illuminate\Support\Str::plural('item', $paginator->count()) }}

@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — Motto">
+<x-layouts.admin header="SOC - Motto">
     <form method="post" action="{{ route('admin.soc.motto.update') }}" class="admin-page-narrow">
         @csrf
         @method('PUT')

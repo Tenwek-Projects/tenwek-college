@@ -17,7 +17,7 @@
         $socialPairs = array_slice($socialPairs, 0, $socialRows);
     }
 @endphp
-<x-layouts.admin header="SOC — Contact block">
+<x-layouts.admin header="SOC - Contact block">
     <form method="post" action="{{ route('admin.soc.contact.update') }}" class="admin-page-narrow">
         @csrf
         @method('PUT')

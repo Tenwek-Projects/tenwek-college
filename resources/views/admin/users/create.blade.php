@@ -33,7 +33,7 @@
                 <div x-show="role !== 'super_admin'" x-cloak>
                     <x-admin.ui.group label="School" for="school_id" name="school_id" hint="Required for school administrators.">
                         <select name="school_id" id="school_id" class="admin-select" :disabled="role === 'super_admin'">
-                            <option value="">— Select school —</option>
+                            <option value="">- Select school -</option>
                             @foreach ($schools as $s)
                                 <option value="{{ $s->id }}" @selected((string) old('school_id') === (string) $s->id)>{{ $s->name }}</option>
                             @endforeach

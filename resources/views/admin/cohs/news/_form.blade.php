@@ -35,7 +35,7 @@
         >
         <p class="admin-hint">
             @if($existingUrl)
-                Current image — choose a new file to replace it.
+                Current image - choose a new file to replace it.
             @else
                 Choose a file to see a preview.
             @endif

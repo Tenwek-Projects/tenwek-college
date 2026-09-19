@@ -57,7 +57,7 @@ class PublicAssetUrl
         }
 
         // Files that already live under public/ (e.g. images/image-2.jpg, banner-a.jpg)
-        // must use asset URLs — not the uploads /media/ route.
+        // must use asset URLs - not the uploads /media/ route.
         if (is_file(public_path($relative))) {
             return null;
         }

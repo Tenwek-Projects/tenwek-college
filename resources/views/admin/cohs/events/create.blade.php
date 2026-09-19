@@ -1,5 +1,5 @@
 @php $event = new \App\Models\SchoolEvent(['starts_at' => now()]); @endphp
-<x-layouts.admin header="COHS — New event">
+<x-layouts.admin header="COHS - New event">
     <form method="post" action="{{ route('admin.cohs.events.store') }}" enctype="multipart/form-data" class="admin-page-narrow">
         <div class="admin-card p-6 sm:p-8">
             @csrf

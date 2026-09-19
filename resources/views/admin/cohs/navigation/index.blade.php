@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — Navigation">
+<x-layouts.admin header="COHS - Navigation">
     <div class="admin-toolbar">
         <p class="admin-toolbar-note">If the list is empty, the site uses the default menu from config.</p>
         <div class="admin-toolbar-actions">
@@ -22,14 +22,14 @@
                     @forelse ($items as $item)
                         <tr>
                             <td class="font-medium text-thc-navy">{{ $item->label }}</td>
-                            <td class="text-thc-text/75">{{ $item->parent?->label ?? '—' }}</td>
+                            <td class="text-thc-text/75">{{ $item->parent?->label ?? '-' }}</td>
                             <td class="text-xs text-thc-text/80">
                                 @if ($item->external_url)
                                     {{ \Illuminate\Support\Str::limit($item->external_url, 40) }}
                                 @elseif ($item->route_name)
                                     {{ $item->route_name }}
                                 @else
-                                    {{ $item->page_slug ?? '—' }}
+                                    {{ $item->page_slug ?? '-' }}
                                 @endif
                             </td>
                             <td>{{ $item->sort_order }}</td>

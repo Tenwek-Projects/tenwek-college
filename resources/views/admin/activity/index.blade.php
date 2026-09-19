@@ -40,7 +40,7 @@
                                 <time datetime="{{ $log->created_at->toIso8601String() }}">{{ $log->created_at->format('Y-m-d H:i:s') }}</time>
                             </td>
                             <td class="text-sm">
-                                <span class="font-medium text-thc-navy">{{ $log->user?->name ?? '—' }}</span>
+                                <span class="font-medium text-thc-navy">{{ $log->user?->name ?? '-' }}</span>
                                 <span class="mt-0.5 block text-xs text-thc-text/65">{{ $log->user?->email }}</span>
                             </td>
                             <td class="hidden max-w-xs truncate text-sm text-thc-text/90 md:table-cell" title="{{ $route }}">
@@ -57,22 +57,22 @@
                                         <x-admin.ui.badge variant="success">{{ $status }}</x-admin.ui.badge>
                                     @endif
                                 @else
-                                    —
+                                    -
                                 @endif
                             </td>
                             <td class="hidden max-w-[14rem] truncate text-xs text-thc-text/80 xl:table-cell">
                                 @if ($log->auditable_type)
                                     {{ class_basename($log->auditable_type) }} #{{ $log->auditable_id }}
                                 @else
-                                    —
+                                    -
                                 @endif
                             </td>
-                            <td class="hidden font-mono text-xs text-thc-text/70 sm:table-cell">{{ $log->ip_address ?? '—' }}</td>
+                            <td class="hidden font-mono text-xs text-thc-text/70 sm:table-cell">{{ $log->ip_address ?? '-' }}</td>
                         </tr>
                         <tr class="bg-thc-navy/[0.02]">
                             <td colspan="7" class="border-t border-thc-navy/10 px-4 py-3 text-xs text-thc-text/75">
                                 <span class="font-medium text-thc-navy/80">Path:</span>
-                                {{ $meta['path'] ?? '—' }}
+                                {{ $meta['path'] ?? '-' }}
                                 @if (! empty($meta['parameters']))
                                     <span class="mx-2 text-thc-text/40">·</span>
                                     <span class="font-medium text-thc-navy/80">Params:</span>

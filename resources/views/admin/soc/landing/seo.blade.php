@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — Landing SEO (/soc)">
+<x-layouts.admin header="SOC - Landing SEO (/soc)">
     <form method="post" action="{{ route('admin.soc.seo.update') }}" enctype="multipart/form-data" class="admin-page-narrow">
         @csrf
         @method('PUT')

@@ -18,7 +18,7 @@
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
-    {{-- Hero — accent #8265ae (thc-royal) --}}
+    {{-- Hero - accent #8265ae (thc-royal) --}}
     <div
         class="relative overflow-hidden text-white"
         style="background: linear-gradient(135deg, #1a1a68 0%, {{ $accent }}d9 45%, #1a1a68 100%);"
@@ -91,7 +91,7 @@
         </div>
     </div>
 
-    {{-- Row 2: core values — horizontal flow / grid --}}
+    {{-- Row 2: core values - horizontal flow / grid --}}
     @if(count($coreValues) > 0)
         <section
             class="border-t border-thc-navy/8"

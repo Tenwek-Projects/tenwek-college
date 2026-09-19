@@ -1,7 +1,7 @@
 @php
     $highlightsJson = old('highlights_json', json_encode($socialLife['highlights'] ?? [], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 @endphp
-<x-layouts.admin header="COHS — Social life">
+<x-layouts.admin header="COHS - Social life">
     <form method="post" action="{{ route('admin.cohs.social-life.update') }}" enctype="multipart/form-data" class="admin-page-narrow">
         @csrf
         @method('PUT')

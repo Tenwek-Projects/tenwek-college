@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — Events">
+<x-layouts.admin header="COHS - Events">
     <div class="admin-toolbar">
         <div class="admin-toolbar-actions">
             <a href="{{ route('admin.cohs.events.create') }}" class="admin-btn-primary admin-btn-sm">New event</a>

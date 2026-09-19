@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — Utility top bar">
+<x-layouts.admin header="COHS - Utility top bar">
     <form method="post" action="{{ route('admin.cohs.top-bar.update') }}" class="admin-page-narrow">
         @csrf
         @method('PUT')

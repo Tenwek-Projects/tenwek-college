@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — About (Karibu)">
+<x-layouts.admin header="SOC - About (Karibu)">
     <form method="post" action="{{ route('admin.soc.about.update') }}" class="admin-page-narrow">
         @csrf
         @method('PUT')

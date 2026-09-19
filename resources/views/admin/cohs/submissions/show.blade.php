@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     <dt class="font-semibold text-thc-navy">IP</dt>
-                    <dd class="mt-1 font-mono text-xs">{{ $submission->ip_address ?? '—' }}</dd>
+                    <dd class="mt-1 font-mono text-xs">{{ $submission->ip_address ?? '-' }}</dd>
                 </div>
             </dl>
         </div>

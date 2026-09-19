@@ -1,6 +1,6 @@
 <x-admin.ui.group label="Parent (for submenu link)" for="parent_id" name="parent_id" hint="Leave empty for a top-level item.">
     <select name="parent_id" id="parent_id" class="admin-select">
-        <option value="">— Top level (dropdown header or single link) —</option>
+        <option value="">- Top level (dropdown header or single link) -</option>
         @foreach ($parents as $p)
             <option value="{{ $p->id }}" @selected(old('parent_id', $navigation->parent_id ?? null) == $p->id)>{{ $p->label }}</option>
         @endforeach
@@ -11,13 +11,13 @@
     <input type="text" name="label" id="label" value="{{ old('label', $navigation->label ?? '') }}" required class="admin-input">
 </x-admin.ui.group>
 
-<x-admin.ui.group label="Internal page slug" for="page_slug" name="page_slug" hint="e.g. admissions — used when no external URL or special route.">
+<x-admin.ui.group label="Internal page slug" for="page_slug" name="page_slug" hint="e.g. admissions - used when no external URL or special route.">
     <input type="text" name="page_slug" id="page_slug" value="{{ old('page_slug', $navigation->page_slug ?? '') }}" placeholder="e.g. admissions" class="admin-input">
 </x-admin.ui.group>
 
 <x-admin.ui.group label="Special route" for="route_name" name="route_name">
     <select name="route_name" id="route_name" class="admin-select">
-        <option value="">—</option>
+        <option value="">-</option>
         <option value="soc.register" @selected(old('route_name', $navigation->route_name ?? '') === 'soc.register')>Register online (soc.register)</option>
     </select>
 </x-admin.ui.group>

@@ -1,4 +1,4 @@
-<x-layouts.admin header="School of Chaplaincy — CMS" title="SOC CMS | {{ config('tenwek.name') }}">
+<x-layouts.admin header="School of Chaplaincy - CMS" title="SOC CMS | {{ config('tenwek.name') }}">
     <div class="admin-page-wide">
         <p class="text-sm leading-relaxed text-thc-text/85">
             Manage the public <a href="{{ route('schools.show', $soc) }}" class="admin-link">/soc</a> experience. Structured forms update live content; JSON modules are for advanced blocks (fees, programmes list, etc.). Use <a href="{{ route('admin.soc.faqs.index') }}" class="admin-link">FAQs</a> for <span class="admin-code">/soc/faqs</span>.

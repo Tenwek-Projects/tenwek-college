@@ -26,9 +26,9 @@
                             <td class="font-medium text-thc-navy">{{ $u->name }}</td>
                             <td class="hidden text-thc-text/90 sm:table-cell">{{ $u->email }}</td>
                             <td class="hidden text-thc-text/90 md:table-cell">
-                                {{ $u->roles->pluck('name')->join(', ') ?: '—' }}
+                                {{ $u->roles->pluck('name')->join(', ') ?: '-' }}
                             </td>
-                            <td class="hidden text-thc-text/90 lg:table-cell">{{ $u->school?->name ?? '—' }}</td>
+                            <td class="hidden text-thc-text/90 lg:table-cell">{{ $u->school?->name ?? '-' }}</td>
                             <td>
                                 @if ($u->is_active)
                                     <x-admin.ui.badge variant="success">Active</x-admin.ui.badge>

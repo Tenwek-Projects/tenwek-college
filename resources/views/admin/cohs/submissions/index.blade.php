@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — Form submissions">
+<x-layouts.admin header="COHS - Form submissions">
     <p class="mb-6 text-sm leading-relaxed text-thc-text/80">Contact form and online registration wizard submissions for the School of Chaplaincy.</p>
     <div class="admin-toolbar">
         <a href="{{ route('admin.cohs.dashboard') }}" class="admin-btn-ghost admin-btn-sm">← COHS CMS</a>

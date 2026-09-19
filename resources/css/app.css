@@ -14,7 +14,7 @@
     --color-thc-royal: #8265ae;
     --color-thc-maroon: #8265ae;
     /**
-     * School of Chaplaincy — Salient palette from
+     * School of Chaplaincy - Salient palette from
      * https://tenwekhospitalcollege.ac.ke/soc/
      */
     --color-thc-soc-purple: #8265ae;
@@ -22,10 +22,10 @@
     --color-thc-soc-sky-soft: #b2deea;
     --color-thc-soc-cream: #f5f4f0;
     --color-thc-soc-wash: #eef8fc;
-    /* Legacy alias — remapped to sky under .thc-soc-skin; keep for older class names */
+    /* Legacy alias - remapped to sky under .thc-soc-skin; keep for older class names */
     --color-thc-soc-magenta: #d946ef;
     /**
-     * College of Health Sciences — Salient palette from
+     * College of Health Sciences - Salient palette from
      * https://tenwekhospitalcollege.ac.ke/cohs/
      */
     --color-thc-cohs-indigo: #13007c;
@@ -37,7 +37,7 @@
     --color-thc-cohs-wash: #eaf1fd;
     --color-thc-cohs-cream: #f7f4eb;
     /**
-     * Secondary accent — remapped to SOC sky under .thc-soc-skin.
+     * Secondary accent - remapped to SOC sky under .thc-soc-skin.
      */
     --color-thc-teal: #62a3a1;
     --color-thc-soc-teal: var(--color-thc-teal);
@@ -73,7 +73,7 @@
     }
 
     /**
-     * SOC public site — remap shared tokens to the live School of Chaplaincy
+     * SOC public site - remap shared tokens to the live School of Chaplaincy
      * Salient colors (purple, sky blue, cream washes).
      */
     .thc-soc-skin {
@@ -87,7 +87,7 @@
     }
 
     /**
-     * COHS public site — remap shared tokens to the live College of Health Sciences
+     * COHS public site - remap shared tokens to the live College of Health Sciences
      * Salient colors (deep indigo, bright blue, coral accent, sky washes).
      */
     .thc-cohs-skin {
@@ -118,7 +118,7 @@
         @apply text-thc-cohs-coral;
     }
 
-    /** COHS inner pages — light sky wash matching live site section gradients. */
+    /** COHS inner pages - light sky wash matching live site section gradients. */
     .cohs-page-hero {
         border-bottom-color: rgb(86 148 255 / 0.22);
         background: linear-gradient(
@@ -168,7 +168,7 @@
         background: linear-gradient(135deg, #e64a2c 0%, #1b20b8 100%);
     }
 
-    /** COHS landing — section washes from live site */
+    /** COHS landing - section washes from live site */
     .thc-cohs-skin .cohs-landing-programmes {
         background: linear-gradient(to bottom, #eaf1fd 0%, white 100%);
     }
@@ -201,7 +201,7 @@
         );
     }
 
-    /** SOC landing — section washes from live site */
+    /** SOC landing - section washes from live site */
     .thc-soc-skin .soc-landing-about {
         background-color: #f5f4f0;
     }
@@ -218,7 +218,7 @@
         background: linear-gradient(to bottom, white 0%, #eef8fc 100%);
     }
 
-    /** /soc/strategic-partners — purple / sky washes (SOC skin only). */
+    /** /soc/strategic-partners - purple / sky washes (SOC skin only). */
     .thc-soc-skin .soc-strategic-partners-hero {
         border-bottom-color: rgb(130 101 174 / 0.22);
         background: linear-gradient(
@@ -272,7 +272,7 @@
         @apply mt-1.5 block w-full text-sm text-thc-text file:mr-4 file:rounded-lg file:border-0 file:bg-thc-navy file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-thc-royal;
     }
 
-    /** COHS contact page — elevated form controls */
+    /** COHS contact page - elevated form controls */
     .cohs-contact-input {
         @apply w-full rounded-2xl border border-thc-navy/12 bg-thc-surface/80 px-4 py-3 text-sm text-thc-text shadow-inner shadow-thc-navy/[0.03] transition placeholder:text-thc-text/40 focus:border-thc-royal/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-thc-royal/20;
     }
@@ -321,7 +321,7 @@
     }
 
     /**
-     * Site footer — visual rhythm inspired by the Cardiothoracic Centre footer
+     * Site footer - visual rhythm inspired by the Cardiothoracic Centre footer
      * (https://ctc.designekta.com/): layered dark band, column titles,
      * contact emphasis, CTA strip, sub-bar.
      */
@@ -528,7 +528,7 @@
         }
     }
 
-    /** Admin dashboard shell — dark sidebar, light canvas, shared surfaces */
+    /** Admin dashboard shell - dark sidebar, light canvas, shared surfaces */
     .admin-sidebar-group-label {
         @apply px-2 pb-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white/45;
     }

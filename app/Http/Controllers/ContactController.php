@@ -16,7 +16,7 @@ class ContactController extends Controller
     {
         $seo = SeoPresenter::build($request, [
             'title' => 'Contact | '.config('tenwek.name'),
-            'description' => 'Directory for Tenwek Hospital College (School of Chaplaincy and College of Health Sciences), Tenwek Hospital, and the Cardiothoracic Centre—plus a message form for general enquiries.',
+            'description' => 'Directory for Tenwek Hospital College (School of Chaplaincy and College of Health Sciences), Tenwek Hospital, and the Cardiothoracic Centre-plus a message form for general enquiries.',
             'canonical' => route('contact.show'),
             'schema' => [[
                 '@context' => 'https://schema.org',
@@ -36,7 +36,7 @@ class ContactController extends Controller
     public function store(ContactMessageRequest $request): RedirectResponse
     {
         if ($request->filled('fax')) {
-            return back()->with('status', __('Thank you — your message has been received.'));
+            return back()->with('status', __('Thank you - your message has been received.'));
         }
 
         $payload = $request->safe()->except(['_token', 'school_id']);
@@ -67,6 +67,6 @@ class ContactController extends Controller
             }
         }
 
-        return back()->with('status', __('Thank you — your message has been received.'));
+        return back()->with('status', __('Thank you - your message has been received.'));
     }
 }

@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — Media library">
+<x-layouts.admin header="COHS - Media library">
     <div class="admin-card mb-10 max-w-xl p-6">
         <form method="post" action="{{ route('admin.cohs.media.store') }}" enctype="multipart/form-data" class="admin-form-stack-tight">
             @csrf

@@ -1,4 +1,4 @@
-<x-layouts.admin header="SOC — JSON: {{ str_replace('_', ' ', $section) }}">
+<x-layouts.admin header="SOC - JSON: {{ str_replace('_', ' ', $section) }}">
     <form method="post" action="{{ route('admin.soc.json.update', $section) }}" class="admin-page-wide">
         @csrf
         @method('PUT')

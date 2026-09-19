@@ -16,7 +16,7 @@
             <p class="text-sm font-medium text-thc-text/70">
                 <time datetime="{{ $event->starts_at->toIso8601String() }}">{{ $event->starts_at->format('l, F j, Y') }}</time>
                 @if ($event->ends_at)
-                    <span class="text-thc-text/50"> — </span>
+                    <span class="text-thc-text/50"> - </span>
                     <time datetime="{{ $event->ends_at->toIso8601String() }}">{{ $event->ends_at->format('g:i a') }}</time>
                 @else
                     <span class="text-thc-text/55"> · {{ $event->starts_at->format('g:i a') }}</span>

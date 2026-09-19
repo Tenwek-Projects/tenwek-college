@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — News">
+<x-layouts.admin header="COHS - News">
     <div class="admin-toolbar">
         <div class="admin-toolbar-actions">
             <a href="{{ route('admin.cohs.news.create') }}" class="admin-btn-primary admin-btn-sm">New post</a>
@@ -19,7 +19,7 @@
                     @forelse ($posts as $post)
                         <tr>
                             <td class="font-medium text-thc-navy">{{ $post->title }}</td>
-                            <td class="text-thc-text/75">{{ $post->published_at?->format('Y-m-d') ?? '—' }}</td>
+                            <td class="text-thc-text/75">{{ $post->published_at?->format('Y-m-d') ?? '-' }}</td>
                             <td>
                                 <div class="admin-table-actions">
                                     <a href="{{ route('admin.cohs.news.edit', $post) }}" class="admin-link">Edit</a>

@@ -1,4 +1,4 @@
-<x-layouts.admin header="College of Health Sciences — CMS" title="COHS CMS | {{ config('tenwek.name') }}">
+<x-layouts.admin header="College of Health Sciences - CMS" title="COHS CMS | {{ config('tenwek.name') }}">
     <div class="admin-page-wide">
         <p class="text-sm leading-relaxed text-thc-text/85">
             Manage the public <a href="{{ route('schools.show', $cohs) }}" class="admin-link">/cohs</a> experience. Structured forms update live content; JSON is available for full programme blocks.

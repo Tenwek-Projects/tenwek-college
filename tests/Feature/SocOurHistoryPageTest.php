@@ -21,6 +21,6 @@ class SocOurHistoryPageTest extends TestCase
         $response->assertSee('Milestones', false);
         $response->assertSee('1991', false);
         $response->assertSee('L. Nelson Bell Chaplaincy Training School', false);
-        $response->assertSee('TVET – CDACC', false);
+        $response->assertSee('TVET - CDACC', false);
     }
 }

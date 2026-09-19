@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — Pages">
+<x-layouts.admin header="COHS - Pages">
     <div class="admin-toolbar">
         <a href="{{ route('admin.cohs.dashboard') }}" class="admin-btn-ghost admin-btn-sm">← COHS CMS</a>
     </div>

@@ -1,4 +1,4 @@
-<x-layouts.admin header="COHS — Welcome section">
+<x-layouts.admin header="COHS - Welcome section">
     <form method="post" action="{{ route('admin.cohs.welcome.update') }}" class="admin-page-narrow">
         @csrf
         @method('PUT')

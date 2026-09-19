@@ -41,7 +41,7 @@
         @php($imgUrl = \App\Support\Soc\SocLandingRepository::publicMediaUrl($team->image_path) ?? asset($team->image_path))
         <div class="mt-3 flex flex-wrap items-end gap-4">
             <img src="{{ $imgUrl }}" alt="" class="h-32 w-24 rounded-lg border border-thc-navy/10 object-cover shadow-sm" width="96" height="128" loading="lazy" decoding="async">
-            <p class="admin-hint">Current file: <span class="admin-code">{{ $team->image_path }}</span> — choose a new file above to replace it.</p>
+            <p class="admin-hint">Current file: <span class="admin-code">{{ $team->image_path }}</span> - choose a new file above to replace it.</p>
         </div>
     @endif
 </x-admin.ui.group>

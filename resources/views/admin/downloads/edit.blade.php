@@ -17,7 +17,7 @@
 
                 <x-admin.ui.group label="Category" for="category_id" name="category_id" hint="Optional.">
                     <select name="category_id" id="category_id" class="admin-select">
-                        <option value="">—</option>
+                        <option value="">-</option>
                         @foreach ($categories as $c)
                             <option value="{{ $c->id }}" @selected(old('category_id', $download->category_id) == $c->id)>{{ $c->name }}</option>
                         @endforeach
@@ -53,7 +53,7 @@
                     <div class="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
                         <div>
                             <span class="font-medium text-thc-navy">Current file:</span>
-                            <span class="text-thc-text/90">{{ $download->original_filename ?? '—' }}</span>
+                            <span class="text-thc-text/90">{{ $download->original_filename ?? '-' }}</span>
                             @if ($download->hasFile() && $download->mime)
                                 <span class="mt-1 block text-xs text-thc-text/60">{{ $download->mime }}</span>
                             @endif

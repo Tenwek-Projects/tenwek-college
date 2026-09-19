@@ -34,7 +34,7 @@
             <div class="mb-8 flex justify-center sm:mb-10">
                 <img
                     src="{{ $logoUrl }}"
-                    alt="Tenwek Hospital — official emblem (We Treat, Jesus Heals)"
+                    alt="Tenwek Hospital - official emblem (We Treat, Jesus Heals)"
                     class="h-28 w-28 object-contain drop-shadow-[0_4px_24px_rgba(0,0,0,0.45)] sm:h-36 sm:w-36 md:h-44 md:w-44"
                     width="176"
                     height="176"
@@ -52,7 +52,7 @@
             <a
                 href="#schools"
                 class="thc-hero-school-cta group mt-10 flex max-w-md flex-col items-center gap-5 rounded-2xl px-6 py-5 text-center transition duration-300 hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-thc-royal sm:mt-12 sm:gap-6 sm:px-8 sm:py-6"
-                aria-label="Select a school — go to School of Chaplaincy and College of Health Sciences"
+                aria-label="Select a school - go to School of Chaplaincy and College of Health Sciences"
             >
                 <span class="flex flex-col items-center gap-1.5">
                     <span class="text-[10px] font-bold uppercase tracking-[0.28em] text-white/70 sm:text-[11px]">Your next step</span>
