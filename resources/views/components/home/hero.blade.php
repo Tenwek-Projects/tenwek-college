@@ -5,7 +5,7 @@
     $img = $hero['image'] ?? 'https://tenwekhospitalcollege.ac.ke/wp-content/uploads/2020/10/tenwekoverhead.jpg';
     $imgAlt = $hero['image_alt'] ?? 'Tenwek Hospital College campus';
     $imgUrl = \Illuminate\Support\Str::startsWith($img, ['http://', 'https://']) ? $img : asset($img);
-    $logoSrc = config('tenwek.brand_logo', 'Tenwek-collge-logo.jfif');
+    $logoSrc = config('tenwek.brand_logo', 'Tenwek-collge-logo.png');
     $logoUrl = \Illuminate\Support\Str::startsWith($logoSrc, ['http://', 'https://']) ? $logoSrc : asset($logoSrc);
 @endphp
 

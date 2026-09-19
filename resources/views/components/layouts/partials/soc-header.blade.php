@@ -1,6 +1,6 @@
 @php
     $L = $socLanding ?? config('tenwek.soc_landing');
-    $socLogo = $L['logo'] ?? config('tenwek.brand_logo', 'Tenwek-collge-logo.jfif');
+    $socLogo = $L['logo'] ?? config('tenwek.brand_logo', 'Tenwek-collge-logo.png');
     $mainNav = $L['main_nav'] ?? [];
     $page = fn (string $slug): string => $slug === 'register'
         ? route('soc.register')

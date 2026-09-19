@@ -128,18 +128,23 @@
     <div class="relative mx-auto flex max-w-7xl items-center justify-between gap-2 overflow-visible px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-3">
         <a
             href="{{ route('schools.show', $school) }}"
-            class="group flex min-w-0 shrink-0 items-center gap-2 sm:gap-3"
+            class="group flex min-w-0 shrink-0 items-center gap-2.5 sm:gap-3.5"
             @if($isSchoolLanding) aria-current="page" @endif
             @click="openMega = null"
         >
             <img
                 src="{{ $brandLogo }}"
-                alt="{{ $school->name }}"
-                width="320"
+                alt="AGC Tenwek Hospital"
+                width="64"
                 height="64"
-                class="h-12 w-auto max-w-[11.5rem] shrink-0 object-contain object-left sm:h-14 sm:max-w-[14rem] lg:h-16 lg:max-w-[18rem]"
+                class="h-11 w-11 shrink-0 rounded-full object-cover object-center sm:h-12 sm:w-12 lg:h-14 lg:w-14"
                 decoding="async"
             >
+            <span class="hidden h-9 w-px shrink-0 bg-thc-navy/80 sm:block lg:h-10" aria-hidden="true"></span>
+            <span class="min-w-0 leading-none">
+                <span class="block text-[0.8rem] font-bold uppercase tracking-[0.04em] text-thc-navy transition group-hover:text-thc-royal sm:text-[0.95rem] lg:text-[1.05rem]">AGC Tenwek</span>
+                <span class="mt-0.5 block text-[0.65rem] font-medium uppercase tracking-[0.28em] text-thc-navy/75 sm:text-[0.72rem] lg:tracking-[0.32em]">Hospital</span>
+            </span>
         </a>
 
         <nav class="hidden min-w-0 flex-1 items-center justify-end gap-0.5 py-1 lg:flex lg:flex-wrap lg:justify-center lg:gap-x-0.5 lg:gap-y-2 lg:px-2 xl:px-4" aria-label="College of Health Sciences">
