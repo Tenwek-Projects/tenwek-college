@@ -1,0 +1,629 @@
+<?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
+
+$__newAttributes = [];
+$__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames((['seo', 'landingHeader' => null, 'school' => null]));
+
+foreach ($attributes->all() as $__key => $__value) {
+    if (in_array($__key, $__propNames)) {
+        $$__key = $$__key ?? $__value;
+    } else {
+        $__newAttributes[$__key] = $__value;
+    }
+}
+
+$attributes = new \Illuminate\View\ComponentAttributeBag($__newAttributes);
+
+unset($__propNames);
+unset($__newAttributes);
+
+foreach (array_filter((['seo', 'landingHeader' => null, 'school' => null]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
+    $$__key = $$__key ?? $__value;
+}
+
+$__defined_vars = get_defined_vars();
+
+foreach ($attributes->all() as $__key => $__value) {
+    if (array_key_exists($__key, $__defined_vars)) unset($$__key);
+}
+
+unset($__defined_vars, $__key, $__value); ?>
+
+<?php
+    // School-scoped chrome (COHS / SOC header): infer from model if the layout only received :school.
+    if ($landingHeader === null && $school instanceof \App\Models\School && in_array($school->slug, ['cohs', 'soc'], true)) {
+        $landingHeader = $school->slug;
+    }
+
+    // Downloads hub: ?school=cohs|soc should use the same header even if the page forgot to pass props.
+    if ($landingHeader === null && $school === null && request()->routeIs('downloads.index') && request()->filled('school')) {
+        $schoolSlug = (string) request()->input('school');
+        if ($schoolSlug === 'cohs' || $schoolSlug === 'soc') {
+            $school = \App\Models\School::query()
+                ->where('slug', $schoolSlug)
+                ->where('is_active', true)
+                ->first();
+            if ($school !== null) {
+                $landingHeader = $schoolSlug;
+            }
+        }
+    }
+
+    // School events listing/detail: use school header when viewing /{school}/events.
+    if ($landingHeader === null && $school === null && request()->routeIs('schools.events.*')) {
+        $routeSchool = request()->route('school');
+        if ($routeSchool instanceof \App\Models\School && in_array($routeSchool->slug, ['soc', 'cohs'], true)) {
+            $school = $routeSchool;
+            $landingHeader = $routeSchool->slug;
+        }
+    }
+
+    // Search: same as downloads when scoped with ?school=cohs|soc.
+    if ($landingHeader === null && $school === null && request()->routeIs('search') && request()->filled('school')) {
+        $schoolSlug = (string) request()->input('school');
+        if ($schoolSlug === 'cohs' || $schoolSlug === 'soc') {
+            $school = \App\Models\School::query()
+                ->where('slug', $schoolSlug)
+                ->where('is_active', true)
+                ->first();
+            if ($school !== null) {
+                $landingHeader = $schoolSlug;
+            }
+        }
+    }
+
+    $showPublicHeader = ! request()->routeIs('home') || in_array($landingHeader, ['soc', 'cohs'], true);
+
+    $primaryNavHref = function (array $item): string {
+        if (! empty($item['url'])) {
+            return $item['url'];
+        }
+        $u = route($item['route'], $item['params'] ?? []);
+        if (! empty($item['fragment'])) {
+            $u .= '#'.ltrim((string) $item['fragment'], '#');
+        }
+
+        return $u;
+    };
+?>
+
+<!DOCTYPE html>
+<html id="top" lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" class="h-full scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <link rel="icon" href="<?php echo e(asset('favicon.svg')); ?>" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="<?php echo e(asset('ctc.jpg')); ?>">
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
+    <?php if (isset($component)) { $__componentOriginal42da61123f891e63201d7be28f403427 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal42da61123f891e63201d7be28f403427 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.seo','data' => ['seo' => $seo]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('seo'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['seo' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($seo)]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal42da61123f891e63201d7be28f403427)): ?>
+<?php $attributes = $__attributesOriginal42da61123f891e63201d7be28f403427; ?>
+<?php unset($__attributesOriginal42da61123f891e63201d7be28f403427); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal42da61123f891e63201d7be28f403427)): ?>
+<?php $component = $__componentOriginal42da61123f891e63201d7be28f403427; ?>
+<?php unset($__componentOriginal42da61123f891e63201d7be28f403427); ?>
+<?php endif; ?>
+</head>
+<body
+    class="<?php echo \Illuminate\Support\Arr::toCssClasses([
+        'min-h-full bg-thc-surface text-thc-text antialiased',
+        'thc-soc-skin' => $landingHeader === 'soc',
+        'thc-cohs-skin' => $landingHeader === 'cohs',
+    ]); ?>"
+    x-data="{
+        mobileNavOpen: false,
+        navScrolled: false,
+        openMega: null,
+        searchOpen: false,
+        mobileExpanded: null,
+        isHomePage: <?php echo json_encode(request()->routeIs('home'), 15, 512) ?>,
+        toggleMega(label) { this.openMega = this.openMega === label ? null : label },
+        toggleMobile(label) { this.mobileExpanded = this.mobileExpanded === label ? null : label },
+    }"
+    @scroll.window="navScrolled = (window.pageYOffset || document.documentElement.scrollTop) > 10"
+    @keydown.escape.window="openMega = null; searchOpen = false; mobileNavOpen = false"
+>
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:shadow-lg">Skip to content</a>
+
+    <?php if($showPublicHeader): ?>
+    <?php if($landingHeader === 'soc' && $school): ?>
+        <?php echo $__env->make('components.layouts.partials.soc-header', ['school' => $school], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php elseif($landingHeader === 'cohs' && $school): ?>
+        <?php echo $__env->make('components.layouts.partials.cohs-header', ['school' => $school], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+    <?php else: ?>
+    <header
+        class="sticky top-0 z-50 border-b transition-[box-shadow,background-color,backdrop-filter] duration-300"
+        :class="!isHomePage || navScrolled ? 'border-thc-navy/10 bg-white/95 shadow-sm shadow-thc-navy/5 backdrop-blur-md' : 'border-transparent bg-transparent shadow-none backdrop-blur-none'"
+    >
+        <div class="relative mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:min-h-[4rem] lg:px-8">
+            <a href="<?php echo e(route('home')); ?>" class="group flex min-w-0 items-center gap-3" @click="openMega = null">
+                <span
+                    class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold shadow-sm ring-2 transition"
+                    :class="!isHomePage || navScrolled ? 'bg-thc-navy text-white ring-thc-navy/35' : 'bg-white/15 text-white ring-white/40'"
+                >THC</span>
+                <span class="min-w-0 leading-tight">
+                    <span
+                        class="block truncate text-sm font-semibold tracking-tight"
+                        :class="!isHomePage || navScrolled ? 'text-thc-navy group-hover:text-thc-royal' : 'text-white group-hover:text-white/90'"
+                    ><?php echo e(config('tenwek.name')); ?></span>
+                    <span
+                        class="hidden truncate text-xs sm:block"
+                        :class="!isHomePage || navScrolled ? 'text-thc-text/65' : 'text-white/75'"
+                    ><?php echo e(config('tenwek.hospital.name')); ?> · Bomet, Kenya</span>
+                </span>
+            </a>
+
+            <nav class="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
+                <?php $__currentLoopData = config('tenwek.navigation.primary'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if(!empty($item['children']) || !empty($item['groups'])): ?>
+                        <?php $megaId = $item['label']; ?>
+                        <div class="relative">
+                            <button
+                                type="button"
+                                class="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition"
+                                :class="[
+                                    openMega === <?php echo json_encode($megaId, 15, 512) ?>
+                                        ? (!isHomePage || navScrolled ? 'bg-thc-royal/12 text-thc-navy' : 'bg-white/15 text-white')
+                                        : '',
+                                    (!isHomePage || navScrolled) ? 'text-thc-text hover:bg-thc-royal/8 hover:text-thc-navy' : 'text-white/95 hover:bg-white/10 hover:text-white',
+                                ]"
+                                data-mega="<?php echo e(e($megaId)); ?>"
+                                @click="toggleMega($event.currentTarget.dataset.mega)"
+                                :aria-expanded="(openMega === <?php echo json_encode($megaId, 15, 512) ?>).toString()"
+                                aria-haspopup="true"
+                            >
+                                <?php echo e($item['label']); ?>
+
+                                <svg class="h-4 w-4 opacity-60 transition" :class="{ 'rotate-180': openMega === <?php echo json_encode($megaId, 15, 512) ?> }" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </button>
+                        </div>
+                    <?php else: ?>
+                        <?php
+                            $isActive = false;
+                            if (($item['route'] ?? '') === 'home' && (($item['fragment'] ?? '') === 'schools')) {
+                                $isActive = request()->routeIs('home');
+                            } elseif (($item['route'] ?? '') === 'downloads.index') {
+                                $isActive = request()->routeIs('downloads.*');
+                            } elseif (($item['route'] ?? '') === 'news.index') {
+                                $isActive = request()->routeIs('news.*');
+                            } elseif (($item['route'] ?? '') === 'pages.show') {
+                                $isActive = request()->routeIs('pages.show') && request()->route('slug') === ($item['params']['slug'] ?? null);
+                            }
+                        ?>
+                        <a
+                            href="<?php echo e($primaryNavHref($item)); ?>"
+                            class="rounded-lg px-3 py-2 text-sm font-medium transition"
+                            :class="<?php echo json_encode($isActive, 15, 512) ?>
+                                ? (!isHomePage || navScrolled ? 'bg-thc-royal/12 text-thc-navy' : 'bg-white/15 text-white')
+                                : ((!isHomePage || navScrolled) ? 'text-thc-text hover:bg-thc-royal/8 hover:text-thc-navy' : 'text-white/95 hover:bg-white/10')"
+                            @click="openMega = null"
+                        ><?php echo e($item['label']); ?></a>
+                    <?php endif; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </nav>
+
+            <div class="flex shrink-0 items-center gap-1 sm:gap-2">
+                <button
+                    type="button"
+                    class="inline-flex rounded-full p-2 transition"
+                    :class="!isHomePage || navScrolled ? 'text-thc-text hover:bg-thc-royal/8 hover:text-thc-navy' : 'text-white hover:bg-white/10'"
+                    @click="searchOpen = true; openMega = null; mobileNavOpen = false"
+                    aria-haspopup="dialog"
+                    aria-label="Open site search"
+                >
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </button>
+                <a
+                    href="<?php echo e(route('contact.show')); ?>"
+                    class="hidden rounded-full border px-4 py-2 text-sm font-medium shadow-sm transition md:inline-flex"
+                    :class="!isHomePage || navScrolled ? 'border-thc-navy/15 bg-white text-thc-navy hover:border-thc-navy/25 hover:bg-thc-royal/8' : 'border-white/35 bg-white/10 text-white hover:bg-white/15'"
+                    @click="openMega = null"
+                >Contact</a>
+                <button
+                    type="button"
+                    class="inline-flex rounded-lg p-2 lg:hidden"
+                    :class="!isHomePage || navScrolled ? 'text-thc-text hover:bg-thc-royal/8' : 'text-white hover:bg-white/10'"
+                    @click="mobileNavOpen = !mobileNavOpen; openMega = null"
+                    aria-label="Open menu"
+                    :aria-expanded="mobileNavOpen.toString()"
+                >
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+
+        
+        <div
+            class="relative z-40 hidden border-t border-thc-navy/8 bg-white shadow-lg lg:block"
+            x-show="openMega !== null"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-1"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-1"
+            style="display: none;"
+        >
+            <div class="mx-auto max-w-7xl px-6 py-8 lg:px-8">
+                <?php $__currentLoopData = config('tenwek.navigation.primary'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if(!empty($item['groups'])): ?>
+                        <div x-show="openMega === <?php echo json_encode($item['label'], 15, 512) ?>" style="display: none;">
+                            <div class="grid gap-10 lg:grid-cols-2">
+                                <div>
+                                    <p class="thc-kicker"><?php echo e($item['label']); ?></p>
+                                    <p class="mt-3 max-w-md text-sm leading-relaxed text-thc-text/90">
+                                        <?php echo e(config('tenwek.tagline')); ?>
+
+                                    </p>
+                                </div>
+                                <div class="grid gap-8 sm:grid-cols-2">
+                                    <?php $__currentLoopData = $item['groups']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <div>
+                                            <p class="text-xs font-bold uppercase tracking-[0.2em] text-thc-maroon"><?php echo e($group['heading']); ?></p>
+                                            <ul class="mt-3 grid gap-2">
+                                                <?php $__currentLoopData = $group['children']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $child): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <li>
+                                                        <a
+                                                            href="<?php echo e(route($child['route'], $child['params'] ?? [])); ?>"
+                                                            class="flex items-center justify-between gap-3 rounded-xl border border-thc-navy/8 bg-thc-navy/[0.04] px-4 py-3 text-sm font-semibold text-thc-navy transition hover:border-thc-royal/25 hover:bg-white hover:shadow-sm"
+                                                            @click="openMega = null"
+                                                        >
+                                                            <?php echo e($child['label']); ?>
+
+                                                            <svg class="h-4 w-4 shrink-0 text-thc-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                                        </a>
+                                                    </li>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </ul>
+                                        </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php elseif(!empty($item['children'])): ?>
+                        <div x-show="openMega === <?php echo json_encode($item['label'], 15, 512) ?>" style="display: none;">
+                            <div class="grid gap-10 md:grid-cols-2">
+                                <div>
+                                    <p class="thc-kicker"><?php echo e($item['label']); ?></p>
+                                    <p class="mt-3 max-w-md text-sm leading-relaxed text-thc-text/90">
+                                        <?php echo e(config('tenwek.tagline')); ?>
+
+                                    </p>
+                                </div>
+                                <ul class="grid gap-2 sm:grid-cols-2">
+                                    <?php $__currentLoopData = $item['children']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $child): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li>
+                                            <a
+                                                href="<?php echo e(route($child['route'], $child['params'] ?? [])); ?>"
+                                                class="flex items-center justify-between gap-3 rounded-xl border border-thc-navy/8 bg-thc-navy/[0.04] px-4 py-3 text-sm font-semibold text-thc-navy transition hover:border-thc-royal/25 hover:bg-white hover:shadow-sm"
+                                                @click="openMega = null"
+                                            >
+                                                <?php echo e($child['label']); ?>
+
+                                                <svg class="h-4 w-4 shrink-0 text-thc-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </ul>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
+        </div>
+
+        
+        <div
+            x-show="mobileNavOpen"
+            x-transition
+            class="max-h-[min(70vh,calc(100dvh-4rem))] overflow-y-auto border-t border-thc-navy/10 bg-white lg:hidden"
+            style="display: none;"
+        >
+            <div class="space-y-1 px-4 py-4">
+                <?php $__currentLoopData = config('tenwek.navigation.primary'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if(!empty($item['groups'])): ?>
+                        <?php $mid = $item['label']; ?>
+                        <button
+                            type="button"
+                            class="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm font-semibold text-thc-navy hover:bg-thc-royal/8"
+                            data-mobile-section="<?php echo e(e($mid)); ?>"
+                            @click="toggleMobile($event.currentTarget.dataset.mobileSection)"
+                            :aria-expanded="(mobileExpanded === <?php echo json_encode($mid, 15, 512) ?>).toString()"
+                        >
+                            <?php echo e($item['label']); ?>
+
+                            <svg class="h-4 w-4 transition" :class="{ 'rotate-180': mobileExpanded === <?php echo json_encode($mid, 15, 512) ?> }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div x-show="mobileExpanded === <?php echo json_encode($mid, 15, 512) ?>" class="pl-2" style="display: none;">
+                            <?php $__currentLoopData = $item['groups']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <p class="px-3 pb-1 pt-3 text-[10px] font-bold uppercase tracking-[0.18em] text-thc-text/55"><?php echo e($group['heading']); ?></p>
+                                <?php $__currentLoopData = $group['children']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $child): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <a href="<?php echo e(route($child['route'], $child['params'] ?? [])); ?>" class="block rounded-lg px-3 py-2.5 text-sm text-thc-text hover:bg-thc-royal/8" @click="mobileNavOpen = false"><?php echo e($child['label']); ?></a>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
+                    <?php elseif(!empty($item['children'])): ?>
+                        <?php $mid = $item['label']; ?>
+                        <button
+                            type="button"
+                            class="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm font-semibold text-thc-navy hover:bg-thc-royal/8"
+                            data-mobile-section="<?php echo e(e($mid)); ?>"
+                            @click="toggleMobile($event.currentTarget.dataset.mobileSection)"
+                            :aria-expanded="(mobileExpanded === <?php echo json_encode($mid, 15, 512) ?>).toString()"
+                        >
+                            <?php echo e($item['label']); ?>
+
+                            <svg class="h-4 w-4 transition" :class="{ 'rotate-180': mobileExpanded === <?php echo json_encode($mid, 15, 512) ?> }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </button>
+                        <div x-show="mobileExpanded === <?php echo json_encode($mid, 15, 512) ?>" class="pl-2" style="display: none;">
+                            <?php $__currentLoopData = $item['children']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $child): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <a href="<?php echo e(route($child['route'], $child['params'] ?? [])); ?>" class="block rounded-lg px-3 py-2.5 text-sm text-thc-text hover:bg-thc-royal/8" @click="mobileNavOpen = false"><?php echo e($child['label']); ?></a>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </div>
+                    <?php else: ?>
+                        <a href="<?php echo e($primaryNavHref($item)); ?>" class="block rounded-lg px-3 py-3 text-sm font-semibold text-thc-navy hover:bg-thc-royal/8" @click="mobileNavOpen = false"><?php echo e($item['label']); ?></a>
+                    <?php endif; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <button
+                    type="button"
+                    class="mt-2 w-full rounded-full border border-thc-navy/20 bg-white py-3 text-center text-sm font-semibold text-thc-navy"
+                    @click="searchOpen = true; mobileNavOpen = false"
+                >
+                    Search resources
+                </button>
+                <a href="<?php echo e(route('contact.show')); ?>" class="mt-2 block rounded-full bg-thc-royal px-4 py-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-thc-navy" @click="mobileNavOpen = false">Contact admissions</a>
+            </div>
+        </div>
+    </header>
+    <?php endif; ?>
+    <?php endif; ?>
+
+    
+    <div
+        x-show="searchOpen"
+        x-cloak
+        class="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-thc-navy/50 px-4 py-16 sm:py-24"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="search-dialog-title"
+        @keydown.escape.window="searchOpen = false"
+    >
+        <div class="absolute inset-0" @click="searchOpen = false" aria-hidden="true"></div>
+        <div class="relative w-full max-w-lg rounded-2xl border border-thc-navy/12 bg-white p-6 shadow-2xl" @click.stop>
+            <h2 id="search-dialog-title" class="font-serif text-xl font-semibold text-thc-navy">Search the site</h2>
+            <p class="mt-2 text-sm text-thc-text/90">Find pages, news, admission packs, clinical documents, and other downloads.</p>
+            <form method="get" action="<?php echo e(route('search')); ?>" class="mt-6 flex flex-col gap-3 sm:flex-row" role="search">
+                <?php if($landingHeader && $school instanceof \App\Models\School && in_array($landingHeader, ['cohs', 'soc'], true)): ?>
+                    <input type="hidden" name="school" value="<?php echo e($school->slug); ?>">
+                <?php endif; ?>
+                <label class="sr-only" for="nav-search-q">Search query</label>
+                <input
+                    type="search"
+                    name="q"
+                    id="nav-search-q"
+                    class="w-full rounded-xl border border-thc-navy/12 px-4 py-3 text-sm focus:border-thc-royal focus:outline-none focus:ring-2 focus:ring-thc-royal/20"
+                    placeholder="What are you looking for?"
+                    autofocus
+                >
+                <button type="submit" class="thc-btn-primary shrink-0 rounded-xl px-6">Search</button>
+            </form>
+            <button type="button" class="mt-4 text-sm font-medium text-thc-text/90 hover:text-thc-navy" @click="searchOpen = false">Close</button>
+        </div>
+    </div>
+
+    <main id="main">
+        <?php echo e($slot); ?>
+
+    </main>
+
+    <?php if(request()->routeIs('home')): ?>
+        <?php if (isset($component)) { $__componentOriginaldd389e25d9b18dd73b03a0b91a6d619e = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginaldd389e25d9b18dd73b03a0b91a6d619e = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.landing.compact-footer','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('landing.compact-footer'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginaldd389e25d9b18dd73b03a0b91a6d619e)): ?>
+<?php $attributes = $__attributesOriginaldd389e25d9b18dd73b03a0b91a6d619e; ?>
+<?php unset($__attributesOriginaldd389e25d9b18dd73b03a0b91a6d619e); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginaldd389e25d9b18dd73b03a0b91a6d619e)): ?>
+<?php $component = $__componentOriginaldd389e25d9b18dd73b03a0b91a6d619e; ?>
+<?php unset($__componentOriginaldd389e25d9b18dd73b03a0b91a6d619e); ?>
+<?php endif; ?>
+    <?php else: ?>
+    <footer class="thc-site-footer text-white">
+        <a href="#top" class="thc-footer-backtotop"><?php echo e(__('Back to top')); ?></a>
+
+        <div class="mx-auto max-w-7xl px-4 pb-6 pt-12 sm:px-6 lg:px-8 lg:pb-10 lg:pt-16">
+            <div class="grid gap-10 sm:gap-12 lg:grid-cols-4 lg:gap-8 xl:gap-10">
+                
+                <div class="lg:max-w-sm">
+                    <p class="thc-footer-eyebrow"><?php echo e(__('Part of :hospital', ['hospital' => config('tenwek.hospital.name')])); ?></p>
+                    <p class="thc-footer-brand"><?php echo e(config('tenwek.name')); ?></p>
+                    <p class="mt-4 text-sm leading-relaxed text-white/85"><?php echo e(config('tenwek.tagline')); ?></p>
+                    <?php $__currentLoopData = array_filter(config('tenwek.footer.accreditation', [])); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $line): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <p class="mt-4 text-xs leading-relaxed text-white/60"><?php echo e($line); ?></p>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                    <?php if(count(config('tenwek.social', [])) > 0): ?>
+                        <p class="thc-footer-col-title mt-8"><?php echo e(__('Follow')); ?></p>
+                        <ul class="mt-3 flex flex-wrap gap-2">
+                            <?php $__currentLoopData = config('tenwek.social'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $platform => $url): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $label = config('tenwek.footer.social_labels.'.$platform, ucfirst($platform)); ?>
+                                <li>
+                                    <a
+                                        href="<?php echo e($url); ?>"
+                                        class="thc-footer-social-btn"
+                                        rel="noopener noreferrer"
+                                        aria-label="<?php echo e($label); ?>"
+                                    >
+                                        <?php if($platform === 'facebook'): ?>
+                                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                        <?php elseif($platform === 'instagram'): ?>
+                                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                        <?php elseif($platform === 'linkedin'): ?>
+                                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                                        <?php elseif($platform === 'x'): ?>
+                                            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                        <?php else: ?>
+                                            <span class="text-[11px] font-bold"><?php echo e(strtoupper(substr($label, 0, 1))); ?></span>
+                                        <?php endif; ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+
+                
+                <div>
+                    <h3 class="thc-footer-col-title"><?php echo e(__('Schools')); ?></h3>
+                    <ul class="mt-5 space-y-2.5">
+                        <li>
+                            <a href="<?php echo e(route('home')); ?>#schools" class="thc-footer-link"><?php echo e(__('Choose a school')); ?></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo e(route('schools.show', ['school' => 'soc'])); ?>" class="thc-footer-link"><?php echo e(__('School of Chaplaincy')); ?></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo e(route('schools.show', ['school' => 'cohs'])); ?>" class="thc-footer-link"><?php echo e(__('College of Health Sciences')); ?></a>
+                        </li>
+                    </ul>
+                </div>
+
+                
+                <div>
+                    <h3 class="thc-footer-col-title"><?php echo e(__('On this site')); ?></h3>
+                    <ul class="mt-5 space-y-2.5">
+                        <?php $__currentLoopData = config('tenwek.navigation.primary'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li>
+                                <a href="<?php echo e($primaryNavHref($item)); ?>" class="thc-footer-link"><?php echo e($item['label']); ?></a>
+                            </li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <li>
+                            <a href="<?php echo e(route('search')); ?>" class="thc-footer-link"><?php echo e(__('Search')); ?></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo e(route('contact.show')); ?>" class="thc-footer-link"><?php echo e(__('Contact')); ?></a>
+                        </li>
+                    </ul>
+                </div>
+
+                
+                <div>
+                    <h3 class="thc-footer-col-title"><?php echo e(__('Visit & connect')); ?></h3>
+                    <ul class="mt-5 space-y-2 text-sm text-white/80">
+                        <li><?php echo e(config('tenwek.address.street')); ?></li>
+                        <li><?php echo e(config('tenwek.address.locality')); ?>, <?php echo e(config('tenwek.address.country_name')); ?></li>
+                    </ul>
+                    <p class="mt-4 text-sm text-white/80">
+                        <span class="block text-[11px] font-bold uppercase tracking-[0.16em] text-white/45"><?php echo e(__('Phone')); ?></span>
+                        <a href="tel:<?php echo e(preg_replace('/\s+/', '', config('tenwek.phone'))); ?>" class="thc-footer-link mt-0.5 inline-block font-semibold text-white"><?php echo e(config('tenwek.phone')); ?></a>
+                    </p>
+                    <p class="mt-3 text-sm text-white/80">
+                        <span class="block text-[11px] font-bold uppercase tracking-[0.16em] text-white/45"><?php echo e(__('Email')); ?></span>
+                        <a href="mailto:<?php echo e(config('tenwek.email_public')); ?>" class="thc-footer-link mt-0.5 inline-block break-all font-semibold text-white"><?php echo e(config('tenwek.email_public')); ?></a>
+                    </p>
+                    <p class="thc-footer-col-title mt-8"><?php echo e(__('Also at Tenwek')); ?></p>
+                    <ul class="mt-3 space-y-2.5 text-sm">
+                        <li>
+                            <a href="<?php echo e(config('tenwek.hospital.url')); ?>" class="thc-footer-link" rel="noopener noreferrer"><?php echo e(config('tenwek.hospital.name')); ?></a>
+                        </li>
+                        <li>
+                            <a href="<?php echo e(config('tenwek.ctc.url')); ?>" class="thc-footer-link" rel="noopener noreferrer"><?php echo e(config('tenwek.ctc.name')); ?></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <?php
+            $footerSchoolSlug = ($landingHeader === 'soc' || $landingHeader === 'cohs') ? $landingHeader : null;
+            $footerDownloadsUrl = $footerSchoolSlug
+                ? route('downloads.index', ['school' => $footerSchoolSlug])
+                : route('downloads.index');
+            $footerSearchUrl = $footerSchoolSlug
+                ? route('search', ['school' => $footerSchoolSlug])
+                : route('search');
+        ?>
+        <div class="thc-footer-sub">
+            <div class="thc-footer-sub-inner">
+                <div class="thc-footer-sub-row">
+                    <p class="thc-footer-sub-copy">
+                        © <strong><?php echo e(now()->year); ?></strong> <?php echo e(config('tenwek.institution_legal')); ?>.
+                        <span class="text-white/45"><?php echo e(__('All rights reserved.')); ?></span>
+                    </p>
+                    <nav class="thc-footer-sub-nav" aria-label="<?php echo e(__('Site footer')); ?>">
+                        <a href="<?php echo e(route('home')); ?>#schools" class="thc-footer-sub-link"><?php echo e(__('Schools')); ?></a>
+                        <span class="thc-footer-sub-sep" aria-hidden="true">·</span>
+                        <a href="<?php echo e($footerDownloadsUrl); ?>" class="thc-footer-sub-link"><?php echo e(__('Downloads')); ?></a>
+                        <span class="thc-footer-sub-sep" aria-hidden="true">·</span>
+                        <a href="<?php echo e(route('news.index')); ?>" class="thc-footer-sub-link"><?php echo e(__('News & Events')); ?></a>
+                        <?php if($footerSchoolSlug): ?>
+                            <span class="thc-footer-sub-sep" aria-hidden="true">·</span>
+                            <a href="<?php echo e(route('schools.events.index', $footerSchoolSlug)); ?>" class="thc-footer-sub-link"><?php echo e(__('School events')); ?></a>
+                        <?php endif; ?>
+                        <span class="thc-footer-sub-sep" aria-hidden="true">·</span>
+                        <a href="<?php echo e(route('pages.show', ['slug' => 'about'])); ?>" class="thc-footer-sub-link"><?php echo e(__('About')); ?></a>
+                        <span class="thc-footer-sub-sep" aria-hidden="true">·</span>
+                        <a href="<?php echo e($footerSearchUrl); ?>" class="thc-footer-sub-link"><?php echo e(__('Search')); ?></a>
+                        <span class="thc-footer-sub-sep" aria-hidden="true">·</span>
+                        <a href="<?php echo e(route('contact.show')); ?>" class="thc-footer-sub-link"><?php echo e(__('Contact')); ?></a>
+                    </nav>
+                </div>
+                <div class="thc-footer-sub-meta">
+                    <span class="font-medium text-white/40"><?php echo e(__('Also at Tenwek')); ?></span>
+                    <span class="hidden text-white/20 sm:inline" aria-hidden="true">·</span>
+                    <a href="<?php echo e(config('tenwek.hospital.url')); ?>" rel="noopener noreferrer"><?php echo e(config('tenwek.hospital.name')); ?></a>
+                    <span class="text-white/20" aria-hidden="true">·</span>
+                    <a href="<?php echo e(config('tenwek.ctc.url')); ?>" rel="noopener noreferrer"><?php echo e(config('tenwek.ctc.name')); ?></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <?php endif; ?>
+    <?php if (isset($component)) { $__componentOriginal7ebf73b9426f81e77480d9d036c6642d = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal7ebf73b9426f81e77480d9d036c6642d = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.forms.arithmetic-guard-modal','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('forms.arithmetic-guard-modal'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal7ebf73b9426f81e77480d9d036c6642d)): ?>
+<?php $attributes = $__attributesOriginal7ebf73b9426f81e77480d9d036c6642d; ?>
+<?php unset($__attributesOriginal7ebf73b9426f81e77480d9d036c6642d); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal7ebf73b9426f81e77480d9d036c6642d)): ?>
+<?php $component = $__componentOriginal7ebf73b9426f81e77480d9d036c6642d; ?>
+<?php unset($__componentOriginal7ebf73b9426f81e77480d9d036c6642d); ?>
+<?php endif; ?>
+    <script>
+        window.__mathChallengeUrl = <?php echo \Illuminate\Support\Js::from(route('forms.math-challenge'))->toHtml() ?>;
+    </script>
+</body>
+</html>
+<?php /**PATH C:\projects\Tenwek Projects\tenwek-college\resources\views/components/layouts/public.blade.php ENDPATH**/ ?>

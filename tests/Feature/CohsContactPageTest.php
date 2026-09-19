@@ -19,7 +19,7 @@ class CohsContactPageTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('Contact', false);
-        $response->assertSee('collegeofhealthsciences@tenwekhosp.org', false);
+        $response->assertSee(config('tenwek.cohs_landing.contact_page.email'), false);
         $response->assertSee('Tenwek Hospital College of Health Sciences', false);
         $response->assertSee('0736 568 177', false);
     }

@@ -230,35 +230,78 @@ class CohsLandingFormsController extends BaseCohsAdminController
     {
         $cohs = $this->cohsSchool($request);
         $contactPage = $this->mergedSection($cohs, 'contact_page');
+        $contact = $this->mergedSection($cohs, 'contact');
+        $topBar = $this->mergedSection($cohs, 'top_bar');
         $mapEmbed = app(CohsLandingRepository::class)->forSchool($cohs)['map_embed_url'] ?? '';
 
-        return view('admin.cohs.landing.contact', compact('cohs', 'contactPage', 'mapEmbed'));
+        return view('admin.cohs.landing.contact', compact('cohs', 'contactPage', 'contact', 'topBar', 'mapEmbed'));
     }
 
     public function updateContactPage(Request $request): RedirectResponse
     {
         $cohs = $this->cohsSchool($request);
         $validated = $request->validate([
+            'email' => ['required', 'email', 'max:255'],
+            'phone_numbers' => ['required', 'string', 'max:5000'],
+            'phone_row_label' => ['required', 'string', 'max:120'],
+            'call_prefix' => ['nullable', 'string', 'max:64'],
+            'call_display' => ['nullable', 'string', 'max:255'],
+            'call_tel' => ['nullable', 'string', 'max:64'],
+            'landing_kicker' => ['required', 'string', 'max:120'],
+            'landing_location_lines' => ['required', 'string', 'max:5000'],
+            'office_hours_lines' => ['nullable', 'string', 'max:5000'],
+            'social_label' => ['nullable', 'array'],
+            'social_label.*' => ['nullable', 'string', 'max:120'],
+            'social_url' => ['nullable', 'array'],
+            'social_url.*' => ['nullable', 'string', 'max:2000'],
             'hero_kicker' => ['required', 'string', 'max:120'],
             'headline' => ['required', 'string', 'max:120'],
             'headline_accent' => ['nullable', 'string', 'max:120'],
             'lead' => ['required', 'string', 'max:2000'],
             'intro' => ['required', 'string', 'max:2000'],
-            'email' => ['required', 'email', 'max:255'],
             'office_title' => ['required', 'string', 'max:255'],
             'address_lines' => ['required', 'string', 'max:2000'],
-            'phone_rows_json' => ['required', 'string', 'max:20000'],
             'map_embed_url' => ['nullable', 'string', 'max:2000'],
         ]);
-        try {
-            $phoneRows = json_decode($validated['phone_rows_json'], true, 512, JSON_THROW_ON_ERROR);
-        } catch (\JsonException $e) {
-            return back()->withErrors(['phone_rows_json' => 'Invalid JSON: '.$e->getMessage()])->withInput();
+
+        $phoneDisplays = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $validated['phone_numbers']) ?: [])));
+        if ($phoneDisplays === []) {
+            return back()->withErrors(['phone_numbers' => 'Add at least one phone number.'])->withInput();
         }
-        if (! is_array($phoneRows)) {
-            return back()->withErrors(['phone_rows_json' => 'Phone rows must be a JSON array.'])->withInput();
+
+        $phoneNumbers = [];
+        foreach ($phoneDisplays as $display) {
+            $digits = preg_replace('/[^\d+]/', '', $display) ?: '';
+            if ($digits !== '' && ! str_starts_with($digits, '+') && str_starts_with($digits, '0')) {
+                $digits = '+254'.substr($digits, 1);
+            }
+            $phoneNumbers[] = [
+                'display' => $display,
+                'tel' => $digits !== '' ? $digits : $display,
+            ];
         }
+
+        $phoneRows = [[
+            'label' => $validated['phone_row_label'],
+            'numbers' => $phoneNumbers,
+        ]];
+
         $addressLines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $validated['address_lines']) ?: [])));
+        $locationLines = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $validated['landing_location_lines']) ?: [])));
+        $officeHours = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) ($validated['office_hours_lines'] ?? '')) ?: [])));
+
+        $labels = $validated['social_label'] ?? [];
+        $urls = $validated['social_url'] ?? [];
+        $socialLinks = [];
+        $maxSocial = min(12, max(count($labels), count($urls)));
+        for ($i = 0; $i < $maxSocial; $i++) {
+            $lab = trim((string) ($labels[$i] ?? ''));
+            $url = trim((string) ($urls[$i] ?? ''));
+            if ($lab !== '' && $url !== '') {
+                $socialLinks[] = ['label' => $lab, 'url' => $url];
+            }
+        }
+
         $this->persistSection($cohs, 'contact_page', [
             'hero_kicker' => $validated['hero_kicker'],
             'headline' => $validated['headline'],
@@ -269,6 +312,32 @@ class CohsLandingFormsController extends BaseCohsAdminController
             'office_title' => $validated['office_title'],
             'address_lines' => $addressLines,
             'phone_rows' => $phoneRows,
+        ]);
+
+        $this->persistSection($cohs, 'contact', [
+            'kicker' => $validated['landing_kicker'],
+            'email' => $validated['email'],
+            'location_lines' => $locationLines,
+            'phones' => $phoneDisplays,
+            'office_hours_lines' => $officeHours,
+            'social_links' => $socialLinks,
+        ]);
+
+        $existingTopBar = $this->mergedSection($cohs, 'top_bar');
+        $callDisplay = filled($validated['call_display'] ?? null)
+            ? $validated['call_display']
+            : ($phoneNumbers[0]['display'] ?? ($existingTopBar['call_display'] ?? ''));
+        $callTel = filled($validated['call_tel'] ?? null)
+            ? $validated['call_tel']
+            : ($phoneNumbers[0]['tel'] ?? ($existingTopBar['call_tel'] ?? ''));
+
+        $this->persistSection($cohs, 'top_bar', [
+            'email' => $validated['email'],
+            'call_prefix' => $validated['call_prefix'] ?? ($existingTopBar['call_prefix'] ?? 'Call:'),
+            'call_display' => $callDisplay,
+            'call_tel' => $callTel,
+            'portal_label' => $existingTopBar['portal_label'] ?? null,
+            'portal_url' => $existingTopBar['portal_url'] ?? null,
         ]);
 
         $assets = CohsLandingSection::query()
@@ -285,7 +354,7 @@ class CohsLandingFormsController extends BaseCohsAdminController
         }
         $this->persistSection($cohs, 'site_assets', $assets);
 
-        return redirect()->route('admin.cohs.contact.edit')->with('status', 'Contact page content saved.');
+        return redirect()->route('admin.cohs.contact.edit')->with('status', 'COHS contact details saved (header, landing, and contact page).');
     }
 
     public function editSocialLife(Request $request): View

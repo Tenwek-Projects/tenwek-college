@@ -45,8 +45,8 @@
             </a>
             <a href="{{ route('admin.cohs.contact.edit') }}" class="admin-dash-tile">
                 <p class="admin-dash-tile-kicker">Inner</p>
-                <p class="admin-dash-tile-title">Contact page</p>
-                <p class="admin-dash-tile-desc">Phones, email, address, map</p>
+                <p class="admin-dash-tile-title">Contact</p>
+                <p class="admin-dash-tile-desc">Header, landing band, contact page, map</p>
             </a>
             <a href="{{ route('admin.cohs.seo.edit') }}" class="admin-dash-tile">
                 <p class="admin-dash-tile-kicker">SEO</p>

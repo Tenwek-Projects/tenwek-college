@@ -62,7 +62,7 @@ final class SocLandingRepository
                 continue;
             }
             if (isset($base[$sectionKey]) && is_array($base[$sectionKey])) {
-                $base[$sectionKey] = array_replace_recursive($base[$sectionKey], $payload);
+                $base[$sectionKey] = $this->mergeSectionPayload($base[$sectionKey], $payload);
             } else {
                 $base[$sectionKey] = $payload;
             }
@@ -78,6 +78,39 @@ final class SocLandingRepository
         self::$cache[$key] = $base;
 
         return $base;
+    }
+
+    /**
+     * Merge CMS payloads over config defaults. List (numeric) arrays replace wholesale
+     * so shorter admin lists do not keep leftover config rows.
+     *
+     * @param  array<string, mixed>  $base
+     * @param  array<string, mixed>  $payload
+     * @return array<string, mixed>
+     */
+    private function mergeSectionPayload(array $base, array $payload): array
+    {
+        $merged = $base;
+        foreach ($payload as $key => $value) {
+            if (is_array($value) && array_is_list($value)) {
+                $merged[$key] = $value;
+
+                continue;
+            }
+            if (
+                is_array($value)
+                && isset($merged[$key])
+                && is_array($merged[$key])
+                && ! array_is_list($merged[$key])
+            ) {
+                $merged[$key] = $this->mergeSectionPayload($merged[$key], $value);
+
+                continue;
+            }
+            $merged[$key] = $value;
+        }
+
+        return $merged;
     }
 
     public static function flushCache(): void

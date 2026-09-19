@@ -4,6 +4,11 @@
         @method('PUT')
         <div class="admin-card p-6 sm:p-8">
             <div class="admin-form-stack">
+                <p class="text-sm leading-relaxed text-thc-text/80">
+                    Prefer editing email and phone from
+                    <a href="{{ route('admin.cohs.contact.edit') }}" class="admin-link">COHS Contact</a>
+                    (keeps header, landing, and contact page in sync). Portal and off-campus URLs stay here.
+                </p>
                 <x-admin.ui.group label="Email" for="email" name="email">
                     <input type="email" name="email" id="email" value="{{ old('email', $topBar['email'] ?? '') }}" required class="admin-input">
                 </x-admin.ui.group>
