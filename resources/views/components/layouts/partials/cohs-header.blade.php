@@ -9,8 +9,7 @@
     $topEmail = $topBar['email'] ?? 'info@tenwekhospitalcollege.ac.ke';
     $topCallDisplay = $topBar['call_display'] ?? '+254 700 000 000';
     $topCallTel = preg_replace('/[^\d+]/', '', $topBar['call_tel'] ?? '+254700000000');
-    $logoPath = $L['logo'] ?? config('tenwek.cohs_landing.logo', config('tenwek.brand_logo'));
-    $brandLogo = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($logoPath) ? $logoPath : null) ?? asset(is_string($logoPath) ? $logoPath : (string) config('tenwek.brand_logo'));
+    $brandLogo = asset('Tenwek-collge-logo.png');
 
     $routeSchool = request()->route('school');
     $schoolContext = $routeSchool instanceof \App\Models\School && $routeSchool->is($school);
@@ -134,16 +133,16 @@
         >
             <img
                 src="{{ $brandLogo }}"
-                alt="AGC Tenwek Hospital"
+                alt="{{ $school->name }}"
                 width="64"
                 height="64"
-                class="h-11 w-11 shrink-0 rounded-full object-cover object-center sm:h-12 sm:w-12 lg:h-14 lg:w-14"
+                class="h-11 w-11 shrink-0 rounded-full object-cover object-center ring-1 ring-thc-navy/10 sm:h-12 sm:w-12 lg:h-14 lg:w-14"
                 decoding="async"
             >
-            <span class="hidden h-9 w-px shrink-0 bg-thc-navy/80 sm:block lg:h-10" aria-hidden="true"></span>
+            <span class="h-10 w-0.5 shrink-0 self-center bg-thc-navy sm:h-11 lg:h-12" aria-hidden="true"></span>
             <span class="min-w-0 leading-none">
-                <span class="block text-[0.8rem] font-bold uppercase tracking-[0.04em] text-thc-navy transition group-hover:text-thc-royal sm:text-[0.95rem] lg:text-[1.05rem]">AGC Tenwek</span>
-                <span class="mt-0.5 block text-[0.65rem] font-medium uppercase tracking-[0.28em] text-thc-navy/75 sm:text-[0.72rem] lg:tracking-[0.32em]">Hospital</span>
+                <span class="block text-[0.72rem] font-bold uppercase tracking-[0.02em] text-thc-navy transition group-hover:text-thc-royal sm:text-[0.85rem] lg:text-[0.95rem]">College of Health</span>
+                <span class="mt-1 block text-[0.62rem] font-medium uppercase tracking-[0.22em] text-thc-navy/70 sm:text-[0.7rem] lg:tracking-[0.28em]">Sciences</span>
             </span>
         </a>
 
