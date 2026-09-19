@@ -57,7 +57,7 @@ return [
     'default_og_image' => 'ctc.jpg',
 
     /** Public path under public/ or absolute http(s) URL for the official circular seal. */
-    'brand_logo' => env('TENWEK_BRAND_LOGO', 'images/tenwek-hospital-logo.png'),
+    'brand_logo' => env('TENWEK_BRAND_LOGO', 'Tenwek-collge-logo.jfif'),
 
     'hero' => [
         'credibility' => env('TENWEK_HERO_CREDIBILITY', 'Est. 1937 · Level 5 Teaching & Referral · Bomet, Kenya'),
@@ -103,7 +103,7 @@ return [
      */
     'soc_landing' => [
         /** Navbar mark for /soc (file under public/). */
-        'logo' => env('TENWEK_SOC_LOGO', 'logo-chaplain.png'),
+        'logo' => env('TENWEK_SOC_LOGO', 'Tenwek-collge-logo.jfif'),
         'hero_image' => env('TENWEK_SOC_LANDING_HERO_IMAGE', 'banner-a.jpg'),
         'about_image' => env('TENWEK_SOC_LANDING_ABOUT_IMAGE', 'banner-a.jpg'),
         'map_embed_url' => env('TENWEK_SOC_MAP_EMBED_URL', 'https://maps.google.com/maps?q=-0.7792,35.3369&z=14&output=embed'),
@@ -684,7 +684,7 @@ return [
      */
     'cohs_landing' => [
         /** Navbar mark for /cohs (file under public/). */
-        'logo' => env('TENWEK_COHS_LOGO', 'logo-cors.svg'),
+        'logo' => env('TENWEK_COHS_LOGO', 'Tenwek-collge-logo.jfif'),
         'hero_image' => env('TENWEK_COHS_LANDING_HERO_IMAGE', 'banner-nursing.jpg'),
         'welcome_image' => env('TENWEK_COHS_LANDING_WELCOME_IMAGE', 'banner-nursing.jpg'),
         'map_embed_url' => env('TENWEK_COHS_MAP_EMBED_URL', 'https://maps.google.com/maps?q=-0.7792,35.3369&z=14&output=embed'),
