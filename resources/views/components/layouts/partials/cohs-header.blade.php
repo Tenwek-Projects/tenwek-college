@@ -139,7 +139,7 @@
                 class="h-11 w-11 shrink-0 rounded-full object-cover object-center sm:h-12 sm:w-12"
                 decoding="async"
             >
-            <span class="h-10 w-px shrink-0 bg-thc-navy/25" aria-hidden="true"></span>
+            <span class="h-10 w-0.5 shrink-0 bg-thc-navy/30" aria-hidden="true"></span>
             <span class="min-w-0 leading-tight">
                 <span class="block truncate text-sm font-semibold tracking-tight text-thc-navy group-hover:text-thc-royal">{{ $school->name }}</span>
                 <span class="hidden truncate text-xs text-thc-text/65 sm:block">{{ config('tenwek.name') }}</span>
