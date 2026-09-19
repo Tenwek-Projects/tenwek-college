@@ -127,22 +127,22 @@
     <div class="relative mx-auto flex max-w-7xl items-center justify-between gap-2 overflow-visible px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-3">
         <a
             href="{{ route('schools.show', $school) }}"
-            class="group flex min-w-0 shrink-0 items-center gap-2.5 sm:gap-3.5"
+            class="group flex min-w-0 shrink-0 items-center gap-3 sm:gap-3.5"
             @if($isSchoolLanding) aria-current="page" @endif
             @click="openMega = null"
         >
             <img
                 src="{{ $brandLogo }}"
-                alt="{{ $school->name }}"
-                width="64"
-                height="64"
-                class="h-11 w-11 shrink-0 rounded-full object-cover object-center ring-1 ring-thc-navy/10 sm:h-12 sm:w-12 lg:h-14 lg:w-14"
+                alt="{{ $school->name }} logo"
+                width="56"
+                height="56"
+                class="h-11 w-11 shrink-0 rounded-full object-cover object-center sm:h-12 sm:w-12"
                 decoding="async"
             >
-            <span class="h-10 w-0.5 shrink-0 self-center bg-thc-navy sm:h-11 lg:h-12" aria-hidden="true"></span>
-            <span class="min-w-0 leading-none">
-                <span class="block text-[0.72rem] font-bold uppercase tracking-[0.02em] text-thc-navy transition group-hover:text-thc-royal sm:text-[0.85rem] lg:text-[0.95rem]">College of Health</span>
-                <span class="mt-1 block text-[0.62rem] font-medium uppercase tracking-[0.22em] text-thc-navy/70 sm:text-[0.7rem] lg:tracking-[0.28em]">Sciences</span>
+            <span class="h-10 w-px shrink-0 bg-thc-navy/25" aria-hidden="true"></span>
+            <span class="min-w-0 leading-tight">
+                <span class="block truncate text-sm font-semibold tracking-tight text-thc-navy group-hover:text-thc-royal">{{ $school->name }}</span>
+                <span class="hidden truncate text-xs text-thc-text/65 sm:block">{{ config('tenwek.name') }}</span>
             </span>
         </a>
 
