@@ -2,6 +2,7 @@
     $L = $cohsLanding ?? config('tenwek.cohs_landing');
     $logoPath = $L['logo'] ?? config('tenwek.cohs_landing.logo', config('tenwek.brand_logo'));
     $cohsAppLogo = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($logoPath) ? $logoPath : null) ?? asset(is_string($logoPath) ? $logoPath : (string) config('tenwek.brand_logo'));
+    $cohsEmail = $L['top_bar']['email'] ?? config('tenwek.cohs_landing.top_bar.email', 'shs@tenwekhosp.org');
 @endphp
 <x-layouts.public :seo="$seo" landing-header="cohs" :school="$school">
     <div class="min-h-[60vh] bg-gradient-to-b from-thc-navy/[0.04] to-thc-surface pb-16 pt-8 sm:pt-12">
@@ -33,7 +34,7 @@
                             Ext 1315/1334
                             <span class="text-white/50">|</span>
                             Email:
-                            <a href="mailto:collegeofhealthsciences@tenwekhosp.org" class="font-medium underline decoration-white/40 hover:decoration-white">collegeofhealthsciences@tenwekhosp.org</a>
+                            <a href="mailto:{{ $cohsEmail }}" class="font-medium underline decoration-white/40 hover:decoration-white">{{ $cohsEmail }}</a>
                         </p>
                     </div>
                     <div class="mx-auto mt-6 max-w-2xl rounded-xl border border-white/15 bg-white/10 px-4 py-4 backdrop-blur-sm">

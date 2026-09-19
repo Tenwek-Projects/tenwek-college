@@ -1,8 +1,8 @@
 @php
     $L = $cohsLanding ?? config('tenwek.cohs_landing');
     $C = $L['contact_page'] ?? config('tenwek.cohs_landing.contact_page');
-    $heroPath = $L['hero_image'] ?? 'banner-nursing.jpg';
-    $heroImage = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($heroPath) ? $heroPath : null) ?? asset(is_string($heroPath) ? $heroPath : 'banner-nursing.jpg');
+    $heroPath = 'banner-nursing.jpg';
+    $heroImage = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl($heroPath) ?? asset($heroPath);
     $introHtml = str_replace(
         ':email',
         '<a href="mailto:'.e($C['email']).'" class="font-medium text-thc-cohs-blue underline decoration-thc-cohs-blue/35 decoration-1 underline-offset-[0.2em] transition hover:decoration-thc-cohs-indigo">'.e($C['email']).'</a>',

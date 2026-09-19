@@ -45,7 +45,7 @@
                 @endforeach
             </div>
 
-            <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" role="list" data-reveal>
+            <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4" role="list" data-reveal>
                 @foreach($F['highlights'] as $h)
                     <li class="group flex h-full flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)] ring-1 ring-thc-cohs-blue/10 transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-thc-card-hover)]">
                         <div class="h-1.5 shrink-0 bg-gradient-to-r from-thc-cohs-indigo via-thc-cohs-blue to-thc-cohs-coral" aria-hidden="true"></div>

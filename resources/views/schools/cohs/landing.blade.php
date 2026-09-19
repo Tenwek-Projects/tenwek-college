@@ -5,10 +5,10 @@
     $programmesBand = $L['programmes_band'] ?? ['items' => [], 'kicker' => '', 'title' => '', 'intro' => ''];
     $testimonials = $L['testimonials'] ?? ['items' => [], 'kicker' => '', 'title' => ''];
     $contactBlock = $L['contact'] ?? ['location_lines' => [], 'phones' => [], 'email' => '', 'kicker' => ''];
-    $heroPath = $L['hero_image'] ?? 'banner-nursing.jpg';
-    $welcomePath = $L['welcome_image'] ?? 'banner-nursing.jpg';
-    $heroImageUrl = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($heroPath) ? $heroPath : null) ?? asset(is_string($heroPath) ? $heroPath : 'banner-nursing.jpg');
-    $welcomeImageUrl = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($welcomePath) ? $welcomePath : null) ?? asset(is_string($welcomePath) ? $welcomePath : 'banner-nursing.jpg');
+    $heroPath = $L['hero_image'] ?? 'images/image-1.jpg';
+    $welcomePath = $L['welcome_image'] ?? 'images/image-2.jpg';
+    $heroImageUrl = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($heroPath) ? $heroPath : null) ?? asset(is_string($heroPath) ? $heroPath : 'images/image-1.jpg');
+    $welcomeImageUrl = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($welcomePath) ? $welcomePath : null) ?? asset(is_string($welcomePath) ? $welcomePath : 'images/image-2.jpg');
     $mapUrl = $L['map_embed_url'] ?? null;
     $primaryCta = $hero['primary_cta'] ?? ['label' => 'View programmes', 'route' => 'schools.pages.show', 'params' => ['school' => $school->slug, 'pageSlug' => 'diploma-in-nursing']];
 @endphp
@@ -92,21 +92,31 @@
                 </h2>
                 <p class="mt-4 text-lg text-thc-text/85">{{ $programmesBand['intro'] }}</p>
             </div>
-            <div class="mt-12 grid gap-6 lg:grid-cols-2 lg:gap-8">
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
                 @foreach($programmesBand['items'] as $prog)
+                    @php
+                        $ctaLabel = $prog['cta_label'] ?? 'Read more';
+                        if (! empty($prog['apply_slug'])) {
+                            $ctaHref = route('cohs.programme-application', $prog['apply_slug']);
+                        } elseif (! empty($prog['page_slug'])) {
+                            $ctaHref = route('schools.pages.show', [$school, $prog['page_slug']]);
+                        } else {
+                            $ctaHref = route('schools.pages.show', [$school, 'application-forms']);
+                        }
+                    @endphp
                     <article
                         data-reveal
                         class="group flex flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-thc-card-hover)]"
                     >
                         <div class="h-1.5 bg-gradient-to-r from-thc-cohs-indigo via-thc-cohs-blue to-thc-cohs-coral" aria-hidden="true"></div>
-                        <div class="flex flex-1 flex-col p-8 sm:p-10">
-                            <h3 class="font-serif text-xl font-semibold text-thc-navy sm:text-2xl">{{ $prog['title'] }}</h3>
+                        <div class="flex flex-1 flex-col p-8 sm:p-9">
+                            <h3 class="font-serif text-xl font-semibold text-thc-navy sm:text-[1.35rem]">{{ $prog['title'] }}</h3>
                             <p class="mt-4 flex-1 text-base leading-relaxed text-thc-text/90">{{ $prog['summary'] }}</p>
                             <a
-                                href="{{ route('schools.pages.show', [$school, $prog['page_slug']]) }}"
+                                href="{{ $ctaHref }}"
                                 class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-thc-royal hover:underline"
                             >
-                                Read more
+                                {{ $ctaLabel }}
                                 <span aria-hidden="true">→</span>
                             </a>
                         </div>
@@ -241,7 +251,13 @@
                                 </p>
                             </div>
                             <p class="mt-auto rounded-xl bg-thc-cohs-wash/80 px-4 py-3 text-sm leading-relaxed text-thc-navy/80 ring-1 ring-thc-cohs-blue/15">
-                                Office hours follow the college calendar. We aim to reply within a few working days.
+                                @if(count($contactBlock['office_hours_lines'] ?? []) > 0)
+                                    @foreach($contactBlock['office_hours_lines'] as $i => $hourLine)
+                                        @if($i > 0)<br>@endif{{ $hourLine }}
+                                    @endforeach
+                                @else
+                                    Office hours follow the college calendar. We aim to reply within a few working days.
+                                @endif
                             </p>
                         </div>
                     </div>

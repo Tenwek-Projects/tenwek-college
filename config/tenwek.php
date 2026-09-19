@@ -685,19 +685,19 @@ return [
     'cohs_landing' => [
         /** Navbar mark for /cohs (file under public/). */
         'logo' => env('TENWEK_COHS_LOGO', 'Tenwek-collge-logo.png'),
-        'hero_image' => env('TENWEK_COHS_LANDING_HERO_IMAGE', 'banner-nursing.jpg'),
-        'welcome_image' => env('TENWEK_COHS_LANDING_WELCOME_IMAGE', 'banner-nursing.jpg'),
+        'hero_image' => env('TENWEK_COHS_LANDING_HERO_IMAGE', 'images/image-1.jpg'),
+        'welcome_image' => env('TENWEK_COHS_LANDING_WELCOME_IMAGE', 'images/image-2.jpg'),
         'map_embed_url' => env('TENWEK_COHS_MAP_EMBED_URL', 'https://maps.google.com/maps?q=-0.7792,35.3369&z=14&output=embed'),
         /**
-         * /cohs/contact-us, aligned with https://tenwekhospitalcollege.ac.ke/cohs/contact-us/
+         * /cohs/contact-us — brochure contact + apply facts
          */
         'contact_page' => [
             'hero_kicker' => 'College of Health Sciences',
             'headline' => 'Contact',
             'headline_accent' => 'us',
             'lead' => 'Send a note, call the office, or write to us in Bomet. We are glad to help with admissions, programmes, and general enquiries.',
-            'intro' => 'Use the form to send us a message or email us at :email. One of our colleagues will get back to you soon. Have a great day!',
-            'email' => env('TENWEK_COHS_EMAIL', 'collegeofhealthsciences@tenwekhosp.org'),
+            'intro' => 'Use the form to send us a message or email us at :email. Applications are received throughout the year, with March and September intakes. A non-refundable application fee must accompany application forms.',
+            'email' => env('TENWEK_COHS_EMAIL', 'shs@tenwekhosp.org'),
             'office_title' => 'Tenwek Hospital College of Health Sciences',
             'phone_rows' => [
                 [
@@ -709,7 +709,7 @@ return [
                     ],
                 ],
             ],
-            'address_lines' => ['P.O. Box 39-20400', 'Bomet, Kenya'],
+            'address_lines' => ['P.O. Box 39-20400', 'Bomet, Kenya', 'About 5 km from Bomet Town'],
         ],
         'landing_seo' => [
             'title' => null,
@@ -722,7 +722,7 @@ return [
             'robots' => null,
         ],
         'top_bar' => [
-            'email' => env('TENWEK_COHS_EMAIL', 'collegeofhealthsciences@tenwekhosp.org'),
+            'email' => env('TENWEK_COHS_EMAIL', 'shs@tenwekhosp.org'),
             'call_prefix' => 'Call:',
             'call_display' => env('TENWEK_COHS_TOP_BAR_PHONE', env('TENWEK_PUBLIC_PHONE', '+254 700 000 000')),
             'call_tel' => env('TENWEK_COHS_TOP_BAR_TEL', preg_replace('/[^\d+]/', '', env('TENWEK_PUBLIC_PHONE', '+254700000000'))),
@@ -765,36 +765,60 @@ return [
             ['label' => 'Contact Us', 'slug' => 'contact-us'],
         ],
         'hero' => [
-            'badge' => 'Caring in Christ\'s name',
+            'badge' => 'Training for Christ\'s Service',
             'eyebrow' => 'Tenwek Hospital College · College of Health Sciences',
             'headline' => 'College of Health Sciences',
-            'subhead' => 'With over 30 years\' experience training highly coveted nursing care practitioners, we inspire students to become servant leaders by modelling excellence in compassionate medical care.',
+            'subhead' => 'Qualified nurses since 1987: Christ-centred healthcare training, mentorship, and spiritual formation for nurses and clinical officers who serve with skill and compassion.',
             'primary_cta' => ['label' => 'View programmes', 'route' => 'schools.pages.show', 'params' => ['school' => 'cohs', 'pageSlug' => 'diploma-in-nursing']],
             'secondary_cta' => ['label' => 'Apply & downloads', 'hash' => 'programmes'],
         ],
         'welcome' => [
             'kicker' => 'Welcome',
             'title' => 'Welcome to the College of Health Sciences',
-            'lead' => 'Established in 1987 as the Tenwek School of Nursing, the College of Health Sciences has grown into a trusted name in training quality medical practitioners in Kenya.',
+            'lead' => 'Established in 1987 as the Tenwek School of Nursing, the College of Health Sciences offers the best training in healthcare, mentorship, and matters of spirituality.',
             'paragraphs' => [
-                'The school graduated its first class of registered community health nurses in 1999 and has continued to prepare clinicians and nurses for decades.',
-                'Today we offer rigorous diploma pathways anchored in clinical training at Tenwek Hospital, forming professionals who serve with skill and Christ-minded compassion.',
+                'In 1999 the school graduated its first class of registered Community Health Nurses, and in 2022 its first class of registered Clinical Medicine and Surgery graduates.',
+                'We incorporate classroom learning, clinical practice, and Christian service. The school is an affiliate of Africa Gospel Church and is equipped with nurses and doctors who mentor students for the field.',
             ],
         ],
         'programmes_band' => [
-            'kicker' => 'About us',
-            'title' => 'Over 30 years\' experience training nursing care practitioners',
-            'intro' => 'Explore our flagship diploma programmes, each designed for bedside excellence and community impact.',
+            'kicker' => 'Programmes',
+            'title' => 'Training for Christ\'s Service',
+            'intro' => 'Three-year diploma pathways, higher diplomas for practising clinicians and nurses, and life-saving short courses — all combining classroom learning, clinical practice, and Christian service.',
             'items' => [
                 [
-                    'title' => 'Diploma in Community Health Nursing',
-                    'summary' => 'Registered community health nursing formation with deep clinical immersion and servant-leadership values.',
+                    'title' => 'Diploma in Nursing (KRCHN)',
+                    'summary' => 'A 3-year diploma forming midwives, general nurses, and community health nurses through classroom, clinical, and community training.',
                     'page_slug' => 'diploma-in-nursing',
                 ],
                 [
                     'title' => 'Diploma in Clinical Medicine & Surgery',
-                    'summary' => 'Clinical medicine training that pairs strong academics with the pace and breadth of a mission referral hospital.',
+                    'summary' => 'A 3-year basic diploma preparing clinical officers for competent service in hospital and community settings.',
                     'page_slug' => 'diploma-in-clinical-medicine',
+                ],
+                [
+                    'title' => 'Higher Diploma in Cardiovascular Perfusion',
+                    'summary' => 'For clinicians with a diploma or degree in Clinical Medicine & Surgery, a valid practising licence, and at least two years\' experience. Advantage: anaesthesia or Critical Care Clinical Officer (ECCCO) with one year\'s experience.',
+                    'apply_slug' => 'hd-cardiovascular-perfusion',
+                    'cta_label' => 'Apply online',
+                ],
+                [
+                    'title' => 'HND Critical Care Nursing',
+                    'summary' => 'For nurses with a diploma or degree in nursing, a valid practising licence, and a minimum of two years\' working experience.',
+                    'apply_slug' => 'critical-care-nursing',
+                    'cta_label' => 'Apply online',
+                ],
+                [
+                    'title' => 'HND Trauma & Emergency Nursing',
+                    'summary' => 'Blended delivery for registered nurses (BScN, KRN, KRN/MHP, KRN/M, KRCHN) with at least one year of clinical experience and a valid nursing practice licence.',
+                    'apply_slug' => 'hnd-trauma-emergency',
+                    'cta_label' => 'Apply online',
+                ],
+                [
+                    'title' => 'BLS & ACLS short courses',
+                    'summary' => 'Basic Life Support (BLS) and Advanced Cardiovascular Life Support (ACLS) for healthcare professionals seeking essential emergency skills.',
+                    'page_slug' => 'application-forms',
+                    'cta_label' => 'Application forms',
                 ],
             ],
         ],
@@ -825,26 +849,26 @@ return [
         'about_us' => [
             'kicker' => 'About',
             /** Page hero (legacy H1). */
-            'headline' => 'Christian Centre of Excellence',
+            'headline' => 'Training for Christ\'s Service',
             /** Shown beside “Our history” (file under public/). */
             'history_image' => env('TENWEK_COHS_ABOUT_HISTORY_IMAGE', 'banner-nursing.jpg'),
             'history_image_alt' => 'Nursing and clinical training at Tenwek Hospital College of Health Sciences',
             'history_heading' => 'Our history',
             'history_paragraphs' => [
-                'Established in 1987 as the Tenwek School of Nursing, the Tenwek Hospital College School of Health Sciences has since grown to become a household name in the training of quality medical practitioners in Kenya. The school graduated its first class of Registered Community Health Nurses in 1999 and has continued to do so for the past 30 years.',
-                'We have diversified our training modules and continue to adapt to changing environmental needs by enhancing our curriculum to incorporate both classroom learning and clinical rounds. At the moment, the school offers training in Diploma in Nursing and Diploma in Clinical Medicine. We are still working on diversifying our course portfolio and hope to begin Accident and Emergency Training, Anesthesia Training, Critical Care Training, and a Bachelor of Science in Nursing (in partnership with Kenya Highland University).',
+                'Tenwek Hospital College — School of Health Sciences has qualified nurses since 1987. The school offers the best training in healthcare, mentorship, and matters of spirituality. In 1999 it graduated its first class of registered Community Health Nurses, and in 2022 its first class of registered Clinical Medicine and Surgery.',
+                'We offer a 3-year diploma in Kenya Registered Community Health Nursing (KRCHN) and a 3-year diploma in Clinical Medicine and Surgery, plus Higher National Diploma in Trauma and Emergency Nursing (KRT&EN), Higher Diploma in Cardiovascular Perfusion, and Higher National Diploma in Critical Care Nursing. Training combines classroom learning, clinical practice, and Christian service. The school is an affiliate of Africa Gospel Church.',
             ],
             'vision' => [
                 'title' => 'Vision',
-                'text' => 'To seek to be a Christian Centre of Excellence for training by providing outstanding education.',
+                'text' => 'To train Christ-transformed and competent professionals serving humanity.',
             ],
             'mission' => [
                 'title' => 'Mission',
-                'text' => 'To inspire students to become servant leaders by modelling excellence in compassionate medical care while empowering them to go and do likewise to those who are in need.',
+                'text' => 'To prepare Christ-transformed professionals for competent service in a dynamic context through holistic quality training, research, and Bible-centred nourishment.',
             ],
             'motto' => [
                 'title' => 'Motto',
-                'text' => 'Caring in Christ\'s name',
+                'text' => 'Training for Christ\'s Service',
             ],
             'board_section_heading' => 'Board and management team',
             'board_intro' => 'Tenwek Hospital College Health Sciences is a training subsidiary of Tenwek Hospital. The Board that governs the school is therefore the same Board that governs the hospital.',
@@ -885,16 +909,16 @@ return [
                     ['label' => 'Internship year', 'description' => 'One year of mandatory internship so graduates enter practice with confidence.'],
                     ['label' => 'Christ-like formation', 'description' => 'Training that pairs clinical skill with compassionate, servant-hearted care.'],
                 ],
-                'overview' => 'With over 30 years\' experience in training highly coveted nursing care practitioners, Tenwek Hospital College of Health Sciences has begun offering a Diploma in Clinical Medicine. This is an accredited three-year course with a one-year mandatory internship. Our aim is to offer quality training in a compassionate, Christ-like manner, producing clinicians ready to serve their communities and country.',
+                'overview' => 'Tenwek Hospital College of Health Sciences offers a 3-year diploma in Clinical Medicine and Surgery. Graduates earn a basic diploma in Clinical Medicine and Surgery, prepared through classroom learning, clinical practice, and Christian service for competent care in hospitals and communities.',
                 'admissions' => [
                     'heading' => 'Admission requirements',
-                    'lead' => 'Those interested in pursuing a Diploma in Clinical Medicine must meet the requirements below.',
-                    'mean_grade' => 'KCSE mean grade of C Plain and above, or its equivalent.',
+                    'lead' => 'Those interested in pursuing a Diploma in Clinical Medicine & Surgery must meet the requirements below.',
+                    'mean_grade' => 'KCSE mean grade of at least C Plain.',
                     'subject_rules' => [
-                        'C Plain in English or Kiswahili',
-                        'C Plain in Biology or Biological Sciences',
+                        'C in English or Kiswahili',
+                        'C in Biology or Biological Sciences',
                         'C– (minus) in Chemistry',
-                        'C– (minus) in any of the following subjects: Mathematics, Physics, or Physical Sciences',
+                        'C– (minus) in either Mathematics, Physics, or Physical Sciences',
                     ],
                 ],
             ],
@@ -905,21 +929,22 @@ return [
                     ['label' => 'Clinical rounds', 'description' => 'Bedside training at Tenwek Hospital and partner sites.'],
                     ['label' => 'Community health', 'description' => 'Practical experience in communities around the college.'],
                 ],
-                'overview' => 'This is a three-and-a-half-year training programme that incorporates classroom education, clinical rounds, and community health practical learning in the communities around the school. We offer diversification in training and our students graduate as qualified midwives, general nursing practitioners, and community health nurses. This training equips them with the right skills to serve in diverse settings, making them among the best prepared in the industry.',
+                'overview' => 'A 3-year diploma training programme for Basic Kenya Registered Community Health Nurse (KRCHN). Nursing graduates earn a diploma in nursing, having qualified as midwives, general nurses, and community health nurses — incorporating classroom learning, clinical practice, and Christian service.',
                 'admissions' => [
                     'heading' => 'Admission requirements',
-                    'lead' => 'Those interested in pursuing a Diploma in Nursing must meet the requirements below.',
-                    'mean_grade' => 'KCSE mean grade of C Plain and above, or its equivalent.',
+                    'lead' => 'Those interested in pursuing a Diploma in Nursing (KRCHN) must meet the requirements below.',
+                    'mean_grade' => 'KCSE mean grade of at least C Plain.',
                     'subject_rules' => [
-                        'C Plain in English or Kiswahili',
-                        'C Plain in Biology or Biological Sciences',
-                        'C– (minus) in any of the following subjects: Mathematics, Physics, Chemistry, or Physical Sciences',
+                        'C in English or Kiswahili',
+                        'C in Biology or Biological Sciences',
+                        'C– (minus) in Chemistry',
+                        'C– (minus) in either Mathematics, Physics, or Physical Sciences',
                     ],
                 ],
             ],
         ],
         /**
-         * /cohs/social-life: https://tenwekhospitalcollege.ac.ke/cohs/social-life/
+         * /cohs/social-life — brochure student life
          */
         'social_life' => [
             'kicker' => 'Student life',
@@ -927,53 +952,57 @@ return [
             'headline_emphasis' => 'life',
             'pull_quote' => 'No man is an island!',
             'paragraphs' => [
-                'The school provides facilities and spaces for students to interact, grow, have fun, and most of all, to grow in relationship with Christ. Our students have access to table tennis and football, Christian Union challenges, and outdoor trips. They also volunteer in communities surrounding Tenwek.',
-                'You can visit us to get a feel of what studying at the Tenwek College of Health Sciences feels like!',
+                'The school has modern infrastructure and provides student accommodation in serene hostels that are conducive for study and relaxation. Students can participate in physical activities such as darts, table tennis, and volleyball, and they engage in Bible study and Christian Union fellowships.',
+                'Students gain experience not only in classrooms and practical training but also in county hospital facilities, the national referral hospital, and the surrounding communities. Visit us to feel what studying at the College of Health Sciences is like.',
             ],
             'highlights' => [
                 [
-                    'title' => 'Sports & games',
-                    'description' => 'Table tennis, football, and room to play and recharge between clinical days.',
+                    'title' => 'Hostels',
+                    'description' => 'Modern, serene student accommodation supportive of study and rest.',
                 ],
                 [
-                    'title' => 'Christian Union',
-                    'description' => 'Fellowship, challenges, and shared faith that anchors student life.',
+                    'title' => 'Sports & recreation',
+                    'description' => 'Darts, table tennis, volleyball, and space to recharge between clinical days.',
                 ],
                 [
-                    'title' => 'Outdoor trips',
-                    'description' => 'Excursions that build camaraderie and widen perspective beyond the classroom.',
+                    'title' => 'Christian Union & Bible study',
+                    'description' => 'Fellowship and shared faith that anchor student life.',
                 ],
                 [
-                    'title' => 'Community volunteering',
-                    'description' => 'Serving neighbourhoods around Tenwek as part of holistic formation.',
+                    'title' => 'Clinical placements',
+                    'description' => 'Experience in county hospitals, national referral care, and community settings.',
                 ],
             ],
             'hero_image' => env('TENWEK_COHS_SOCIAL_HERO', 'banner-nursing.jpg'),
         ],
         /**
-         * /cohs/facilities: https://tenwekhospitalcollege.ac.ke/cohs/facilities/
+         * /cohs/facilities — brochure campus facts
          */
         'facilities' => [
             'kicker' => 'Campus',
             'headline_before' => 'Our',
             'headline_emphasis' => 'facilities',
             'paragraphs' => [
-                'Our College of Health Sciences has modern buildings and infrastructure that give students a comfortable space and serene environment for learning.',
-                'We provide accommodation and meals for our students as part of the school fees arrangement. Our library is equipped with at least ten desktop computers and about 4,000 books to support research and revision.',
-                'The school has a skills laboratory laid out like a hospital ward, fitted with equipment for practical learning and demonstration.',
+                'The college building provides eight classrooms equipped with modern teaching aids, giving students a comfortable space and serene environment for learning.',
+                'We have a modern library kitted with desktop computers and more than 6,000 books to support learning and research. Student accommodation is available in school hostels.',
+                'The school has a modern skills laboratory equipped for practical learning. We are located in Bomet County, about 5 km from Bomet Town.',
             ],
             'highlights' => [
                 [
-                    'title' => 'Campus & accommodation',
-                    'description' => 'Modern buildings and a calm setting for study, plus residential care and meals alongside your fees.',
+                    'title' => 'Eight classrooms',
+                    'description' => 'Modern teaching aids in a calm campus setting designed for focused learning.',
                 ],
                 [
                     'title' => 'Library & ICT',
-                    'description' => 'A well-stocked library with desktop workstations for research and quiet revision.',
+                    'description' => 'Desktop computers and more than 6,000 books for research and revision.',
                 ],
                 [
                     'title' => 'Skills laboratory',
-                    'description' => 'Ward-style layout and equipment so students practise procedures in a realistic clinical space.',
+                    'description' => 'Modern equipment so students practise procedures before clinical placements.',
+                ],
+                [
+                    'title' => 'Hostels & location',
+                    'description' => 'On-campus hostels in Bomet County, about 5 km from Bomet Town.',
                 ],
             ],
             'hero_image' => env('TENWEK_COHS_FACILITIES_HERO', 'banner-nursing.jpg'),
@@ -983,13 +1012,18 @@ return [
             'location_lines' => [
                 'Silibwet Township, Bomet Central, Kenya',
                 'P.O. Box 39–20400, Bomet, Kenya',
+                'About 5 km from Bomet Town',
                 'Tenwek Hospital College · College of Health Sciences',
             ],
             'phones' => [
                 env('TENWEK_PUBLIC_PHONE', '+254 700 000 000'),
             ],
-            'email' => env('TENWEK_COHS_EMAIL', 'info@tenwekhospitalcollege.ac.ke'),
-            'office_hours_lines' => [],
+            'email' => env('TENWEK_COHS_EMAIL', 'shs@tenwekhosp.org'),
+            'office_hours_lines' => [
+                'Applications are received throughout the year.',
+                'Intakes: March and September.',
+                'A non-refundable application fee must accompany application forms.',
+            ],
             'social_links' => [],
         ],
     ],
