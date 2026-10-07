@@ -108,6 +108,12 @@ class CohsProgrammeApplicationController extends Controller
             }
         }
 
+        try {
+            Mail::raw('Hello '.$request->validated('full_name').",\n\nWe received your application for {$def['programme']}. Admissions will review it and contact you using the details provided.\n\nTenwek Hospital College", fn ($mail) => $mail->to($request->validated('email'))->subject('We received your application | Tenwek Hospital College'));
+        } catch (\Throwable $exception) {
+            report($exception);
+        }
+
         return redirect()
             ->route('cohs.programme-application', $form)
             ->with('status', __('Thank you. Your application has been received. We will contact you using the details you provided.'));

@@ -50,7 +50,7 @@ class ContactController extends Controller
             'user_agent' => substr((string) $request->userAgent(), 0, 512),
         ]);
 
-        $to = config('mail.from.address');
+        $to = config('tenwek.email_public');
         if ($to && filter_var($to, FILTER_VALIDATE_EMAIL)) {
             try {
                 Mail::raw(
@@ -65,6 +65,12 @@ class ContactController extends Controller
             } catch (\Throwable) {
                 // Submission is stored; mail can be retried from admin.
             }
+        }
+
+        try {
+            Mail::raw('Hello '.$payload['name'].",\n\nWe received your message and will route it to the appropriate team.\n\nTenwek Hospital College", fn ($message) => $message->to($payload['email'])->subject('We received your message | Tenwek Hospital College'));
+        } catch (\Throwable $exception) {
+            report($exception);
         }
 
         return back()->with('status', __('Thank you - your message has been received.'));

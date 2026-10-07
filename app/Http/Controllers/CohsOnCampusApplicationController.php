@@ -112,7 +112,7 @@ class CohsOnCampusApplicationController extends Controller
             ]),
         ]);
 
-        $to = config('mail.from.address');
+        $to = config('tenwek.cohs_landing.contact_page.email', config('tenwek.email_public'));
         if ($to && filter_var($to, FILTER_VALIDATE_EMAIL)) {
             try {
                 $lines = [
@@ -128,6 +128,12 @@ class CohsOnCampusApplicationController extends Controller
             } catch (\Throwable) {
                 // Stored; mail optional
             }
+        }
+
+        try {
+            Mail::raw('Hello '.$validated['first_name'].",\n\nWe received your College of Health Sciences application for ".($payload['programme_label'] ?? 'your selected programme').". Admissions will review your application and contact you.\n\nTenwek Hospital College", fn ($mail) => $mail->to($validated['email'])->subject('We received your COHS application'));
+        } catch (\Throwable $exception) {
+            report($exception);
         }
 
         return redirect()
