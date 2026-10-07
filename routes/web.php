@@ -88,11 +88,11 @@ Route::get('/news/{post}', [NewsPostController::class, 'show'])->name('news.show
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'store'])
-    ->middleware(['throttle:forms', 'arithmetic'])
+    ->middleware(['report.spam', 'throttle:forms', 'arithmetic'])
     ->name('contact.store');
 
 Route::post('/forms/math-challenge', [ArithmeticChallengeController::class, 'store'])
-    ->middleware('throttle:forms')
+    ->middleware(['report.spam', 'throttle:forms'])
     ->name('forms.math-challenge');
 
 Route::middleware('guest')->group(function (): void {
@@ -250,19 +250,19 @@ Route::middleware(['auth', 'active_user', 'role:super_admin|cohs_admin', 'manage
     });
 
 Route::post('/soc/fee/mpesa/stk', [SocMpesaStkController::class, 'initiate'])
-    ->middleware(['throttle:mpesa-stk', 'arithmetic'])
+    ->middleware(['report.spam', 'throttle:mpesa-stk', 'arithmetic'])
     ->name('soc.fee.mpesa.stk');
 Route::post('/payments/mpesa/stk-callback', [SocMpesaStkController::class, 'callback'])
     ->name('payments.mpesa.stk-callback');
 
 Route::get('/soc/register', [SocRegistrationController::class, 'show'])->name('soc.register');
 Route::post('/soc/register', [SocRegistrationController::class, 'store'])
-    ->middleware(['throttle:forms', 'arithmetic'])
+    ->middleware(['report.spam', 'throttle:forms', 'arithmetic'])
     ->name('soc.register.store');
 
 Route::get('/cohs/on-campus-application', [CohsOnCampusApplicationController::class, 'show'])->name('cohs.on-campus-application');
 Route::post('/cohs/on-campus-application', [CohsOnCampusApplicationController::class, 'store'])
-    ->middleware(['throttle:forms', 'arithmetic'])
+    ->middleware(['report.spam', 'throttle:forms', 'arithmetic'])
     ->name('cohs.on-campus-application.store');
 
 Route::get('/cohs/apply/{form}', [CohsProgrammeApplicationController::class, 'show'])
@@ -270,7 +270,7 @@ Route::get('/cohs/apply/{form}', [CohsProgrammeApplicationController::class, 'sh
     ->name('cohs.programme-application');
 Route::post('/cohs/apply/{form}', [CohsProgrammeApplicationController::class, 'store'])
     ->where('form', 'clinical-medicine|critical-care-nursing|hnd-cardiac-perfusion|hnd-trauma-emergency|hd-cardiovascular-perfusion|krchn')
-    ->middleware(['throttle:forms', 'arithmetic'])
+    ->middleware(['report.spam', 'throttle:forms', 'arithmetic'])
     ->name('cohs.programme-application.store');
 
 Route::get('/cohs/off-campus-application', function () {

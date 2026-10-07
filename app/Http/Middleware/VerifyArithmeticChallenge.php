@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Support\Forms\ArithmeticChallenge;
+use App\Support\SpamActivityReporter;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,7 @@ class VerifyArithmeticChallenge
         $answer = $request->input('math_challenge_answer');
 
         if (! ArithmeticChallenge::verify(is_string($token) ? $token : null, $answer)) {
+            SpamActivityReporter::record($request, (string) ($request->route()?->getName() ?: $request->path()), 'arithmetic_failed');
             $message = __('Please solve the arithmetic check correctly to continue.');
 
             if ($request->expectsJson() || $request->ajax()) {

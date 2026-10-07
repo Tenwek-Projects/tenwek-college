@@ -33,6 +33,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'manages_soc' => EnsureUserCanManageSoc::class,
             'manages_cohs' => EnsureUserCanManageCohs::class,
             'arithmetic' => VerifyArithmeticChallenge::class,
+            'report.spam' => \App\Http\Middleware\ReportSpamActivity::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
