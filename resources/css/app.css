@@ -201,6 +201,120 @@
         );
     }
 
+    /** SOC academic programmes: crisp editorial contrast and clear study pathways. */
+    .soc-academic-crumb-band {
+        background-color: #2d428b;
+    }
+
+    .soc-academic-hero {
+        border-bottom: 1px solid #e2d9eb;
+        background-color: #f3eff7;
+    }
+
+    .soc-academic-kicker,
+    .soc-academic-future-kicker,
+    .soc-academic-cta-kicker {
+        color: #88601f;
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        line-height: 1.4;
+        text-transform: uppercase;
+    }
+
+    .soc-academic-title,
+    .soc-academic-heading,
+    .soc-academic-card-title {
+        color: #25212c;
+        font-weight: 700;
+        letter-spacing: -0.025em;
+    }
+
+    .soc-academic-lead,
+    .soc-academic-copy {
+        color: #45404b;
+    }
+
+    .soc-academic-overview,
+    .soc-academic-specialisations,
+    .soc-academic-cta-wrap {
+        background-color: #fff;
+    }
+
+    .soc-academic-levels {
+        background-color: #f3eff7;
+    }
+
+    .soc-academic-level-card {
+        border-color: #d9d0e2;
+        border-top-color: #57356a;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgb(37 33 44 / 0.045), 0 14px 34px rgb(55 38 72 / 0.06);
+        transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    .soc-academic-level-card:hover {
+        border-color: #ac98bd;
+        border-top-color: #3f2357;
+        box-shadow: 0 8px 18px rgb(37 33 44 / 0.08), 0 22px 44px rgb(55 38 72 / 0.11);
+        transform: translateY(-2px);
+    }
+
+    .soc-academic-badge {
+        background-color: #eee7f3;
+        color: #4d2a61;
+    }
+
+    .soc-academic-link {
+        color: #4d2a61;
+    }
+
+    .soc-academic-specialisation-list {
+        border-top: 1px solid #e1dbe6;
+    }
+
+    .soc-academic-specialisation {
+        border-bottom: 1px solid #e1dbe6;
+        color: #25212c;
+    }
+
+    .soc-academic-specialisation:hover .soc-academic-card-title {
+        color: #4d2a61;
+    }
+
+    .soc-academic-future-panel,
+    .soc-academic-cta {
+        background: linear-gradient(118deg, #48265f 0%, #3e2d70 58%, #2d428b 100%);
+        box-shadow: 0 12px 34px rgb(54 34 78 / 0.16);
+    }
+
+    .soc-academic-future-kicker,
+    .soc-academic-cta-kicker {
+        color: #f0c56d;
+    }
+
+    .soc-academic-future-link,
+    .soc-academic-cta-primary {
+        background-color: #f0c56d;
+        color: #2d2137;
+    }
+
+    .soc-academic-future-link:hover,
+    .soc-academic-cta-primary:hover {
+        background-color: #f7d78e;
+    }
+
+    .soc-academic-cta-secondary {
+        border-color: rgb(255 255 255 / 0.4);
+        background-color: rgb(255 255 255 / 0.06);
+        color: #fff;
+    }
+
+    .soc-academic-cta-secondary:hover {
+        border-color: rgb(255 255 255 / 0.72);
+        background-color: rgb(255 255 255 / 0.13);
+    }
+
     /** SOC landing - section washes from live site */
     .thc-soc-skin .soc-landing-about {
         background-color: #f5f4f0;
