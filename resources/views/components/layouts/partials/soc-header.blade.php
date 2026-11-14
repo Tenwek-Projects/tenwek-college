@@ -194,7 +194,7 @@
             </button>
             <a
                 href="{{ route('soc.register') }}"
-                class="hidden rounded-full border border-thc-maroon/25 bg-thc-maroon/8 px-3 py-2 text-xs font-semibold text-thc-maroon shadow-sm transition hover:bg-thc-maroon hover:text-white min-[480px]:inline-flex xl:px-4 xl:text-sm {{ $isSocRegister ? 'bg-thc-maroon text-white ring-2 ring-thc-maroon/45 hover:bg-thc-maroon hover:text-white' : '' }}"
+                class="hidden rounded-full border border-thc-maroon/30 bg-thc-maroon/10 px-3 py-2 text-xs font-semibold text-thc-maroon shadow-sm transition hover:bg-thc-maroon hover:text-white min-[480px]:inline-flex xl:px-4 xl:text-sm {{ $isSocRegister ? 'font-bold ring-2 ring-thc-maroon/45' : '' }}"
                 @if($isSocRegister) aria-current="page" @endif
                 @click="openMega = null"
             >Register Online</a>
