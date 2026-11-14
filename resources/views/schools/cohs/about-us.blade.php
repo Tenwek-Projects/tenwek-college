@@ -4,132 +4,131 @@
     $histPath = $A['history_image'] ?? 'banner-nursing.jpg';
     $historyImage = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($histPath) ? $histPath : null) ?? asset(is_string($histPath) ? $histPath : 'banner-nursing.jpg');
     $historyAlt = $A['history_image_alt'] ?? '';
+    $heroImage = asset('images/image-2.jpg');
+    $todayImage = asset('images/image-1.jpg');
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="cohs" :school="$school">
-    <div class="relative overflow-hidden cohs-page-hero">
-        <div class="pointer-events-none absolute -right-24 top-1/2 hidden h-[min(28rem,50vh)] w-[min(28rem,45vw)] -translate-y-1/2 rounded-full bg-thc-cohs-sky/30 blur-3xl md:block" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute -left-20 top-8 h-40 w-40 rounded-full bg-thc-cohs-coral/15 blur-2xl" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute bottom-0 left-1/3 h-32 w-64 rounded-full bg-thc-cohs-blue/15 blur-3xl" aria-hidden="true"></div>
-        <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-            <nav class="mb-8 text-sm text-thc-text/65" aria-label="Breadcrumb" data-reveal>
+    <section class="relative isolate overflow-hidden bg-[#0b1953] text-white" aria-labelledby="cohs-about-title">
+        <div class="absolute inset-0 z-0" aria-hidden="true">
+            <img src="{{ $heroImage }}" alt="" class="h-full w-full object-cover object-center">
+        </div>
+        <div class="absolute inset-0 z-[1] bg-[linear-gradient(90deg,#08164d_0%,rgba(8,22,77,.98)_25%,rgba(8,22,77,.82)_43%,rgba(8,22,77,.2)_72%,rgba(8,22,77,.03)_100%)]" aria-hidden="true"></div>
+        <div class="absolute inset-0 z-[1] bg-gradient-to-t from-[#08164d]/45 via-transparent to-[#08164d]/10" aria-hidden="true"></div>
+        <div class="relative z-10 mx-auto flex min-h-[23rem] max-w-7xl flex-col justify-center px-5 pb-14 pt-8 sm:px-8 lg:min-h-[22rem] lg:px-10 lg:pb-16">
+            <nav class="mb-8 text-xs font-medium text-white/75 sm:text-sm" aria-label="Breadcrumb" data-reveal>
                 <ol class="flex flex-wrap items-center gap-2">
-                    <li><a href="{{ route('home') }}" class="transition hover:text-thc-cohs-blue">Home</a></li>
-                    <li aria-hidden="true" class="text-thc-text/35">/</li>
-                    <li><a href="{{ route('schools.show', $school) }}" class="transition hover:text-thc-cohs-blue">{{ $school->name }}</a></li>
-                    <li aria-hidden="true" class="text-thc-text/35">/</li>
-                    <li class="font-medium text-thc-navy">{{ $page->title }}</li>
+                    <li><a href="{{ route('home') }}" class="transition hover:text-white">Home</a></li>
+                    <li aria-hidden="true" class="text-white/50">/</li>
+                    <li><a href="{{ route('schools.show', $school) }}" class="transition hover:text-white">{{ $school->name }}</a></li>
+                    <li aria-hidden="true" class="text-white/50">/</li>
+                    <li class="font-semibold text-white">About Us</li>
                 </ol>
             </nav>
-
-            <header class="max-w-3xl" data-reveal>
-                <p class="thc-kicker">{{ $A['kicker'] }}</p>
-                <h1 class="mt-4 bg-gradient-to-r from-thc-cohs-indigo via-thc-cohs-footer to-thc-cohs-blue bg-clip-text font-serif text-4xl font-semibold tracking-tight text-transparent sm:text-5xl lg:text-[3.25rem]">
+            <div class="max-w-2xl" data-reveal>
+                <p class="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-white/85">
+                    <span>About us</span><span class="h-px w-24 bg-white/70 sm:w-36" aria-hidden="true"></span>
+                </p>
+                <h1 id="cohs-about-title" class="mt-4 max-w-xl font-serif text-4xl font-semibold leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
                     {{ $A['headline'] }}
                 </h1>
-                @if(filled($page->excerpt))
-                    <p class="mt-6 text-lg leading-relaxed text-thc-text/90 sm:text-xl">{{ $page->excerpt }}</p>
-                @else
-                    <p class="mt-6 text-lg leading-relaxed text-thc-text/85 sm:text-xl">
-                        Our history, vision, mission, and the hospital board that governs the College of Health Sciences.
-                    </p>
-                @endif
-            </header>
-        </div>
-    </div>
-
-    <section
-        class="border-b border-thc-cohs-blue/15 bg-white"
-        aria-labelledby="cohs-history-heading"
-    >
-        <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-            <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-20" data-reveal>
-                <div class="min-w-0 lg:pr-4">
-                    <div class="inline-flex items-center gap-2 rounded-full border border-thc-cohs-coral/30 bg-thc-cohs-coral/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-thc-cohs-coral">
-                        <span class="h-1.5 w-1.5 rounded-full bg-thc-cohs-coral" aria-hidden="true"></span>
-                        Since 1987
-                    </div>
-                    <h2 id="cohs-history-heading" class="mt-4 font-serif text-2xl font-semibold text-thc-navy sm:text-3xl lg:text-[2rem]">
-                        {{ $A['history_heading'] }}
-                    </h2>
-                    <div class="mt-6 space-y-4 border-l-2 border-thc-cohs-blue/35 pl-5 text-base leading-relaxed text-thc-text/90 sm:text-lg">
-                        @foreach($A['history_paragraphs'] as $p)
-                            <p>{{ $p }}</p>
-                        @endforeach
-                    </div>
-                    <div class="mt-8 flex flex-wrap gap-3">
-                        <a href="{{ route('schools.pages.show', [$school, 'diploma-in-nursing']) }}" class="thc-btn-ghost">Diploma in Nursing</a>
-                        <a href="{{ route('schools.pages.show', [$school, 'diploma-in-clinical-medicine']) }}" class="inline-flex items-center gap-2 text-sm font-semibold text-thc-cohs-blue transition hover:text-thc-cohs-indigo hover:underline">
-                            Clinical Medicine →
-                        </a>
-                    </div>
-                </div>
-                @if(filled($A['history_image'] ?? null))
-                    <div class="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none">
-                        <div class="pointer-events-none absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-thc-cohs-blue/25 via-thc-cohs-sky/20 to-thc-cohs-coral/15 opacity-90 blur-sm" aria-hidden="true"></div>
-                        <div class="pointer-events-none absolute -right-4 -bottom-4 hidden h-24 w-24 rounded-3xl border-2 border-dashed border-thc-cohs-coral/40 sm:block" aria-hidden="true"></div>
-                        <figure class="relative overflow-hidden rounded-3xl shadow-[var(--shadow-thc-card-hover)] ring-2 ring-white ring-offset-2 ring-offset-thc-cohs-blue/20">
-                            <div class="absolute inset-x-0 top-0 z-10 h-1.5 bg-gradient-to-r from-thc-cohs-indigo via-thc-cohs-blue to-thc-cohs-coral" aria-hidden="true"></div>
-                            <img
-                                src="{{ $historyImage }}"
-                                alt="{{ $historyAlt }}"
-                                class="aspect-[4/5] w-full object-cover sm:aspect-[5/6] lg:aspect-[4/5] lg:min-h-[20rem]"
-                                loading="lazy"
-                                decoding="async"
-                            >
-                            <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-thc-cohs-indigo/95 via-thc-cohs-footer/50 to-transparent px-5 py-6 pt-16 text-sm font-medium text-white/95">
-                                {{ $school->name }}
-                            </figcaption>
-                        </figure>
-                    </div>
-                @endif
+                <span class="mt-4 block h-1.5 w-40 -rotate-2 rounded-full bg-violet-500" aria-hidden="true"></span>
+                <p class="mt-5 max-w-lg text-base leading-relaxed text-white/95 sm:text-lg">
+                    Our history, vision, mission, and the hospital board that governs the College of Health Sciences.
+                </p>
             </div>
+        </div>
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-5 bg-white [clip-path:ellipse(58%_100%_at_50%_100%)]" aria-hidden="true"></div>
+    </section>
+
+    <section class="relative z-10 border-b border-thc-cohs-blue/10 bg-white" aria-label="What defines our college">
+        <div class="mx-auto grid max-w-7xl gap-5 px-5 py-8 sm:grid-cols-2 sm:px-8 lg:grid-cols-4 lg:gap-0 lg:px-10 lg:py-7">
+            @foreach([
+                ['title' => 'Quality Training', 'text' => 'Professional and competent graduates', 'path' => 'M3 7.5 12 3l9 4.5-9 4.5-9-4.5Zm3.5 2v5c3.5 2.7 7.5 2.7 11 0v-5M21 7.5v6'],
+                ['title' => 'Christ-Centred', 'text' => 'Service rooted in Christian values', 'path' => 'M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m6-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm10 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75'],
+                ['title' => 'Practical Learning', 'text' => 'Hands-on clinical experience at Tenwek Hospital', 'path' => 'M8 12h8m-8 4h5M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm7 0v5h5'],
+                ['title' => 'Community Impact', 'text' => 'Serving communities in Kenya and beyond', 'path' => 'M12 22V12m0 4C6 16 4 12 4 7c5 0 8 2 8 8Zm0-3c0-5 3-8 8-8 0 5-3 8-8 8Z'],
+            ] as $feature)
+                <div class="flex items-center gap-4 border-thc-cohs-blue/15 px-3 py-2 sm:px-5 lg:border-r lg:px-6 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0" data-reveal>
+                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-thc-cohs-wash text-thc-cohs-indigo ring-1 ring-thc-cohs-blue/10" aria-hidden="true">
+                        <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="{{ $feature['path'] }}"/></svg>
+                    </span>
+                    <span><strong class="block text-sm font-bold text-thc-cohs-indigo">{{ $feature['title'] }}</strong><span class="mt-1 block text-sm leading-snug text-thc-navy/85">{{ $feature['text'] }}</span></span>
+                </div>
+            @endforeach
         </div>
     </section>
 
-    <section class="cohs-landing-programmes border-b border-thc-cohs-blue/15" aria-labelledby="cohs-vmm-heading">
-        <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-            <div class="mx-auto max-w-2xl text-center" data-reveal>
-                <p class="thc-kicker">Who we are</p>
-                <h2 id="cohs-vmm-heading" class="mt-4 font-serif text-3xl font-semibold text-thc-navy sm:text-4xl">
-                    Vision, mission &amp; motto
-                </h2>
-                <p class="mt-4 text-lg text-thc-text/85">
-                    The compass that guides training, clinical practice, and Christian witness at the college.
-                </p>
+    <section class="border-b border-thc-cohs-blue/10 bg-white" aria-labelledby="cohs-history-heading">
+        <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 sm:px-8 lg:grid-cols-2 lg:gap-14 lg:px-10 lg:py-20">
+            <div data-reveal>
+                <span class="inline-flex items-center gap-2 rounded-full bg-fuchsia-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-thc-cohs-indigo"><span aria-hidden="true">▣</span> Since 1987</span>
+                <h2 id="cohs-history-heading" class="mt-4 font-serif text-3xl font-semibold tracking-tight text-thc-cohs-indigo sm:text-4xl">{{ $A['history_heading'] }}</h2>
+                <span class="mt-3 block h-1 w-16 -rotate-2 rounded-full bg-violet-500" aria-hidden="true"></span>
+                <div class="mt-5 space-y-3 text-[15px] leading-relaxed text-thc-navy/90 sm:text-base">
+                    @foreach($A['history_paragraphs'] as $p)
+                        <p>{{ $p }}</p>
+                    @endforeach
+                </div>
+                <div class="mt-7 flex flex-wrap gap-3">
+                    <a href="{{ route('schools.pages.show', [$school, 'diploma-in-nursing']) }}" class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-thc-cohs-indigo px-6 py-3 text-sm font-bold text-white shadow-md transition hover:bg-thc-cohs-blue">Diploma in Nursing <span aria-hidden="true">→</span></a>
+                    <a href="{{ route('schools.pages.show', [$school, 'diploma-in-clinical-medicine']) }}" class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-thc-cohs-indigo px-6 py-3 text-sm font-bold text-thc-cohs-indigo transition hover:bg-thc-cohs-wash">Clinical Medicine <span aria-hidden="true">→</span></a>
+                </div>
             </div>
+            @if(filled($A['history_image'] ?? null))
+                <div class="relative mx-auto w-full max-w-xl lg:max-w-none" data-reveal>
+                    <div class="absolute -right-4 -top-4 h-28 w-28 rounded-[1.75rem] bg-gradient-to-br from-violet-500 to-indigo-600 sm:-right-5 sm:-top-5 sm:h-32 sm:w-32" aria-hidden="true"></div>
+                    <figure class="relative overflow-hidden rounded-[1.75rem] border-4 border-white shadow-[var(--shadow-thc-card-hover)]">
+                        <img src="{{ $historyImage }}" alt="{{ $historyAlt }}" class="aspect-[4/3] w-full object-cover sm:aspect-[5/4]" loading="lazy" decoding="async">
+                        <figcaption class="absolute bottom-5 left-5 inline-flex items-center gap-3 rounded-2xl bg-white/95 px-4 py-3 text-sm font-bold text-thc-cohs-indigo shadow-lg backdrop-blur">
+                            <svg class="h-7 w-7 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Zm0 0V21m4-13h8m-8 4h8"/></svg>
+                            <span>College of<br>Health Sciences</span>
+                        </figcaption>
+                    </figure>
+                    <div class="absolute -bottom-3 right-3 h-5 w-1/2 -skew-x-12 rounded-full bg-gradient-to-r from-sky-400 via-indigo-600 to-violet-500" aria-hidden="true"></div>
+                </div>
+            @endif
+        </div>
+    </section>
 
-            <div class="mt-12 grid items-stretch gap-6 lg:grid-cols-3 lg:gap-8">
-                @foreach([
-                    'vision' => ['bar' => 'from-thc-cohs-indigo via-thc-cohs-footer to-thc-cohs-blue', 'icon_bg' => 'bg-thc-cohs-wash text-thc-cohs-indigo ring-thc-cohs-blue/25', 'wash' => 'from-thc-cohs-wash/90'],
-                    'mission' => ['bar' => 'from-thc-cohs-blue via-thc-cohs-sky to-thc-cohs-blue', 'icon_bg' => 'bg-thc-cohs-blue/10 text-thc-cohs-blue ring-thc-cohs-blue/25', 'wash' => 'from-thc-cohs-sky/15'],
-                    'motto' => ['bar' => 'from-thc-cohs-coral via-thc-cohs-footer to-thc-cohs-indigo', 'icon_bg' => 'bg-thc-cohs-coral/10 text-thc-cohs-coral ring-thc-cohs-coral/25', 'wash' => 'from-thc-cohs-coral/[0.08]'],
-                ] as $key => $meta)
+    <section class="bg-thc-cohs-wash/70" aria-labelledby="cohs-guiding-heading">
+        <div class="mx-auto max-w-7xl px-5 py-9 sm:px-8 lg:px-10 lg:py-10">
+            <h2 id="cohs-guiding-heading" class="sr-only">What guides us</h2>
+            <div class="grid gap-7 rounded-3xl border border-thc-cohs-blue/10 bg-white/50 p-6 sm:p-8 lg:grid-cols-3 lg:gap-0">
+                @foreach(['mission', 'vision', 'motto'] as $key)
                     @php $block = $A[$key]; @endphp
-                    <article
-                        class="group flex h-full flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-gradient-to-br {{ $meta['wash'] }} to-white shadow-[var(--shadow-thc-card)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-thc-card-hover)]"
-                        data-reveal
-                    >
-                        <div class="h-1.5 shrink-0 bg-gradient-to-r {{ $meta['bar'] }}" aria-hidden="true"></div>
-                        <div class="flex flex-1 flex-col p-8 sm:p-9">
-                            <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl ring-1 {{ $meta['icon_bg'] }}" aria-hidden="true">
-                                @if($key === 'vision')
-                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                @elseif($key === 'mission')
-                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
-                                @else
-                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
-                                @endif
-                            </span>
-                            <h3 class="mt-5 font-serif text-xl font-semibold text-thc-navy">{{ $block['title'] }}</h3>
-                            <p class="mt-4 flex-1 text-base leading-relaxed text-thc-text/90">{{ $block['text'] }}</p>
-                        </div>
+                    <article class="flex gap-4 border-thc-cohs-blue/20 lg:px-7 lg:first:pl-2 lg:last:pr-2 {{ $loop->iteration < 3 ? 'lg:border-r' : '' }}" data-reveal>
+                        <span class="mt-1 shrink-0 text-thc-cohs-blue" aria-hidden="true">
+                            @if($key === 'mission')
+                                <svg class="h-9 w-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.7"/><circle cx="12" cy="12" r="5" stroke-width="1.7"/><circle cx="12" cy="12" r="1" stroke-width="1.7"/></svg>
+                            @elseif($key === 'vision')
+                                <svg class="h-9 w-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3" stroke-width="1.7"/></svg>
+                            @else
+                                <svg class="h-9 w-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg>
+                            @endif
+                        </span>
+                        <div><h3 class="font-serif text-xl font-bold text-thc-cohs-indigo">Our {{ $block['title'] }}</h3><p class="mt-2 text-sm leading-relaxed text-thc-navy/85">{{ $block['text'] }}</p></div>
                     </article>
                 @endforeach
             </div>
         </div>
     </section>
 
+    <section class="overflow-hidden bg-white" aria-labelledby="cohs-today-heading">
+        <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 sm:px-8 lg:grid-cols-2 lg:gap-14 lg:px-10 lg:py-16">
+            <div class="relative mx-auto w-full max-w-xl lg:mx-0 lg:max-w-none" data-reveal>
+                <div class="absolute -left-4 -top-4 h-28 w-28 rounded-[2rem] bg-violet-200 sm:-left-5 sm:-top-5 sm:h-32 sm:w-32" aria-hidden="true"></div>
+                <img src="{{ $todayImage }}" alt="Health sciences students learning together at Tenwek Hospital College" class="relative aspect-[4/3] w-full rounded-[1.75rem] object-cover shadow-[var(--shadow-thc-card-hover)]" loading="lazy" decoding="async">
+            </div>
+            <div data-reveal>
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-thc-cohs-indigo">The college today</p>
+                <h2 id="cohs-today-heading" class="mt-4 max-w-xl font-serif text-3xl font-semibold leading-tight tracking-tight text-thc-cohs-indigo sm:text-4xl">Training health professionals with compassion</h2>
+                <span class="mt-3 block h-1 w-16 -rotate-2 rounded-full bg-violet-500" aria-hidden="true"></span>
+                <p class="mt-5 max-w-xl text-base leading-relaxed text-thc-navy/85 sm:text-lg">We combine classroom learning, clinical practice, and Christian service to equip competent, ethical, and compassionate health professionals who make a difference in their communities.</p>
+                <a href="{{ route('schools.pages.show', [$school, 'about-us']) }}#cohs-guiding-heading" class="mt-7 inline-flex min-h-11 items-center justify-center gap-3 rounded-full bg-thc-cohs-indigo px-6 py-3 text-sm font-bold text-white shadow-md transition hover:bg-thc-cohs-blue">Learn more about us <span aria-hidden="true">→</span></a>
+            </div>
+        </div>
+    </section>
     <section class="cohs-landing-testimonials border-b border-thc-cohs-blue/15" aria-labelledby="cohs-board-team-heading">
         <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
             <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)]" data-reveal>
