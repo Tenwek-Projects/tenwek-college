@@ -38,11 +38,11 @@
                         <figure class="mx-auto w-full max-w-[20rem] shrink-0 lg:mx-0 lg:w-[min(100%,18rem)] xl:w-[20rem]">
                             @php $pImage = $partner['image'] ?? null; @endphp
                             @if(filled($pImage))
-                                <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-thc-navy/[0.03] shadow-sm ring-1 ring-thc-navy/5">
+                                <div class="flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-sm ring-1 ring-thc-navy/5">
                                     <img
                                         src="{{ \App\Support\Soc\SocLandingRepository::publicMediaUrl($pImage) ?? asset($pImage) }}"
                                         alt="{{ $partner['name'] }}"
-                                        class="aspect-[4/3] w-full object-cover object-center"
+                                        class="h-full w-full object-contain object-center p-3 sm:p-4"
                                         loading="lazy"
                                         decoding="async"
                                         width="640"
