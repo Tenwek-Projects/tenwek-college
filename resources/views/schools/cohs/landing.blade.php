@@ -203,6 +203,11 @@
             >
                 <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)]">
                     @foreach($testimonials['items'] as $ti => $t)
+                        @php
+                            $voiceImagePath = $t['image'] ?? $testimonials['fallback_image'] ?? 'images/image-1.jpg';
+                            $voiceImageUrl = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($voiceImagePath) ? $voiceImagePath : null) ?? asset('images/image-1.jpg');
+                            $voiceImageAlt = ! empty($t['image']) ? ('Photo accompanying testimonial from '.$t['name']) : 'College of Health Sciences students learning together at Tenwek';
+                        @endphp
                         <div
                             x-show="active === {{ $ti }}"
                             x-transition:enter="transition ease-out duration-300"
@@ -211,20 +216,31 @@
                             x-transition:leave="transition ease-in duration-200"
                             x-transition:leave-start="opacity-100"
                             x-transition:leave-end="opacity-0"
-                            class="px-8 py-12 sm:px-12 sm:py-14"
+                            class="grid md:min-h-[30rem] md:grid-cols-[minmax(15rem,0.9fr)_minmax(0,1.4fr)]"
                             role="tabpanel"
                             @if($ti > 0) style="display: none;" @endif
                         >
-                            <p class="text-xs font-bold uppercase tracking-[0.18em] text-thc-royal">{{ $t['role'] }}</p>
-                            <blockquote class="mt-6 font-serif text-xl font-normal leading-relaxed text-thc-navy sm:text-2xl">
-                                “{{ $t['quote'] }}”
-                            </blockquote>
-                            <footer class="mt-8 flex items-center gap-4">
-                                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-thc-cohs-coral to-thc-cohs-indigo text-sm font-bold text-white" aria-hidden="true">{{ \Illuminate\Support\Str::substr($t['name'], 0, 1) }}</span>
-                                <div>
-                                    <cite class="not-italic text-base font-semibold text-thc-navy">{{ $t['name'] }}</cite>
-                                </div>
-                            </footer>
+                            <figure class="flex min-h-[15rem] items-center justify-center overflow-hidden border-b border-slate-200 bg-slate-50 p-3 sm:p-5 md:min-h-full md:border-b-0 md:border-r">
+                                <img
+                                    src="{{ e($voiceImageUrl) }}"
+                                    alt="{{ e($voiceImageAlt) }}"
+                                    class="max-h-[30rem] w-full object-contain"
+                                    loading="lazy"
+                                >
+                            </figure>
+                            <div class="flex flex-col justify-center px-7 py-9 sm:px-10 sm:py-12 lg:px-14">
+                                <p class="text-xs font-bold uppercase tracking-[0.18em] text-thc-royal">{{ $t['role'] }}</p>
+                                <div class="mt-4 h-1 w-12 rounded-full bg-blue-600" aria-hidden="true"></div>
+                                <blockquote class="mt-5 font-serif text-xl font-normal leading-relaxed text-thc-navy sm:text-2xl">
+                                    “{{ $t['quote'] }}”
+                                </blockquote>
+                                <footer class="mt-8 flex items-center gap-4 border-t border-slate-200 pt-6">
+                                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-700 text-sm font-bold text-white" aria-hidden="true">{{ \Illuminate\Support\Str::substr($t['name'], 0, 1) }}</span>
+                                    <div>
+                                        <cite class="not-italic text-base font-semibold text-thc-navy">{{ $t['name'] }}</cite>
+                                    </div>
+                                </footer>
+                            </div>
                         </div>
                     @endforeach
                 </div>

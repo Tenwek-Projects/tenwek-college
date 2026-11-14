@@ -31,7 +31,7 @@
     </div>
 </div>
 
-<x-admin.ui.group label="Photo" for="image" name="image" hint="Optional. JPG or PNG recommended.">
+<x-admin.ui.group label="Photo" for="image" name="image" hint="Optional. Appears beside this Student voices quote. The full image is shown without cropping; JPG or PNG recommended.">
     <input type="file" name="image" id="image" accept="image/*" class="admin-file-input">
     @if ($t?->image_path)
         <p class="admin-hint">Current: <span class="admin-code">{{ $t->image_path }}</span></p>
