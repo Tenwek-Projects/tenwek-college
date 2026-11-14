@@ -30,19 +30,21 @@
         <div class="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden lg:min-w-0">
             <x-admin.topbar :header="$header" :breadcrumbs="$breadcrumbs" :page-hint="$cohsPageHint ?? null" />
             <main class="admin-main min-h-0 flex-1 overflow-y-auto overscroll-y-contain p-4 sm:p-6 lg:p-8">
-                @if (session('status'))
-                    <div class="admin-alert-success mb-6">{{ session('status') }}</div>
-                @endif
-                @if ($errors->any())
-                    <div class="admin-alert-error mb-6" role="alert">
-                        <ul class="list-inside list-disc space-y-1">
-                            @foreach ($errors->all() as $err)
-                                <li>{{ $err }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                {{ $slot }}
+                <div class="admin-content">
+                    @if (session('status'))
+                        <div class="admin-alert-success mb-6">{{ session('status') }}</div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="admin-alert-error mb-6" role="alert">
+                            <ul class="list-inside list-disc space-y-1">
+                                @foreach ($errors->all() as $err)
+                                    <li>{{ $err }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    {{ $slot }}
+                </div>
             </main>
         </div>
     </div>

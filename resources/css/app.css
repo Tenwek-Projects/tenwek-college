@@ -606,6 +606,10 @@
         @apply border border-thc-navy/10 bg-white;
     }
 
+    .admin-content {
+        @apply mx-auto w-[90%] min-w-0;
+    }
+
     .admin-stat-card {
         border-radius: var(--radius-thc-card);
         box-shadow: var(--shadow-thc-card);
@@ -641,15 +645,15 @@
     }
 
     .admin-page {
-        @apply mx-auto w-full max-w-5xl space-y-6;
+        @apply w-full max-w-none space-y-6;
     }
 
     .admin-page-narrow {
-        @apply mx-auto w-full max-w-2xl space-y-5;
+        @apply w-full max-w-none space-y-5;
     }
 
     .admin-page-wide {
-        @apply mx-auto w-full max-w-6xl space-y-6;
+        @apply w-full max-w-none space-y-6;
     }
 
     .admin-form-stack {
