@@ -371,7 +371,11 @@
                         </div>
                         <address class="mt-3 space-y-1 text-sm leading-relaxed text-slate-700 not-italic">
                             @foreach($contactBlock['location_lines'] as $line)
-                                <div>{{ $line }}</div>
+                                <div @class([
+                                    'font-semibold text-slate-900' => $loop->iteration <= 2,
+                                    'mt-3 inline-flex rounded-full bg-blue-50 px-3 py-1 font-semibold text-blue-900' => $loop->iteration === 3,
+                                    'mt-2 border-t border-slate-100 pt-2 text-xs font-medium text-slate-600' => $loop->iteration > 3,
+                                ])>{{ $line }}</div>
                             @endforeach
                         </address>
                     </article>
@@ -383,9 +387,14 @@
                             </span>
                             <h4 class="text-sm font-bold text-slate-900">Phone</h4>
                         </div>
-                        <ul class="mt-3 space-y-2 text-sm font-semibold">
+                        <ul class="mt-3 space-y-2">
                             @foreach($contactBlock['phones'] as $phone)
-                                <li><a href="tel:{{ preg_replace('/[^0-9+]/', '', \Illuminate\Support\Str::before($phone, ',')) }}" class="text-blue-800 underline-offset-4 hover:text-blue-950 hover:underline">{{ $phone }}</a></li>
+                                <li>
+                                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', \Illuminate\Support\Str::before($phone, ',')) }}" class="cohs-contact-phone-link">
+                                        <span>{{ $phone }}</span>
+                                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17 17 7M8 7h9v9"/></svg>
+                                    </a>
+                                </li>
                             @endforeach
                         </ul>
                     </article>
@@ -397,7 +406,10 @@
                             </span>
                             <h4 class="text-sm font-bold text-slate-900">Email</h4>
                         </div>
-                        <a href="mailto:{{ $contactBlock['email'] }}" class="mt-3 inline-block break-all text-sm font-semibold text-blue-800 underline-offset-4 hover:text-blue-950 hover:underline">{{ $contactBlock['email'] }}</a>
+                        <a href="mailto:{{ $contactBlock['email'] }}" class="cohs-contact-email-link mt-3" aria-label="Email the College at {{ $contactBlock['email'] }}">
+                            <span class="break-all">{{ $contactBlock['email'] }}</span>
+                            <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17 17 7M8 7h9v9"/></svg>
+                        </a>
                     </article>
 
                     <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
@@ -405,17 +417,24 @@
                             <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-700" aria-hidden="true">
                                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.75"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 7v5l3 2"/></svg>
                             </span>
-                            <h4 class="text-sm font-bold text-slate-900">Office hours</h4>
+                            <h4 class="text-sm font-bold text-slate-900">Admissions information</h4>
                         </div>
-                        <div class="mt-3 space-y-1 text-sm leading-relaxed text-slate-700">
+                        <div class="mt-3 space-y-2 text-sm leading-relaxed text-slate-700">
                             @if(count($contactBlock['office_hours_lines'] ?? []) > 0)
-                                @foreach($contactBlock['office_hours_lines'] as $hourLine)
-                                    <p>{{ $hourLine }}</p>
+                                @foreach($contactBlock['office_hours_lines'] as $hourIndex => $hourLine)
+                                    @if($hourIndex === 0)
+                                        <p class="font-semibold text-slate-900">{{ $hourLine }}</p>
+                                    @elseif($hourIndex === 1)
+                                        <p class="cohs-contact-intake">{{ $hourLine }}</p>
+                                    @else
+                                        <div class="cohs-contact-fee-note">{{ $hourLine }}</div>
+                                    @endif
                                 @endforeach
                             @else
-                                <p>Office hours follow the college calendar. We aim to reply within a few working days.</p>
+                                <p class="font-medium text-slate-800">Office hours follow the college calendar. We aim to reply within a few working days.</p>
                             @endif
                         </div>
+                        <a href="{{ route('schools.pages.show', [$school, 'application-forms']) }}" class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-blue-800 underline-offset-4 hover:text-blue-950 hover:underline">View application forms <span aria-hidden="true">→</span></a>
                     </article>
                 </div>
             </div>

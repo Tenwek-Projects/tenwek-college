@@ -364,6 +364,62 @@
         outline-offset: 1px;
     }
 
+    .thc-cohs-skin #contact .cohs-contact-phone-link,
+    .thc-cohs-skin #contact .cohs-contact-email-link {
+        display: flex;
+        min-height: 2.8rem;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.65rem;
+        border: 1px solid #c7d8f3;
+        border-radius: 0.75rem;
+        background: #eff6ff;
+        padding: 0.65rem 0.75rem;
+        color: #1746a2;
+        font-size: 0.9rem;
+        font-weight: 700;
+        line-height: 1.35;
+        text-decoration: none;
+        transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .thc-cohs-skin #contact .cohs-contact-phone-link:hover,
+    .thc-cohs-skin #contact .cohs-contact-email-link:hover {
+        border-color: #2563eb;
+        background: #2563eb;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgb(37 99 235 / 0.18);
+    }
+
+    .thc-cohs-skin #contact .cohs-contact-intake {
+        display: inline-flex;
+        border: 1px solid #bfdbfe;
+        border-radius: 0.65rem;
+        background: #eff6ff;
+        padding: 0.45rem 0.65rem;
+        color: #1e40af;
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
+
+    .thc-cohs-skin #contact .cohs-contact-fee-note {
+        border-left: 3px solid #2563eb;
+        border-radius: 0 0.5rem 0.5rem 0;
+        background: #f8fafc;
+        padding: 0.6rem 0.7rem;
+        color: #334155;
+        font-size: 0.78rem;
+        line-height: 1.5;
+    }
+
+    .thc-cohs-skin #contact .cohs-contact-intake + .cohs-contact-fee-note {
+        margin-top: 0.4rem;
+    }
+
+    .thc-cohs-skin #contact p.font-semibold.text-slate-900 {
+        color: #17233d;
+    }
+
     /** COHS landing - restrained neutral section surfaces */
     .thc-cohs-skin .cohs-landing-programmes {
         background: #f4f5f7;
