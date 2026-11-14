@@ -70,7 +70,10 @@ class TenwekFoundationSeeder extends Seeder
             env('TENWEK_FETCH_COHS_APPLICATION_PDFS', ! app()->environment('testing')),
             FILTER_VALIDATE_BOOLEAN
         );
-        $disk = Storage::disk('downloads');
+        // Prefer S3 when the production bucket is configured; local development
+        // keeps using the private downloads disk when no bucket is available.
+        $downloadsDisk = filled(config('filesystems.disks.s3.bucket')) ? 's3' : 'downloads';
+        $disk = Storage::disk($downloadsDisk);
 
         foreach (CohsApplicationFormDownloads::definitions() as $form) {
             $originalName = basename(parse_url($form['source_url'], PHP_URL_PATH) ?? '') ?: $form['slug'].'.pdf';
@@ -86,7 +89,7 @@ class TenwekFoundationSeeder extends Seeder
                         ->withHeaders(['User-Agent' => 'TenwekHospitalCollegeSiteSeeder/1.0'])
                         ->get($form['source_url']);
                     if ($response->successful() && $response->body() !== '') {
-                        $disk->put($relativePath, $response->body());
+                        $disk->put($relativePath, $response->body(), ['ContentType' => 'application/pdf']);
                     }
                 } catch (\Throwable) {
                     // keep external_url only
@@ -107,7 +110,7 @@ class TenwekFoundationSeeder extends Seeder
                     'title' => $form['title'],
                     'description' => 'Official College of Health Sciences application form.',
                     'file_path' => $filePath,
-                    'external_url' => $form['source_url'],
+                    'external_url' => $filePath ? null : $form['source_url'],
                     'original_filename' => $originalName,
                     'mime' => $mime,
                     'size_bytes' => $sizeBytes,

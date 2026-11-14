@@ -115,13 +115,25 @@ class PublicDownloadController extends Controller
         }
 
         $path = $download->file_path;
+        $disk = Storage::disk('downloads');
 
-        if (! Storage::disk('downloads')->exists($path)) {
+        if (
+            ! $disk->exists($path)
+            && str_starts_with($path, 'cohs/application-forms/')
+            && filled(config('filesystems.disks.s3.bucket'))
+        ) {
+            $s3 = Storage::disk('s3');
+            if ($s3->exists($path)) {
+                $disk = $s3;
+            }
+        }
+
+        if (! $disk->exists($path)) {
             abort(404);
         }
 
         $download->increment('download_count');
 
-        return Storage::disk('downloads')->download($path, $download->original_filename ?? basename($path));
+        return $disk->download($path, $download->original_filename ?? basename($path));
     }
 }
