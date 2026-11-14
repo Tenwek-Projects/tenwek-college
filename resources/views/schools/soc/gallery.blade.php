@@ -102,7 +102,7 @@
             </div>
 
             @if($galleryGridItems->isNotEmpty())
-                <ul class="grid auto-rows-[10rem] grid-cols-2 gap-3 sm:auto-rows-[12rem] sm:gap-4 lg:auto-rows-[13rem] lg:grid-cols-4 lg:gap-5" role="list">
+                <ul class="grid grid-flow-dense auto-rows-[10rem] grid-cols-2 gap-3 sm:auto-rows-[12rem] sm:gap-4 lg:auto-rows-[13rem] lg:grid-cols-4 lg:gap-5" role="list">
                     @foreach($galleryGridItems as $index => $item)
                         @php $lbIndex = $index + 1; @endphp
                         <li @class(['min-h-0 min-w-0', 'sm:col-span-2 lg:col-span-2 lg:row-span-2' => $index % 7 === 0, 'lg:row-span-2' => $index % 7 === 3]) data-reveal>
