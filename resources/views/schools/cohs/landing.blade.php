@@ -1,6 +1,9 @@
 @php
     $L = $cohsLanding ?? config('tenwek.cohs_landing');
     $hero = $L['hero'] ?? [];
+    $heroEyebrow = ($hero['eyebrow'] ?? null) === 'Tenwek Hospital College · College of Health Sciences'
+        ? 'Tenwek Hospital College'
+        : ($hero['eyebrow'] ?? 'Tenwek Hospital College');
     $welcome = $L['welcome'] ?? [];
     $programmesBand = $L['programmes_band'] ?? ['items' => [], 'kicker' => '', 'title' => '', 'intro' => ''];
     $testimonials = $L['testimonials'] ?? ['items' => [], 'kicker' => '', 'title' => ''];
@@ -27,7 +30,7 @@
 
         <div class="relative z-10 mx-auto w-[88%] max-w-none px-0 pb-36 pt-16 sm:pb-40 sm:pt-20 lg:pb-40 lg:pt-16">
             <div data-reveal class="max-w-xl">
-                <p class="mt-0 text-sm font-semibold uppercase tracking-[0.28em] text-white/80">{{ $hero['eyebrow'] }}</p>
+                <p class="mt-0 text-sm font-semibold uppercase tracking-[0.28em] text-white/80">{{ $heroEyebrow }}</p>
                 <h1 class="mt-4 font-serif text-4xl font-semibold leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-[4.5rem]">
                     {{ $hero['headline'] }}
                 </h1>

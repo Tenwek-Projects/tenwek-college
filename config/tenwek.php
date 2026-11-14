@@ -792,7 +792,7 @@ return [
         ],
         'hero' => [
             'badge' => 'Training for Christ\'s Service',
-            'eyebrow' => 'Tenwek Hospital College · College of Health Sciences',
+            'eyebrow' => 'Tenwek Hospital College',
             'headline' => 'College of Health Sciences',
             'subhead' => 'Qualified nurses since 1987: Christ-centred healthcare training, mentorship, and spiritual formation for nurses and clinical officers who serve with skill and compassion.',
             'primary_cta' => ['label' => 'View programmes', 'route' => 'schools.pages.show', 'params' => ['school' => 'cohs', 'pageSlug' => 'diploma-in-nursing']],
