@@ -75,6 +75,7 @@ class SearchController extends Controller
 
         $schoolQuery = School::query()
             ->where('is_active', true)
+            ->when($filterSchool, fn ($query) => $query->whereKey($filterSchool->id))
             ->where(function ($sub) use ($pattern) {
                 $sub->where('name', 'like', $pattern)
                     ->orWhere('tagline', 'like', $pattern)
@@ -86,6 +87,7 @@ class SearchController extends Controller
         $pageQuery = Page::query()
             ->published()
             ->with('school')
+            ->when($filterSchool, fn ($query) => $query->where('school_id', $filterSchool->id))
             ->where(function ($sub) use ($pattern) {
                 $sub->where('title', 'like', $pattern)
                     ->orWhere('slug', 'like', $pattern)
@@ -98,6 +100,7 @@ class SearchController extends Controller
         $newsQuery = NewsPost::query()
             ->published()
             ->with('school')
+            ->when($filterSchool, fn ($query) => $query->where('school_id', $filterSchool->id))
             ->where(function ($sub) use ($pattern) {
                 $sub->where('title', 'like', $pattern)
                     ->orWhere('slug', 'like', $pattern)
@@ -110,6 +113,7 @@ class SearchController extends Controller
         $downloadQuery = Download::query()
             ->published()
             ->with(['school', 'category'])
+            ->when($filterSchool, fn ($query) => $query->where('school_id', $filterSchool->id))
             ->where(function ($sub) use ($pattern) {
                 $sub->where('title', 'like', $pattern)
                     ->orWhere('slug', 'like', $pattern)
