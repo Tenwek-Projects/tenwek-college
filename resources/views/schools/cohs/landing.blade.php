@@ -19,9 +19,10 @@
         class="relative flex min-h-[min(88svh,48rem)] flex-col justify-end overflow-hidden"
         aria-label="College of Health Sciences hero"
     >
-        <div class="pointer-events-none absolute inset-0 thc-hero-ken-bg bg-cover bg-center" style="background-image: url('{{ e($heroImageUrl) }}');" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-0 bg-no-repeat" style="background-image: url('{{ e($heroImageUrl) }}'); background-size: auto 125%; background-position: center bottom;" aria-hidden="true"></div>
         <div class="cohs-landing-hero-overlay absolute inset-0" aria-hidden="true"></div>
         <div class="pointer-events-none absolute inset-0 opacity-[0.14] mix-blend-overlay" style="background-image: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.45), transparent 42%), radial-gradient(circle at 80% 75%, rgba(90,200,250,0.45), transparent 40%);" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-0" style="background: linear-gradient(90deg, rgba(10,24,76,0.98) 0%, rgba(10,24,76,0.98) 32%, rgba(10,24,76,0.82) 36%, transparent 41%), linear-gradient(0deg, rgba(10,24,76,0.94) 0%, rgba(10,24,76,0.72) 9%, transparent 22%);" aria-hidden="true"></div>
 
         <div class="relative z-10 mx-auto w-full max-w-7xl px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:px-8 lg:pb-24">
             <nav class="mb-8 text-sm text-white/75" aria-label="Breadcrumb">
