@@ -156,7 +156,7 @@
                         data-reveal
                         class="group flex flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-thc-card-hover)]"
                     >
-                        <div class="h-1.5 bg-gradient-to-r from-thc-cohs-indigo via-thc-cohs-blue to-thc-cohs-coral" aria-hidden="true"></div>
+                        <div class="h-1 bg-thc-cohs-indigo" aria-hidden="true"></div>
                         <div class="flex flex-1 flex-col p-8 sm:p-9">
                             <h3 class="font-serif text-xl font-semibold text-thc-navy sm:text-[1.35rem]">{{ $prog['title'] }}</h3>
                             <p class="mt-4 flex-1 text-base leading-relaxed text-thc-text/90">{{ $prog['summary'] }}</p>
@@ -188,7 +188,7 @@
                 x-data="{ active: 0, count: {{ $tCount }} }"
                 data-reveal
             >
-                <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-gradient-to-br from-thc-cohs-wash via-white to-white shadow-[var(--shadow-thc-card)]">
+                <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)]">
                     @foreach($testimonials['items'] as $ti => $t)
                         <div
                             x-show="active === {{ $ti }}"
@@ -261,7 +261,7 @@
             <div class="mt-12 grid items-stretch gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-14">
                 <div class="flex lg:col-span-5" data-reveal>
                     <div class="cohs-landing-contact-card flex h-full w-full flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)]">
-                        <div class="h-1.5 shrink-0 bg-gradient-to-r from-thc-cohs-indigo via-thc-cohs-blue to-thc-cohs-coral" aria-hidden="true"></div>
+                        <div class="h-1 shrink-0 bg-thc-cohs-indigo" aria-hidden="true"></div>
                         <div class="flex flex-1 flex-col gap-8 p-6 sm:gap-10 sm:p-8">
                             <div>
                                 <div class="flex items-center gap-3">
@@ -318,7 +318,7 @@
                         @endif
 
                         <div class="cohs-landing-contact-form flex h-full flex-1 flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)]">
-                            <div class="h-1.5 shrink-0 bg-gradient-to-r from-thc-cohs-coral via-thc-cohs-blue to-thc-cohs-indigo" aria-hidden="true"></div>
+                            <div class="h-1 shrink-0 bg-thc-cohs-indigo" aria-hidden="true"></div>
                             <div class="flex flex-1 flex-col p-6 sm:p-8">
                                 <h3 class="font-serif text-xl font-semibold text-thc-navy">Send a message</h3>
                                 <p class="mt-2 text-sm text-thc-text/80">Use this form for enquiries to the College of Health Sciences. Required fields are marked.</p>

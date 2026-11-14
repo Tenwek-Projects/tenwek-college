@@ -191,17 +191,89 @@
         background: linear-gradient(135deg, #e64a2c 0%, #1b20b8 100%);
     }
 
-    /** COHS landing - section washes from live site */
+    /** COHS landing - quiet editorial styling below the home hero */
+    .thc-cohs-skin #about,
+    .thc-cohs-skin #programmes,
+    .thc-cohs-skin #testimonials,
+    .thc-cohs-skin #contact {
+        --color-thc-navy: #17233d;
+        --color-thc-royal: #263b5d;
+        --color-thc-text: #303846;
+        --color-thc-cohs-indigo: #17233d;
+        --color-thc-cohs-blue: #40516a;
+        --color-thc-cohs-coral: #526075;
+        --color-thc-cohs-wash: #f3f4f6;
+    }
+
+    .thc-cohs-skin #about p,
+    .thc-cohs-skin #programmes p,
+    .thc-cohs-skin #testimonials p,
+    .thc-cohs-skin #contact p,
+    .thc-cohs-skin #contact label,
+    .thc-cohs-skin #contact li {
+        color: #303846;
+    }
+
+    .thc-cohs-skin #about h2,
+    .thc-cohs-skin #programmes h2,
+    .thc-cohs-skin #testimonials h2,
+    .thc-cohs-skin #contact h2,
+    .thc-cohs-skin #programmes h3,
+    .thc-cohs-skin #contact h3 {
+        color: #17233d;
+    }
+
+    .thc-cohs-skin #programmes,
+    .thc-cohs-skin #contact {
+        background: #f4f5f7;
+    }
+
+    .thc-cohs-skin #testimonials {
+        background: #ffffff;
+    }
+
+    .thc-cohs-skin #programmes article,
+    .thc-cohs-skin #contact .cohs-landing-contact-card,
+    .thc-cohs-skin #contact .cohs-landing-contact-form {
+        border-color: #d7dce3;
+        box-shadow: 0 2px 8px rgb(23 35 61 / 0.045);
+    }
+
+    .thc-cohs-skin #contact .cohs-landing-contact-card > div:first-child,
+    .thc-cohs-skin #contact .cohs-landing-contact-form > div:first-child {
+        background: #263b5d;
+    }
+
+    .thc-cohs-skin #testimonials [role="tabpanel"] > p:first-child {
+        color: #526075;
+    }
+
+    .thc-cohs-skin #testimonials footer > span {
+        background: #263b5d;
+    }
+
+    .thc-cohs-skin #contact .thc-btn-primary,
+    .thc-cohs-skin #contact .cohs-contact-submit {
+        background: #263b5d;
+        box-shadow: none;
+    }
+
+    .thc-cohs-skin #contact .thc-btn-primary:hover,
+    .thc-cohs-skin #contact .cohs-contact-submit:hover {
+        background: #17233d;
+    }
+
+    /** COHS landing - restrained neutral section surfaces */
     .thc-cohs-skin .cohs-landing-programmes {
-        background: linear-gradient(to bottom, #eaf1fd 0%, white 100%);
+        background: #f4f5f7;
     }
 
     .thc-cohs-skin .cohs-landing-testimonials {
-        background-color: #f7f4eb;
+        background-color: #ffffff;
     }
 
     .thc-cohs-skin .cohs-landing-contact {
-        background: linear-gradient(to bottom, white 0%, #eaf1fd 100%);
+        background: #f4f5f7;
     }
 
     .thc-cohs-skin .cohs-landing-hero-overlay {
