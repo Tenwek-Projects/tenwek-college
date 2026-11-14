@@ -15,84 +15,127 @@
         })
         ->values()
         ->all();
+    $galleryCollection = collect($lightboxItems);
+    $featuredItem = $galleryCollection->first();
+    $galleryGridItems = $galleryCollection->skip(1)->values();
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
     <x-schools.soc.page-breadcrumb-band :school="$school" :current="$page->title" />
-    <div class="soc-page-hero">
-        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
 
-
-            <header class="max-w-3xl" data-reveal>
-                <p class="thc-kicker">{{ $G['kicker'] ?? 'Our gallery' }}</p>
-                <h1 class="mt-4 font-serif text-4xl font-semibold tracking-tight text-thc-navy sm:text-5xl">
-                    {{ $G['headline'] ?? 'SOC life' }}
-                </h1>
-                @if(filled($G['intro'] ?? null))
-                    <p class="mt-6 text-lg leading-relaxed text-thc-text/90">{{ $G['intro'] }}</p>
-                @endif
-            </header>
-        </div>
-    </div>
-
-    <div
-        class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:flex lg:gap-12 lg:px-8 lg:py-16"
+    <main
+        class="bg-white"
         x-data="socGallery({ items: @js($lightboxItems) })"
         @keydown.window="onKeydown($event)"
     >
-        <div class="min-w-0 flex-1">
-            @if(count($items) > 0)
-                @php $lightboxSlot = 0; @endphp
-                <ul class="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 lg:gap-6" role="list">
-                    @foreach($items as $index => $item)
-                        @php $src = $item['src'] ?? ''; @endphp
-                        <li class="flex min-h-0 min-w-0" data-reveal>
-                            <figure
-                                class="group flex w-full flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-thc-navy/[0.04] shadow-sm ring-1 ring-thc-navy/5"
+        <section class="overflow-hidden bg-[#f3eff7]" aria-labelledby="soc-gallery-heading">
+            <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:py-16">
+                <header class="lg:col-span-5" data-reveal>
+                    <p class="inline-flex items-center gap-2 rounded-full border border-thc-royal/20 bg-white/80 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#76531f]">
+                        <span class="h-1.5 w-1.5 rounded-full bg-thc-royal" aria-hidden="true"></span>
+                        {{ $G['kicker'] ?? 'Our gallery' }}
+                    </p>
+                    <h1 id="soc-gallery-heading" class="mt-5 max-w-xl font-serif text-4xl font-semibold leading-[1.08] tracking-tight text-thc-navy sm:text-5xl lg:text-6xl">
+                        {{ $G['headline'] ?? 'SOC life' }}
+                    </h1>
+                    @if(filled($G['intro'] ?? null))
+                        <p class="mt-6 max-w-xl text-base leading-relaxed text-thc-text sm:text-lg">{{ $G['intro'] }}</p>
+                    @endif
+                    <div class="mt-8 flex flex-wrap items-center gap-4">
+                        <a href="#soc-gallery-grid" class="inline-flex items-center gap-2 rounded-xl bg-thc-royal px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-thc-royal">
+                            Explore the gallery
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 13l5 5 5-5M12 18V6"/></svg>
+                        </a>
+                        <span class="text-sm font-medium text-thc-text/80">
+                            <strong class="font-semibold text-thc-navy">{{ count($lightboxItems) }}</strong>
+                            {{ \Illuminate\Support\Str::plural('moment', count($lightboxItems)) }} from life at Tenwek
+                        </span>
+                    </div>
+                </header>
+
+                @if($featuredItem)
+                    <figure class="group relative overflow-hidden rounded-[1.75rem] border border-white/70 bg-thc-navy/10 shadow-[0_24px_70px_rgba(26,26,104,0.22)] ring-1 ring-thc-navy/10 lg:col-span-7" data-reveal>
+                        <button
+                            type="button"
+                            class="relative block aspect-[4/3] w-full cursor-zoom-in text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-thc-royal sm:aspect-[16/10]"
+                            @click="openAt(0)"
+                            :aria-expanded="open && activeIndex === 0 ? 'true' : 'false'"
+                            aria-haspopup="dialog"
+                            aria-label="{{ __('View larger') }}: {{ $featuredItem['caption'] ?: $featuredItem['alt'] ?: __('Photo') }}"
+                        >
+                            <img
+                                src="{{ $featuredItem['src'] }}"
+                                alt="{{ $featuredItem['alt'] }}"
+                                class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                                loading="eager"
+                                decoding="async"
+                                fetchpriority="high"
+                                sizes="(min-width: 1024px) 58vw, 100vw"
                             >
-                                @if(filled($src))
-                                    @php
-                                        $imgUrl = \App\Support\Soc\SocLandingRepository::publicMediaUrl($src) ?? asset($src);
-                                        $lbIndex = $lightboxSlot++;
-                                    @endphp
-                                    <button
-                                        type="button"
-                                        class="block w-full shrink-0 cursor-zoom-in text-left transition focus-visible:outline focus-visible:ring-2 focus-visible:ring-thc-royal focus-visible:ring-offset-2"
-                                        @click="openAt({{ $lbIndex }})"
-                                        :aria-expanded="open && activeIndex === {{ $lbIndex }} ? 'true' : 'false'"
-                                        aria-haspopup="dialog"
+                            <span class="absolute inset-0 bg-gradient-to-t from-[#16123a]/90 via-[#16123a]/10 to-transparent" aria-hidden="true"></span>
+                            <span class="absolute bottom-0 left-0 right-0 flex flex-wrap items-end justify-between gap-4 p-5 text-white sm:p-7">
+                                <span class="max-w-lg">
+                                    <span class="block text-[10px] font-bold uppercase tracking-[0.22em] text-white/75">A glimpse of our community</span>
+                                    <span class="mt-2 block font-serif text-xl font-semibold leading-tight sm:text-2xl">{{ $featuredItem['caption'] ?: 'Life at Tenwek' }}</span>
+                                </span>
+                                <span class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/35 bg-white/15 backdrop-blur-sm transition group-hover:bg-white/25" aria-hidden="true">
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 3h6v6m-11 5L21 3M5 7H4a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1v-1"/></svg>
+                                </span>
+                            </span>
+                        </button>
+                    </figure>
+                @else
+                    <div class="flex aspect-[4/3] items-center justify-center rounded-[1.75rem] border border-thc-navy/10 bg-white p-8 text-center shadow-sm lg:col-span-7" data-reveal>
+                        <p class="font-serif text-xl text-thc-text">Photographs will be published here soon.</p>
+                    </div>
+                @endif
+            </div>
+        </section>
+
+        <section id="soc-gallery-grid" class="scroll-mt-24 mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20" aria-labelledby="soc-gallery-grid-heading">
+            <div class="mb-8 flex flex-col gap-4 border-b border-thc-navy/10 pb-6 sm:flex-row sm:items-end sm:justify-between" data-reveal>
+                <div>
+                    <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#76531f]">People, learning &amp; service</p>
+                    <h2 id="soc-gallery-grid-heading" class="mt-2 font-serif text-2xl font-semibold tracking-tight text-thc-navy sm:text-3xl">Scenes from SOC</h2>
+                </div>
+                <p class="text-sm font-medium text-thc-text/75">Select any photo to view it full size.</p>
+            </div>
+
+            @if($galleryGridItems->isNotEmpty())
+                <ul class="grid auto-rows-[10rem] grid-cols-2 gap-3 sm:auto-rows-[12rem] sm:gap-4 lg:auto-rows-[13rem] lg:grid-cols-4 lg:gap-5" role="list">
+                    @foreach($galleryGridItems as $index => $item)
+                        @php $lbIndex = $index + 1; @endphp
+                        <li @class(['min-h-0 min-w-0', 'sm:col-span-2 lg:col-span-2 lg:row-span-2' => $index % 7 === 0, 'lg:row-span-2' => $index % 7 === 3]) data-reveal>
+                            <div class="group relative h-full min-h-0 overflow-hidden rounded-2xl border border-thc-navy/10 bg-thc-navy/5 shadow-sm ring-1 ring-thc-navy/[0.04]">
+                                <button
+                                    type="button"
+                                    class="absolute inset-0 h-full w-full cursor-zoom-in text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-4px] focus-visible:outline-thc-royal"
+                                    @click="openAt({{ $lbIndex }})"
+                                    :aria-expanded="open && activeIndex === {{ $lbIndex }} ? 'true' : 'false'"
+                                    aria-haspopup="dialog"
+                                    aria-label="{{ __('View larger') }}: {{ $item['caption'] ?: $item['alt'] ?: __('Photo') }}"
+                                >
+                                    <img
+                                        src="{{ $item['src'] }}"
+                                        alt="{{ $item['alt'] }}"
+                                        class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                                        loading="{{ $index < 4 ? 'eager' : 'lazy' }}"
+                                        decoding="async"
+                                        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                                     >
-                                        <span class="sr-only">{{ __('View larger') }}: {{ $item['caption'] ?? $item['alt'] ?? __('Photo') }}</span>
-                                        <div class="aspect-[4/3] overflow-hidden">
-                                            <img
-                                                src="{{ $imgUrl }}"
-                                                alt="{{ $item['alt'] ?? '' }}"
-                                                class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                                                loading="{{ $index < 3 ? 'eager' : 'lazy' }}"
-                                                decoding="async"
-                                                sizes="(min-width: 1024px) 33vw, 50vw"
-                                            >
-                                        </div>
-                                    </button>
-                                    <figcaption class="flex h-20 shrink-0 items-center border-t border-thc-navy/8 bg-white px-4 py-2 sm:px-5">
-                                        <span class="line-clamp-2 w-full text-sm font-medium leading-snug text-thc-navy">{{ $item['caption'] ?? '' }}</span>
-                                    </figcaption>
-                                @endif
-                            </figure>
+                                    <span class="absolute inset-0 bg-gradient-to-t from-[#16123a]/80 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-100" aria-hidden="true"></span>
+                                    <span class="absolute inset-x-0 bottom-0 p-4 text-left text-sm font-semibold leading-snug text-white sm:p-5">{{ $item['caption'] ?: $item['alt'] ?: __('View photo') }}</span>
+                                </button>
+                            </div>
                         </li>
                     @endforeach
                 </ul>
-            @else
-                <div
-                    class="rounded-2xl border border-dashed border-thc-navy/20 bg-thc-navy/[0.02] px-8 py-16 text-center"
-                    data-reveal
-                >
-                    <p class="font-serif text-lg text-thc-text/80">Photographs will be published here soon.</p>
+            @elseif(!$featuredItem)
+                <div class="rounded-2xl border border-dashed border-thc-navy/20 bg-[#f3eff7] px-8 py-16 text-center" data-reveal>
+                    <p class="font-serif text-lg text-thc-text/85">Photographs will be published here soon.</p>
                 </div>
             @endif
-        </div>
-
-        <x-schools.soc.about-sidebar :school="$school" :page="$page" />
+        </section>
 
         <template x-teleport="body">
             <div
@@ -187,5 +230,5 @@
                 </div>
             </div>
         </template>
-    </div>
+    </main>
 </x-layouts.public>
