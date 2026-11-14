@@ -14,6 +14,26 @@
     $secondaryCtaUrl = route('schools.pages.show', [$school, 'application-forms']);
     $welcome = $L['welcome'] ?? [];
     $programmesBand = $L['programmes_band'] ?? ['items' => [], 'kicker' => '', 'title' => '', 'intro' => ''];
+    $homepageProgrammes = collect($programmesBand['items'] ?? [])
+        ->filter(fn ($programme) => in_array($programme['page_slug'] ?? '', ['diploma-in-nursing', 'diploma-in-clinical-medicine'], true))
+        ->map(function ($programme) {
+            if (($programme['page_slug'] ?? '') === 'diploma-in-nursing') {
+                $programme['title'] = 'Diploma in Community Health Nursing';
+                $programme['summary'] = 'Prepares Registered Community Health Nurses to care for patients in the hospital, the clinic and the community.';
+            } elseif (($programme['page_slug'] ?? '') === 'diploma-in-clinical-medicine') {
+                $programme['title'] = 'Diploma in Clinical Medicine & Surgery';
+                $programme['summary'] = 'Trains clinical officers to assess, diagnose and treat patients, with hands-on rotations across a busy referral hospital.';
+            }
+
+            return $programme;
+        })
+        ->values();
+    $programmesHeading = ($programmesBand['title'] ?? '') === 'Training for Christ\'s Service'
+        ? 'Two diplomas, one calling'
+        : ($programmesBand['title'] ?? 'Two diplomas, one calling');
+    $programmesIntro = ($programmesBand['intro'] ?? '') === 'Three-year diploma pathways, higher diplomas for practising clinicians and nurses, and life-saving short courses - all combining classroom learning, clinical practice, and Christian service.'
+        ? 'Train as a community health nurse or clinical officer through three-year diploma programmes combining classroom learning, clinical rotations at Tenwek Hospital, and compassionate care.'
+        : ($programmesBand['intro'] ?? '');
     $testimonials = $L['testimonials'] ?? ['items' => [], 'kicker' => '', 'title' => ''];
     $contactBlock = $L['contact'] ?? ['location_lines' => [], 'phones' => [], 'email' => '', 'kicker' => ''];
     $heroPath = $L['hero_image'] ?? 'images/image-1.jpg';
@@ -116,12 +136,12 @@
             <div class="mx-auto max-w-2xl text-center" data-reveal>
                 <p class="thc-kicker">{{ $programmesBand['kicker'] }}</p>
                 <h2 id="cohs-programmes-heading" class="mt-4 font-serif text-3xl font-semibold text-thc-navy sm:text-4xl">
-                    {{ $programmesBand['title'] }}
+                    {{ $programmesHeading }}
                 </h2>
-                <p class="mt-4 text-lg text-thc-text/85">{{ $programmesBand['intro'] }}</p>
+                <p class="mt-4 text-lg text-thc-text/85">{{ $programmesIntro }}</p>
             </div>
-            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-                @foreach($programmesBand['items'] as $prog)
+            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 lg:gap-8">
+                @foreach($homepageProgrammes as $prog)
                     @php
                         $ctaLabel = $prog['cta_label'] ?? 'Read more';
                         if (! empty($prog['apply_slug'])) {

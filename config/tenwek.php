@@ -809,42 +809,18 @@ return [
         ],
         'programmes_band' => [
             'kicker' => 'Programmes',
-            'title' => 'Training for Christ\'s Service',
-            'intro' => 'Three-year diploma pathways, higher diplomas for practising clinicians and nurses, and life-saving short courses - all combining classroom learning, clinical practice, and Christian service.',
+            'title' => 'Two diplomas, one calling',
+            'intro' => 'Train as a community health nurse or clinical officer through three-year diploma programmes combining classroom learning, clinical rotations at Tenwek Hospital, and compassionate care.',
             'items' => [
                 [
-                    'title' => 'Diploma in Nursing (KRCHN)',
-                    'summary' => 'A 3-year diploma forming midwives, general nurses, and community health nurses through classroom, clinical, and community training.',
+                    'title' => 'Diploma in Community Health Nursing',
+                    'summary' => 'Prepares Registered Community Health Nurses to care for patients in the hospital, the clinic and the community.',
                     'page_slug' => 'diploma-in-nursing',
                 ],
                 [
                     'title' => 'Diploma in Clinical Medicine & Surgery',
-                    'summary' => 'A 3-year basic diploma preparing clinical officers for competent service in hospital and community settings.',
+                    'summary' => 'Trains clinical officers to assess, diagnose and treat patients, with hands-on rotations across a busy referral hospital.',
                     'page_slug' => 'diploma-in-clinical-medicine',
-                ],
-                [
-                    'title' => 'Higher Diploma in Cardiovascular Perfusion',
-                    'summary' => 'For clinicians with a diploma or degree in Clinical Medicine & Surgery, a valid practising licence, and at least two years\' experience. Advantage: anaesthesia or Critical Care Clinical Officer (ECCCO) with one year\'s experience.',
-                    'apply_slug' => 'hd-cardiovascular-perfusion',
-                    'cta_label' => 'Apply online',
-                ],
-                [
-                    'title' => 'HND Critical Care Nursing',
-                    'summary' => 'For nurses with a diploma or degree in nursing, a valid practising licence, and a minimum of two years\' working experience.',
-                    'apply_slug' => 'critical-care-nursing',
-                    'cta_label' => 'Apply online',
-                ],
-                [
-                    'title' => 'HND Trauma & Emergency Nursing',
-                    'summary' => 'Blended delivery for registered nurses (BScN, KRN, KRN/MHP, KRN/M, KRCHN) with at least one year of clinical experience and a valid nursing practice licence.',
-                    'apply_slug' => 'hnd-trauma-emergency',
-                    'cta_label' => 'Apply online',
-                ],
-                [
-                    'title' => 'BLS & ACLS short courses',
-                    'summary' => 'Basic Life Support (BLS) and Advanced Cardiovascular Life Support (ACLS) for healthcare professionals seeking essential emergency skills.',
-                    'page_slug' => 'application-forms',
-                    'cta_label' => 'Application forms',
                 ],
             ],
         ],
