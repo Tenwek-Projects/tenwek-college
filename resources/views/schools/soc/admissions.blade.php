@@ -7,6 +7,9 @@
     $defaultPortal = $topBar['portal_url'] ?? route('downloads.index', ['school' => $school->slug]);
     $req = $A['requirements'] ?? [];
     $resolveResourceHref = function (array $resource) use ($defaultPortal): string {
+        if (! empty($resource['asset'])) {
+            return asset((string) $resource['asset']);
+        }
         if (! empty($resource['external'])) {
             return filled($resource['url'] ?? null) ? (string) $resource['url'] : (string) $defaultPortal;
         }
@@ -45,6 +48,7 @@
                         @php
                             $href = $resolveResourceHref($resource);
                             $isExternal = ! empty($resource['external']);
+                            $isDownload = ! empty($resource['download']);
                         @endphp
                         <li>
                             <div class="flex h-full flex-col rounded-2xl border border-thc-navy/10 bg-white p-6 shadow-sm ring-1 ring-thc-navy/5">
@@ -57,6 +61,7 @@
                                 <a
                                     href="{{ $href }}"
                                     @if($isExternal) target="_blank" rel="noopener noreferrer" @endif
+                                    @if($isDownload) download @endif
                                     class="mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-thc-royal transition hover:text-thc-navy"
                                 >
                                     {{ $resource['cta'] ?? 'Open' }}
