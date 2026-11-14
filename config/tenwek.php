@@ -934,32 +934,40 @@ return [
          */
         'social_life' => [
             'kicker' => 'Student life',
-            'headline_before' => 'Social',
-            'headline_emphasis' => 'life',
+            'headline_before' => 'Life beyond the',
+            'headline_emphasis' => 'classroom',
+            'lead' => 'No one trains alone. Our students learn, play, worship and serve together, building friendships and a living relationship with Christ.',
             'pull_quote' => 'No man is an island!',
             'paragraphs' => [
-                'The school has modern infrastructure and provides student accommodation in serene hostels that are conducive for study and relaxation. Students can participate in physical activities such as darts, table tennis, and volleyball, and they engage in Bible study and Christian Union fellowships.',
-                'Students gain experience not only in classrooms and practical training but also in county hospital facilities, the national referral hospital, and the surrounding communities. Visit us to feel what studying at the College of Health Sciences is like.',
+                'Our students learn, play, worship and serve together, building friendships and a living relationship with Christ.',
+                'From comfortable student hostels and recreation to Bible study, clinical placements, and community volunteering, life at Tenwek extends well beyond the classroom.',
             ],
+            'activities_intro' => 'The college provides facilities and spaces for students to interact, grow and have fun.',
             'highlights' => [
                 [
-                    'title' => 'Hostels',
-                    'description' => 'Modern, serene student accommodation supportive of study and rest.',
+                    'title' => 'Sport',
+                    'description' => 'Football and table tennis to stay active and unwind between classes and ward shifts.',
                 ],
                 [
-                    'title' => 'Sports & recreation',
-                    'description' => 'Darts, table tennis, volleyball, and space to recharge between clinical days.',
+                    'title' => 'Christian Union',
+                    'description' => 'Fellowship, worship and Christian Union challenges that help you grow in faith.',
                 ],
                 [
-                    'title' => 'Christian Union & Bible study',
-                    'description' => 'Fellowship and shared faith that anchor student life.',
+                    'title' => 'Outdoor trips',
+                    'description' => 'Trips beyond campus to explore, relax and build friendships.',
                 ],
                 [
-                    'title' => 'Clinical placements',
-                    'description' => 'Experience in county hospitals, national referral care, and community settings.',
+                    'title' => 'Community volunteering',
+                    'description' => 'Serving the communities around Tenwek, putting compassionate care into practice.',
                 ],
             ],
-            'hero_image' => env('TENWEK_COHS_SOCIAL_HERO', 'banner-nursing.jpg'),
+            'community_heading' => 'A community, not just a college',
+            'community_paragraphs' => [
+                'Studying at Tenwek means joining a close community of classmates, tutors and hospital staff who share a calling to care in Christ’s name.',
+                'You’ll learn together, worship together and serve together.',
+            ],
+            'hero_image' => env('TENWEK_COHS_SOCIAL_HERO', 'images/cohs/TWH163-1024x701.jpg'),
+            'community_image' => 'images/cohs/TWH330-1024x682.jpg',
         ],
         /**
          * /cohs/facilities - brochure campus facts
