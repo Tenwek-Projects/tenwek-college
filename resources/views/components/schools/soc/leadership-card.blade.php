@@ -6,7 +6,6 @@
 
 @php
     $highlight = ! empty($person['highlight']);
-    $image = $person['image'] ?? null;
     $parts = array_values(array_filter(preg_split('/\s+/', (string) ($person['name'] ?? '')) ?: []));
     $initials = '';
     if (count($parts) >= 2) {
@@ -30,24 +29,13 @@
     ]) }}
 >
     <div class="relative aspect-[5/6] w-full overflow-hidden bg-gradient-to-b from-thc-navy/[0.07] to-thc-navy/[0.02] sm:aspect-[4/5]">
-        @if(filled($image))
-            <img
-                src="{{ \App\Support\Soc\SocLandingRepository::publicMediaUrl($image) ?? asset($image) }}"
-                alt="{{ $person['name'] ?? '' }}"
-                class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-                loading="lazy"
-                decoding="async"
-                width="400"
-                height="500"
-            >
-        @else
-            <div class="flex h-full w-full flex-col items-center justify-center gap-3 p-6 text-center" aria-hidden="true">
-                <span class="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full border-2 border-dashed border-thc-navy/20 bg-white font-serif text-2xl font-semibold tracking-tight text-thc-navy shadow-sm sm:h-20 sm:w-20 sm:text-3xl">
-                    {{ $initials }}
-                </span>
-                <span class="max-w-[10rem] text-[10px] font-semibold uppercase leading-tight tracking-[0.12em] text-thc-text/45">Photo to be added</span>
-            </div>
-        @endif
+        <div class="relative flex h-full w-full items-center justify-center overflow-hidden" aria-hidden="true">
+            <span class="absolute -right-10 -top-10 h-40 w-40 rounded-full border border-thc-navy/10"></span>
+            <span class="absolute -bottom-16 -left-10 h-48 w-48 rounded-full border border-thc-navy/10"></span>
+            <span class="relative flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-thc-navy/20 bg-white/90 font-serif text-3xl font-semibold tracking-tight text-thc-navy shadow-sm sm:h-24 sm:w-24 sm:text-4xl">
+                {{ $initials }}
+            </span>
+        </div>
     </div>
     <div class="flex flex-1 flex-col p-5 sm:p-6">
         <h3 class="font-serif text-lg font-semibold leading-snug text-thc-navy sm:text-xl">
