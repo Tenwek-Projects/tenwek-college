@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <section class="cohs-landing-contact scroll-mt-24 border-t border-thc-navy/10 pb-0" aria-labelledby="cohs-contact-heading">
+    <section id="contact" class="cohs-landing-contact scroll-mt-24 border-t border-thc-navy/10 pb-0" aria-labelledby="cohs-contact-heading">
         <div class="mx-auto max-w-7xl px-4 pt-14 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20">
             <div class="max-w-3xl lg:max-w-2xl" data-reveal>
                 <p class="thc-kicker cohs-section-kicker">{{ $contactBlock['kicker'] ?? 'Contact us' }}</p>
