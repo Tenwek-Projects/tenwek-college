@@ -973,13 +973,45 @@ return [
          * /cohs/facilities - brochure campus facts
          */
         'facilities' => [
-            'kicker' => 'Campus',
-            'headline_before' => 'Our',
-            'headline_emphasis' => 'facilities',
+            'kicker' => 'Campus and facilities',
+            'headline_before' => 'Facilities built for',
+            'headline_emphasis' => 'learning',
+            'lead' => 'Modern buildings in a calm setting at Tenwek, with a well-stocked library, a skills lab laid out like a ward, and accommodation and meals for every student.',
+            'stats' => [
+                ['value' => '6,000+', 'label' => 'Books in the college library'],
+                ['value' => '10+', 'label' => 'Desktop computers'],
+                ['value' => '8', 'label' => 'Modern classrooms'],
+                ['value' => 'Included', 'label' => 'Accommodation and meals'],
+            ],
             'paragraphs' => [
                 'The college building provides eight classrooms equipped with modern teaching aids, giving students a comfortable space and serene environment for learning.',
                 'We have a modern library kitted with desktop computers and more than 6,000 books to support learning and research. Student accommodation is available in school hostels.',
-                'The school has a modern skills laboratory equipped for practical learning. We are located in Bomet County, about 5 km from Bomet Town.',
+                'The school has a modern skills laboratory laid out like a hospital ward for hands-on practice. Accommodation and meals are provided as part of the school fees. We are located in Bomet County, about 5 km from Bomet Town, close to Tenwek Hospital where students attend clinical rounds.',
+            ],
+            'facility_cards' => [
+                [
+                    'title' => 'Skills lab',
+                    'description' => 'Set up like a hospital ward for hands-on practice and demonstrations, helping students build confidence before working with patients.',
+                    'image' => 'images/cohs/TWH261-1024x682.jpg',
+                    'image_alt' => 'Two nursing students practising airway care on a manikin in the skills lab',
+                ],
+                [
+                    'title' => 'Library and computers',
+                    'description' => 'More than 6,000 books and desktop computers support research, study and revision.',
+                    'image' => 'images/cohs/TWH424-1024x682.jpg',
+                    'image_alt' => 'A smiling student in college uniform holding a book in the library',
+                ],
+                [
+                    'title' => 'Classrooms',
+                    'description' => 'Eight modern teaching spaces with learning aids in a calm, comfortable environment.',
+                    'image' => 'images/cohs/TWH355-1024x682.jpg',
+                    'image_alt' => 'Students discussing their work together in a classroom',
+                ],
+            ],
+            'accommodation_heading' => 'Accommodation and meals',
+            'accommodation_paragraphs' => [
+                'Accommodation and meals are provided as part of the school fees, so students can focus on their studies and practical training.',
+                'The college is at Tenwek, in the hills of Bomet County, close to Tenwek Hospital for clinical rounds and about 5 km from Bomet Town.',
             ],
             'highlights' => [
                 [
@@ -999,7 +1031,8 @@ return [
                     'description' => 'On-campus hostels in Bomet County, about 5 km from Bomet Town.',
                 ],
             ],
-            'hero_image' => env('TENWEK_COHS_FACILITIES_HERO', 'banner-nursing.jpg'),
+            'hero_image' => env('TENWEK_COHS_FACILITIES_HERO', 'tenwekoverhead.jpg'),
+            'hero_image_alt' => 'Aerial view of Tenwek and the surrounding hills',
         ],
         'contact' => [
             'kicker' => 'Contact us',
