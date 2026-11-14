@@ -419,7 +419,6 @@
                     </article>
                 </div>
             </div>
-            @endif
         </div>
 
         <div class="h-12 sm:h-16 lg:h-20" aria-hidden="true"></div>
