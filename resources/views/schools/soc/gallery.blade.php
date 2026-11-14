@@ -66,7 +66,7 @@
                             <img
                                 src="{{ $featuredItem['src'] }}"
                                 alt="{{ $featuredItem['alt'] }}"
-                                class="absolute inset-0 h-full w-full bg-[#e9e2f0] object-contain transition duration-500 ease-out group-hover:brightness-105"
+                                class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                                 loading="eager"
                                 decoding="async"
                                 fetchpriority="high"
@@ -118,7 +118,7 @@
                                     <img
                                         src="{{ $item['src'] }}"
                                         alt="{{ $item['alt'] }}"
-                                        class="absolute inset-0 h-full w-full bg-[#e9e2f0] object-contain transition duration-500 ease-out group-hover:brightness-105"
+                                        class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.05] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                                         loading="{{ $index < 4 ? 'eager' : 'lazy' }}"
                                         decoding="async"
                                         sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
