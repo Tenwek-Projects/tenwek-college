@@ -77,6 +77,7 @@
      * Salient colors (purple, sky blue, cream washes).
      */
     .thc-soc-skin {
+        --color-thc-text: #39333f;
         --color-thc-maroon: var(--color-thc-soc-purple);
         --color-thc-royal: var(--color-thc-soc-purple);
         --color-thc-teal: var(--color-thc-soc-sky);
@@ -111,7 +112,11 @@
     }
 
     .thc-soc-skin .thc-kicker {
-        @apply text-thc-soc-sky;
+        color: #76531f;
+    }
+
+    .thc-soc-skin main [class*="text-thc-text/"] {
+        color: #3b3541 !important;
     }
 
     .thc-cohs-skin .thc-kicker {
@@ -190,19 +195,14 @@
         );
     }
 
-    /** Shared hero strip for SOC inner pages (cream / sky wash into white). */
+    /** Shared light editorial hero for SOC inner pages. */
     .soc-page-hero {
-        border-bottom-color: rgb(178 222 234 / 0.55);
-        background: linear-gradient(
-            to bottom,
-            #f5f4f0 0%,
-            rgb(238 248 252 / 0.65) 42%,
-            white 100%
-        );
+        border-bottom: 1px solid #e2d9eb;
+        background-color: #f3eff7;
     }
 
-    /** SOC academic programmes: crisp editorial contrast and clear study pathways. */
-    .soc-academic-crumb-band {
+    /** Full-width School of Chaplaincy breadcrumb band shared by inner pages. */
+    .soc-page-breadcrumb-band {
         background-color: #2d428b;
     }
 

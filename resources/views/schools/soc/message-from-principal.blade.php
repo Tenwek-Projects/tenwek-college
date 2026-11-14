@@ -9,26 +9,26 @@
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
-    {{-- Hero band --}}
-    <div class="relative overflow-hidden bg-gradient-to-br from-thc-navy via-thc-soc-purple/70 to-thc-soc-sky/80 text-white">
-        <div class="pointer-events-none absolute inset-0 opacity-[0.14]" style="background-image: radial-gradient(circle at 15% 20%, rgba(255,255,255,0.35), transparent 42%), radial-gradient(circle at 90% 80%, rgba(90,200,250,0.45), transparent 45%);" aria-hidden="true"></div>
-        <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-            <x-schools.soc.breadcrumbs :school="$school" :current="$page->title" variant="hero" class="mb-8" data-reveal />
-            <div class="mt-8 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+    <x-schools.soc.page-breadcrumb-band :school="$school" :current="$page->title" />
+
+    {{-- Principal introduction --}}
+    <div class="soc-page-hero">
+        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+            <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
                 <div class="min-w-0 flex-1">
-                    <p class="max-w-2xl text-[11px] font-bold uppercase tracking-[0.22em] text-thc-soc-sky-soft sm:text-xs" data-reveal>
+                    <p class="max-w-2xl text-[11px] font-bold uppercase tracking-[0.22em] text-thc-soc-purple sm:text-xs" data-reveal>
                         {{ $P['kicker'] ?? '' }}
                     </p>
-                    <h1 class="mt-4 max-w-3xl font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-[3.25rem]" data-reveal>
+                    <h1 class="mt-4 max-w-3xl font-serif text-4xl font-semibold leading-tight tracking-tight text-thc-navy sm:text-5xl lg:text-[3.25rem]" data-reveal>
                         {{ $page->title }}
                     </h1>
-                    <p class="mt-8 max-w-xl border-l-4 border-thc-royal/90 pl-5 font-serif text-lg italic leading-relaxed text-white/95 sm:text-xl" data-reveal>
+                    <p class="mt-8 max-w-xl border-l-4 border-thc-royal/90 pl-5 font-serif text-lg italic leading-relaxed text-thc-text sm:text-xl" data-reveal>
                         “{{ $P['motto'] ?? 'Equip Chaplains for Wholistic Service' }}”
                     </p>
                 </div>
                 <figure class="mx-auto w-full max-w-[16rem] shrink-0 lg:mx-0 lg:max-w-[18rem]" data-reveal>
                     @if(filled($principalImg))
-                        <div class="overflow-hidden rounded-2xl border border-white/25 bg-white/10 shadow-xl ring-1 ring-white/20">
+                        <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-xl">
                             <img
                                 src="{{ \App\Support\Soc\SocLandingRepository::publicMediaUrl($principalImg) ?? asset($principalImg) }}"
                                 alt="{{ $principalAlt }}"
@@ -39,20 +39,20 @@
                                 decoding="async"
                             >
                         </div>
-                        <figcaption class="mt-3 text-center text-xs text-white/75">{{ $principalAlt }}</figcaption>
+                        <figcaption class="mt-3 text-center text-xs text-thc-text">{{ $principalAlt }}</figcaption>
                     @else
                         <div
-                            class="flex aspect-[4/5] w-full flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-white/40 bg-white/[0.07] px-4 text-center shadow-inner backdrop-blur-[2px]"
+                            class="flex aspect-[4/5] w-full flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-thc-navy/25 bg-white px-4 text-center shadow-inner"
                             role="img"
                             aria-label="{{ $placeholderCaption }}"
                         >
-                            <span class="flex h-20 w-20 items-center justify-center rounded-full bg-white/15 ring-2 ring-white/25">
-                                <svg class="h-10 w-10 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <span class="flex h-20 w-20 items-center justify-center rounded-full bg-thc-soc-wash ring-2 ring-thc-navy/15">
+                                <svg class="h-10 w-10 text-thc-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                 </svg>
                             </span>
-                            <span class="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/85">Principal</span>
-                            <span class="text-xs leading-snug text-white/65">{{ $placeholderCaption }}</span>
+                            <span class="text-[11px] font-semibold uppercase tracking-[0.14em] text-thc-navy">Principal</span>
+                            <span class="text-xs leading-snug text-thc-text">{{ $placeholderCaption }}</span>
                         </div>
                     @endif
                 </figure>

@@ -9,11 +9,7 @@
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
-    <div class="soc-academic-crumb-band">
-        <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
-            <x-schools.soc.breadcrumbs :school="$school" :current="$page->title" variant="hero" />
-        </div>
-    </div>
+    <x-schools.soc.page-breadcrumb-band :school="$school" :current="$page->title" />
 
     <header class="soc-academic-hero">
         <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">

@@ -1,16 +1,8 @@
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
+    <x-schools.soc.page-breadcrumb-band :school="$school" :current="$page->title" />
+
     <div class="soc-page-hero">
         <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-            <nav class="mb-6 text-sm text-thc-text/65" aria-label="Breadcrumb" data-reveal>
-                <ol class="flex flex-wrap items-center gap-2">
-                    <li><a href="{{ route('home') }}" class="transition hover:text-thc-royal hover:underline">Home</a></li>
-                    <li class="text-thc-text/45" aria-hidden="true">/</li>
-                    <li><a href="{{ route('schools.show', $school) }}" class="transition hover:text-thc-royal hover:underline">{{ $school->name }}</a></li>
-                    <li class="text-thc-text/45" aria-hidden="true">/</li>
-                    <li class="font-medium text-thc-navy">{{ $page->title }}</li>
-                </ol>
-            </nav>
-
             <header class="max-w-3xl" data-reveal>
                 <p class="thc-kicker">Online application</p>
                 <h1 class="mt-3 font-serif text-4xl font-semibold tracking-tight text-thc-navy sm:text-5xl">

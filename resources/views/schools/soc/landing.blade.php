@@ -13,6 +13,8 @@
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
+    <x-schools.soc.page-breadcrumb-band :school="$school" />
+
     {{-- Hero --}}
     <section
         class="relative flex min-h-[min(92svh,52rem)] flex-col justify-end overflow-hidden"
@@ -23,7 +25,6 @@
         <div class="pointer-events-none absolute inset-0 opacity-[0.16] mix-blend-overlay" style="background-image: radial-gradient(circle at 20% 25%, rgba(255,255,255,0.45), transparent 45%), radial-gradient(circle at 85% 70%, rgba(90,200,250,0.4), transparent 42%), radial-gradient(circle at 70% 20%, rgba(130,101,174,0.28), transparent 46%);" aria-hidden="true"></div>
 
         <div class="relative z-10 mx-auto w-full max-w-7xl px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:px-8 lg:pb-24">
-            <x-schools.soc.breadcrumbs :school="$school" variant="hero" class="mb-8" />
             <div data-reveal class="max-w-3xl">
                 <p class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-white/95 backdrop-blur-sm">
                     {{ $hero['badge'] }}

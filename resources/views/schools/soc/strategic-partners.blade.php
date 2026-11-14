@@ -6,9 +6,10 @@
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
+    <x-schools.soc.page-breadcrumb-band :school="$school" :current="$page->title" />
     <div class="soc-page-hero soc-strategic-partners-hero">
         <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-            <x-schools.soc.breadcrumbs :school="$school" :current="$page->title" class="mb-8" data-reveal />
+
 
             <header class="max-w-3xl" data-reveal>
                 <p class="thc-kicker strategic-partners-kicker">Strategic partnerships</p>

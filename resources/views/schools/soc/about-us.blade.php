@@ -18,33 +18,23 @@
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="soc" :school="$school">
-    {{-- Hero - accent #8265ae (thc-royal) --}}
-    <div
-        class="relative overflow-hidden text-white"
-        style="background: linear-gradient(135deg, #1a1a68 0%, {{ $accent }}d9 45%, #1a1a68 100%);"
-    >
-        <div
-            class="pointer-events-none absolute inset-0 opacity-25"
-            style="background-image: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.35), transparent 42%), radial-gradient(circle at 80% 75%, rgba(130,101,174,0.5), transparent 48%);"
-            aria-hidden="true"
-        ></div>
-        <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-            <x-schools.soc.breadcrumbs :school="$school" :current="$page->title" variant="hero" class="mb-8" data-reveal />
-            <header class="max-w-3xl" data-reveal>
-                <p class="text-[11px] font-bold uppercase tracking-[0.22em] text-white/90 sm:text-xs">
-                    {{ $A['kicker'] ?? 'Tenwek Hospital College' }}
-                </p>
-                <h1 class="mt-4 font-serif text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-[3.25rem]">
+    <x-schools.soc.page-breadcrumb-band :school="$school" :current="$page->title" />
+
+    <header class="soc-page-hero">
+        <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+            <div class="max-w-3xl" data-reveal>
+                <p class="thc-kicker">{{ $A['kicker'] ?? 'Tenwek Hospital College' }}</p>
+                <h1 class="mt-4 font-serif text-4xl font-semibold leading-tight tracking-tight text-thc-navy sm:text-5xl lg:text-[3.25rem]">
                     {{ $page->title }}
                 </h1>
                 @if(filled($page->excerpt))
-                    <p class="mt-6 max-w-2xl text-base leading-relaxed text-white/90 sm:text-lg">
+                    <p class="mt-6 max-w-2xl text-base leading-relaxed text-thc-text sm:text-lg">
                         {{ $page->excerpt }}
                     </p>
                 @endif
-            </header>
+            </div>
         </div>
-    </div>
+    </header>
 
     {{-- Row 1: image + opening paragraphs + CTA --}}
     <div class="bg-white">
