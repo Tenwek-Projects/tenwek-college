@@ -123,8 +123,8 @@
                     @endforeach
                 </div>
                 <div class="mt-10 flex flex-wrap gap-4">
-                    <a href="{{ route('schools.pages.show', [$school, 'about-us']) }}" class="thc-btn-ghost">Read more about us</a>
-                    <a href="{{ route('schools.pages.show', [$school, 'application-forms']) }}" class="inline-flex items-center gap-2 text-sm font-semibold text-thc-royal hover:underline">Application forms →</a>
+                    <a href="{{ route('schools.pages.show', [$school, 'about-us']) }}" class="cohs-post-hero-action">Read more about us <span aria-hidden="true">→</span></a>
+                    <a href="{{ route('schools.pages.show', [$school, 'application-forms']) }}" class="cohs-post-hero-action cohs-post-hero-action-secondary">Application forms <span aria-hidden="true">↗</span></a>
                 </div>
             </div>
         </div>
@@ -156,20 +156,33 @@
                         data-reveal
                         class="group flex flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-thc-card-hover)]"
                     >
-                        <div class="h-1 bg-thc-cohs-indigo" aria-hidden="true"></div>
-                        <div class="flex flex-1 flex-col p-8 sm:p-9">
-                            <h3 class="font-serif text-xl font-semibold text-thc-navy sm:text-[1.35rem]">{{ $prog['title'] }}</h3>
+                        <div class="h-1 bg-[#2563eb]" aria-hidden="true"></div>
+                        <div class="flex flex-1 flex-col p-7 sm:p-9">
+                            <div class="mb-6 flex items-center justify-between gap-3">
+                                <span class="rounded-full bg-blue-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-blue-800">Diploma programme</span>
+                                <span class="font-serif text-2xl font-semibold text-blue-200" aria-hidden="true">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                            </div>
+                            <h3 class="font-serif text-2xl font-semibold leading-tight text-thc-navy sm:text-[1.65rem]">{{ $prog['title'] }}</h3>
                             <p class="mt-4 flex-1 text-base leading-relaxed text-thc-text/90">{{ $prog['summary'] }}</p>
                             <a
                                 href="{{ $ctaHref }}"
-                                class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-thc-royal hover:underline"
+                                class="cohs-post-hero-action mt-8 self-start"
+                                aria-label="Explore {{ $prog['title'] }}"
                             >
-                                {{ $ctaLabel }}
+                                {{ $ctaLabel === 'Read more' ? 'Explore programme' : $ctaLabel }}
                                 <span aria-hidden="true">→</span>
                             </a>
                         </div>
                     </article>
                 @endforeach
+            </div>
+
+            <div class="cohs-programmes-nextstep mt-8 flex flex-col gap-5 rounded-2xl border border-blue-200 bg-blue-50/80 p-6 sm:flex-row sm:items-center sm:justify-between sm:px-8" data-reveal>
+                <div>
+                    <p class="cohs-nextstep-label text-xs font-bold uppercase tracking-[0.16em]">Your next step</p>
+                    <p class="cohs-nextstep-copy mt-1 text-base font-semibold">Need entry requirements, fees or application forms?</p>
+                </div>
+                <a href="{{ route('schools.pages.show', [$school, 'application-forms']) }}" class="cohs-post-hero-action self-start sm:self-auto">Admissions information <span aria-hidden="true">→</span></a>
             </div>
         </div>
     </section>
@@ -234,14 +247,16 @@
                         <div class="flex gap-2">
                             <button
                                 type="button"
-                                class="rounded-full border border-thc-navy/15 px-4 py-2 text-sm font-semibold text-thc-navy transition hover:bg-thc-navy/5"
+                                class="rounded-full border border-blue-200 bg-white px-5 py-2.5 text-sm font-semibold text-blue-900 transition hover:border-blue-600 hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                                 @click="active = (active - 1 + count) % count"
-                            >Previous</button>
+                                aria-label="Previous testimonial"
+                            ><span aria-hidden="true">←</span> Previous</button>
                             <button
                                 type="button"
-                                class="rounded-full border border-thc-navy/15 px-4 py-2 text-sm font-semibold text-thc-navy transition hover:bg-thc-navy/5"
+                                class="rounded-full bg-blue-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                                 @click="active = (active + 1) % count"
-                            >Next</button>
+                                aria-label="Next testimonial"
+                            >Next <span aria-hidden="true">→</span></button>
                         </div>
                     </div>
                 @endif
