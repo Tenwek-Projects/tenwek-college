@@ -149,7 +149,7 @@
             </span>
         </a>
 
-        <nav class="hidden min-w-0 flex-1 items-center justify-end gap-0.5 py-1 lg:flex lg:flex-wrap lg:justify-center lg:gap-x-0.5 lg:gap-y-2 lg:px-2 xl:px-4" aria-label="College of Health Sciences">
+        <nav class="hidden min-w-0 flex-1 items-center justify-end gap-2.5 py-1 lg:flex lg:flex-wrap lg:justify-center lg:gap-x-2.5 lg:gap-y-2 lg:px-2 xl:gap-x-3 xl:px-4" aria-label="College of Health Sciences">
             @foreach($mainNav as $item)
                 @if(! empty($item['mega_id']) && ! empty($item['children']))
                     <div class="relative shrink-0">
