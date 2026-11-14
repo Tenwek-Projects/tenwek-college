@@ -697,7 +697,7 @@ return [
         'logo' => env('TENWEK_COHS_LOGO', 'Tenwek-collge-logo.png'),
         'hero_image' => env('TENWEK_COHS_LANDING_HERO_IMAGE', 'images/image-1.jpg'),
         'welcome_image' => env('TENWEK_COHS_LANDING_WELCOME_IMAGE', 'images/image-2.jpg'),
-        'map_embed_url' => env('TENWEK_COHS_MAP_EMBED_URL', 'https://maps.google.com/maps?q=-0.7792,35.3369&z=14&output=embed'),
+        'map_embed_url' => env('TENWEK_COHS_MAP_EMBED_URL', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.815841979077!2d36.8343166!3d-1.2844217999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f119dc1c4872d%3A0x24104f8e63d8680e!2sTenwek%20Hospital%20College%20Of%20Health%20Sciences!5e0!3m2!1sen!2ske!4v1794657976999!5m2!1sen!2ske'),
         /**
          * /cohs/contact-us - brochure contact + apply facts
          */
