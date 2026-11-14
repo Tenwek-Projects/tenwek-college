@@ -273,128 +273,152 @@
                 <p class="mt-4 text-lg text-thc-text/85">Admissions, programme questions, or general enquiries: reach the College of Health Sciences office.</p>
             </div>
 
-            <div class="mt-12 grid items-stretch gap-8 lg:grid-cols-12 lg:gap-10 xl:gap-14">
-                <div class="flex lg:col-span-5" data-reveal>
-                    <div class="cohs-landing-contact-card flex h-full w-full flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)]">
-                        <div class="h-1 shrink-0 bg-thc-cohs-indigo" aria-hidden="true"></div>
-                        <div class="flex flex-1 flex-col gap-8 p-6 sm:gap-10 sm:p-8">
-                            <div>
-                                <div class="flex items-center gap-3">
-                                    <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-thc-cohs-wash text-thc-cohs-indigo ring-1 ring-thc-cohs-blue/25" aria-hidden="true">
-                                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
-                                    </span>
-                                    <h3 class="text-xs font-bold uppercase tracking-[0.18em] text-thc-cohs-coral">Our location</h3>
+            <div class="mt-10 grid items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
+                @if($mapUrl)
+                    <div class="h-full lg:col-span-5" data-reveal>
+                        <div class="flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_8px_24px_rgb(23_35_61_/_0.08)]">
+                            <div class="flex items-center gap-3 border-b border-slate-200 px-5 py-4 sm:px-6">
+                                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700" aria-hidden="true">
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                                </span>
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-[0.16em] text-blue-800">Find us</p>
+                                    <h3 class="mt-0.5 text-base font-semibold text-slate-900">Visit the College</h3>
                                 </div>
-                                <ul class="mt-4 space-y-2 border-l-2 border-thc-cohs-blue/35 pl-4 text-sm leading-relaxed text-thc-text/90">
-                                    @foreach($contactBlock['location_lines'] as $line)
-                                        <li>{{ $line }}</li>
-                                    @endforeach
-                                </ul>
                             </div>
-                            <div class="border-t border-thc-cohs-blue/20 pt-8">
-                                <div class="flex items-center gap-3">
-                                    <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-thc-cohs-coral/10 text-thc-cohs-coral ring-1 ring-thc-cohs-coral/25" aria-hidden="true">
-                                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-                                    </span>
-                                    <h3 class="text-xs font-bold uppercase tracking-[0.18em] text-thc-cohs-coral">Phone</h3>
-                                </div>
-                                <ul class="mt-4 space-y-2 text-sm font-medium text-thc-navy">
-                                    @foreach($contactBlock['phones'] as $phone)
-                                        <li><a href="tel:{{ preg_replace('/[^0-9+]/', '', \Illuminate\Support\Str::before($phone, ',')) }}" class="transition hover:text-thc-cohs-blue hover:underline">{{ $phone }}</a></li>
-                                    @endforeach
-                                </ul>
-                                <div class="mt-8 flex items-center gap-3">
-                                    <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-thc-cohs-blue/10 text-thc-cohs-blue ring-1 ring-thc-cohs-blue/25" aria-hidden="true">
-                                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
-                                    </span>
-                                    <h3 class="text-xs font-bold uppercase tracking-[0.18em] text-thc-cohs-coral">Email</h3>
-                                </div>
-                                <p class="mt-4">
-                                    <a href="mailto:{{ $contactBlock['email'] }}" class="text-sm font-semibold text-thc-cohs-blue transition hover:text-thc-cohs-indigo hover:underline">{{ $contactBlock['email'] }}</a>
-                                </p>
-                            </div>
-                            <p class="mt-auto rounded-xl bg-thc-cohs-wash/80 px-4 py-3 text-sm leading-relaxed text-thc-navy/80 ring-1 ring-thc-cohs-blue/15">
-                                @if(count($contactBlock['office_hours_lines'] ?? []) > 0)
-                                    @foreach($contactBlock['office_hours_lines'] as $i => $hourLine)
-                                        @if($i > 0)<br>@endif{{ $hourLine }}
-                                    @endforeach
-                                @else
-                                    Office hours follow the college calendar. We aim to reply within a few working days.
-                                @endif
-                            </p>
+                            <iframe
+                                title="Map: Tenwek Hospital College area"
+                                src="{{ $mapUrl }}"
+                                class="h-full min-h-[22rem] w-full flex-1 border-0 lg:min-h-[30rem]"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                allowfullscreen
+                            ></iframe>
                         </div>
                     </div>
-                </div>
+                @endif
 
-                <div class="flex lg:col-span-7" data-reveal>
-                    <div class="flex h-full w-full flex-col">
-                        @if (session('status'))
-                            <div class="mb-6 rounded-xl border border-thc-cohs-blue/30 bg-thc-cohs-wash px-4 py-3 text-sm text-thc-navy">{{ session('status') }}</div>
-                        @endif
+                <div class="lg:col-span-{{ $mapUrl ? '7' : '12' }}" data-reveal>
+                    @if (session('status'))
+                        <div class="mb-6 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm font-medium text-slate-900">{{ session('status') }}</div>
+                    @endif
 
-                        <div class="cohs-landing-contact-form flex h-full flex-1 flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)]">
-                            <div class="h-1 shrink-0 bg-thc-cohs-indigo" aria-hidden="true"></div>
-                            <div class="flex flex-1 flex-col p-6 sm:p-8">
-                                <h3 class="font-serif text-xl font-semibold text-thc-navy">Send a message</h3>
-                                <p class="mt-2 text-sm text-thc-text/80">Use this form for enquiries to the College of Health Sciences. Required fields are marked.</p>
+                    <div class="cohs-landing-contact-form overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_8px_24px_rgb(23_35_61_/_0.08)]">
+                        <div class="h-1 bg-blue-600" aria-hidden="true"></div>
+                        <div class="p-6 sm:p-8">
+                            <h3 class="font-serif text-xl font-semibold text-slate-900">Send a message</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-700">Use this form for enquiries to the College of Health Sciences. Required fields are marked.</p>
 
-                                <form method="post" action="{{ route('contact.store') }}" class="mt-8 flex flex-1 flex-col space-y-5" data-arithmetic-guard>
-                                    @csrf
-                                    <input type="hidden" name="school_id" value="{{ $school->id }}">
-                                    <input type="text" name="fax" tabindex="-1" autocomplete="off" class="absolute -left-[9999px] h-0 w-0 opacity-0" aria-hidden="true">
+                            <form method="post" action="{{ route('contact.store') }}" class="mt-7 space-y-5" data-arithmetic-guard>
+                                @csrf
+                                <input type="hidden" name="school_id" value="{{ $school->id }}">
+                                <input type="text" name="fax" tabindex="-1" autocomplete="off" class="absolute -left-[9999px] h-0 w-0 opacity-0" aria-hidden="true">
 
-                                    <div class="grid flex-1 gap-5 content-start sm:grid-cols-2">
-                                        <div class="sm:col-span-2">
-                                            <label for="cohs-contact-name" class="block text-sm font-medium text-thc-navy">Full name</label>
-                                            <input type="text" name="name" id="cohs-contact-name" value="{{ old('name') }}" required autocomplete="name" class="mt-1.5 w-full rounded-xl border border-thc-navy/12 bg-thc-cohs-wash/40 px-4 py-3 text-sm transition focus:border-thc-cohs-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-thc-cohs-blue/25">
-                                            @error('name')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-                                        </div>
-                                        <div>
-                                            <label for="cohs-contact-email" class="block text-sm font-medium text-thc-navy">Email</label>
-                                            <input type="email" name="email" id="cohs-contact-email" value="{{ old('email') }}" required autocomplete="email" class="mt-1.5 w-full rounded-xl border border-thc-navy/12 bg-thc-cohs-wash/40 px-4 py-3 text-sm transition focus:border-thc-cohs-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-thc-cohs-blue/25">
-                                            @error('email')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-                                        </div>
-                                        <div>
-                                            <label for="cohs-contact-phone" class="block text-sm font-medium text-thc-navy">Phone <span class="font-normal text-thc-text/60">(optional)</span></label>
-                                            <input type="text" name="phone" id="cohs-contact-phone" value="{{ old('phone') }}" autocomplete="tel" class="mt-1.5 w-full rounded-xl border border-thc-navy/12 bg-thc-cohs-wash/40 px-4 py-3 text-sm transition focus:border-thc-cohs-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-thc-cohs-blue/25">
-                                            @error('phone')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-                                        </div>
-                                        <div class="sm:col-span-2">
-                                            <label for="cohs-contact-topic" class="block text-sm font-medium text-thc-navy">Topic <span class="font-normal text-thc-text/60">(optional)</span></label>
-                                            <input type="text" name="topic" id="cohs-contact-topic" value="{{ old('topic', 'College of Health Sciences enquiry') }}" class="mt-1.5 w-full rounded-xl border border-thc-navy/12 bg-thc-cohs-wash/40 px-4 py-3 text-sm transition focus:border-thc-cohs-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-thc-cohs-blue/25">
-                                            @error('topic')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-                                        </div>
-                                        <div class="sm:col-span-2 flex min-h-0 flex-1 flex-col">
-                                            <label for="cohs-contact-message" class="block text-sm font-medium text-thc-navy">Message</label>
-                                            <textarea name="message" id="cohs-contact-message" rows="5" required class="mt-1.5 min-h-[8rem] w-full flex-1 rounded-xl border border-thc-navy/12 bg-thc-cohs-wash/40 px-4 py-3 text-sm transition focus:border-thc-cohs-blue focus:bg-white focus:outline-none focus:ring-2 focus:ring-thc-cohs-blue/25">{{ old('message') }}</textarea>
-                                            @error('message')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-                                        </div>
+                                <div class="grid gap-x-5 gap-y-4 sm:grid-cols-2">
+                                    <div class="sm:col-span-2">
+                                        <label for="cohs-contact-name" class="block text-sm font-semibold text-slate-800">Full name</label>
+                                        <input type="text" name="name" id="cohs-contact-name" value="{{ old('name') }}" required autocomplete="name" class="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition placeholder:text-slate-500 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20">
+                                        @error('name')<p class="mt-1 text-sm text-red-700">{{ $message }}</p>@enderror
                                     </div>
-
-                                    <div class="mt-auto flex flex-col gap-4 border-t border-thc-cohs-blue/15 pt-6 sm:flex-row sm:items-center sm:justify-between">
-                                        <button type="submit" class="thc-btn-primary w-full justify-center sm:w-auto sm:min-w-[12rem]">Send message</button>
-                                        <p class="text-xs text-thc-text/65">By submitting, you agree we may respond using the details provided.</p>
+                                    <div>
+                                        <label for="cohs-contact-email" class="block text-sm font-semibold text-slate-800">Email</label>
+                                        <input type="email" name="email" id="cohs-contact-email" value="{{ old('email') }}" required autocomplete="email" class="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition placeholder:text-slate-500 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20">
+                                        @error('email')<p class="mt-1 text-sm text-red-700">{{ $message }}</p>@enderror
                                     </div>
-                                </form>
-                            </div>
+                                    <div>
+                                        <label for="cohs-contact-phone" class="block text-sm font-semibold text-slate-800">Phone <span class="font-normal text-slate-600">(optional)</span></label>
+                                        <input type="text" name="phone" id="cohs-contact-phone" value="{{ old('phone') }}" autocomplete="tel" class="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition placeholder:text-slate-500 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20">
+                                        @error('phone')<p class="mt-1 text-sm text-red-700">{{ $message }}</p>@enderror
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label for="cohs-contact-topic" class="block text-sm font-semibold text-slate-800">Topic <span class="font-normal text-slate-600">(optional)</span></label>
+                                        <input type="text" name="topic" id="cohs-contact-topic" value="{{ old('topic', 'College of Health Sciences enquiry') }}" class="mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition placeholder:text-slate-500 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20">
+                                        @error('topic')<p class="mt-1 text-sm text-red-700">{{ $message }}</p>@enderror
+                                    </div>
+                                    <div class="sm:col-span-2">
+                                        <label for="cohs-contact-message" class="block text-sm font-semibold text-slate-800">Message</label>
+                                        <textarea name="message" id="cohs-contact-message" rows="5" required class="mt-1.5 min-h-[9rem] w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 transition placeholder:text-slate-500 focus:border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600/20">{{ old('message') }}</textarea>
+                                        @error('message')<p class="mt-1 text-sm text-red-700">{{ $message }}</p>@enderror
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-4 border-t border-slate-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
+                                    <button type="submit" class="thc-btn-primary w-full justify-center bg-blue-700 text-white hover:bg-blue-800 sm:w-auto sm:min-w-[12rem]">Send message <span aria-hidden="true">→</span></button>
+                                    <p class="text-xs leading-relaxed text-slate-600">By submitting, you agree we may respond using the details provided.</p>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
 
-            @if($mapUrl)
-                <div class="mt-10 w-full sm:mt-12 lg:mt-14" data-reveal>
-                    <div class="overflow-hidden rounded-2xl border border-thc-navy/10 bg-thc-navy/[0.03] shadow-[var(--shadow-thc-card)] ring-1 ring-thc-navy/5">
-                        <iframe
-                            title="Map: Tenwek Hospital College area"
-                            src="{{ $mapUrl }}"
-                            class="block aspect-video min-h-[16rem] w-full max-w-full border-0 sm:min-h-[18rem] lg:min-h-[22rem]"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            allowfullscreen
-                        ></iframe>
+            <div class="mt-10 sm:mt-12" data-reveal>
+                <div class="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-[0.16em] text-blue-800">Contact details</p>
+                        <h3 class="mt-1 font-serif text-2xl font-semibold text-slate-900">Reach the College office</h3>
                     </div>
+                    <p class="max-w-xl text-sm leading-relaxed text-slate-700">Choose the easiest way to reach us or plan your visit to Tenwek.</p>
                 </div>
+
+                <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                    <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+                        <div class="flex items-center gap-3">
+                            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-700" aria-hidden="true">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+                            </span>
+                            <h4 class="text-sm font-bold text-slate-900">Location</h4>
+                        </div>
+                        <address class="mt-3 space-y-1 text-sm leading-relaxed text-slate-700 not-italic">
+                            @foreach($contactBlock['location_lines'] as $line)
+                                <div>{{ $line }}</div>
+                            @endforeach
+                        </address>
+                    </article>
+
+                    <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+                        <div class="flex items-center gap-3">
+                            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-700" aria-hidden="true">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                            </span>
+                            <h4 class="text-sm font-bold text-slate-900">Phone</h4>
+                        </div>
+                        <ul class="mt-3 space-y-2 text-sm font-semibold">
+                            @foreach($contactBlock['phones'] as $phone)
+                                <li><a href="tel:{{ preg_replace('/[^0-9+]/', '', \Illuminate\Support\Str::before($phone, ',')) }}" class="text-blue-800 underline-offset-4 hover:text-blue-950 hover:underline">{{ $phone }}</a></li>
+                            @endforeach
+                        </ul>
+                    </article>
+
+                    <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+                        <div class="flex items-center gap-3">
+                            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-700" aria-hidden="true">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M3.75 6.75h16.5v10.5H3.75z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="m4.5 7.5 7.5 6 7.5-6"/></svg>
+                            </span>
+                            <h4 class="text-sm font-bold text-slate-900">Email</h4>
+                        </div>
+                        <a href="mailto:{{ $contactBlock['email'] }}" class="mt-3 inline-block break-all text-sm font-semibold text-blue-800 underline-offset-4 hover:text-blue-950 hover:underline">{{ $contactBlock['email'] }}</a>
+                    </article>
+
+                    <article class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-blue-200 hover:shadow-md">
+                        <div class="flex items-center gap-3">
+                            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-700" aria-hidden="true">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.75"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M12 7v5l3 2"/></svg>
+                            </span>
+                            <h4 class="text-sm font-bold text-slate-900">Office hours</h4>
+                        </div>
+                        <div class="mt-3 space-y-1 text-sm leading-relaxed text-slate-700">
+                            @if(count($contactBlock['office_hours_lines'] ?? []) > 0)
+                                @foreach($contactBlock['office_hours_lines'] as $hourLine)
+                                    <p>{{ $hourLine }}</p>
+                                @endforeach
+                            @else
+                                <p>Office hours follow the college calendar. We aim to reply within a few working days.</p>
+                            @endif
+                        </div>
+                    </article>
+                </div>
+            </div>
             @endif
         </div>
 

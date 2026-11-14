@@ -302,8 +302,7 @@
         box-shadow: none;
     }
 
-    .thc-cohs-skin #contact .cohs-landing-contact-card > div:first-child,
-    .thc-cohs-skin #contact .cohs-landing-contact-form > div:first-child {
+    .thc-cohs-skin #contact .cohs-landing-contact-card > div:first-child {
         background: #263b5d;
     }
 
