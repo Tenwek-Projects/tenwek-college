@@ -16,9 +16,6 @@
                 <p class="mt-6 text-lg leading-relaxed text-thc-text/90">
                     {{ $B['intro'] ?? '' }}
                 </p>
-                @if(!empty($B['photo_note']))
-                    <p class="mt-4 text-sm text-thc-text/65">{{ $B['photo_note'] }}</p>
-                @endif
             </header>
         </div>
     </div>

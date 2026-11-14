@@ -274,7 +274,6 @@ return [
          */
         'board_and_management' => [
             'intro' => 'Tenwek Hospital College · School of Chaplaincy is a training subsidiary of Tenwek Hospital. The board that governs the school is therefore the same board that governs the hospital.',
-            'photo_note' => 'Official portraits are displayed on each card as they become available.',
             'board_heading' => 'Board',
             /** Optional per person: `'image' => 'images/board/filename.jpg'` */
             'board' => [
