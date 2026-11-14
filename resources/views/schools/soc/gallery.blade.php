@@ -54,7 +54,7 @@
                 </header>
 
                 @if($featuredItem)
-                    <figure class="group relative overflow-hidden rounded-[1.75rem] border border-white/70 bg-[#211a3c] shadow-[0_24px_70px_rgba(26,26,104,0.22)] ring-1 ring-thc-navy/10 lg:col-span-7" data-reveal>
+                    <figure class="group relative overflow-hidden rounded-[1.75rem] border border-white/70 bg-thc-navy/10 shadow-[0_24px_70px_rgba(26,26,104,0.22)] ring-1 ring-thc-navy/10 lg:col-span-7" data-reveal>
                         <button
                             type="button"
                             class="relative block aspect-[4/3] w-full cursor-zoom-in text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-thc-royal sm:aspect-[16/10]"
@@ -65,23 +65,15 @@
                         >
                             <img
                                 src="{{ $featuredItem['src'] }}"
-                                alt=""
-                                aria-hidden="true"
-                                class="absolute inset-0 h-full w-full scale-110 object-cover opacity-60 blur-2xl"
-                                loading="lazy"
-                                decoding="async"
-                            >
-                            <img
-                                src="{{ $featuredItem['src'] }}"
                                 alt="{{ $featuredItem['alt'] }}"
-                                class="absolute inset-0 z-10 h-full w-full object-contain transition duration-500 ease-out group-hover:brightness-105"
+                                class="absolute inset-0 h-full w-full bg-[#e9e2f0] object-contain transition duration-500 ease-out group-hover:brightness-105"
                                 loading="eager"
                                 decoding="async"
                                 fetchpriority="high"
                                 sizes="(min-width: 1024px) 58vw, 100vw"
                             >
-                            <span class="absolute inset-0 z-20 bg-gradient-to-t from-[#16123a]/90 via-[#16123a]/10 to-transparent" aria-hidden="true"></span>
-                            <span class="absolute bottom-0 left-0 right-0 z-30 flex flex-wrap items-end justify-between gap-4 p-5 text-white sm:p-7">
+                            <span class="absolute inset-0 bg-gradient-to-t from-[#16123a]/90 via-[#16123a]/10 to-transparent" aria-hidden="true"></span>
+                            <span class="absolute bottom-0 left-0 right-0 flex flex-wrap items-end justify-between gap-4 p-5 text-white sm:p-7">
                                 <span class="max-w-lg">
                                     <span class="block text-[10px] font-bold uppercase tracking-[0.22em] text-white/75">A glimpse of our community</span>
                                     <span class="mt-2 block font-serif text-xl font-semibold leading-tight sm:text-2xl">{{ $featuredItem['caption'] ?: 'Life at Tenwek' }}</span>
@@ -114,7 +106,7 @@
                     @foreach($galleryGridItems as $index => $item)
                         @php $lbIndex = $index + 1; @endphp
                         <li @class(['min-h-0 min-w-0', 'sm:col-span-2 lg:col-span-2 lg:row-span-2' => $index % 7 === 0, 'lg:row-span-2' => $index % 7 === 3]) data-reveal>
-                            <div class="group relative h-full min-h-0 overflow-hidden rounded-2xl border border-thc-navy/10 bg-[#211a3c] shadow-sm ring-1 ring-thc-navy/[0.04]">
+                            <div class="group relative h-full min-h-0 overflow-hidden rounded-2xl border border-thc-navy/10 bg-thc-navy/5 shadow-sm ring-1 ring-thc-navy/[0.04]">
                                 <button
                                     type="button"
                                     class="absolute inset-0 h-full w-full cursor-zoom-in text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-[-4px] focus-visible:outline-thc-royal"
@@ -125,22 +117,14 @@
                                 >
                                     <img
                                         src="{{ $item['src'] }}"
-                                        alt=""
-                                        aria-hidden="true"
-                                        class="absolute inset-0 h-full w-full scale-110 object-cover opacity-60 blur-2xl"
-                                        loading="lazy"
-                                        decoding="async"
-                                    >
-                                    <img
-                                        src="{{ $item['src'] }}"
                                         alt="{{ $item['alt'] }}"
-                                        class="absolute inset-0 z-10 h-full w-full object-contain transition duration-500 ease-out group-hover:brightness-105"
+                                        class="absolute inset-0 h-full w-full bg-[#e9e2f0] object-contain transition duration-500 ease-out group-hover:brightness-105"
                                         loading="{{ $index < 4 ? 'eager' : 'lazy' }}"
                                         decoding="async"
                                         sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                                     >
-                                    <span class="absolute inset-0 z-20 bg-gradient-to-t from-[#16123a]/80 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-100" aria-hidden="true"></span>
-                                    <span class="absolute inset-x-0 bottom-0 z-30 p-4 text-left text-sm font-semibold leading-snug text-white sm:p-5">{{ $item['caption'] ?: $item['alt'] ?: __('View photo') }}</span>
+                                    <span class="absolute inset-0 bg-gradient-to-t from-[#16123a]/80 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-100" aria-hidden="true"></span>
+                                    <span class="absolute inset-x-0 bottom-0 p-4 text-left text-sm font-semibold leading-snug text-white sm:p-5">{{ $item['caption'] ?: $item['alt'] ?: __('View photo') }}</span>
                                 </button>
                             </div>
                         </li>
