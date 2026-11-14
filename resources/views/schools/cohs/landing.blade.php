@@ -60,7 +60,7 @@
                 <p class="mt-0 flex max-w-xl items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/85 sm:gap-3 sm:text-sm sm:tracking-[0.28em]">
                     <span class="h-px w-5 shrink-0 bg-white/75 sm:w-12" aria-hidden="true"></span>
                     <span class="whitespace-nowrap">{{ $heroEyebrow }}</span>
-                    <span class="h-px min-w-5 flex-1 bg-white/65 sm:min-w-12" aria-hidden="true"></span>
+                    <span class="h-px w-5 shrink-0 bg-white/65 sm:w-12" aria-hidden="true"></span>
                 </p>
                 <h1 class="mt-4 font-serif text-4xl font-semibold leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-[4.5rem]">
                     {{ $hero['headline'] }}
