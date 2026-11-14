@@ -19,10 +19,9 @@
         class="relative flex min-h-[min(88svh,48rem)] flex-col justify-center overflow-hidden bg-[#0a184c]"
         aria-label="College of Health Sciences hero"
     >
-        <div class="pointer-events-none absolute inset-x-0 top-0 h-[55%] overflow-hidden lg:inset-y-0 lg:left-[30%] lg:h-auto" aria-hidden="true">
-            <img src="{{ e($heroImageUrl) }}" alt="" class="h-full w-full object-cover object-center">
-            <span class="absolute inset-0 lg:hidden" style="background: linear-gradient(0deg, #0a184c 0%, rgba(10,24,76,0.45) 34%, transparent 78%);"></span>
-            <span class="absolute inset-0 hidden lg:block" style="background: linear-gradient(90deg, rgba(10,24,76,0.9) 0%, rgba(10,24,76,0.68) 10%, rgba(10,24,76,0.42) 22%, rgba(10,24,76,0.18) 36%, transparent 52%);"></span>
+        <div class="pointer-events-none absolute inset-0 hidden bg-cover bg-center lg:block" style="background-image: url('{{ e($heroImageUrl) }}');" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-x-0 top-0 h-[55%] bg-cover lg:hidden" style="background-image: url('{{ e($heroImageUrl) }}'); background-position: 80% center;" aria-hidden="true">
+            <span class="absolute inset-0" style="background: linear-gradient(0deg, #0a184c 0%, rgba(10,24,76,0.55) 34%, transparent 82%);"></span>
         </div>
 
         <div class="relative z-10 mx-auto w-[88%] max-w-none px-0 pb-36 pt-16 sm:pb-40 sm:pt-20 lg:pb-40 lg:pt-16">
