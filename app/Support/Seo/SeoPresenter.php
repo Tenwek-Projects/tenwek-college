@@ -39,6 +39,9 @@ class SeoPresenter
             ? $g['default_robots']
             : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1';
         $robots = $overrides['robots'] ?? $defaultRobots;
+        if ($request->getHost() === 'college.tenwekhosp.org') {
+            $robots = 'noindex,follow';
+        }
         $keywords = $overrides['keywords'] ?? self::keywordsFromGlobalOrDefault($g);
         $locale = str_replace('_', '-', app()->getLocale());
 

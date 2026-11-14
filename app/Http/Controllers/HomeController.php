@@ -12,8 +12,8 @@ class HomeController extends Controller
     public function __invoke(Request $request): View
     {
         $seo = SeoPresenter::build($request, [
-            'title' => config('tenwek.name').' | '.config('tenwek.institution_legal'),
-            'description' => config('tenwek.tagline'),
+            'title' => 'Tenwek Hospital College – The Tenwek Hospital',
+            'description' => 'Welcome to Tenwek Hospital College. Two schools, one calling: forming health workers and chaplains to serve the whole person. Choose a school to continue.',
             'faq' => [
                 [
                     'question' => 'What is Tenwek Hospital College?',
