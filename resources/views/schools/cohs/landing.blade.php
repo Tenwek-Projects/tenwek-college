@@ -16,31 +16,20 @@
 <x-layouts.public :seo="$seo" landing-header="cohs" :school="$school">
     {{-- Hero: rhythm inspired by https://tenwekhospitalcollege.ac.ke/cohs/ --}}
     <section
-        class="relative flex min-h-[min(88svh,48rem)] flex-col justify-end overflow-hidden"
+        class="relative flex min-h-[min(88svh,48rem)] flex-col justify-center overflow-hidden"
         aria-label="College of Health Sciences hero"
     >
         <div class="pointer-events-none absolute inset-0 bg-no-repeat" style="background-image: url('{{ e($heroImageUrl) }}'); background-size: auto 125%; background-position: center bottom;" aria-hidden="true"></div>
-        <div class="cohs-landing-hero-overlay absolute inset-0" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute inset-0 opacity-[0.14] mix-blend-overlay" style="background-image: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.45), transparent 42%), radial-gradient(circle at 80% 75%, rgba(90,200,250,0.45), transparent 40%);" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute inset-0" style="background: linear-gradient(90deg, rgba(10,24,76,0.98) 0%, rgba(10,24,76,0.98) 32%, rgba(10,24,76,0.82) 36%, transparent 41%), linear-gradient(0deg, rgba(10,24,76,0.94) 0%, rgba(10,24,76,0.72) 9%, transparent 22%);" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-0" style="background: linear-gradient(90deg, rgba(10,24,76,0.99) 0%, rgba(10,24,76,0.99) 32%, rgba(10,24,76,0.72) 36%, transparent 40%); clip-path: inset(0 0 22% 0);" aria-hidden="true"></div>
 
-        <div class="relative z-10 mx-auto w-full max-w-7xl px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-32 lg:px-8 lg:pb-24">
-            <nav class="mb-8 text-sm text-white/75" aria-label="Breadcrumb">
-                <ol class="flex flex-wrap gap-2">
-                    <li><a href="{{ route('home') }}" class="hover:text-white">Home</a></li>
-                    <li aria-hidden="true">/</li>
-                    <li class="text-white">{{ $school->name }}</li>
-                </ol>
-            </nav>
-            <div data-reveal class="max-w-3xl">
-                <p class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-white/95 backdrop-blur-sm">
-                    {{ $hero['badge'] }}
-                </p>
+        <div class="relative z-10 mx-auto w-full max-w-7xl px-4 pb-36 pt-16 sm:px-6 sm:pb-40 sm:pt-20 lg:px-8 lg:pb-40 lg:pt-16">
+            <div data-reveal class="max-w-2xl">
                 <p class="mt-6 text-sm font-semibold uppercase tracking-[0.28em] text-white/80">{{ $hero['eyebrow'] }}</p>
-                <h1 class="mt-4 font-serif text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
+                <h1 class="mt-4 font-serif text-4xl font-semibold leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-[4.5rem]">
                     {{ $hero['headline'] }}
                 </h1>
-                <p class="mt-6 max-w-2xl text-lg leading-relaxed text-white/92 sm:text-xl">
+                <div class="mt-3 h-1.5 w-56 -rotate-2 rounded-full bg-violet-500" aria-hidden="true"></div>
+                <p class="mt-5 max-w-xl text-lg leading-relaxed text-white/95 sm:text-xl">
                     {{ $hero['subhead'] }}
                 </p>
                 <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
