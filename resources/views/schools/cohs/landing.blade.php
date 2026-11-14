@@ -16,15 +16,18 @@
 <x-layouts.public :seo="$seo" landing-header="cohs" :school="$school">
     {{-- Hero: rhythm inspired by https://tenwekhospitalcollege.ac.ke/cohs/ --}}
     <section
-        class="relative flex min-h-[min(88svh,48rem)] flex-col justify-center overflow-hidden"
+        class="relative flex min-h-[min(88svh,48rem)] flex-col justify-center overflow-hidden bg-[#0a184c]"
         aria-label="College of Health Sciences hero"
     >
-        <div class="pointer-events-none absolute inset-0 bg-no-repeat" style="background-image: url('{{ e($heroImageUrl) }}'); background-size: auto 125%; background-position: center bottom;" aria-hidden="true"></div>
-        <div class="pointer-events-none absolute inset-0" style="background: linear-gradient(90deg, rgba(10,24,76,0.99) 0%, rgba(10,24,76,0.99) 32%, rgba(10,24,76,0.72) 36%, transparent 40%); clip-path: inset(0 0 22% 0);" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute inset-x-0 top-0 h-[55%] overflow-hidden lg:inset-y-0 lg:left-[30%] lg:h-auto" aria-hidden="true">
+            <img src="{{ e($heroImageUrl) }}" alt="" class="h-full w-full object-cover object-center">
+            <span class="absolute inset-0 lg:hidden" style="background: linear-gradient(0deg, #0a184c 0%, rgba(10,24,76,0.45) 34%, transparent 78%);"></span>
+            <span class="absolute inset-0 hidden lg:block" style="background: linear-gradient(90deg, rgba(10,24,76,0.86) 0%, rgba(10,24,76,0.38) 6%, transparent 18%);"></span>
+        </div>
 
-        <div class="relative z-10 mx-auto w-full max-w-7xl px-4 pb-36 pt-16 sm:px-6 sm:pb-40 sm:pt-20 lg:px-8 lg:pb-40 lg:pt-16">
-            <div data-reveal class="max-w-2xl">
-                <p class="mt-6 text-sm font-semibold uppercase tracking-[0.28em] text-white/80">{{ $hero['eyebrow'] }}</p>
+        <div class="relative z-10 mx-auto w-[88%] max-w-none px-0 pb-36 pt-16 sm:pb-40 sm:pt-20 lg:pb-40 lg:pt-16">
+            <div data-reveal class="max-w-xl">
+                <p class="mt-0 text-sm font-semibold uppercase tracking-[0.28em] text-white/80">{{ $hero['eyebrow'] }}</p>
                 <h1 class="mt-4 font-serif text-4xl font-semibold leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-[4.5rem]">
                     {{ $hero['headline'] }}
                 </h1>
@@ -40,6 +43,25 @@
                         {{ $hero['secondary_cta']['label'] }}
                     </a>
                 </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 z-20 hidden w-[88%] max-w-[1576px] -translate-x-1/2 grid-cols-4 divide-x divide-white/25 rounded-full border border-white/20 bg-[#314486]/70 px-3 py-4 text-white shadow-xl backdrop-blur-md lg:grid">
+            <div class="flex items-center gap-3 px-4">
+                <svg class="h-9 w-9 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 9l9-5 9 5-9 5-9-5zm3.5 2.2V16c3.5 2.7 7.5 2.7 11 0v-4.8M21 9v6"/></svg>
+                <span><strong class="block text-sm">Accredited Programmes</strong><small class="mt-1 block text-xs text-white/80">Health training to national standards</small></span>
+            </div>
+            <div class="flex items-center gap-3 px-4">
+                <svg class="h-9 w-9 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2m6-10a4 4 0 100-8 4 4 0 000 8zm10 10v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                <span><strong class="block text-sm">Experienced Faculty</strong><small class="mt-1 block text-xs text-white/80">Qualified and practicing professionals</small></span>
+            </div>
+            <div class="flex items-center gap-3 px-4">
+                <svg class="h-9 w-9 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 00-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 00-.1-7.8zM3 12h4l2-3 3 6 2-3h7"/></svg>
+                <span><strong class="block text-sm">Hands-on Training</strong><small class="mt-1 block text-xs text-white/80">Real clinical and community exposure</small></span>
+            </div>
+            <div class="flex items-center gap-3 px-4">
+                <svg class="h-9 w-9 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 21v-8m0 2C6 15 4 12 4 7c5 0 8 2 8 8zm0-3c0-5 3-8 8-8 0 5-3 8-8 8z"/></svg>
+                <span><strong class="block text-sm">Meaningful Impact</strong><small class="mt-1 block text-xs text-white/80">Serving communities in Kenya and beyond</small></span>
             </div>
         </div>
     </section>
