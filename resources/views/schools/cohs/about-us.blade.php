@@ -166,16 +166,15 @@
                 <ul class="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3" role="list">
                     @foreach($A['board'] as $person)
                         <li>
-                            <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-[var(--shadow-thc-card)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-thc-card-hover)] {{ ! empty($person['highlight']) ? 'ring-1 ring-thc-cohs-coral/30' : '' }}">
-                                <div class="h-1.5 shrink-0 bg-gradient-to-r {{ ! empty($person['highlight']) ? 'from-thc-cohs-coral via-thc-cohs-blue to-thc-cohs-indigo' : 'from-thc-cohs-indigo via-thc-cohs-blue to-thc-cohs-sky' }}" aria-hidden="true"></div>
-                                <div class="relative aspect-[5/6] w-full overflow-hidden bg-gradient-to-b from-thc-cohs-wash to-white sm:aspect-[4/5]">
-                                    @php
-                                        $image = $person['image'] ?? null;
-                                        $parts = array_values(array_filter(preg_split('/\s+/', (string) ($person['name'] ?? '')) ?: []));
-                                        $initials = count($parts) >= 2
-                                            ? mb_strtoupper(mb_substr($parts[0], 0, 1).mb_substr($parts[count($parts) - 1], 0, 1))
-                                            : (count($parts) === 1 ? mb_strtoupper(mb_substr($parts[0], 0, 2)) : '?');
-                                    @endphp
+                            @php
+                                $image = $person['image'] ?? null;
+                                $parts = array_values(array_filter(preg_split('/\s+/', (string) ($person['name'] ?? '')) ?: []));
+                                $initials = count($parts) >= 2
+                                    ? mb_strtoupper(mb_substr($parts[0], 0, 1).mb_substr($parts[count($parts) - 1], 0, 1))
+                                    : (count($parts) === 1 ? mb_strtoupper(mb_substr($parts[0], 0, 2)) : '?');
+                            @endphp
+                            <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-thc-navy/10 bg-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-thc-card-hover)] {{ ! empty($person['highlight']) ? 'border-thc-cohs-indigo/30 bg-gradient-to-br from-thc-cohs-wash/70 to-white ring-1 ring-thc-cohs-indigo/15' : '' }}">
+                                <div class="relative aspect-[5/6] w-full overflow-hidden bg-gradient-to-b from-thc-cohs-wash to-thc-cohs-wash/30 sm:aspect-[4/5]">
                                     @if(filled($image))
                                         <img
                                             src="{{ \App\Support\Cohs\CohsLandingRepository::publicMediaUrl($image) ?? asset($image) }}"
@@ -186,12 +185,14 @@
                                             width="400"
                                             height="500"
                                         >
+                                        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-thc-cohs-indigo/35 to-transparent" aria-hidden="true"></div>
                                     @else
-                                        <div class="flex h-full w-full flex-col items-center justify-center gap-3 p-6 text-center" aria-hidden="true">
-                                            <span class="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full bg-gradient-to-br from-thc-cohs-coral to-thc-cohs-indigo font-serif text-2xl font-semibold tracking-tight text-white shadow-sm sm:h-20 sm:w-20 sm:text-3xl">
+                                        <div class="relative flex h-full w-full items-center justify-center overflow-hidden" aria-hidden="true">
+                                            <span class="absolute -right-10 -top-10 h-40 w-40 rounded-full border border-thc-cohs-blue/10"></span>
+                                            <span class="absolute -bottom-16 -left-10 h-48 w-48 rounded-full border border-thc-cohs-indigo/10"></span>
+                                            <span class="relative flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-thc-cohs-indigo/25 bg-white/90 font-serif text-3xl font-semibold tracking-tight text-thc-cohs-indigo shadow-sm sm:h-24 sm:w-24 sm:text-4xl">
                                                 {{ $initials }}
                                             </span>
-                                            <span class="max-w-[10rem] text-[10px] font-semibold uppercase leading-tight tracking-[0.12em] text-thc-text/45">Photo to be added</span>
                                         </div>
                                     @endif
                                 </div>
@@ -199,14 +200,9 @@
                                     <h3 class="font-serif text-lg font-semibold leading-snug text-thc-navy sm:text-xl">
                                         {{ $person['name'] ?? '' }}
                                     </h3>
-                                    <p class="mt-3 text-[11px] font-bold uppercase leading-snug tracking-[0.14em] text-thc-cohs-coral sm:text-xs">
+                                    <p class="mt-3 text-[11px] font-bold uppercase leading-snug tracking-[0.14em] text-thc-cohs-indigo sm:text-xs">
                                         {{ $person['role'] ?? '' }}
                                     </p>
-                                    @if(filled($person['bio'] ?? null))
-                                        <p class="mt-3 text-sm leading-relaxed text-thc-text/80">
-                                            {{ $person['bio'] }}
-                                        </p>
-                                    @endif
                                 </div>
                             </article>
                         </li>
