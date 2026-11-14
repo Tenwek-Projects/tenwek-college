@@ -118,8 +118,7 @@ class PublicDownloadController extends Controller
         $disk = Storage::disk('downloads');
 
         if (
-            ! $disk->exists($path)
-            && str_starts_with($path, 'cohs/application-forms/')
+            str_starts_with($path, 'cohs/application-forms/')
             && filled(config('filesystems.disks.s3.bucket'))
         ) {
             $s3 = Storage::disk('s3');
