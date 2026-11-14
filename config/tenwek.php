@@ -753,22 +753,6 @@ return [
                 'children' => [
                     ['label' => 'Diploma in Nursing (KRCHN)', 'slug' => 'diploma-in-nursing'],
                     ['label' => 'Diploma in Clinical Medicine & Surgery', 'slug' => 'diploma-in-clinical-medicine'],
-                    [
-                        'label' => 'Higher Diploma in Cardiovascular Perfusion',
-                        'route' => 'cohs.programme-application',
-                        'route_params' => ['form' => 'hd-cardiovascular-perfusion'],
-                    ],
-                    [
-                        'label' => 'HND Critical Care Nursing',
-                        'route' => 'cohs.programme-application',
-                        'route_params' => ['form' => 'critical-care-nursing'],
-                    ],
-                    [
-                        'label' => 'HND Trauma & Emergency Nursing',
-                        'route' => 'cohs.programme-application',
-                        'route_params' => ['form' => 'hnd-trauma-emergency'],
-                    ],
-                    ['label' => 'BLS & ACLS short courses', 'slug' => 'application-forms'],
                 ],
             ],
             ['label' => 'Social Life', 'slug' => 'social-life'],
