@@ -769,9 +769,9 @@ return [
                         'external_config_key' => 'off_campus_application_url',
                         'open_new_tab' => true,
                     ],
+                    ['label' => 'Application forms', 'slug' => 'application-forms'],
                 ],
             ],
-            ['label' => 'Application forms', 'slug' => 'application-forms'],
             ['label' => 'Contact Us', 'slug' => 'contact-us'],
         ],
         'hero' => [
