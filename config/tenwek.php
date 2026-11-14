@@ -253,7 +253,7 @@ return [
             'kicker' => 'Welcome to Tenwek Hospital College · School of Chaplaincy.',
             'motto' => 'Equip Chaplains for Wholistic Service',
             /** Set to a path under public/ (e.g. images/soc/principal.jpg) when available; empty shows a placeholder frame. */
-            'principal_image' => env('TENWEK_SOC_PRINCIPAL_IMAGE'),
+            'principal_image' => env('TENWEK_SOC_PRINCIPAL_IMAGE') ?: 'images/soc/Bett-Soc-768x985.webp',
             'principal_image_alt' => env('TENWEK_SOC_PRINCIPAL_IMAGE_ALT', 'Principal, School of Chaplaincy'),
             'principal_placeholder_caption' => 'Photograph coming soon',
             'paragraphs' => [
