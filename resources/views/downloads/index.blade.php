@@ -6,29 +6,37 @@
     };
     $hasFilters = filled(request('q')) || filled(request('category')) || filled(request('school'));
     $isCohsHub = $filterSchool?->slug === 'cohs';
+    $isSocHub = $filterSchool?->slug === 'soc';
 @endphp
 
 <x-layouts.public :seo="$seo" :landingHeader="$landingHeader" :school="$filterSchool">
+    @if($isSocHub)
+        <x-schools.soc.page-breadcrumb-band :school="$filterSchool" current="Downloads" />
+    @endif
+
     <div @class([
         'relative overflow-hidden border-b border-thc-navy/8',
+        'soc-page-hero' => $isSocHub,
         'cohs-page-hero' => $isCohsHub,
-        'bg-gradient-to-b from-thc-navy/[0.04] via-white to-white' => ! $isCohsHub,
+        'bg-gradient-to-b from-thc-navy/[0.04] via-white to-white' => ! $isCohsHub && ! $isSocHub,
     ])>
         @if($isCohsHub)
             <div class="pointer-events-none absolute -right-16 top-0 h-72 w-72 rounded-full bg-thc-royal/[0.12] blur-3xl" aria-hidden="true"></div>
         @endif
         <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-            <nav class="mb-8 text-sm text-thc-text/65" aria-label="Breadcrumb" data-reveal>
-                <ol class="flex flex-wrap items-center gap-2">
-                    <li><a href="{{ route('home') }}" class="transition hover:text-thc-royal">Home</a></li>
-                    <li aria-hidden="true" class="text-thc-text/35">/</li>
-                    @if($filterSchool)
-                        <li><a href="{{ route('schools.show', $filterSchool) }}" class="transition hover:text-thc-royal">{{ $filterSchool->name }}</a></li>
+            @unless($isSocHub)
+                <nav class="mb-8 text-sm text-thc-text/75" aria-label="Breadcrumb" data-reveal>
+                    <ol class="flex flex-wrap items-center gap-2">
+                        <li><a href="{{ route('home') }}" class="transition hover:text-thc-royal">Home</a></li>
                         <li aria-hidden="true" class="text-thc-text/35">/</li>
-                    @endif
-                    <li class="font-medium text-thc-navy">Downloads</li>
-                </ol>
-            </nav>
+                        @if($filterSchool)
+                            <li><a href="{{ route('schools.show', $filterSchool) }}" class="transition hover:text-thc-royal">{{ $filterSchool->name }}</a></li>
+                            <li aria-hidden="true" class="text-thc-text/35">/</li>
+                        @endif
+                        <li class="font-medium text-thc-navy">Downloads</li>
+                    </ol>
+                </nav>
+            @endunless
 
             <header class="max-w-3xl" data-reveal>
                 @if($isCohsHub)
@@ -39,7 +47,7 @@
                 <h1 class="mt-3 font-serif text-4xl font-semibold tracking-tight text-thc-navy sm:text-5xl lg:text-[3.25rem]">
                     @if($filterSchool)
                         <span class="text-thc-navy">{{ $filterSchool->name }}</span>
-                        <span class="text-thc-text/80"> - </span>
+                        <span class="text-thc-text"> - </span>
                     @endif
                     Downloads <span class="italic text-thc-royal">&amp; forms</span>
                 </h1>
