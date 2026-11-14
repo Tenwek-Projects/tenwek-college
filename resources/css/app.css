@@ -220,7 +220,32 @@
     .thc-cohs-skin #contact h2,
     .thc-cohs-skin #programmes h3,
     .thc-cohs-skin #contact h3 {
-        color: #17233d;
+        color: #13007c;
+    }
+
+    .thc-cohs-skin #about .cohs-section-kicker,
+    .thc-cohs-skin #programmes .cohs-section-kicker,
+    .thc-cohs-skin #testimonials .cohs-section-kicker,
+    .thc-cohs-skin #contact .cohs-section-kicker {
+        display: flex;
+        width: fit-content;
+        align-items: center;
+        gap: 0.7rem;
+        color: #1d4ed8;
+    }
+
+    .thc-cohs-skin .cohs-section-kicker::before,
+    .thc-cohs-skin .cohs-section-kicker::after {
+        width: 2.5rem;
+        height: 1px;
+        flex: 0 0 auto;
+        background: #5694ff;
+        content: "";
+    }
+
+    .thc-cohs-skin #programmes .cohs-section-kicker {
+        margin-right: auto;
+        margin-left: auto;
     }
 
     .thc-cohs-skin #programmes,

@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="mt-12 lg:col-span-7 lg:mt-0" data-reveal>
-                <p class="thc-kicker">{{ $welcome['kicker'] }}</p>
+                <p class="thc-kicker cohs-section-kicker">{{ $welcome['kicker'] }}</p>
                 <h2 class="mt-4 font-serif text-3xl font-semibold tracking-tight text-thc-navy sm:text-4xl">
                     {{ $welcome['title'] }}
                 </h2>
@@ -134,7 +134,7 @@
     <section id="programmes" class="cohs-landing-programmes scroll-mt-24" aria-labelledby="cohs-programmes-heading">
         <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
             <div class="mx-auto max-w-2xl text-center" data-reveal>
-                <p class="thc-kicker">{{ $programmesBand['kicker'] }}</p>
+                <p class="thc-kicker cohs-section-kicker">{{ $programmesBand['kicker'] }}</p>
                 <h2 id="cohs-programmes-heading" class="mt-4 font-serif text-3xl font-semibold text-thc-navy sm:text-4xl">
                     {{ $programmesHeading }}
                 </h2>
@@ -191,7 +191,7 @@
     <section id="testimonials" class="cohs-landing-testimonials scroll-mt-24" aria-labelledby="cohs-testimonials-heading">
         <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
             <div class="max-w-2xl" data-reveal>
-                <p class="thc-kicker">{{ $testimonials['kicker'] }}</p>
+                <p class="thc-kicker cohs-section-kicker">{{ $testimonials['kicker'] }}</p>
                 <h2 id="cohs-testimonials-heading" class="mt-4 font-serif text-3xl font-semibold text-thc-navy sm:text-4xl">{{ $testimonials['title'] }}</h2>
             </div>
 
@@ -268,7 +268,7 @@
     <section id="contact" class="cohs-landing-contact scroll-mt-24 border-t border-thc-navy/10 pb-0">
         <div class="mx-auto max-w-7xl px-4 pt-16 sm:px-6 lg:px-8 lg:pt-24">
             <div class="max-w-3xl lg:max-w-2xl" data-reveal>
-                <p class="thc-kicker">{{ $contactBlock['kicker'] }}</p>
+                <p class="thc-kicker cohs-section-kicker">{{ $contactBlock['kicker'] }}</p>
                 <h2 class="mt-4 font-serif text-3xl font-semibold text-thc-navy sm:text-4xl">We would love to hear from you</h2>
                 <p class="mt-4 text-lg text-thc-text/85">Admissions, programme questions, or general enquiries: reach the College of Health Sciences office.</p>
             </div>
