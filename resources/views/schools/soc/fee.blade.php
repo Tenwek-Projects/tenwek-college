@@ -130,7 +130,7 @@
 
             {{-- Payment --}}
             <section
-                class="space-y-6"
+                class="space-y-6 rounded-3xl border border-thc-navy/10 bg-[#f5f1f8] p-5 sm:p-8"
                 data-reveal
                 aria-labelledby="payment-heading"
                 @if(config('mpesa.stk_public_ui'))
@@ -142,11 +142,12 @@
                     @keydown.escape.window="closeModal()"
                 @endif
             >
-                <h2 id="payment-heading" class="font-serif text-2xl font-semibold text-thc-navy sm:text-3xl">
-                    How to pay
-                </h2>
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#76531f]">Secure payment options</p>
+                    <h2 id="payment-heading" class="mt-2 font-serif text-2xl font-semibold text-thc-navy sm:text-3xl">How to pay</h2>
+                </div>
                 @if(filled($F['payment_notice'] ?? null))
-                    <p class="max-w-3xl text-base leading-relaxed text-thc-text/90">{{ $F['payment_notice'] }}</p>
+                    <p class="max-w-3xl rounded-xl border border-amber-300/70 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950 sm:text-base">{{ $F['payment_notice'] }}</p>
                 @endif
 
                 @if(config('mpesa.stk_public_ui'))
@@ -269,12 +270,20 @@
                     </div>
                 @endif
 
-                <div class="grid gap-6 lg:grid-cols-2">
+                <div class="grid gap-5 lg:grid-cols-2" x-data="socFeeCopy" aria-label="Copy payment details">
                     @php $bank = $F['bank'] ?? []; @endphp
                     @if(count(array_filter($bank)) > 0)
-                        <div class="rounded-2xl border border-thc-navy/10 bg-white p-6 shadow-sm sm:p-8">
-                            <p class="text-xs font-bold uppercase tracking-[0.18em] text-thc-maroon">Bank transfer</p>
-                            <dl class="mt-5 space-y-3 text-sm">
+                        <div class="rounded-2xl border border-thc-navy/10 bg-white p-5 shadow-sm sm:p-7">
+                            <div class="flex flex-wrap items-start justify-between gap-3">
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-thc-maroon">Bank transfer</p>
+                                    <h3 class="mt-2 font-serif text-xl font-semibold text-thc-navy">Pay by bank</h3>
+                                </div>
+                                <span class="rounded-full bg-thc-navy/[0.06] px-3 py-1 text-xs font-semibold text-thc-navy">
+                                    {{ $bank['bank_name'] ?? 'Bank transfer' }}{{ filled($bank['branch'] ?? null) ? ' · '.$bank['branch'] : '' }}
+                                </span>
+                            </div>
+                            <dl class="mt-5 divide-y divide-thc-navy/8 text-sm">
                                 @foreach([
                                     'account_name' => 'Account name',
                                     'bank_name' => 'Bank',
@@ -286,40 +295,58 @@
                                     'currency' => 'Currency',
                                 ] as $key => $label)
                                     @if(filled($bank[$key] ?? null))
-                                        <div class="flex flex-col gap-0.5 sm:flex-row sm:gap-4">
-                                            <dt class="shrink-0 text-thc-text/65 sm:w-36">{{ $label }}</dt>
-                                            <dd class="font-semibold text-thc-navy">{{ $bank[$key] }}</dd>
-                                    </div>
+                                        <div class="flex flex-col gap-1 py-3 first:pt-0 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                                            <dt class="shrink-0 text-thc-text/75">{{ $label }}</dt>
+                                            <dd class="flex min-w-0 items-center justify-between gap-3 sm:justify-end">
+                                                <span class="break-all font-semibold text-thc-navy">{{ $bank[$key] }}</span>
+                                                <button type="button" class="shrink-0 rounded-lg border border-thc-navy/15 px-2.5 py-1.5 text-xs font-semibold text-thc-navy transition hover:border-thc-royal/40 hover:bg-thc-royal/[0.05] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-thc-royal" @click="copy(@js($bank[$key]), @js($label))" :aria-label="`Copy ${@js($label)}`">
+                                                    <span x-text="copiedLabel === @js($label) ? 'Copied' : 'Copy'"></span>
+                                                </button>
+                                            </dd>
+                                        </div>
                                     @endif
                                 @endforeach
                             </dl>
+                            <p class="mt-4 text-xs leading-relaxed text-thc-text/75">Use the account name and number as your payment reference. Keep your bank confirmation for your records.</p>
                         </div>
                     @endif
 
                     @php $mp = $F['mpesa'] ?? []; @endphp
                     @if(filled($mp['paybill'] ?? null))
-                        <div class="relative overflow-hidden rounded-2xl border border-emerald-700/15 bg-gradient-to-br from-emerald-50/90 via-white to-white p-6 shadow-sm sm:p-8">
+                        @php $mpAccount = $mp['account'] ?? $bank['account_number'] ?? ''; @endphp
+                        <div class="relative overflow-hidden rounded-2xl border border-emerald-700/20 bg-gradient-to-br from-emerald-50 via-white to-white p-5 shadow-sm sm:p-7">
                             <div class="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-emerald-500/10" aria-hidden="true"></div>
-                            <p class="relative text-xs font-bold uppercase tracking-[0.18em] text-emerald-800">{{ $mp['title'] ?? 'M-Pesa' }}</p>
+                            <div class="relative flex flex-wrap items-start justify-between gap-3">
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-[0.18em] text-emerald-800">{{ $mp['title'] ?? 'M-Pesa' }} · Pay Bill</p>
+                                    <h3 class="mt-2 font-serif text-xl font-semibold text-thc-navy">Pay by M-Pesa</h3>
+                                </div>
+                                <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-900">No cash accepted</span>
+                            </div>
                             <ol class="relative mt-5 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-thc-text">
                                 <li>Go to <strong class="text-thc-navy">Pay Bill</strong> on your M-Pesa menu.</li>
-                                <li>
-                                    Business number:
-                                    <span class="rounded-md bg-emerald-100/80 px-2 py-0.5 font-mono font-semibold text-emerald-900">{{ $mp['paybill'] }}</span>
+                                <li class="flex flex-wrap items-center justify-between gap-2">
+                                    <span>Business number</span>
+                                    <span class="flex items-center gap-2 rounded-lg bg-emerald-100/80 px-2.5 py-1.5 font-mono font-semibold text-emerald-950">
+                                        {{ $mp['paybill'] }}
+                                        <button type="button" class="rounded-md bg-white px-2 py-1 font-sans text-xs text-emerald-950 shadow-sm transition hover:bg-emerald-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700" @click="copy(@js($mp['paybill']), 'Business number')" :aria-label="copiedLabel === 'Business number' ? 'Business number copied' : 'Copy business number'"><span x-text="copiedLabel === 'Business number' ? 'Copied' : 'Copy'"></span></button>
+                                    </span>
                                 </li>
-                                <li>
-                                    Account number:
-                                    <span class="rounded-md bg-white px-2 py-0.5 font-mono font-semibold text-thc-navy ring-1 ring-thc-navy/10">{{ $mp['account'] ?? $bank['account_number'] ?? '' }}</span>
+                                <li class="flex flex-wrap items-center justify-between gap-2">
+                                    <span>Account number</span>
+                                    <span class="flex items-center gap-2 rounded-lg bg-white px-2.5 py-1.5 font-mono font-semibold text-thc-navy ring-1 ring-thc-navy/10">
+                                        {{ $mpAccount }}
+                                        <button type="button" class="rounded-md border border-thc-navy/10 bg-white px-2 py-1 font-sans text-xs text-thc-navy shadow-sm transition hover:bg-thc-navy/[0.04] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-thc-royal" @click="copy(@js($mpAccount), 'M-Pesa account number')" :aria-label="copiedLabel === 'M-Pesa account number' ? 'M-Pesa account number copied' : 'Copy M-Pesa account number'"><span x-text="copiedLabel === 'M-Pesa account number' ? 'Copied' : 'Copy'"></span></button>
+                                    </span>
                                 </li>
                                 <li>Enter amount, M-Pesa PIN, then confirm.</li>
                             </ol>
                             @if(filled($mp['confirmation_note'] ?? null))
-                                <p class="relative mt-5 rounded-xl border border-emerald-700/10 bg-white/80 px-4 py-3 text-sm text-thc-text/90">
-                                    {{ $mp['confirmation_note'] }}
-                                </p>
+                                <p class="relative mt-5 rounded-xl border border-emerald-700/10 bg-white/80 px-4 py-3 text-sm text-thc-text/90">{{ $mp['confirmation_note'] }}</p>
                             @endif
                         </div>
                     @endif
+                    <p class="sr-only" aria-live="polite" x-text="copiedLabel ? (copiedLabel === 'Copy failed' ? 'Could not copy payment detail' : `${copiedLabel} copied to clipboard`) : ''"></p>
                 </div>
             </section>
         </div>

@@ -406,6 +406,46 @@ document.addEventListener('alpine:init', () => {
         },
     }));
 
+    /** SOC /fee: copy bank and M-Pesa payment details */
+    Alpine.data('socFeeCopy', () => ({
+        copiedLabel: '',
+        copyTimer: null,
+
+        async copy(value, label) {
+            const text = String(value ?? '').trim();
+            if (!text) {
+                return;
+            }
+
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    const field = document.createElement('textarea');
+                    field.value = text;
+                    field.setAttribute('readonly', '');
+                    field.style.position = 'fixed';
+                    field.style.opacity = '0';
+                    document.body.appendChild(field);
+                    field.select();
+                    const copied = document.execCommand('copy');
+                    field.remove();
+                    if (!copied) {
+                        throw new Error('Clipboard copy failed');
+                    }
+                }
+
+                this.copiedLabel = label;
+                window.clearTimeout(this.copyTimer);
+                this.copyTimer = window.setTimeout(() => { this.copiedLabel = ''; }, 2200);
+            } catch {
+                this.copiedLabel = 'Copy failed';
+                window.clearTimeout(this.copyTimer);
+                this.copyTimer = window.setTimeout(() => { this.copiedLabel = ''; }, 3000);
+            }
+        },
+    }));
+
     /** SOC /fee: M-Pesa STK Push payment modal */
     Alpine.data('socFeeStk', (config) => ({
         initiateUrl: config.initiateUrl,
