@@ -204,6 +204,7 @@
 
     @foreach($mainNav as $item)
         @if(! empty($item['mega_id']) && ! empty($item['children']))
+            @php $isCoursesMega = mb_strtolower($item['label'] ?? '') === 'courses'; @endphp
             <div
                 class="relative z-40 hidden border-t border-thc-navy/8 bg-white shadow-lg lg:block"
                 x-show="openMega === '{{ $item['mega_id'] }}'"
@@ -216,14 +217,22 @@
                 style="display: none;"
             >
                 <div class="mx-auto max-w-7xl px-6 py-8 lg:px-8">
-                    <div class="grid gap-10 md:grid-cols-2">
-                        <div>
+                    <div class="grid gap-7 md:grid-cols-12 md:gap-8">
+                        <div class="md:col-span-4">
                             <p class="thc-kicker">{{ $item['label'] }}</p>
-                            <p class="mt-3 max-w-md text-sm leading-relaxed text-thc-text/90">
-                                {{ $school->excerpt ?? $school->tagline ?? config('tenwek.tagline') }}
-                            </p>
+                            @if($isCoursesMega)
+                                <p class="mt-3 max-w-md text-sm leading-relaxed text-thc-text/90">Choose a diploma programme and explore the clinical training pathway that suits you.</p>
+                                <span class="mt-4 inline-flex items-center gap-2 rounded-full bg-thc-cohs-wash px-3 py-1.5 text-xs font-bold text-thc-cohs-indigo ring-1 ring-thc-cohs-blue/15">
+                                    <span class="h-2 w-2 rounded-full bg-thc-cohs-blue" aria-hidden="true"></span>
+                                    Two diploma programmes
+                                </span>
+                            @else
+                                <p class="mt-3 max-w-md text-sm leading-relaxed text-thc-text/90">
+                                    {{ $school->excerpt ?? $school->tagline ?? config('tenwek.tagline') }}
+                                </p>
+                            @endif
                         </div>
-                        <ul class="grid gap-2 sm:grid-cols-2" role="list">
+                        <ul class="grid gap-3 md:col-span-8 {{ $isCoursesMega ? 'xl:grid-cols-2' : 'sm:grid-cols-2' }}" role="list">
                             @foreach($item['children'] as $child)
                                 @php
                                     if ($cohsChildIsExternal($child)) {
@@ -238,16 +247,19 @@
                                     }
                                     $childHref = $cohsChildHref($child);
                                     $childNewTab = ! empty($child['open_new_tab']) && $cohsChildIsExternal($child);
+                                    $childDefaultClass = $isCoursesMega
+                                        ? 'border-thc-cohs-blue/15 bg-gradient-to-br from-thc-cohs-wash/75 to-white text-thc-cohs-indigo hover:border-thc-cohs-blue/40 hover:bg-white hover:shadow-md'
+                                        : 'border-thc-navy/10 bg-thc-navy/[0.03] text-thc-navy hover:border-thc-navy/22 hover:bg-thc-navy/[0.06] hover:text-thc-royal';
                                 @endphp
                                 <li>
                                     <a
                                         href="{{ $childHref }}"
                                         @if($childNewTab) target="_blank" rel="noopener noreferrer" @endif
-                                        class="flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-sm font-semibold transition hover:shadow-sm {{ $childNavActive ? 'border-thc-navy/30 bg-thc-navy/[0.08] text-thc-navy ring-1 ring-thc-navy/20 hover:border-thc-navy/40 hover:bg-thc-navy/[0.10]' : 'border-thc-navy/10 bg-thc-navy/[0.03] text-thc-navy hover:border-thc-navy/22 hover:bg-thc-navy/[0.06] hover:text-thc-royal' }}"
+                                        class="flex min-h-14 min-w-0 items-center justify-between gap-3 rounded-xl border px-4 py-3 text-sm font-semibold transition hover:shadow-sm {{ $childNavActive ? 'border-thc-navy/30 bg-thc-navy/[0.08] text-thc-navy ring-1 ring-thc-navy/20 hover:border-thc-navy/40 hover:bg-thc-navy/[0.10]' : $childDefaultClass }}"
                                         @if($childNavActive) aria-current="page" @endif
                                         @click="openMega = null"
                                     >
-                                        {{ $child['label'] }}
+                                        <span class="min-w-0 {{ $isCoursesMega ? 'whitespace-nowrap' : '' }}">{{ $child['label'] }}</span>
                                         @if($childNewTab)
                                             <svg class="h-4 w-4 shrink-0 text-thc-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                         @else
