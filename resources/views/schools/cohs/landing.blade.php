@@ -1,9 +1,17 @@
 @php
     $L = $cohsLanding ?? config('tenwek.cohs_landing');
     $hero = $L['hero'] ?? [];
+    $primaryCta = $hero['primary_cta'] ?? ['label' => 'Explore Programmes', 'route' => 'schools.pages.show', 'params' => ['school' => $school->slug, 'pageSlug' => 'diploma-in-nursing']];
     $heroEyebrow = ($hero['eyebrow'] ?? null) === 'Tenwek Hospital College · College of Health Sciences'
         ? 'Tenwek Hospital College'
         : ($hero['eyebrow'] ?? 'Tenwek Hospital College');
+    $primaryCtaLabel = ($primaryCta['label'] ?? null) === 'View programmes'
+        ? 'Explore Programmes'
+        : ($primaryCta['label'] ?? 'Explore Programmes');
+    $secondaryCtaLabel = ($hero['secondary_cta']['label'] ?? null) === 'Apply & downloads'
+        ? 'Apply for Admission'
+        : ($hero['secondary_cta']['label'] ?? 'Apply for Admission');
+    $secondaryCtaUrl = route('schools.pages.show', [$school, 'application-forms']);
     $welcome = $L['welcome'] ?? [];
     $programmesBand = $L['programmes_band'] ?? ['items' => [], 'kicker' => '', 'title' => '', 'intro' => ''];
     $testimonials = $L['testimonials'] ?? ['items' => [], 'kicker' => '', 'title' => ''];
@@ -13,7 +21,6 @@
     $heroImageUrl = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($heroPath) ? $heroPath : null) ?? asset(is_string($heroPath) ? $heroPath : 'images/image-1.jpg');
     $welcomeImageUrl = \App\Support\Cohs\CohsLandingRepository::publicMediaUrl(is_string($welcomePath) ? $welcomePath : null) ?? asset(is_string($welcomePath) ? $welcomePath : 'images/image-2.jpg');
     $mapUrl = $L['map_embed_url'] ?? null;
-    $primaryCta = $hero['primary_cta'] ?? ['label' => 'View programmes', 'route' => 'schools.pages.show', 'params' => ['school' => $school->slug, 'pageSlug' => 'diploma-in-nursing']];
 @endphp
 
 <x-layouts.public :seo="$seo" landing-header="cohs" :school="$school">
@@ -30,7 +37,11 @@
 
         <div class="relative z-10 mx-auto w-[88%] max-w-none px-0 pb-36 pt-16 sm:pb-40 sm:pt-20 lg:pb-40 lg:pt-16">
             <div data-reveal class="max-w-xl">
-                <p class="mt-0 text-sm font-semibold uppercase tracking-[0.28em] text-white/80">{{ $heroEyebrow }}</p>
+                <p class="mt-0 flex max-w-xl items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-white/85 sm:gap-3 sm:text-sm sm:tracking-[0.28em]">
+                    <span class="h-px w-5 shrink-0 bg-white/75 sm:w-12" aria-hidden="true"></span>
+                    <span class="whitespace-nowrap">{{ $heroEyebrow }}</span>
+                    <span class="h-px min-w-5 flex-1 bg-white/65 sm:min-w-12" aria-hidden="true"></span>
+                </p>
                 <h1 class="mt-4 font-serif text-4xl font-semibold leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-[4.5rem]">
                     {{ $hero['headline'] }}
                 </h1>
@@ -39,11 +50,13 @@
                     {{ $hero['subhead'] }}
                 </p>
                 <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
-                    <a href="{{ route($primaryCta['route'], $primaryCta['params']) }}" class="thc-btn-primary justify-center px-8 shadow-xl ring-1 ring-white/10">
-                        {{ $primaryCta['label'] }}
+                    <a href="{{ route($primaryCta['route'], $primaryCta['params']) }}" class="thc-btn-primary cohs-hero-cta-primary justify-center gap-3 px-8 py-4 shadow-xl ring-1 ring-white/10">
+                        <span>{{ $primaryCtaLabel }}</span>
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>
-                    <a href="#{{ $hero['secondary_cta']['hash'] }}" class="thc-btn-secondary justify-center px-8">
-                        {{ $hero['secondary_cta']['label'] }}
+                    <a href="{{ $secondaryCtaUrl }}" class="thc-btn-secondary cohs-hero-cta-secondary justify-center gap-3 px-8 py-4">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m2 10 10-5 10 5-10 5-10-5zm4 2v4.5c3.6 2.5 8.4 2.5 12 0V12M22 10v6"/></svg>
+                        <span>{{ $secondaryCtaLabel }}</span>
                     </a>
                 </div>
             </div>

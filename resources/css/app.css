@@ -158,6 +158,24 @@
         filter: brightness(1.05);
     }
 
+    .thc-cohs-skin .cohs-hero-cta-primary {
+        background: linear-gradient(110deg, #6635ed 0%, #7540f2 100%);
+    }
+
+    .thc-cohs-skin .cohs-hero-cta-primary:hover {
+        filter: brightness(1.08);
+    }
+
+    .thc-cohs-skin .cohs-hero-cta-secondary {
+        border-color: rgb(255 255 255 / 0.82);
+        background: rgb(10 24 76 / 0.18);
+    }
+
+    .thc-cohs-skin .cohs-hero-cta-secondary:hover {
+        border-color: rgb(255 255 255 / 1);
+        background: rgb(255 255 255 / 0.12);
+    }
+
     .thc-cohs-skin .thc-btn-ghost:hover {
         border-color: rgb(86 148 255 / 0.45);
         background: linear-gradient(to bottom right, rgb(86 148 255 / 0.08), rgb(90 200 250 / 0.1));

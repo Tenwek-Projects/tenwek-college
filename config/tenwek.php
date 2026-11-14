@@ -795,8 +795,8 @@ return [
             'eyebrow' => 'Tenwek Hospital College',
             'headline' => 'College of Health Sciences',
             'subhead' => 'Qualified nurses since 1987: Christ-centred healthcare training, mentorship, and spiritual formation for nurses and clinical officers who serve with skill and compassion.',
-            'primary_cta' => ['label' => 'View programmes', 'route' => 'schools.pages.show', 'params' => ['school' => 'cohs', 'pageSlug' => 'diploma-in-nursing']],
-            'secondary_cta' => ['label' => 'Apply & downloads', 'hash' => 'programmes'],
+            'primary_cta' => ['label' => 'Explore Programmes', 'route' => 'schools.pages.show', 'params' => ['school' => 'cohs', 'pageSlug' => 'diploma-in-nursing']],
+            'secondary_cta' => ['label' => 'Apply for Admission', 'hash' => 'programmes'],
         ],
         'welcome' => [
             'kicker' => 'Welcome',
